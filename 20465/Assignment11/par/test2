@@ -1,0 +1,6 @@
+char message[] = "Comment /*Inside string activates comment?";
+If it did, this ]ine would be balanced;
+*/
+
+int longline = /* string opener " inside comment */ 3 (]";
+char message2[] = "String closer after \" char ] ";

@@ -1,0 +1,9 @@
+
+Please enter 9 integers to build the magic square, separated by spaces (^d to stop):
+
+The square you entered is: 
+8	1	6	
+3	5	7	
+4	9	2	
+
+The given square is a magic square! (Sum of each row, column and digaon: 15)

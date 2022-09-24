@@ -1,0 +1,8 @@
+
+
+Processing file: tests/megatest.as
+tests/megatest.am:5 - Warning: Label to .extern instruction ignored
+tests/megatest.am:76 - Warning: Label to .entry instruction ignored
+
+File processing finished successfully.
+

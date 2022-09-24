@@ -1,0 +1,14 @@
+
+
+Processing file: tests/spass_errors.as
+tests/spass_errors.am:9 - Error: Unrecognized symbol for .entry instruction
+tests/spass_errors.am:10 - Error: External symbol cannot be defined as .entry
+tests/spass_errors.am:14 - Error: Symbol not found in first operand
+tests/spass_errors.am:15 - Error: Symbol not found in first operand
+tests/spass_errors.am:16 - Error: Symbol not found in first operand
+tests/spass_errors.am:17 - Error: Symbol not found in first operand
+tests/spass_errors.am:18 - Error: Symbol not found in second operand
+tests/spass_errors.am:19 - Error: Symbol not found in second operand
+tests/spass_errors.am:20 - Error: Symbol not found in second operand
+File processing failed.
+

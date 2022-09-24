@@ -1,0 +1,12 @@
+
+  inc r6
+  mov r3, W
+  inc r6
+  mov r3, W
+
+
+  rts
+  jmp Line
+  rts
+  inc r6
+  mov r3, W

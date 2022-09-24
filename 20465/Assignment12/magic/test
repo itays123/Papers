@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo $(make)
+echo "Testing input format... $(./magic <test_input_format >test_input_format_out)"
+echo "Testing non-integer input... $(./magic <test_non_integer >test_non_integer_out)"
+echo "Testing insufficient input... $(./magic <test_not_enough_input >test_not_enough_input_out)"
+echo "Testing too much input... $(./magic <test_too_much_input >test_too_much_input_out)"
+echo "Testing unique values... $(./magic <test_unique_values >test_unique_values_out)"
+echo "Testing range... $(./magic <test_range >test_range_out)"
+echo "Testing valid input... $(./magic <test_square_n5 >test_square_n5_out)"

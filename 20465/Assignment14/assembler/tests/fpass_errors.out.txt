@@ -1,0 +1,58 @@
+
+
+Processing file: tests/fpass_errors.as
+tests/fpass_errors.am:4 - Error: Unrecognized operation
+tests/fpass_errors.am:5 - Error: Multiple consecutive commas between operands
+tests/fpass_errors.am:6 - Error: Missing comma between operands
+tests/fpass_errors.am:7 - Error: Missing operand - required 1
+tests/fpass_errors.am:8 - Error: Missing operand(s) - required 2
+tests/fpass_errors.am:9 - Error: Missing operand(s) - required 2
+tests/fpass_errors.am:10 - Error: Expected a valid number after '#' mark
+tests/fpass_errors.am:11 - Error: Expected a register between r10 and r15 for index operand
+tests/fpass_errors.am:12 - Error: Label name should be at most 31 characters
+tests/fpass_errors.am:13 - Error: Label name should contain only letters and digits
+tests/fpass_errors.am:14 - Error: Label name should start with a letter
+tests/fpass_errors.am:15 - Error: Label cannot be named like register
+tests/fpass_errors.am:16 - Error: Label cannot be named like operation
+tests/fpass_errors.am:18 - Error: Label cannot be named like operation
+tests/fpass_errors.am:19 - Error: Label cannot be named like operation
+tests/fpass_errors.am:21 - Error: Expected a register between r10 and r15 for index operand
+tests/fpass_errors.am:22 - Error: Invalid addressing method for second operand
+tests/fpass_errors.am:23 - Error: Invalid addressing method for first operand
+tests/fpass_errors.am:24 - Error: Extraneous text after command end
+tests/fpass_errors.am:25 - Error: Extraneous text after command end
+tests/fpass_errors.am:26 - Error: Missing comma between operands
+tests/fpass_errors.am:28 - Error: Unrecognized instruction
+tests/fpass_errors.am:29 - Error: Expected data after .data instruction
+tests/fpass_errors.am:30 - Error: Illegal comma afer instruction
+tests/fpass_errors.am:31 - Error: Invalid operand - not a number
+tests/fpass_errors.am:32 - Error: expected number after comma
+tests/fpass_errors.am:33 - Error: expected number after comma
+tests/fpass_errors.am:34 - Error: Missing comma between operands
+tests/fpass_errors.am:35 - Error: Expected string after .string instruction
+tests/fpass_errors.am:36 - Error: String must begin with quotation mark ('"')
+tests/fpass_errors.am:37 - Error: String must begin with quotation mark ('"')
+tests/fpass_errors.am:38 - Error: String must end with quotation mark ('"')
+tests/fpass_errors.am:40 - Error: Extraneous text after command end
+tests/fpass_errors.am:41 - Error: Illegal comma after operation
+tests/fpass_errors.am:42 - Error: Missing operand - required 1
+tests/fpass_errors.am:43 - Error: Expected a register between r10 and r15 for index operand
+tests/fpass_errors.am:44 - Error: Missing operand(s) - required 2
+tests/fpass_errors.am:45 - Error: Missing operand(s) - required 2
+tests/fpass_errors.am:46 - Error: Expected a register between r10 and r15 for index operand
+tests/fpass_errors.am:47 - Error: Extraneous text after command end
+tests/fpass_errors.am:48 - Error: Extraneous text after command end
+tests/fpass_errors.am:49 - Error: Extraneous text after command end
+tests/fpass_errors.am:50 - Error: Extraneous text after command end
+tests/fpass_errors.am:51 - Error: Extraneous text after command end
+tests/fpass_errors.am:52 - Error: Invalid addressing method for first operand
+tests/fpass_errors.am:53 - Error: Invalid addressing method for second operand
+tests/fpass_errors.am:54 - Error: Invalid addressing method for first operand
+tests/fpass_errors.am:56 - Error: Required operand for instruction
+tests/fpass_errors.am:57 - Error: Illegal comma afer instruction
+tests/fpass_errors.am:58 - Error: Missing comma between operands
+tests/fpass_errors.am:59 - Error: Extraneous text after command end
+tests/fpass_errors.am:60 - Error: Extraneous text after command end
+tests/fpass_errors.am:61 - Error: Extraneous text after command end
+File processing failed.
+

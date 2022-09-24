@@ -1,0 +1,6 @@
+
+
+Processing file: tests/valid.as
+
+File processing finished successfully.
+

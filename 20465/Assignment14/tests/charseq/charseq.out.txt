@@ -1,0 +1,17 @@
+label: operation 123, op2
+
+next white or colon: `: operation 123, op2`, extected :
+check: next non alnum: `: operation 123, op2`, expected :
+next non white: `operation 123, op2`, expected o
+next white or comma: ` 123, op2`, expected SPACE
+op name == `operation`? 1
+next non white: `123, op2`, expected 1
+next non digital: `, op2`, expected ,
+digits converted to integer = 123
+check: next white or comma: `, op2`, expected ,
+
+.string "hello" 
+
+next white: ` "hello" `, expected SPACE
+next quote: `"hello" `, expected quote
+next quote: `" `, expected quote

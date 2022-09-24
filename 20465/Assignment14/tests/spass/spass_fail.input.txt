@@ -1,0 +1,20 @@
+; This should not generate an object file
+; Symbol definitions
+STR: .string "mycoolstring"
+NUMBERS: .data 6, 5, 4, 3, 2, 1
+CODE: add #-12, r3
+.extern EXTERNAL
+
+; Entry definition errors
+.entry STRING
+.entry EXTERNAL
+
+; Symbol reference errors
+jmp CODE
+jmp CODE0
+jmp CODEE
+jmp COD
+add NUMBER[r10], r8
+add r8, NUMBER
+cmp NUMBERS, STRING
+cmp EXTERNAL, NUM

@@ -1,0 +1,16 @@
+Please enter your code to check (^D to stop)
+
+	> Line 1: `char str[] = "hello, (World]";` - balanced.
+
+	> Line 2: `char str[] = "hello," (World];` - IMBALANCED!
+
+	> Line 3: `int n = 3; /* The approximate number of pi.` - balanced.
+
+	> Line 4: `` - balanced.
+
+	> Line 5: `Used here to (([}]))` - balanced.
+
+	> Line 6: `*/` - balanced.
+
+	> Line 7: `(([}]))` - IMBALANCED!
+Your code is imbalanced

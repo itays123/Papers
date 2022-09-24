@@ -1,0 +1,51 @@
+input.am:4 - Error: Unrecognized operation
+input.am:5 - Error: Multiple consecutive commas between operands
+input.am:6 - Error: Missing comma between operands
+input.am:7 - Error: Missing operand - required 1
+input.am:8 - Error: Missing operand(s) - required 2
+input.am:9 - Error: Missing operand(s) - required 2
+input.am:10 - Error: Expected a valid number after '#' mark
+input.am:11 - Error: Expected a register between r10 and r15 for index operand
+input.am:12 - Error: Label name should be at most 31 characters
+input.am:13 - Error: Label name should contain only letters and digits
+input.am:14 - Error: Label name should start with a letter
+input.am:15 - Error: Label cannot be named like register
+input.am:16 - Error: Label cannot be named like operation
+input.am:19 - Error: Expected a register between r10 and r15 for index operand
+input.am:20 - Error: Invalid addressing method for second operand
+input.am:21 - Error: Invalid addressing method for first operand
+input.am:22 - Error: Extraneous text after command end
+input.am:23 - Error: Extraneous text after command end
+input.am:24 - Error: Missing comma between operands
+input.am:26 - Error: Unrecognized instruction
+input.am:27 - Error: Expected data after .data instruction
+input.am:28 - Error: Illegal comma afer instruction
+input.am:29 - Error: Invalid operand - not a number
+input.am:30 - Error: expected number after comma
+input.am:31 - Error: expected number after comma
+input.am:32 - Error: Missing comma between operands
+input.am:33 - Error: Expected string after .string instruction
+input.am:34 - Error: String must begin with quotation mark ('"')
+input.am:35 - Error: String must begin with quotation mark ('"')
+input.am:36 - Error: String must end with quotation mark ('"')
+input.am:38 - Error: Extraneous text after command end
+input.am:39 - Error: Illegal comma after operation
+input.am:40 - Error: Missing operand - required 1
+input.am:41 - Error: Expected a register between r10 and r15 for index operand
+input.am:42 - Error: Missing operand(s) - required 2
+input.am:43 - Error: Missing operand(s) - required 2
+input.am:44 - Error: Expected a register between r10 and r15 for index operand
+input.am:45 - Error: Extraneous text after command end
+input.am:46 - Error: Extraneous text after command end
+input.am:47 - Error: Extraneous text after command end
+input.am:48 - Error: Extraneous text after command end
+input.am:49 - Error: Extraneous text after command end
+input.am:50 - Error: Invalid addressing method for first operand
+input.am:51 - Error: Invalid addressing method for second operand
+input.am:52 - Error: Invalid addressing method for first operand
+input.am:54 - Error: Required operand for instruction
+input.am:55 - Error: Illegal comma afer instruction
+input.am:56 - Error: Missing comma between operands
+input.am:57 - Error: Extraneous text after command end
+input.am:58 - Error: Extraneous text after command end
+input.am:59 - Error: Extraneous text after command end

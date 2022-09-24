@@ -1,0 +1,11 @@
+
+
+Externals table:
+External reference (Another, base=123, offset=124)
+External reference (Extern, base=172, offset=173)
+External reference (Extern, base=171, offset=172)
+External reference (Extern, base=170, offset=171)
+External reference (Hello, base=169, offset=170)
+External reference (Hello, base=167, offset=168)
+External reference (Hello, base=22, offset=23)
+External reference (Hello, base=165, offset=166)

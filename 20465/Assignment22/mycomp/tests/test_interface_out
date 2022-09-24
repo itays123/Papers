@@ -1,0 +1,107 @@
+Welcome to my complex calculator! Ready for calculations...
+
+ > 
+ < read_comp G, 3.1, 6.5
+
+Error: undefined complex variable
+
+ > 
+ < read_comp a, 3.6, 5.1
+
+Error: undefined complex variable
+
+ > 
+ < do_it A,B
+
+Error: undefined command name
+
+ > 
+ < Add_Comp A, C
+
+Error: undefined command name
+
+ > 
+ < add_comp xyz, B
+
+Error: undefined complex variable
+
+ > 
+ < read_comp A, 3.5, xyz
+
+Error: invalid parameter - not a number
+
+ > 
+ < read_comp A, 3.5
+
+Error: missing argument
+
+ > 
+ < read_comp A, 3.5, -3,
+
+Error: Extraneous text after end of command
+
+ > 
+ <        add_comp D
+
+Error: missing argument
+
+ > 
+ < add_comp B
+
+Error: missing argument
+
+ > 
+ < add_comp A,B
+0.00 + (0.00)i
+
+ > 
+ < add_comp
+
+Error: missing argument
+
+ > 
+ < print_comp C, D
+
+Error: Extraneous text after end of command
+
+ > 
+ < sub_comp F, ,D
+
+Error: Multiple consecutive commas
+
+ > 
+ < mult_comp_comp F D
+
+Error: Missing comma
+
+ > 
+ <     
+
+
+ > 
+ < mult_comp_real, A, 2.5
+
+Error: undefined command name
+
+ > 
+ < mult_comp_img A,B
+
+Error: invalid parameter - not a number
+
+ > 
+ < 
+
+
+ > 
+ < abs_comp
+
+Error: missing argument
+
+ > 
+ < stop A
+Error: Extraneous text after end of command
+
+ > 
+Error: not exited using the stop command
+
+Goodbye!

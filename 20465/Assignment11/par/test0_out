@@ -1,0 +1,22 @@
+Please enter your code to check (^D to stop)
+
+	> Line 1: `if (x > y)` - balanced.
+
+	> Line 2: `{` - IMBALANCED!
+
+	> Line 3: `    z[(1)] = 0;` - balanced.
+
+	> Line 4: `    printf(“x>y\n”);` - balanced.
+
+	> Line 5: `    if (y > 1)` - balanced.
+
+	> Line 6: `    {` - IMBALANCED!
+
+	> Line 7: `        z[(2)] = y;` - balanced.
+
+	> Line 8: `        prinf("y>1\n");` - balanced.
+
+	> Line 9: `    }` - IMBALANCED!
+
+	> Line 10: `}` - IMBALANCED!
+Your code is well balanced. Good Job!

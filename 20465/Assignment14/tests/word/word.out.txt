@@ -1,0 +1,45 @@
+
+Size of word - 4
+new_opcode_word(ADD_OP, 5):
+Word {
+	ARE: 4,
+	type: 0,
+	length: 5,
+	data: 2
+}
+new_opdata_word(ADD_FUNCT, 0, IMMEDIATE, 6, INDEX):
+Word {
+	ARE: 4,
+	type: 1,
+	length: 0,
+	funct: 10,
+	src_reg: 0,
+	src_adrs: 0,
+	dest_reg: 6,
+	dest_adrs: 2
+}
+new_data_word(STORABLE(32)):
+Word {
+	ARE: 4,
+	type: 2,
+	length: 0,
+	data: 32
+}
+alloc_address_words(33, Relocateable)
+Word {
+	ARE: 2,
+	type: 2,
+	length: 0,
+	data: 32
+}
+Word {
+	ARE: 2,
+	type: 2,
+	length: 0,
+	data: 1
+}
+4, 0, 0, 0, 4
+4, a, 0, 1, a
+4, 0, 0, 2, 0
+2, 0, 0, 2, 0
+2, 0, 0, 0, 1

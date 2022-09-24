@@ -1,0 +1,6 @@
+
+
+Processing file: tests/no_tables.as
+
+File processing finished successfully.
+

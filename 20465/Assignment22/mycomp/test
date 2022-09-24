@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo $(make)
+echo "Testing Interface... $(./mycomp <tests/test_interface >tests/test_interface_out)"
+echo "Testing Complex... $(./mycomp <tests/test_complex >tests/test_complex_out)"

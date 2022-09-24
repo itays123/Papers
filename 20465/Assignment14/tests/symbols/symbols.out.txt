@@ -1,0 +1,52 @@
+
+Added symbol, status = 0
+Added symbol, status = 0
+Attempted adding duplicate symbol, status = 8
+Added extern symbol, status = 0
+Added extern symbol again, status = 0
+Attempted adding duplicate extern symbol, status = 8
+
+Searching addresses...
+Searching the address of 'Hello': 102
+Searching the address of 'Another': 37
+Searching the address of 'Extern': 0
+Searching the address of 'notfound': -1
+Searching the address of 'AAAA': -1
+
+Searching addresses after relocation:
+Searching the address of 'Hello': 102
+Searching the address of 'Another': 139
+Searching the address of 'Extern': 0
+
+Marking entry symbols:
+Marked Hello as entry. Result = 0
+Marked Another as entry. Result = 0
+Marked Extern as entry. Result = 33
+Marked notfound as entry. Result = 30
+Marked AAAA as entry. Result = 30
+
+Symbols table:
+Symbol: {
+	key: Another,
+	is_code: 0,
+	is_data: 1,
+	is_extern: 0,
+	is_entry: 1,
+	data: 139,
+}
+Symbol: {
+	key: Extern,
+	is_code: 0,
+	is_data: 0,
+	is_extern: 1,
+	is_entry: 0,
+	data: 0,
+}
+Symbol: {
+	key: Hello,
+	is_code: 1,
+	is_data: 0,
+	is_extern: 0,
+	is_entry: 1,
+	data: 102,
+}

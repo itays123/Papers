@@ -1,0 +1,90 @@
+Welcome to my complex calculator! Ready for calculations...
+
+ > 
+ < print_comp A
+0.00 + (0.00)i
+
+ > 
+ < print_comp B
+0.00 + (0.00)i
+
+ > 
+ < print_comp C
+0.00 + (0.00)i
+
+ > 
+ < read_comp A, 45.1, -23.75
+
+
+ > 
+ < print_comp A
+45.10 - (23.75)i
+
+ > 
+ < read_comp B, 54.2, 3.56
+
+
+ > 
+ < print_comp B
+54.20 + (3.56)i
+
+ > 
+ < read_comp C, 0, -1
+
+
+ > 
+ < print_comp C
+0.00 - (1.00)i
+
+ > 
+ < add_comp A, B
+99.30 - (20.19)i
+
+ > 
+ < sub_comp C, A
+-45.10 + (22.75)i
+
+ > 
+ < sub_comp B, B
+0.00 + (0.00)i
+
+ > 
+ < sub_comp D, A
+-45.10 + (23.75)i
+
+ > 
+ < mult_comp_real A, 2.51
+113.20 - (59.61)i
+
+ > 
+ < mult_comp_img A, -2.564
+-60.90 - (115.64)i
+
+ > 
+ < mult_comp_comp A, B
+2528.97 - (1126.69)i
+
+ > 
+ < mult_comp_comp E , C
+0.00 + (0.00)i
+
+ > 
+ < abs_comp A
+50.97
+
+ > 
+ < abs_comp B
+54.32
+
+ > 
+ < abs_comp C
+1.00
+
+ > 
+ < abs_comp F
+0.00
+
+ > 
+ < stop
+
+Goodbye!

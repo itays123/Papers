@@ -1,0 +1,6 @@
+
+Concating two strings. Result: myassembly.as, expected myassembly.as
+Checking STORABLE(-6). Result: FFFA, expected 0xFFFA
+In hexbits - 4, F, F, F, A
+Testing GET_BASE_OFFSET(33). Result: (32, 1), expected (32, 1)
+Copied filename, result: myassembly
