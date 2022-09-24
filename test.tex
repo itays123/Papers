@@ -1,0 +1,31 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{polyglossia}
+    
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\begin{document}
+שלום שלום
+
+יהא $\epsilon >0$ ונבחר $\delta = \frac 1 \epsilon $
+
+\[
+    f(x) = \begin{cases}
+        \arctan x & 0 \leq x \leq 1 \\
+        -\ln x    & 1 < x \leq 3
+    \end{cases}
+\]
+
+
+\end{document}
