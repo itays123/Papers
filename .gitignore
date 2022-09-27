@@ -20,6 +20,9 @@
 # *.eps
 *.pdf
 !*-booklet.pdf
+!20474/*.pdf
+!20407/*.pdf
+!04101/*.pdf
 
 # Fonts
 *.ttf
