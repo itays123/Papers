@@ -1,0 +1,207 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newtheorem{lemma}{טענת עזר}
+
+\title{מטלת מנחה 12 - אינפי 2}
+\author{328197462}
+\date{25/11/2022}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+נחשב את כל האינטגרלים
+
+\subsection*{סעיף א}
+
+\[
+    \int \frac{x^5}{1-x^3}dx =
+    \int \frac{x^2\cdot x^3 - x^2 + x^2}{1-x^3}dx =
+    \int \frac{x^2(x^3 - 1) + x^2}{1-x^3}dx =
+\]
+\[
+    \int (-x^2 - \frac{x^2}{x^3-1})dx =
+    -\frac{x^3}{3} + \int \frac{(x^3-1)'}{x^3-1}dx =
+    \begin{bmatrix}
+        \mathsmaller{\text{לפי נגזרת}} \\
+        \mathsmaller{\text{הפונקציה}}  \\
+        \mathsmaller{\text{הלוגוריתמית}}
+    \end{bmatrix} =
+    -\frac{x^3}{3} + \ln(x^3-1) + C
+\]
+
+\subsection*{סעיף ב}
+
+\[
+    \int (3x-7)^4dx=
+    [\mathsmaller{\mathsmaller{\int x^4dx=\frac{1}{5}x^5+C}}]=
+    \frac{1}{3} \cdot \frac{(3x-7)^5}{5} + C =
+    \frac{(3x-7)^5}{15} + C
+\]
+
+\subsection*{סעיף ג}
+
+\[
+    \int \frac{\sqrt{1+x^2} + \sqrt{1-x^2}}{\sqrt{1-x^4}}dx =
+    \int \frac{\sqrt{1+x^2} + \sqrt{1-x^2}}{\sqrt{1+x^2} \cdot \sqrt{1-x^2}}dx =
+    \int (\frac{1}{\sqrt{1-x^2}} + \frac{1}{\sqrt{1+x^2}})dx =
+\]
+\[
+    \begin{bmatrix}
+        \text{לפי דוגמה 2.29} \\
+        \int \frac{1}{\sqrt{1+x^2}}dx = \ln|x+\sqrt{1+x^2}| + C
+    \end{bmatrix}
+    = \arcsin x + \ln|x+\sqrt{1+x^2}| + C
+\]
+
+\subsection*{חישוב עזר - סעיפים ד' + ה'}
+\[
+    \frac{1}{2} \cdot \int \frac{dt}{a^2+t^2} =
+    \begin{bmatrix}
+        t=a\tan u                \\
+        dt=a \frac{1}{\cos^2u}du \\
+        u=\arctan \frac{t}{a}
+    \end{bmatrix} =
+    \cdot \int \frac{1}{a^2(1+\tan^2u)}\cdot \frac{a}{\cos^2u}du =
+    \begin{bmatrix}
+        1+\tan^2u=\frac{1}{\cos^2u}
+    \end{bmatrix} =
+\]
+\[
+    \frac{1}{a} \cdot \int \cos^2u \cdot \frac{1}{\cos^2u}du=
+    \frac{1}{a} \int 1\cdot du =
+    \frac{1}{a} \cdot u + C =
+    \frac{1}{a} \cdot \arctan \frac{t}{a} + C
+\]
+
+
+\subsection*{סעיף ד}
+
+\[
+    \int \frac{\sin x \cos x}{\sin ^2 x + \sin x + 1}dx=
+    \begin{bmatrix}
+        t=\sin x \\
+        dt=\cos x dx
+    \end{bmatrix} =
+    \int \frac{tdt}{t^2+t+1}=
+    \begin{bmatrix}
+        \mathsmaller{t=\frac{1}{2}(2t+1) - \frac{1}{2}}
+    \end{bmatrix} =
+    \frac{1}{2} \int \frac{(2t+1)dt}{t^2+t+1} - \frac{1}{2} \int \frac{dt}{t^2+t+1}
+\]
+כאשר לפי הצבה לוגוריתמית \[
+    \int \frac{(2t+1)dt}{t^2+t+1} =
+    \ln(t^2+t+1) + C
+\]
+וכן, \[
+    \int \frac{dt}{t^2+t+1} =
+    \int \frac{dt}{(t+0.5)^2+0.75}=
+    \mathsmaller{
+        \begin{bmatrix}
+            u=t+0.5 \\
+            du=dt
+        \end{bmatrix}
+    } =
+    \int \frac{du}{u^2+0.75}=
+\]
+\[
+    \mathsmaller{
+        \begin{bmatrix}
+            \text{לפי חישוב העזר} \\
+            a^2 = \frac{3}{4}     \\
+            a = \frac{\sqrt{3}}{2}
+        \end{bmatrix}
+    } =
+    \frac{2}{\sqrt{3}}\arctan \frac{2u}{\sqrt{3}} + C =
+    \frac{2\sqrt{3}}{3}\arctan \frac{2\sqrt{3}(t+0.5)}{3} + C =
+    \frac{2\sqrt{3}}{3}\arctan \frac{2\sqrt{3}t+\sqrt{3}}{3} + C
+\]
+ומכאן נקבל \[
+    \int \frac{tdt}{t^2+t+1}=
+    \frac{1}{2} \int \frac{(2t+1)dt}{t^2+t+1} - \frac{1}{2} \int \frac{dt}{t^2+t+1} =
+    \frac{1}{2} \ln(t^2+t+1) - \frac{\sqrt{3}}{3}\arctan \frac{2\sqrt{3}t+\sqrt{3}}{3} + C
+\]
+ולכן \[
+    \int \frac{\sin x \cos x}{\sin ^2 x + \sin x + 1}dx=
+    \frac{1}{2} \ln(\sin^2x+\sin x+1) - \frac{\sqrt{3}}{3}\arctan \frac{2\sqrt{3}\sin x+\sqrt{3}}{3} + C
+\]
+
+\subsection*{סעיף ה}
+
+\[
+    \int \frac{e^{2x}}{16+e^{4x}}dx =
+    \begin{bmatrix}
+        t=e^{2x}     \\
+        dt=2e^{2x}dx \\
+        \frac{1}{2} dt = e^{2x}dx
+    \end{bmatrix} =
+    \frac{1}{2} \cdot \int \frac{dt}{16+t^2} =
+\]
+\[
+    \begin{bmatrix}
+        \text{לפי חישוב העזר} \\
+        a^2=16                \\
+        a=4
+    \end{bmatrix} =
+    \frac{1}{8} \arctan \frac{t}{4} + C =
+    \frac{1}{8} \arctan \frac{e^{2x}}{4} + C
+\]
+
+\subsection*{סעיף ו}
+
+\[
+    \int \frac{\arcsin x}{\sqrt{x+1}}dx =
+    \begin{bmatrix}
+        u=\arcsin x               & v'=(x+1)^{-\frac{1}{2}}  \\
+        u'=\frac{1}{\sqrt{1-x^2}} & v= 2 (x+1)^{\frac{1}{2}}
+    \end{bmatrix} =
+    2\arcsin x \cdot \sqrt{x+1} - \int \frac{1}{\sqrt{1-x^2}} \cdot 2\sqrt{x+1}dx =
+\]
+כאשר מתקיים: \[
+    \int \frac{1}{\sqrt{1-x^2}} \cdot 2\sqrt{x+1}dx =
+    2 \int \frac{1}{\sqrt{1-x}} dx=
+    2 \int (1-x)^{-\frac{1}{2}}dx =
+    2 \cdot 2(1-x)^{\frac{1}{2}}\cdot (-1) + C =
+    -4\sqrt{1-x} + C
+\]
+ולכן \[
+    \int \frac{\arcsin x}{\sqrt{x+1}}dx =
+    2\arcsin x \cdot \sqrt{x+1} - \int \frac{1}{\sqrt{1-x^2}} \cdot 2\sqrt{x+1}dx =
+    2\arcsin x \cdot \sqrt{x+1} + 4\sqrt{1-x} + C
+\]
+
+\subsection*{סעיף ז}
+
+\[
+    \int \ln(x^2-3x+2)dx=
+    \int \ln(x^2-3x+2)\cdot 1dx=
+    \begin{bmatrix}
+        u=\ln(x^2-3x+2)          & v'=1 \\
+        u'=\frac{2x-3}{x^2-3x+2} & v=x
+    \end{bmatrix}=
+    x\ln(x^2-3x+2) - \int \frac{2x-3}{x^2-3x+2} \cdot xdx
+\]
+כאשר מתקיים \[
+    \int \frac{2x-3}{x^2-3x+2} \cdot xdx =
+    \int \frac{2x^2-3x}{x^2-3x+2}dx =
+\]
+
+\end{document}
