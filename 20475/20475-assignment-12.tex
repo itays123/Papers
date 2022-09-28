@@ -243,6 +243,76 @@
     \frac{2}{3} \arctan(3\tan(\frac{x}{2}))
 \]
 
+\subsection*{סעיף ב}
+
+נתחיל בחישוב פונקציה קדומה לפונקציית האינטגרד. \\
+נתקלנו בפונקציה קדומה מהצורה $\int \frac{P(x)}{Q(x)\sqrt{ax^2+bx+c}}dx$,
+לכן נבצע הצבת אוילר: $\sqrt{x^2+1}=t-x$
+
+נקבל, לפי עמוד 161
+\[
+    x=\frac{t^2-1}{2t} ; \;
+    dx = \frac{t^2+1}{2t^2}dt ; \;
+    x+1 = \frac{t^2-1}{2t}+\frac{2t}{2t} = \frac{t^2+2t-1}{2t} \;
+    \sqrt{x^2+1}=t\cdot \frac{2t}{2t}-\frac{t^2-1}{2t}=\frac{t^2+1}{2t}
+\]
+נשים לב בנוסף: $x=0\Rightarrow t=1, x=1 \Rightarrow t=\sqrt{2}+1$
+
+ומכאן:
+\[
+    \int_0^1 \frac{dx}{(x+1)\sqrt{x^2+1}} =
+    \int_1^{\sqrt{2}+1} \frac{1}{\frac{t^2+2t-1}{2t} \cdot \frac{t^2+1}{2t}} \cdot \frac{t^2+1}{2t^2}dt =
+    \int_1^{\sqrt{2}+1} \frac{4t^2}{2t^2(t^2+2t-1)}dt =
+    2 \int_1^{\sqrt{2}+1} \frac{dt}{t^2+2t-1}
+\]
+
+נרצה להפריד לצורת $\frac{a}{t-(\sqrt{2}-1)} + \frac{b}{t-(\sqrt{2}+1)}$.
+\begin{align*}
+    \frac{1}{t^2+2t-1}=\frac{a}{t-(\sqrt{2}-1)} + \frac{b}{t-(\sqrt{2}+1)} \\
+    1=a(t-(\sqrt{2}+1)+b(t-(\sqrt{2}-1))                                   \\
+\end{align*}
+נשווה מקדמים של איברי הפולינום:
+\[
+    \begin{cases}
+        [1]: 1=a(1-\sqrt{2})+b(1+\sqrt{2}) \\
+        [t]: 0=a+b \; \Rightarrow b=-a
+    \end{cases}
+\]
+\begin{align*}
+    1=a(1-\sqrt{2})-a(1+\sqrt{2}) = a-\sqrt{2}a-a-\sqrt{2}a=-2\sqrt{2}a \\
+\end{align*}
+
+נקבל $a=-\frac{1}{2\sqrt{2}}, b=\frac{1}{2 \sqrt{2}}$, סך הכל
+\[
+    2 \int_1^{\sqrt{2}+1} \frac{dt}{t^2+2t-1} =
+    \frac{1}{\sqrt{2}} \int_1^{\sqrt{2}+1} (\frac{1}{t-(\sqrt{2}+1)} + \frac{1}{t-(\sqrt{2}-1)})dt=
+\]
+\[
+    \frac{1}{\sqrt{2}} \cdot \ln(\frac{t-(\sqrt{2}+1)}{t-(\sqrt{2}-1)})\bigg|_1^{\sqrt{2}+1}=
+    \frac{1}{\sqrt{2}} ()
+\]
+
+\subsection*{סעיף ג}
+
+נשתמש בתכונת הלינאריות של האינטגרל
+
+\[
+    \int_{-\pi/4}^{\pi/4} \frac{x^7-x+1}{\cos^2x}dx =
+    \int_{-\pi/4}^{\pi/4} \frac{x^7-x}{\cos^2x}dx + \int_{-\pi/4}^{\pi/4} \frac{1}{\cos^2x}dx =
+    \int_{-\pi/4}^{\pi/4} \frac{x^7-x}{\cos^2x}dx + \tan x\bigg|_{-\pi/4}^{\pi/4}
+\]
+
+באשר לאינטגרל שנותר, נשים לב כי פונקציית האינטגרד $f(x) = \frac{x^7-x}{\cos^2x}$ היא אי-זוגית. המונה הוא פונקציית פולינום אי-זוגית, והמכנה הוא פונקציה זוגית ידועה, וביחד המנה תהיה אי-זוגית.\\
+לכן ניעזר בשאלה 43 ביחידה 2. נקבל $\int_{-\pi/4}^{\pi/4} f(x)dx = 0$
+
+ולסיכום:
+\[
+    \int_{-\pi/4}^{\pi/4} \frac{x^7-x+1}{\cos^2x}dx =
+    0 + \tan x\bigg|_{-\pi/4}^{\pi/4} =
+    0 + 1 - (-1) = 2
+\]
+
+
 \subsection*{סעיף ד}
 נשתמש בתכונת האדיטיביות של האינטגרגל $\int_0^5 ||x-1|-|x-2||dx$
 \[
