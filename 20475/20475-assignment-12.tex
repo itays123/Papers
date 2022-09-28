@@ -72,26 +72,7 @@
     = \arcsin x + \ln|x+\sqrt{1+x^2}| + C
 \]
 
-\subsection*{חישוב עזר - סעיפים ד' + ה'}
-\[
-    \frac{1}{2} \cdot \int \frac{dt}{a^2+t^2} =
-    \begin{bmatrix}
-        t=a\tan u                \\
-        dt=a \frac{1}{\cos^2u}du \\
-        u=\arctan \frac{t}{a}
-    \end{bmatrix} =
-    \cdot \int \frac{1}{a^2(1+\tan^2u)}\cdot \frac{a}{\cos^2u}du =
-    \begin{bmatrix}
-        1+\tan^2u=\frac{1}{\cos^2u}
-    \end{bmatrix} =
-\]
-\[
-    \frac{1}{a} \cdot \int \cos^2u \cdot \frac{1}{\cos^2u}du=
-    \frac{1}{a} \int 1\cdot du =
-    \frac{1}{a} \cdot u + C =
-    \frac{1}{a} \cdot \arctan \frac{t}{a} + C
-\]
-
+\pagebreak
 
 \subsection*{סעיף ד}
 
@@ -125,8 +106,8 @@
 \[
     \mathsmaller{
         \begin{bmatrix}
-            \text{לפי חישוב העזר} \\
-            a^2 = \frac{3}{4}     \\
+            \text{שאלה 7ב ביחידה 2} \\
+            a^2 = \frac{3}{4}       \\
             a = \frac{\sqrt{3}}{2}
         \end{bmatrix}
     } =
@@ -157,8 +138,8 @@
 \]
 \[
     \begin{bmatrix}
-        \text{לפי חישוב העזר} \\
-        a^2=16                \\
+        \text{שאלה 7ב ביחידה 2} \\
+        a^2=16                  \\
         a=4
     \end{bmatrix} =
     \frac{1}{8} \arctan \frac{t}{4} + C =
@@ -211,7 +192,7 @@
     \xrightarrow{\cdot (x-1)(x-2)}
     2x^2-3x=a(x-2)+b(x-1) + p(x)(x^2-3x+2)
 \]
-נקבל כי מעלת הפולינום $p$ .היא לכל היותר 1, שכן אחרת מעלת הביטוי מימין תהיה גבוהה ממעלת הביטוי משמאל
+נקבל כי מעלת הפולינום $p$ היא לכל היותר 1, שכן אחרת מעלת הביטוי מימין תהיה גבוהה ממעלת הביטוי משמאל.\\
 נסמן $p(x) = k$
 \[
     \Rightarrow \begin{cases}
@@ -236,6 +217,31 @@
 \pagebreak
 
 \section*{שאלה 2}
+
+\subsection*{סעיף א}
+
+\[
+    \int \frac{dx}{5-4\cos x} =
+    \begin{bmatrix}
+        t=\tan\frac{x}{2}            \\
+        \cos x = \frac{1-t^2}{1+t^2} \\
+        dx = \frac{2}{1+t^2}dt       \\
+        \text{לפי 2.3.8}
+    \end{bmatrix} =
+    \int \frac{1}{5-4(\frac{1-t^2}{1+t^2})} \cdot \frac{2}{1+t^2}dt =
+    \int \frac{1+t^2}{5(1+t^2)-4(1-t^2)} \cdot \frac{2}{1+t^2}dt =
+\]
+\[
+    2 \int \frac{dt}{5+t^2-4+4t^2} =
+    2 \int \frac{dt}{9t^2+1} =
+    \frac{2}{9} \int \frac{dt}{t^2+(\frac{1}{3})^2} =
+    \begin{bmatrix}
+        \text{לפי שאלה 7ב} \\
+        \text{ביחידה 2}
+    \end{bmatrix} =
+    \frac{2}{9} \cdot 3\arctan 3t =
+    \frac{2}{3} \arctan(3\tan(\frac{x}{2}))
+\]
 
 \subsection*{סעיף ד}
 נשתמש בתכונת האדיטיביות של האינטגרגל $\int_0^5 ||x-1|-|x-2||dx$
