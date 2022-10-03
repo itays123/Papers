@@ -358,5 +358,76 @@
     4.5
 \]
 
+\pagebreak
+
+\section*{שאלה 3}
+
+\subsection*{סעיף א}
+
+הטעות טמונה במעבר
+$\int_1^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx =
+    \int_{\sin 1}^{\sin 1}e^{-t^2}dt$. \\
+השתמשנו כאן במשפט $2.11$. לפי המשפט, מתקיים השוויון הבא:
+\[
+    \int_{\sin 1}^{\sin 1}f(x)dx=\int_1^{1+2\pi} f(\sin(t)) \cos x dt
+\]
+כאשר $f(x) = e^{-x^2}$,
+זאת בכפוף לתנאי המשפט. \\
+אכן, $\sin$
+מוגדרת בקטע $[1, 1+2\pi]$
+כנדרש בתנאי הראשון. \\
+התנאי השני של במשפט דורש $\sin([1, 1+2\pi])\subseteq [\sin 1, \sin 1] = \{\sin 1\}$
+נשים לב כי מדובר במחזור שלם של פונקציית הסינוס, ולכן $\sin([1, 1+2\pi])=[-1,1]$
+והתנאי לא מתקיים! זוהי הטעות בהצבה.
+
+\subsection*{סעיף ב}
+
+ניעזר בתכונת האדיטויביות של האינטגרל:
+\[
+    I=
+    \int_1^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx =
+    \int_1^{1+\pi}\cos x \cdot e^{-\sin^2x}dx +
+    \int_{1+\pi}^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx
+\]
+
+נחשב את ערך האינטגרל $\int_{1+\pi}^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx$
+כעת נציב $t=x-\pi$. \\
+אז $dt=dx$, ונקבל:
+\[
+    \int_{1+\pi}^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx =
+    \begin{bmatrix}
+        x = 1 + \pi  & \Rightarrow & t =  1      \\
+        x = 1 + 2\pi & \Rightarrow & t = 1 + \pi
+    \end{bmatrix} =
+    \int_1^{1+\pi} \cos (t+\pi) \cdot e^{-\sin^2(t+\pi)}dt
+\]
+
+כעת, ניעזר בזהויות טריגונומטריות מאינפי 1:
+\[
+    \sin(t+\pi) = -\sin(2\pi - (t+\pi)) = -\sin (\pi - t) = -\sin t
+    \Rightarrow -\sin^2(t+\pi) = -(-\sin t)^2 =-\sin t
+\]
+\[
+    \cos(t+\pi) = \cos (2\pi - (t+\pi)) = \cos (\pi - t) = -\cos t
+\]
+
+נקבל:
+\[
+    \int_{1+\pi}^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx =
+    \int_1^{1+\pi} \cos (t+\pi) \cdot e^{-\sin^2(t+\pi)}dt =
+    -\int_1^{1+\pi} \cos t \cdot e^{-\sin^2t}dt
+\]
+
+ולכן
+\[
+    I =
+    \int_1^{1+\pi}\cos x \cdot e^{-\sin^2x}dx +
+    \int_{1+\pi}^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx =
+\]
+\[
+    =\int_1^{1+\pi}\cos x \cdot e^{-\sin^2x}dx -
+    \int_1^{1+\pi}\cos x \cdot e^{-\sin^2x}dx =
+    0
+\]
 
 \end{document}
