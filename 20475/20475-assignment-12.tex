@@ -430,4 +430,72 @@ $\int_1^{1+2\pi}\cos x \cdot e^{-\sin^2x}dx =
     0
 \]
 
+\pagebreak
+
+\section*{שאלה 4}
+
+נסמן לפי הנתון, לכל $n\in \mathbb{N}$:
+\[
+    \begin{matrix}
+        S_n = \int \sin ^n(x) dx &
+        C_n = \int \cos ^n(x) dx
+    \end{matrix}
+\]
+
+לכל $n\geq 3$
+טבעי:
+\[
+    S_n = \int \sin^n(x)dx =
+    \int \sin ^2 (x) \cdot \sin ^{n-2}(x) dx =
+    \int (1-\cos^2x) \cdot \sin ^{n-2}(x) dx =
+    S_{n-2} - \int \cos ^2 x \cdot \sin ^{n-2}(x) dx
+\]
+נבצע אינטגרציה בחלקים למחוסר. נקבל:
+\[
+    \int \cos ^2 x \cdot \sin ^{n-2}(x) dx =
+    \begin{bmatrix}
+        u=\cos x   &
+        v'=\cos x \cdot \sin^{n-2}(x) \\
+        u'=-\sin x &
+        v = \frac{1}{n-1}\cdot \sin^{n-1}(x)
+    \end{bmatrix} =
+    \frac{1}{n-1} \cos x \cdot \sin^{n-1}(x) - \frac{1}{n-1} \int -\sin^n(x)dx
+\]
+נשים לב:
+$-\frac{1}{n-1} \int -\sin^n(x)dx = \frac{1}{n-1} S_n$.
+לכן נעביר אגפים ונקבל:
+\[
+    \frac{n-1}{n-1} S_n = S_{n-2} - \frac{1}{n-1} \cos x \cdot \sin^{n-1}(x) - \frac{1}{n-1} S_n
+\]
+\[
+    \frac{n}{n-1}S_n = - \frac{1}{n-1} \cos x \cdot \sin^{n-1}(x) + S_{n-2}
+\]
+\[
+    S_n = - \frac{1}{n} \cos x \cdot \sin^{n-1}(x) + \frac{n-1}{n} S_{n-2}
+\]
+ובכך הוכחנו את הנוסחה הראשונה.
+\\\\
+נעבור לנוסחה השנייה ונחזור על התהליך בקצרה. \\
+\[
+    C_n = C_{n-2} - \int \sin^2x\cdot \cos^{n-2}(x)dx
+\]
+\[
+    \int \sin^2x\cdot \cos^{n-2}(x)dx =
+    \begin{bmatrix}
+        u=\sin x  &
+        v'=\sin x \cdot \cos^{n-2}(x) \\
+        u'=\cos x &
+        v = \frac{-1}{n-1}\cdot \cos^{n-1}(x)
+    \end{bmatrix} =
+    \frac{-1}{n-1} \sin x \cdot \cos^{n-1}(x) + \frac{1}{n-1} C_n
+\]
+\[
+    \frac{n-1}{n-1} C_n = C_{n-2} + \frac{1}{n-1} \sin x \cdot \cos^{n-1}(x) - \frac{1}{n-1} C_n
+\]
+\[
+    \frac{n}{n-1}C_n = - \frac{1}{n-1} \sin x \cdot \cos^{n-1}(x) + C_{n-2}
+\]
+\[
+    C_n = \frac{1}{n} \sin x \cdot \cos^{n-1}(x) + \frac{n-1}{n} C_{n-2}
+\]
 \end{document}
