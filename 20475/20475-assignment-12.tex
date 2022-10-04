@@ -9,6 +9,7 @@
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \usepackage{relsize}
+\usepackage{graphicx}
 \usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
 
 \setdefaultlanguage{hebrew}
@@ -498,4 +499,54 @@ $-\frac{1}{n-1} \int -\sin^n(x)dx = \frac{1}{n-1} S_n$.
 \[
     C_n = \frac{1}{n} \sin x \cdot \cos^{n-1}(x) + \frac{n-1}{n} C_{n-2}
 \]
+
+\pagebreak
+
+\section*{שאלה 5}
+
+נרצה לחשב את השטח המוגבל על ידי העקומה $y^2=(1-x^2)^3$. \\
+ראשית, על מנת שהעקומה תהא מוגדרת, נדרוש $(1-x^2)^3\geq 0$.
+נקבל $1-x^2\geq 0$,
+ולכן $-1\leq x \leq 1$
+\\\\
+לכל $x\in[-1,1]$,
+נקבל שני ערכי $y$,
+והם $y=\pm \sqrt{(1-x^2)^3}$. השטח המוגבל שנרצה לחשב ייראה כך:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{20475-assignment-12-05-graph.png}
+\end{figure}
+
+נשים לב כי השטח סימטרי ביחס לציר ה $x$.
+אכן, לכל $x\in[-1,1]$ נקבל:
+\[
+    y(-x) = \pm \sqrt{(1-(-x)^2)^3} = \pm \sqrt{(1-x^2)^3} = y(x)
+\]
+על כן, השטח שלנו יהיה, לפי דוגמה $1.17$:
+\[
+    S=\int_{-1}^1 (\sqrt{(1-x^2)^3} - (-\sqrt{(1-x^2)^3}))dx =
+    2 \int_{-1}^1 \sqrt{(1-x^2)^3}dx =
+    [\text{משיקולי סימטריה}] =
+    4 \int_0^1 \sqrt{1-x^2}^3dx
+\]
+
+כעת נציב $x=\sin t$,
+אז $dx=\cos t dt$
+ונקבל:
+\[
+    4\int_0^1 \sqrt{1-x^2}^3dx =
+    \begin{bmatrix}
+        x=0\Rightarrow t=0     \\
+        x=1\Rightarrow t=\pi/2 \\
+    \end{bmatrix} =
+    4\int_0^{\pi/2} \sqrt{1-\sin^2t}^3\cdot \cos t dt =
+    \begin{bmatrix}
+        \text{בתחום המבוקש מתקיים} \\
+        \cos t = \sqrt{1-\sin^2t}
+    \end{bmatrix} =
+    4 \int_0^{\pi/2} \cos^4t dt
+\]
+משאלה 4 נקבל $\int \cos^4 x dx = \frac{1}{4}\sin x \cdot \cos^3x + \frac{3}{4} \int \cos^2xdx$
+
 \end{document}
