@@ -291,37 +291,15 @@ $
     \xrightarrow{\phi_1: R_2\rightarrow R_2-2R_1}
     \begin{pmatrix}
         2 & 1  & 2  \\
-        0 & -2 & -7 \\
+        0 & -2 & -1 \\
         0 & 3  & 5
     \end{pmatrix}
     \equiv_7
     \begin{pmatrix}
         2 & 1 & 2 \\
-        0 & 5 & 0 \\
+        0 & 5 & 6 \\
         0 & 3 & 5 \\
     \end{pmatrix}
-    \xrightarrow[\phi_3: R_2\rightarrow 5^{-1}R_2\equiv_7 3R_2]{\phi_2: R_1\rightarrow 2^{-1}R_1\equiv_7 4R_1}
-    \begin{pmatrix}
-        1 & 4 & 1 \\
-        0 & 1 & 0 \\
-        0 & 3 & 5 \\
-    \end{pmatrix}
-\]
-\[
-    \xrightarrow[\phi_5: R_3\rightarrow R_3-3R_2]{\phi_4: R_1\rightarrow R_2-4R_2}
-    \begin{pmatrix}
-        1 & 0 & 1 \\
-        0 & 1 & 0 \\
-        0 & 0 & 5 \\
-    \end{pmatrix}
-    \xrightarrow{\phi_6: R_3\rightarrow 5^{-1}R_3\equiv_7 3R_3}
-    \begin{pmatrix}
-        1 & 0 & 1 \\
-        0 & 1 & 0 \\
-        0 & 0 & 1 \\
-    \end{pmatrix}
-    \xrightarrow{\phi_7: R_1\rightarrow R_1-R_3}
-    I_3
 \]
 \[
     B = \begin{pmatrix}
@@ -348,5 +326,34 @@ $
         0 & 5 & 6
     \end{pmatrix}
 \]
+\[
+    \xrightarrow[\eta_5: R_3\rightarrow 6^{-1}R_3\equiv_7 6R_3]{\eta_4: R_2\rightarrow 6^{-1}R_2\equiv_7 6R_2}
+    \begin{pmatrix}
+        1 & 3  & 4 \\
+        0 & 1  & 0 \\
+        0 & 30 & 1
+    \end{pmatrix}
+    \equiv_7
+    \begin{pmatrix}
+        1 & 3 & 4 \\
+        0 & 1 & 0 \\
+        0 & 2 & 1
+    \end{pmatrix}
+    \xrightarrow[\eta_7: R_3\rightarrow R_3-2R_2]{\eta_6: R_1\rightarrow R_1-3R_2}
+    \begin{pmatrix}
+        1 & 0 & 4 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \xrightarrow{\eta_8: R_1\rightarrow R_1-4R_3}
+    I_3
+\]
+
+נקבל $I=\phi_7(\phi_6(...\phi_1(A)...))=\eta_8(\eta_7(...\eta_1(B)...))$,
+ולכן לפי 3.9.3 + 3.9.6
+\[
+    B=\eta^{-1}_1(\eta^{-1}_2(...\eta^{-1}_8(\phi_7(...\phi_1(I)...))...)) \cdot A
+\]
+
 
 \end{document}
