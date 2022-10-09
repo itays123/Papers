@@ -280,92 +280,216 @@ $
 כנדרש אם ורק אם $A$ ו$B$ שקולות שורה.\\
 נמצא את ההצגה הקנונית של שתי המטריצות. ברור כי שתי המטריצות שקולות-שורה להצגתן הקנונית,
 ומאחר וההצגה הקנונית של כל מטריצה היא יחידה, נסיק כי שתי המטריצות שקולות שורה אם ורק אם הצגתן הקנונית זהה.
+נרצה לדרג את שתי המטריצות עד לקבלת מטריצה קנונית $Q$. \\
+במקביל, נבצע את אותן הפעולות על מטריצת היחידה על מנת למצוא את המטריצות $P_1, P_2: Q=P_1A= P_2B$
 
 נחשב:
 \[
-    A = \begin{pmatrix}
-        2 & 1 & 2 \\
-        4 & 0 & 3 \\
-        0 & 3 & 5
-    \end{pmatrix}
-    \xrightarrow{\phi_1: R_2\rightarrow R_2-2R_1}
-    \begin{pmatrix}
-        2 & 1  & 2  \\
-        0 & -2 & -1 \\
-        0 & 3  & 5
-    \end{pmatrix}
-    \equiv_7
-    \begin{pmatrix}
-        2 & 1 & 2 \\
-        0 & 5 & 6 \\
-        0 & 3 & 5 \\
-    \end{pmatrix}
-    \xrightarrow[\phi_3: R_2\rightarrow 5^{-1}R_2\equiv_7 3R_2]{\phi_2: R_1\rightarrow 2^{-1}R_1\equiv_74R_1}
+    (A | I_3) =
+    \left(
+    \begin{matrix}
+            2 & 1 & 2 \\
+            4 & 0 & 3 \\
+            0 & 3 & 5
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_2\rightarrow R_2-2R_1}
+    \left(
+    \begin{matrix}
+            2 & 1  & 2  \\
+            0 & -2 & -1 \\
+            0 & 3  & 5
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0 & 0 \\
+            -2 & 1 & 0 \\
+            0  & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_2\rightarrow R_2+R_3}
 \]
 \[
-    \begin{pmatrix}
-        1 & 4 & 1 \\
-        0 & 1 & 4 \\
-        0 & 3 & 5 \\
-    \end{pmatrix}
-    \xrightarrow[\phi_5: R_3\rightarrow R_3-3R_2]{\phi_4: R_1\rightarrow R_2-4R_2}
-    \begin{pmatrix}
-        1 & 0 & -15 \\
-        0 & 1 & 4   \\
-        0 & 0 & -12 \\
-    \end{pmatrix}
+    \left(
+    \begin{matrix}
+            2 & 1 & 2 \\
+            0 & 1 & 4 \\
+            0 & 3 & 5
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0 & 0 \\
+            -2 & 1 & 1 \\
+            0  & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_3\rightarrow R_3-3R_2]{R_1\rightarrow R_1-R_2}
+    \left(
+    \begin{matrix}
+            2 & 0 & -2 \\
+            0 & 1 & 4  \\
+            0 & 0 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            3  & -1 & -1 \\
+            -2 & 1  & 1  \\
+            6  & -3 & -2
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_1\rightarrow 4R_1}
+\]
+\[
+    \left(
+    \begin{matrix}
+            1 & 0 & 6 \\
+            0 & 1 & 4 \\
+            0 & 0 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            5  & 3  & 3  \\
+            -2 & 1  & 1  \\
+            6  & -3 & -2
+        \end{matrix}
+    \right.
+    \right)
     \equiv_7
+    \left(
+    \begin{matrix}
+            1 & 0 & 6 \\
+            0 & 1 & 4 \\
+            0 & 0 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            5 & 3 & 3 \\
+            5 & 1 & 1 \\
+            6 & 4 & 5
+        \end{matrix}
+    \right.
+    \right)
+    =(Q | P_1)
+\]
+\[
+    (B | I_3) =
+    \left(
+    \begin{matrix}
+            1 & 3 & 4 \\
+            2 & 4 & 0 \\
+            3 & 1 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_3\rightarrow R_3-3R_1]{R_2\rightarrow R_2-2R_1}
+    \left(
+    \begin{matrix}
+            1 & 3 & 4 \\
+            0 & 5 & 6 \\
+            0 & 6 & 3
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0 & 0 \\
+            -2 & 1 & 0 \\
+            -3 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_2\rightarrow 3R_2}
+\]
+\[
+    \left(
+    \begin{matrix}
+            1 & 3 & 4 \\
+            0 & 1 & 4 \\
+            0 & 6 & 3
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0 & 0 \\
+            1  & 3 & 0 \\
+            -3 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_3\rightarrow R_3+R_2]{R_1\rightarrow R_1-3R_2}
+    \left(
+    \begin{matrix}
+            1 & 0 & 6 \\
+            0 & 1 & 4 \\
+            0 & 0 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            5 & 5 & 0 \\
+            1 & 3 & 0 \\
+            5 & 3 & 1
+        \end{matrix}
+    \right.
+    \right) =
+    (Q | P_2)
+\]
+\\\\
+אכן, קיבלנו כי $A, B$
+שקולות לאותה צורה קנונית ולכן קיים $C$ כנדרש.\\
+מתקיים $Q=P_1A=P_2B$,
+המטרציה $P_2$
+הפיכה כמכפלת מטריצות אלמנטריות ולכן נכפול את השוויון משמאל בהופכית לה ונקבל $B=P_2^{-1}P_1A$.
+מכך נובע $C=P^{-1}_2P_1$ והיא אכן הפיכה כמכפלת מטריצות הפיכות.
+\\\\
+נרצה לחשב את $C$.
+לשם כך, נבצע על $P_1$
+את הפעולות האלמנטריות ההפוכות לפעולות שביצענו בדירוג המטריצה $B$.
+לפי מסקנה $3.9.6$
+וטענה $3.9.4$ הדבר אכן ייתן לנו את המטריצה המבוקשת.
+
+\[
+    P_1 =
     \begin{pmatrix}
-        1 & 0 & 6 \\
-        0 & 1 & 4 \\
-        0 & 0 & 0 \\
+        5 & 3 & 3 \\
+        5 & 1 & 1 \\
+        6 & 4 & 5
+    \end{pmatrix}
+    \xrightarrow[R_3\rightarrow R_3-R_2]{R_1\rightarrow R_1+3R_2}
+    \begin{pmatrix}
+        6 & 6 & 6 \\
+        5 & 1 & 1 \\
+        1 & 3 & 4
+    \end{pmatrix}
+    \xrightarrow{R_2\rightarrow 3^{-1}R_2\equiv_7 5R_2}
+    \begin{pmatrix}
+        6 & 6 & 6 \\
+        4 & 5 & 5 \\
+        1 & 3 & 4
+    \end{pmatrix}
+    \xrightarrow[R_3\rightarrow R_3+3R_1]{R_2\rightarrow R_2+2R_1}
+    \begin{pmatrix}
+        6 & 6 & 6 \\
+        2 & 3 & 3 \\
+        5 & 0 & 1
     \end{pmatrix} =
-    Q
-\]
-\[
-    B = \begin{pmatrix}
-        1 & 3 & 4 \\
-        2 & 4 & 0 \\
-        3 & 1 & 1
-    \end{pmatrix}
-    \xrightarrow[\eta_2: R_3\rightarrow R_3-3R_1]{\eta_1: R_2\rightarrow R_2-2R_1}
-    \begin{pmatrix}
-        1 & 3  & 4   \\
-        0 & -2 & -8  \\
-        0 & -8 & -11
-    \end{pmatrix}
-    \equiv_7
-    \begin{pmatrix}
-        1 & 3 & 4 \\
-        0 & 5 & 6 \\
-        0 & 6 & 3
-    \end{pmatrix}
-    \xrightarrow{\eta_3: R_2\rightarrow 5^{-1}R_2\equiv_73R_2}
-\]
-\[
-    \begin{pmatrix}
-        1 & 3 & 4 \\
-        0 & 1 & 4 \\
-        0 & 6 & 3
-    \end{pmatrix}
-    \xrightarrow[\eta_5: R_3\rightarrow R_3-6R_2]{\eta_4: R_1\rightarrow R_1-3R_2}
-    \begin{pmatrix}
-        1 & 0 & -8  \\
-        0 & 1 & 4   \\
-        0 & 0 & -21
-    \end{pmatrix}
-    \equiv_7
-    \begin{pmatrix}
-        1 & 0 & 6 \\
-        0 & 1 & 4 \\
-        0 & 0 & 0
-    \end{pmatrix} = Q
+    C
 \]
 
-נקבל $Q=\phi_5(\phi_4(...\phi_1(A)...))=\eta_5(\eta_4(...\eta_1(B)...))$,
-ולכן לפי 3.9.4 + 3.9.6
-\[
-    B = \eta^{-1}_1(\eta^{-1}_2(...\eta^{-5}_5(\phi_5(...\phi_1(I)...))...)) \cdot Q \cdot A
-\]
+\subsection*{סעיף ב}
+
+נציג את $C$ כמכ
 
 \end{document}
