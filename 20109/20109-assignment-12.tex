@@ -17,6 +17,8 @@
 \setmainfont{[Arial.ttf]}
 \newfontfamily\hebrewfont{[Arial.ttf]}
 
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+
 \title{מטלת מנחה 12 - אלגברה לינארית 1}
 \author{328197462}
 \date{04/12/2022}
@@ -123,5 +125,57 @@ $x_1, x_2, ..., x_n\in F$
 $x_1v_1+x_2v_2+\cdots+x_nv_n=w$,
 אבל לפי הנתון אין ל$w$
 צירוף לינארי כזה!
+
+\pagebreak
+
+\section*{שאלה 3}
+
+נתונות $A_{m\times n}, B_{n\times m}: A \cdot B = I_m$
+
+\subsection*{סעיף א}
+
+עלינו להוכיח כי למערכת ההומוגנית $B\underline{x} = \underline{0}$
+יש פתרון יחיד. מאחר ומדובר במערכת הומוגנית, ברור כי פתרון זה יהיה הפתרון הטריוויאלי.
+\\\\
+אכן, יהא $\underline{c}\in F^m$
+פתרון למערכת ונרצה להוכיח $\underline{c} = \underline{0}$.
+מתקיים:
+\[
+    \underline{c} \underrel{3.5.3}{=}
+    I_m \cdot \underline{c} \underrel{\text{לפי הנתון}}{=}
+    (AB) \underline{c} \underrel{\text{קיבוציות}}{=}
+    A(B\underline{c}) \underrel{\text{\underline{c} פתרון למערכת}}{=}
+    A_{m\times n} \cdot \underline{0}_{n\times 1} =
+    \underline{0}_{m\times 1}
+\]
+ובכך הוכחנו כי הפתרון הטריוויאלי הוא פתרון יחיד.
+
+\subsection*{סעיף ב}
+
+ניעזר בטענה $2.6.5$. \\
+לפי סעיף א' למערכת $B\underline{x}=\underline{0}$ \\
+יש פתרון יחיד. לכן, לפי טענה זו, וקטורי העמודות של מטריצת המקדמים $B$,
+שהם קבוצה של $m$
+מאיברי $F^n$,
+מהווים קבוצה בלתי-תלויה לינארית. \\
+כעת, מאחר והקבוצה בלתי-תלויה לינארית, נובע לפי מסקנה $2.6.7$
+כי $m\leq n$
+ובכך סיימנו את הההוכחה.
+
+\subsection*{סעיף ג}
+
+נניח כי $B\cdot X= I_n$. \\
+באופן דומה לסעיף א',
+נקבל כי למערכת ההומוגנית $X\underline{x} = \underline{0}$
+יש פתרון יחיד, ובאופן דומה לסעיף ב' נסיק $n\leq m$.
+\\\\
+נקבל $m=n$,
+נציב בנתון נקבל $A\cdot B=I_n$,
+כלומר $A,B$
+הפיכות ומתקיים $B^{-1}=A$. \\\\
+נחזור להנחה. נקבל $B\cdot X = I_n = B\cdot A$. \\
+מאחר ו$B$
+הפיכה, נפעיל את כלל הצמצום $3.8.3$
+ונקבל $X=A$ ובכך סיימנו את ההוכחה.
 
 \end{document}
