@@ -1,0 +1,80 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+
+\title{מטלת מנחה 13 - אינפי 2}
+\author{328197462}
+\date{09/12/2022}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+\pagebreak
+
+\section*{שאלה 2}
+
+נסמן $f(x)=\frac{x^\alpha(1-x^2)^\beta}{1-\cos x}$.
+עלינו לבדוק את ההתכנסות את האינטגרל $\int_0^1f(x)dx$. \\
+נדגיש כי הפונקציה חיובית לכל אורך קטע האינטגרציה הנתון.
+
+\[
+    \int_0^1 f(x) dx = \int_0^{1/2}f(x)dx + \int_{1/2}^1f(x)dx
+\]
+האינטגרל משמאל מתכנס אם ורק אם שני האינטגרלים מימין מתכנסים. נבדוק את ההתכנסות של כל אחד מהם בנפרד.
+\\\\
+נבדוק את התכנסות האינטגרל $\int_0^{1/2}f(x)dx$. \\
+נבחר $g(x) = \frac{x^\alpha}{x^2}=\frac{1}{x^{2-\alpha}}$. אז:
+\[
+    \lim_{x\rightarrow 0^+}\frac{f(x)}{g(x)} =
+    \lim_{x\rightarrow 0^+}\frac{x^\alpha(1-x^2)^\beta \cdot x^2}{(1-\cos x)\cdot x^\alpha} =
+    \lim_{x\rightarrow 0^+} (1-x^2)^\beta \cdot \lim_{x\rightarrow 0^+} \frac{x^2}{1-\cos x} \underrel{\text{לופיטל}}{=}
+    1 \cdot \lim_{x\rightarrow 0^+} \frac{2x}{\sin x} = 2 > 0
+\]
+האינטגרל $\int_0^{1/2}g(x)dx=\int_0^{1/2}\frac{1}{x^{2-\alpha}}dx$
+מתכנס אם ורק אם $2-\alpha < 1$,
+כלומר $\alpha > 1$
+(לפי למה $3.2$). \\
+לכן לפי מבחן ההשוואה $3.5*$
+גם האינטגרל $\int_0^{1/2}f(x)dx$
+מתכנס אם ורק אם $\alpha > 1$.
+\\\\
+נמשיך ונבדוק את התכנסות האינטרל $\int_{1/2}^1f(x)dx$. \\
+נבחר, הפעם, $g(x)=(1-x)^\beta=\frac{1}{(1-x)^{-\beta}}$. אז:
+\[
+    \lim_{x\rightarrow 1^-} \frac{f(x)}{g(x)} =
+    \lim_{x\rightarrow 1^-} \frac{x^\alpha (1-x^2)^\beta}{(1-\cos x)\cdot (1-x)^\beta} =
+    \lim_{x\rightarrow 1^-} \frac{x^\alpha}{1-\cos x} \cdot \lim_{x\rightarrow 1^-} \frac{((1-x)(1+x))^\beta}{(1-x)^\beta} =
+\]
+\[
+    \frac{1}{1-\cos 1} \cdot \lim_{x\rightarrow 1^-} (1+x)^\beta =
+    \frac{2^\beta}{1-\cos 1} > 0
+\]
+האינטגרל $\int_{1/2}^1g(x)dx = \int_{1/2}^1\frac{1}{(1-x)^{-\beta}}$
+מתכנס, לפי שאלה 5 ביחידה 3, אם ורק אם $-\beta < 1$, כלומר $\beta > -1$ \\
+לכן לפי מבחן ההשוואה $3.5*$
+גם האינטגרל $\int_{1/2}^1f(x)dx$
+מתכנס אם ורק אם $\beta > -1$.
+\\\\
+לסיכום נקבל שהאינטגרל $\int_0^1f(x)dx$
+מתכנס אם ורק אם $\alpha > 1\wedge \beta > -1$
+
+\end{document}
