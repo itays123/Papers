@@ -110,4 +110,29 @@
 לא מתכנס (כי $-1<1$)
 ולכן גם האינטגרל $\int_1^{\infty}f(x)dx$ לא מתכנס.
 
+\pagebreak
+
+\section*{שאלה 4}
+
+\subsection*{סעיף א}
+
+הטענה לא שגויה. ניקח למשל $f$ כך שלכל $x\leq 1$:
+\[
+    f(x) = \begin{cases}
+        0 & x\notin \mathbb{Z} \\
+        x & x\in \mathbb{Z}
+    \end{cases}
+\]
+בסעיף 3.2.6 (עמוד 38 בכרך ב)
+מוכיחים בעזרת למה 1.25 כי $\int_1^\infty f(x)dx$
+אכן מתכנס.
+\\\\
+אבל $\lim_{x\rightarrow\infty}\frac{f(x)}{x}\ne 0$,
+כי עבור $\epsilon=1$ עבור כל $x$ בתחום ההגדרה ניקח את $\lfloor x \rfloor + 1 > x$ ונקבל:
+\[
+    \frac{f(\lfloor x \rfloor + 1)}{\lfloor x \rfloor + 1} \underrel{הארגומנט שלם}{=}
+    \frac{\lfloor x \rfloor + 1}{\lfloor x \rfloor + 1} =
+    1 \geq \epsilon
+\]
+
 \end{document}
