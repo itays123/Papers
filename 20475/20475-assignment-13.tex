@@ -73,6 +73,19 @@
 
 \pagebreak
 
+\subsection*{סעיף ג}
+
+נסמן $f(x)=\cos x \cdot \frac{\sin x}{\ln(1+x)} = \frac{\sin 2x}{\ln(1+x)}$ \\
+ראשית, נשים לב:
+\[
+    \lim_{x\rightarrow 0^+} \frac{\sin x}{\ln(1+x)} \underrel{\text{לופיטל}}{=}
+    \lim_{x\rightarrow0^+} \frac{\cos x}{\frac{1}{1+x}} =
+    \lim_{x\rightarrow0^+} \cos x\; (1+x) =
+    1 \cdot 1 = 1
+\]
+
+\pagebreak
+
 \section*{שאלה 2}
 
 נסמן $f(x)=\frac{x^\alpha(1-x^2)^\beta}{1-\cos x}$.
@@ -263,7 +276,7 @@ $[a,t]$, וכן בכל תת-קטע $[t,s]$ כך ש $s \geq t$. \\
           נסיק $\xi(u)=\frac{f(\ln u)}{u}\xrightarrow[x\rightarrow \infty]{}0$
     \item כמו כן, מתקיים
           \[
-              |G(x)| = |\int_{e^t}^x \sin u \; du| = |\cos x - \cos e^t| \leq 2
+              |G(x)| = |\int_{e^t}^x \sin u \; du| = |\cos e^t - \cos x| \leq 2
           \]
 \end{enumerate}
 הראינו כי מתקיימים תנאי מבחן דיריכלה ולכן לפי $3.19$ האינטגרל הנ"ל מתכנס.
