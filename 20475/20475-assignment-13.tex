@@ -7,6 +7,7 @@
 \usepackage[makeroom]{cancel}
 \usepackage[]{amssymb} %gives us the character \varnothing
 \usepackage{fontspec}
+\usepackage{enumerate}
 \usepackage{polyglossia}
 \usepackage{relsize}
 \usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
@@ -134,5 +135,124 @@
     \frac{\lfloor x \rfloor + 1}{\lfloor x \rfloor + 1} =
     1 \geq \epsilon
 \]
+
+\subsection*{סעיף ב}
+
+הפונקציה $f^2$
+היא פונקציה חיובית, ולכן נרצה להשתמש במבחן ההשוואה על מנת להוכיח כי
+האינטגרל $\int_1^\infty f^2(x)dx$
+מתכנס.
+\\\\
+ניקח $g(x)=|f(x)|+f^4(x)$.
+ברור כי $g$ פונקציה חיובית ורציפה ב $[1,\infty)$ כסכום של שתי פונקציות חיוביות ורציפות. \\
+מכאן נסיק, לפי 1.18, כי $g$ אינטגרבילית בקטע $[1,t]$ לכל $t\geq 1$. \\
+לפי הנתון האינטגרל $\int_1^\infty |f(x)|dx$
+והאינטגרל $\int_1^\infty f^4(x)dx$ מתכנסים.\\
+לכן, הגבול
+\[
+    \lim_{t\rightarrow \infty}\int_1^t g(x)dx \underrel{1.24}{=}
+    \lim_{t\rightarrow \infty}\int_1^t |f(x)|dx + \lim_{t\rightarrow \infty}\int_1^t f^4(x)dx
+\]
+קיים וסופי כסכום של של מספרים סופיים, ומכאן $\int_1^\infty g(x)dx$ מתכנס.
+\\\\
+כעת, נרצה להוכיח כי יש $A\geq 1$
+כלשהו כך ש $g(x)\geq f^2(x)$
+לכל $x\in[A,\infty)$.
+ניקח $A=1$. לכל $x\in[1,\infty)$,
+
+\begin{enumerate}[I]
+    \item אילו $|f(x)|<1$,
+          אז $f^2(x)<|f(x)|\leq |f(x)|+f^4(x)=g(x)$
+    \item אחרת, $|f(x)|\geq 1$
+          ונקבל $f^2(x)\leq|f(x)|^3\leq f^4(x)\leq |f(x)|+f^4(x)=g(x)$
+\end{enumerate}
+לכן, לפי מבחן ההשוואה $3.16$,
+האינטגרל $\int_1^\infty f^2(x)dx$
+מתכנס וסיימנו.
+
+\pagebreak
+
+\section*{שאלה 5}
+
+ראשית, הפונקציה
+$f(x)\sin(e^x)$
+רציפה בקטע $[a,\infty)$
+כמכפלה והרכבה של פונקציות רציפות. \\
+בפרט, הפונקציה רציפה (ואינטגרבילית לפי $1.18$) בתת-הקטע
+$[a,t]$, וכן בכל תת-קטע $[t,s]$ כך ש $s \geq t$. \\
+לכן, לפי תכונת האדיטיביות המוכללת,
+\[
+    \int_a^\infty f(x)\sin(e^x)dx \underrel{1.23}{=}
+    \int_a^t f(x)\sin(e^x)dx + \int_t^\infty f(x)\sin(e^x)dx
+\]
+האינטגרל $\int_a^t f(x)\sin(e^x)dx$
+הוא אינטגרל מסוים - הפונקציה אינטגבילית בקטע סגור זה. \\
+מכאן נסיק כי האינטגרל $\int_a^\infty f(x)\sin(e^x)dx$
+מתכנס אם רק אם האינטגרל $\int_t^\infty f(x)\sin(e^x)dx$ מתכנס. \\
+משיקולים דומים, $\int_a^\infty |f(x)\sin(e^x)|dx$ מתכנס אם ורק אם $\int_t^\infty |f(x)\sin(e^x)|dx$ מתכנס. \\
+וכן $\int_t^\infty f(x)dx$ מתבדר כי לפי הנתון $\int_a^\infty f(x)dx$ מתבדר.
+\\\\
+כעת, נעבור לעסוק בשאלת ההתכנסות של האינטגרל $\int_t^\infty f(x)\sin(e^x)dx$.
+מתקיים:
+\[
+    \int_t^\infty f(x)\sin(e^x)dx =
+    \begin{bmatrix}
+        u=e^x                                                    \\
+        \ln u = x           & \Rightarrow & \frac{du}{u} = dx    \\
+        x = t               & \Rightarrow & u = e^t              \\
+        x\rightarrow \infty & \Rightarrow & u \rightarrow \infty
+    \end{bmatrix} =
+    \int_{e^t}^\infty \frac{f(\ln u)}{u} \cdot \sin u \;du
+\]
+נרצה להשתמש במבחן דיריכלה להוכיח את התכנסות אינטגרל זה. לשם כך נסמן $\xi(u) = \frac{f(\ln u)}{u}$.
+\begin{enumerate}[I]
+    \item נראה כי $\xi$ יורדת וגזירה ברציפות בקטע $[e^t, \infty)$. \\
+          הפונקציה גזירה בקטע כמנה והרכבה של פונקציות גזירות כאשר מובטח לנו $u>0$ מההצבה $u=e^x$. נקבל אפוא:
+          \[
+              \xi'(x) = [\frac{f(\ln u)}{u}]' =
+              \frac{f'(\ln u)\cdot \frac{1}{u} \cdot u - f(\ln u)}{u^2} =
+              \frac{f'(\ln u) - f(\ln u)}{u^2}
+          \]
+          לכל $u\in[e^t, \infty)$ יש $x\in [t,\infty)$ כך ש $u=e^x$. \\
+          נקבל, לפי הנתון עבור $x\geq t$, כי $f'(\ln u)-f(\ln u)=f'(x)-f(x)<0$. \\
+          לכן $\xi'(u)<0$ והפונקציה יורדת בקטע $[e^t, \infty)$. \\
+          פוקנציית הנגזרת $\xi'$ רציפה כהפרש, מנה והרכבה של פונקציות רציפות כאשר $u>0$ מובטח.
+    \item מהמשפט האנלוגי "חסומה כפול אפסה" עבור $f(\ln u)$ חסומה לפי הנתון ו $\frac{1}{u}$ אפסה,
+          נסיק $\xi(u)=\frac{f(\ln u)}{u}\xrightarrow[x\rightarrow \infty]{}0$
+    \item כמו כן, מתקיים
+          \[
+              |G(x)| = |\int_{e^t}^x \sin u \; du| = |\cos x - \cos e^t| \leq 2
+          \]
+\end{enumerate}
+הראינו כי מתקיימים תנאי מבחן דיריכלה ולכן לפי $3.19$ האינטגרל הנ"ל מתכנס.
+\\\\
+נראה כי האינטגרל מתכנס בתנאי, כלומר $\int_{e^t}^\infty |\xi(u)\sin u| du$ מתבדר. \\
+תחילה, נשים לב כי $\xi$ חיובית בקטע $[t,\infty)$
+(כי היא יורדת ברציפות ושואפת לאפס), ולכן $\int_{e^t}^\infty |\xi(u)\sin u| du = \int_{e^t}^\infty \xi(u)|\sin u| du$ \\
+ידוע כי $|\sin u|\leq 1$ ולכן $|\sin u| \geq \sin^2u$.
+אי לכך, לפי מבחן ההשוואה $3.16$, אילו $\int_{e^t}^\infty \xi(u)\sin^2 u \; du$ מתבדר
+אז $\int_{e^t}^\infty \xi(u)|\sin u| du$.
+\\\\
+נניח בשלילה כי $\int_{e^t}^\infty \xi(u)\sin^2 u \; du$ מתכנס. \\
+מהזהות הטריגונומטרית $\cos 2u = 1 - 2\sin^2u$ נסיק:
+\[
+    \int_{e^t}^\infty \xi(u)\sin^2 u \; du =
+    \frac{1}{2}\int_{e^t}^\infty \xi(u) du - \frac{1}{2} \int_{e^t}^\infty \xi(u)\cos 2u \; du
+\]
+האינטגרל $\int_{e^t}^\infty \xi(u)\cos 2u \; du$ מתכנס לפי מבחן דיריכלה משיקולים דומים לחלק הקודם של ההוכחה.\\
+לכן, מהשוויון שלעיל, נקבל כי גם האינטגרל $\int_{e^t}^\infty \xi(u) du$ מתכנס
+וערכו הוא $2\int_{e^t}^\infty \xi(u)\sin^2 u \; du + \int_{e^t}^\infty \xi(u)\cos 2u \; du$.
+\[
+    \int_{e^t}^\infty \xi(u)du =
+    \int_{e^t}^\infty \frac{f(\ln u)}{u} du =
+    \begin{bmatrix}
+        x = \ln u                       & dx = \frac{du}{u}    \\
+        u = e^t \Rightarrow             & x = t                \\
+        u\rightarrow \infty \Rightarrow & x \rightarrow \infty
+    \end{bmatrix} =
+    \int_t^\infty f(x)dx
+\]
+ולכן $\int_t^\infty f(x)dx$ מתכנס,
+אבל בתחילת ההוכחה הראינו שהוא מתבדר וזו סתירה! מכאן נסיק כי האינטגרל מתכנס בתנאי.
 
 \end{document}
