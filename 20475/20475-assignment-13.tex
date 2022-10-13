@@ -71,18 +71,91 @@
 \\\\
 מכאן נסיק כי $\int_0^\infty f(x)$ מתבדר.
 
-\pagebreak
-
 \subsection*{סעיף ג}
 
-נסמן $f(x)=\cos x \cdot \frac{\sin x}{\ln(1+x)} = \frac{\sin 2x}{\ln(1+x)}$ \\
-ראשית, נשים לב:
+נסמן $f(x)=\cos x \cdot \frac{\sin x}{\ln(1+x)} = \frac{\sin 2x}{2\ln(1+x)}$ \\
+\[
+    \int_0^\infty f(x)dx =
+    \int_0^1 f(x)dx + \int_1^\infty f(x)dx
+\]
+האינטגרל משמאל מתכנס אם ורק אם שני האינטגרלים מימין מתכנסים. \\
+כמו כן, ניתן להסיק מסקנה דומה על התכנסות האינטגרל $\int_0^\infty|f(x)|dx$.
+\\\\
+נבחן את התכנסות האינטגרל $\int_0^1f(x)dx$. הפונקציה רציפה בקטע $(0,1]$ ומתקיים:
 \[
     \lim_{x\rightarrow 0^+} \frac{\sin x}{\ln(1+x)} \underrel{\text{לופיטל}}{=}
     \lim_{x\rightarrow0^+} \frac{\cos x}{\frac{1}{1+x}} =
     \lim_{x\rightarrow0^+} \cos x\; (1+x) =
     1 \cdot 1 = 1
 \]
+\[
+    \lim_{x\rightarrow 0^+}f(x) =
+    \lim_{x\rightarrow 0^+} \cos x \cdot \lim_{x\rightarrow 0^+} \frac{\sin x}{\ln(1+x)} =
+    1 \cdot 1 = 1
+\]
+לכן הפונקציה חסומה בסביבה ימנית של $x=0$ וניתנת להשלמה בנקודה זו. \\
+מכאן נסיק שהאינטגרל $\int_0^1f(x)dx$ הוא אינטגרל מסוים. \\
+מסקנה דומה ניתן להסיק על האינטגרל $\int_0^1 |f(x)|dx$ לפי רציפות פונקציית הערך המוחלט.
+\\\\
+כעת, נראה כי $\int_0^\infty f(x)dx$ מתכנס ע"י הוכחת התכנסות האינטגרל $\int_1^\infty f(x)dx$ בעזרת מבחן דיריכלה:
+\begin{enumerate}[I]
+    \item נראה כי הפונקציה $\frac{1}{\ln(1+x)}$ גזירה ברציפות ויורדת ב $[1,\infty)$.\\
+          הפונקציה גזירה בקטע כמנת פונקציות גזירות כאשר ארגומנט ה$ln$ בהכרח גדול מ-1, ולכן המכנה חיובי. נקבל אפוא:
+          \[
+              [\frac{1}{\ln(1+x)}]' =
+              [(\ln(1+x))^{-1}]'=
+              -1 \cdot (\ln (1+x))^{-2} \cdot \frac{1}{1+x} =
+              \frac{-1}{(\ln(1+x))^2 \cdot (1+x)} \underrel{x\geq 1}{\leq}
+              \frac{-1}{2(\ln(1+x))^2}<0
+          \]
+          מאי-שוויון זה נסיק כי הפונקציה יורדת בקטע. כמו כן, פונקציית הנגזרת רציפה כמנה, הרכבה ומכפלה של פונקציות רציפות (המכנה שונה מאפס וארגומנט ה$\ln$ חיובי בקטע).
+    \item כמו כן,
+          \[
+              \lim_{x\rightarrow\infty} \frac{1}{ln(1+x)} =
+              \begin{bmatrix}
+                  t = 1 + x \\
+                  t\rightarrow \infty \Rightarrow x\rightarrow\infty
+              \end{bmatrix} =
+              \lim_{t\rightarrow\infty} \frac{1}{\ln t} = 0
+          \]
+    \item וכן,
+          \[
+              |G(x)|=
+              |\int_0^x \sin 2t\; dt| =
+              |\cos 0 - \cos x| \leq 2
+          \]
+\end{enumerate}
+לכן, לפי מבחן דיריכלה (משפט $3.19$),
+האינטגרל $\int_1^\infty \frac{\sin 2x}{\ln(1+x)}=\frac{1}{2}\int_1^\infty f(x)dx$ מתכנס,\\
+ומכאן נסיק כי האינטגרל $\int_0^\infty f(x)dx$ מתכנס.
+\\\\
+נראה כי האינטגרל הנ"ל מתכנס בתנאי ע"י הוכחה כי $\int_1^\infty |f(x)|dx$ מתבדר. \\
+תחילה, נשים לב כי $\int_1^\infty f(x)dx=\frac{1}{2}\int_1^\infty \frac{1}{\ln(1+x)} |\sin 2x|dx$. \\
+ברור כי $|\sin 2x|\leq 1$, ולכן $|\sin 2x| \geq \sin^2 2x$ \\
+ולפי מבחן ההשוואה 3.16 נסיק כי אם $\int_1^\infty \frac{1}{\ln(1+x)} \cdot \sin^2 2x \; dx$ מתבדר
+אז $\int_1^\infty |f(x)|dx$ מתבדר.\\
+נניח בשלילה כי $\int_1^\infty \frac{1}{\ln(1+x)} \cdot \sin^2 2x \; dx$ מתכנס. \\
+מהשוויון הטריגונומטרי $\cos 4x = 1-2\sin^2 2x$ נקבל:
+\[
+    \int_1^\infty \frac{1}{\ln(1+x)} \cdot \sin^2 2x \; dx =
+    \frac{1}{2} \int_1^\infty \frac{1}{\ln(1+x)} dx - \frac{1}{2} \int_1^\infty \frac{1}{\ln(1+x)}\cos 4x \; dx
+\]
+האינטגרל $\int_1^\infty \frac{1}{\ln(1+x)}\cos 4x \; dx$
+מתכנס לפי מבחן דיריכלה, באופן דומה להוכחה זו. \\
+לכן נסיק כי האינטגרל $\int_1^\infty \frac{1}{\ln(1+x)}dx$
+מתכנס וערכו $2\int_1^\infty \frac{1}{\ln(1+x)} \cdot \sin^2 2x \; dx + \int_1^\infty \frac{1}{\ln(1+x)}\cos 4x \; dx$
+\\\\
+ניקח $g(x)=\frac{1}{x}$. אז:
+\[
+    \lim_{x\rightarrow\infty}\frac{\frac{1}{\ln(1+x)}}{g(x)} =
+    \lim_{x\rightarrow\infty}\frac{x}{ln(1+x)} = \infty
+\]
+האינטגרל $\int_1^\infty \frac{dx}{x}$ מתבדר לפי למה $3.12$.
+לכן, לפי מבחן ההשוואה $*3.16$,
+האינטגרל $\int_1^\infty \frac{dx}{\ln(1+x)}$ מתבדר
+והגענו לסתירה! \\
+מכאן נסיק שהאינטגרל $\int_1^\infty|f(x)|dx$ מתבדר,
+ולכן $\int_0^\infty f(x)dx$ מתכנס בתנאי.
 
 \pagebreak
 
