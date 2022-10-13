@@ -29,6 +29,48 @@
 
 \section*{שאלה 1}
 
+\subsection*{סעיף א}
+
+נסמן $f(x)=\frac{\sqrt{x-1}}{\sqrt{x^2-x+1}-1}$ חיובית בקטע $(1,2]$.
+הפונקציה רציפה בקטע זה (ולכן אינטגרבילית בכל קטע סגור החלקי לקטע זה) ואינה חסומה אך ורק בסביבת $x=1$,
+ולכן נשתמש במבחן ההשוואה לפונקציות שאינן חסומות בקטע סגור.\\\\
+ניקח $g(x)=\frac{\sqrt{x-1}}{x-1}=\frac{1}{(x-1)^{1/2}}$. אז:
+\[
+    \lim_{x\rightarrow 1^+}\frac{f(x)}{g(x)} =
+    \lim_{x\rightarrow 1^+}\frac{x-1}{\sqrt{x^2-x+1}-1} \underrel{\text{לופיטל}}{=}
+    \lim_{x\rightarrow 1^+}\frac{1}{\frac{2x-1}{2\sqrt{x^2-x+1}}} =
+    \lim_{x\rightarrow 1^+}\frac{2\sqrt{x^2-x+1}}{2x-1} =
+    \frac{2\sqrt{1^2-1+1}}{2\cdot 1-1} = 2 > 0
+\]
+האינטגרל $\int_1^2 g(x)dx = \int_1^2 \frac{1}{(x-1)^{1/2}}dx$
+מתכנס לפי שאלה 5 ביחידה 3 כי $\frac{1}{2}<1$, \\
+ולכן לפי מבחן ההשוואה $*3.5$
+גם $\int_1^2f(x)dx$ מתכנס.
+מאחר והפונקציה חיובית נסיק כי $\int_1^2f(x)dx$ מתכנס בהחלט.
+
+\subsection*{סעיף ב}
+
+נסמן $f(x)=\frac{\arctan x}{\sqrt{x^2+x}}$ חיוביות בקטע $(0,\infty)$.
+\[
+    \int_0^\infty f(x)dx =
+    \int_0^1 f(x)dx + \int_1^\infty f(x)dx
+\]
+האינטגרל משמאל מתכנס אם ורק אם שני האינטגרלים מימין מתכנסים.
+\\\\
+נבדוק את התכנסות האינטגרל $\int_1^{\infty}f(x)dx$. \\
+ניקח $g(x)=\frac{1}{x}$, אז:
+\[
+    \lim_{x\rightarrow\infty}\frac{f(x)}{g(x)} =
+    \lim_{x\rightarrow\infty} \frac{x}(\sqrt{x^2+x}) \cdot \arctan x =
+    \lim_{x\rightarrow\infty} \sqrt{\frac{x^2}{x^2+x}} \cdot \lim_{x\rightarrow\infty} \arctan x =
+    1 \cdot \frac{\pi}{2} = \frac{\pi}{2} > 0
+\]
+האינטגרל $\int_1^\infty g(x)dx=\int_1^\infty \frac{dx}{x}$
+מתבדר לפי למה $3.2$, לכן לפי מבחן ההשוואה $*3.16$
+גם $\int_1^\infty f(x)dx$ מתבדר.
+\\\\
+מכאן נסיק כי $\int_0^\infty f(x)$ מתבדר.
+
 \pagebreak
 
 \section*{שאלה 2}
