@@ -1,0 +1,127 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+
+\title{מטלת מנחה 13 - אלגברה לינארית 1}
+\author{328197462}
+\date{25/12/2022}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+עלינו להראות כי
+\[
+    \begin{vmatrix}
+        a & b & b \\
+        c & d & e \\
+        f & g & g
+    \end{vmatrix} +
+    \begin{vmatrix}
+        a & b & b \\
+        e & c & d \\
+        f & g & g
+    \end{vmatrix} +
+    \begin{vmatrix}
+        a & b & b \\
+        d & e & c \\
+        f & g & g
+    \end{vmatrix} = 0
+\]
+
+נשים לב כי שלושת המטריצות זהות פרט לשורה אחת, לכן, נפעיל את משפט
+$4.3.4$ פעמיים ונקבל:
+\[
+    \begin{vmatrix}
+        a & b & b \\
+        c & d & e \\
+        f & g & g
+    \end{vmatrix} +
+    \begin{vmatrix}
+        a & b & b \\
+        e & c & d \\
+        f & g & g
+    \end{vmatrix} +
+    \begin{vmatrix}
+        a & b & b \\
+        d & e & c \\
+        f & g & g
+    \end{vmatrix} \underrel{4.3.4}{=}
+    \begin{vmatrix}
+        a     & b     & b     \\
+        c + e & d + c & e + d \\
+        f     & g     & g
+    \end{vmatrix} +
+    \begin{vmatrix}
+        a & b & b \\
+        d & e & c \\
+        f & g & g
+    \end{vmatrix} \underrel{4.3.4}{=}
+    \begin{vmatrix}
+        a     & b     & b     \\
+        c+d+e & c+d+e & c+d+e \\
+        f     & g     & g
+    \end{vmatrix}
+\]
+המטריצה שהתקבלה באגף הימני ביותר היא בעלת שתי עמודות זהות.
+לכן, לפי משפט $4.3.5$,
+הדטרמיננטה שלה היא 0 ובכך סיימנו את ההוכחה.
+
+\section*{שאלה 2}
+
+\subsection*{סעיף א}
+נחשב:
+\[
+    D_1 =
+    \begin{vmatrix}
+        a      & b      & 0      & \cdots & \cdots & 0 \\
+        0      & a      & b      & 0      & \cdots & 0 \\
+        0      & \ddots & \ddots & \ddots &        & 0 \\
+        \vdots &        & \ddots & \ddots & \ddots & 0 \\
+        0      & 0      & \cdots & 0      & a      & b \\
+        b      & 0      & 0      & \cdots & 0      & a
+    \end{vmatrix}
+    \equals^\text{פיתוח לפי}_\text{שורה 1}
+    a \begin{vmatrix}
+        a      & b      & 0      & \cdots & 0 \\
+        0      & \ddots & \ddots &        & 0 \\
+        \vdots & \ddots & \ddots & \ddots & 0 \\
+        0      & \cdots & 0      & a      & b \\
+        0      & 0      & \cdots & 0      & a
+    \end{vmatrix}
+    + (-1)^{n+1}b \begin{vmatrix}
+        b      & 0      & \cdots & \cdots & 0 \\
+        a      & b      & 0      & \cdots & 0 \\
+        0      & \ddots & \ddots &        & 0 \\
+        \vdots & \ddots & \ddots & \ddots & 0 \\
+        0      & \cdots & 0      & a      & b \\
+    \end{vmatrix}
+\]
+באגף ימין קיבלנו שתי מטריציות משולשיות מסדר $(n-1)\times(n-1)$. \\
+לפי משפט $4.3.8$, ערך כל דטרמיננטה שווה למכפלת האלכסון הראשי של המטרציה שלה.
+נקבל:
+\[
+    D_1 = a \cdot a^{n-1} + (-1)^{n+1}b \cdot b^{n-1} =
+    a^n  + (-1)^{n+1}b^n
+\]
+
+\end{document}
