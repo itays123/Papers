@@ -19,6 +19,7 @@
 
 \newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
 \DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator\cis{cis}
 
 \title{מטלת מנחה 13 - אלגברה לינארית 1}
 \author{328197462}
@@ -194,6 +195,75 @@ $4.3.4$ פעמיים ונקבל:
 ונקבל:
 \[
     D_2 = (-1)^{\lfloor \frac n 2 \rfloor}n
+\]
+
+\pagebreak
+
+\section*{שאלה 3}
+
+\subsection*{סעיף א}
+
+תחילה נמצא את ההצגה הקוטבית של $w=r\cis{} \theta = 1-i$.
+\[
+    \begin{cases}
+        r = \sqrt{1^2 + (-1)^2}=\sqrt{2} \\
+        \tan \theta = \frac{-1}{1} = -1 \; \Rightarrow \; \theta = -\frac{\pi}{4} + \pi k, k \in \mathbb{Z}
+    \end{cases}
+\]
+משיקולי רביע ניקח $\theta = \frac{7\pi}{4}$,
+אז $t=\cis \frac{3\pi}{4}, w=\sqrt{2} \cis \frac{7\pi}{4}$. \\
+\\
+כעת, נחשב:
+\[
+    \frac{w}{\overline{t}} =
+    \frac{\sqrt{2}\cis \frac{7\pi}{4}}{\overline{\cis{\frac{3\pi}{4}}}} =
+    \frac{\sqrt{2}\cis \frac{7\pi}{4}}{\cis{-\frac{3\pi}{4}}} =
+    \sqrt{2} \cis{(\frac{7\pi}{4} - (-\frac{3\pi}{4}))} =
+    \sqrt{2} \cis{\frac{10\pi}{4}} =
+    \sqrt{2} \cis{\frac{5\pi}{2}} =
+    \sqrt{2} \cis{\frac{\pi}{2}}
+\]
+\\
+נפתור את המשוואה $z^3=\sqrt{2} \cis{\frac{\pi}{2}}$.
+לפי "נוסחת השורשים", נקבל:
+\[
+    z_k=\sqrt[6]{2} \cis{(\frac{\pi}{6}+\frac{2\pi k}{3})}, k=0,1,2
+\]
+כלומר
+$z_2=\sqrt[6]{2} \cis{\frac{9\pi}{6}}$,
+$z_1=\sqrt[6]{2} \cis{\frac{5\pi}{6}}$,
+$z_0=\sqrt[6]{2} \cis{\frac{\pi}{6}}$.
+
+\subsection*{סעיף ב}
+
+לפי "נוסחת השורשים", פתרונות המשוואה $z^n=1=1\cis{0}$ יהיו:
+\[
+    z_k=\sqrt[n]{1} \cis{(\frac{0}{n} + \frac{2\pi k}{n})} =
+    \cis{(\frac{2\pi k}{n})},
+    k = 0, 1, 2, ..., n-1
+\]
+\\
+מכפלת הפתרונות תהא:
+\[
+    \prod_{k=0}^{n-1} \cis{(\frac{2\pi k}{n})} =
+    \cis{\frac{2\pi\cdot 0}{n}} + \cis{\frac{2\pi\cdot 1}{n}} + \cdots + \cis{\frac{2\pi\cdot (n-1)}{n}} =
+    \cis{(\frac{2\pi\cdot 0}{n} + \frac{2\pi\cdot 1}{n} + \cdots + \frac{2\pi\cdot (n-1)}{n})} =
+\]
+\[
+    \cis{(\sum_{k=0}^{n-1}\frac{2\pi k}{n})} =
+    \cis{(\frac{2\pi}{n} \cdot \sum_{k=0}^{n-1}k)} \equals_{\text{סכום סדרה חשבונית}}
+    \cis{(\frac{2\pi}{n} \cdot \frac{n}{2} \cdot (n-1+0))} =
+    \cis{(\pi \cdot (n-1))}
+\]
+\\
+אילו $n$ אי-זוגי,
+אז יש $m\in \mathbb{Z}: n=2m+1$,
+ונקבל:
+\[
+    \prod_{k=0}^{n-1} \cis{(\frac{2\pi k}{n})} =
+    \cis{(\pi \cdot (n-1))} =
+    \cis{(\pi \cdot (2m+1-1))} =
+    \cis{2m\pi} = \cis{0}=1
 \]
 
 \end{document}
