@@ -1,0 +1,63 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{enumerate}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+
+\title{מטלת מנחה 13 - אינפי 2}
+\author{328197462}
+\date{23/12/2022}
+
+\begin{document}
+\long\def\/*#1*/{}
+\maketitle
+
+\section*{שאלה 1}
+נרצה למצוא פיתוח מקלורן לפונקציה $g(t)=\sqrt{1+t}$,
+ולאחר מכן להציב $t=x^2$
+
+
+%% Comment
+\/*
+הפונקציה לפיתוח: $f(x)=\sqrt{1+x^2}$ \\
+נקודת הפיתוח: $a=0$ \\
+סדר הפיתוח: נמצא $n$,
+כך שהשגיאה לא תעלה על $0.5\cdot 10^-4=\frac{1}{2}\cdot \frac{1}{10000}=\frac{1}{20000}$ \\
+צריך לחשב $f(x)=P_n(x)+R_n(x)$ כך ש:
+\[
+    P_n(x) \equals_{(4.2)}\sum_{k=0}^n \frac{f^{(k)}}{k!}\cdot x^n
+\]
+ולהציב $f(0.1)=\sqrt{1+0.1^2}=\sqrt{1.01}$
+\\\\
+ניעזר בהצגת השארית לפי לגראנז': \\
+\[
+    R_n(0.1)=\frac{f^{(n+1)}(c)}{(n+1)!}\cdot {0.1}^n, \;\; c\in (0,0.1)
+\]
+ננסה כעת להציב ערכים קטנים של $n$ עד שנגיע לשגיאה הדרושה.
+\[
+    \begin{matrix}
+        f(x) = (1+x^2)^{-\frac{1}{2}}                                                \\
+        f'(x) = \frac{1}{2}(1+x^2)^{-\frac{1}{2}} \cdot 2x = x(1+x^2)^{-\frac{1}{2}} \\
+        f''(x) = (1+x^2)^{-\frac{1}{2}} - x \cdot \frac{1}{2}(1+x^2)^{-\frac{3}{2}} \cdot 2x = (1+x^2)^{-\frac{1}{2}} - x^2(1+x^2)^{-\frac{3}{2}}
+    \end{matrix}
+\]
+*/
+
+\end{document}
