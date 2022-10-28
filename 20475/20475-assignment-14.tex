@@ -120,10 +120,29 @@
     \frac{f(x)g(x)-P(x)}{x_n} =
     \sum_{k=n+1}^{2n} c_kx^{k-n} + \frac{R_n(x)}{x^n}\cdot(\sum_{k=0}^nb_kx^k+\rho_n(x)) + \frac{\rho_n(x)}{x^n}\cdot \sum_{k=0}^na_kx^k
 \]
-נראה כי שלושת הביטויים הנ"ל שואפים לאפס.
+נראה כי שלושת הביטויים הנ"ל שואפים לאפס כאשר $x\rightarrow 0$. \\
 הביטוי הראשון, $\sum_{k=n+1}^{2n} c_kx^{k-n}=\sum_{k=1}^{n} c_{k+n}x^k$,
 הוא פולינום ומכאן רציף ב-0 והגבול שלו באפס הוא $0$ (אין לו מקדם חופשי). \\
-באופן דומה, גם הפולינומים $\sum_{k=0}^na_kx^kת \sum_{k=0}^nb_kx^k$ שואפים ל $a_0, b_0$ בהתאמה ב$0$.
-לכן,
+באופן דומה, גם הפולינומים $\sum_{k=0}^na_kx^kת \sum_{k=0}^nb_kx^k$ שואפים ל $a_0, b_0$ בהתאמה ב$0$. \\
+לכן מתקיים:
+\[
+    \lim_{x\rightarrow 0} \frac{\rho_n(x)}{x^n}\cdot \sum_{k=0}^na_kx^k =
+    \lim_{x\rightarrow 0} \frac{\rho_n(x)}{x^n}\cdot \lim_{x\rightarrow 0}\sum_{k=0}^na_kx^k =
+    0 \cdot a_0 = 0
+\]
+לבסוף, הפונקציה $\rho_n(x)=f(x)-\sum_{k=0}^nb_kx^k$
+רציפה באפס כהפרש של פונקציות רציפות (הרציפות של $f$ נובעת מגזירותה). \\
+לכן $\rho_n(x)\xrightarrow[x\rightarrow 0]{}\rho_n(0)=0$ ונקבל:
+\[
+    \lim_{x\rightarrow 0} \frac{R_n(x)}{x^n}\cdot(\sum_{k=0}^nb_kx^k+\rho_n(x)) =
+    \lim_{x\rightarrow 0} \frac{R_n(x)}{x^n}\cdot \lim_{x\rightarrow 0}(\sum_{k=0}^nb_kx^k+\rho_n(x)) =
+    0 (b_0+0)=0
+\]
+לסיכום, נקבל
+\[
+    \lim_{x\rightarrow 0}\frac{f(x)g(x)-P(x)}{x_n}=0
+\]
+ולכן לפי משפט 4.8 הפולינום $P(x)$
+הוא פולינום מקלורן של $f(x)g(x)$.
 
 \end{document}
