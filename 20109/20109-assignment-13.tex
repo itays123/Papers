@@ -293,46 +293,47 @@ $z_0=\sqrt[6]{2} \cis{\frac{\pi}{6}}$.
 
 \subsection*{סעיף א}
 
-נראה כי הקבוצה $W$ להלן אינה מהווה מרחב לינארי מעל $\mathbb{R}$
-\[
-    W=\{f: \mathbb{R} \rightarrow \mathbb{R} \; | \; f(x+1) = f(x)+1 \;\;\;\; x\in \mathbb{R} \text{לכל } \}
-\]
-הקבוצה אינה סגורה לפעולת חיבור הפונקציות המוגדרת בעמוד 155 בכרך ב: \\
-ניקח למשל $u=x, v=x+1\in W$, אז:
-\[
-    f(x)=u+v=
-    x+x+1=
-    2x+1
-\]
-אבל $f(x)\notin W$
-כי
-\[
-    \begin{matrix}
-        f(1)=3 & f(0) = 1 & f(0+1)\ne f(0)+1
-    \end{matrix}
-\]
-\\\\
-נוכיח כי הקבוצה $M$ להלן מהווה מרחב לינארי מעל $\mathbb{R}$ בעזרת משפט $7.3.2$:
-\[
-    M=\{p(x)\in \mathbb{R}_4[x] | \; p(x) = p(x-1) \;\;\;\; x\in \mathbb{R} \text{לכל } \}
-\]
-תחילה, $W\ne \emptyset$
-כי הפולינום $p(x)=0\in \mathbb{R}_4[x]$ מקיים לכל $x\in \mathbb{R}$ $p(x)=0=p(x-1)$ ומכאן ש $p(x)\in M$.\\
-נראה סגירות לחיבור המוגדר בעמוד 155 בכרך ב. יהיו $u,v\in M$. נקבל:
-\[
-    \begin{matrix}
-        (u + v)(x) = u(x)+v(x) \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
-        (u+v)(x)=u(x)+v(x)\underrel{u,v\in M}{=} u(x-1)+v(x-1)=(u+v)(x-1)                  \\
-        \Rightarrow u+v\in M
-    \end{matrix}
-\]
-נראה סגירות לכפל בסקלר. יהא $v\in M$ וכן $\lambda \in R$. נקבל:
-\[
-    \begin{matrix}
-        \lambda v \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
-        (\lambda v)(x) = \lambda \cdot v(x) \underrel{v\in M}{=} \lambda \cdot v(x-1)= (\lambda v)(x-1)
-    \end{matrix}
-\]
-הראינו כי שלוש התכונות מתקיימות ולכן לפי $7.3.2$ $M$ מהווה מרחב לינארי.
+\begin{enumerate}[i]
+    \item נראה כי הקבוצה $W$ להלן אינה מהווה מרחב לינארי מעל $\mathbb{R}$
+          \[
+              W=\{f: \mathbb{R} \rightarrow \mathbb{R} \; | \; f(x+1) = f(x)+1 \;\;\;\; x\in \mathbb{R} \text{לכל } \}
+          \]
+          הקבוצה אינה סגורה לפעולת חיבור הפונקציות המוגדרת בעמוד 155 בכרך ב: \\
+          ניקח למשל $u=x, v=x+1\in W$, אז:
+          \[
+              f(x)=u+v=
+              x+x+1=
+              2x+1
+          \]
+          אבל $f(x)\notin W$
+          כי
+          \[
+              \begin{matrix}
+                  f(1)=3 & f(0) = 1 & f(0+1)\ne f(0)+1
+              \end{matrix}
+          \]
+    \item נוכיח כי הקבוצה $M$ להלן מהווה מרחב לינארי מעל $\mathbb{R}$ בעזרת משפט $7.3.2$:
+          \[
+              M=\{p(x)\in \mathbb{R}_4[x] | \; p(x) = p(x-1) \;\;\;\; x\in \mathbb{R} \text{לכל } \}
+          \]
+          תחילה, $W\ne \emptyset$
+          כי הפולינום $p(x)=0\in \mathbb{R}_4[x]$ מקיים לכל $x\in \mathbb{R}$ $p(x)=0=p(x-1)$ ומכאן ש $p(x)\in M$.\\
+          נראה סגירות לחיבור המוגדר בעמוד 155 בכרך ב. יהיו $u,v\in M$. נקבל:
+          \[
+              \begin{matrix}
+                  (u + v)(x) = u(x)+v(x) \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
+                  (u+v)(x)=u(x)+v(x)\underrel{u,v\in M}{=} u(x-1)+v(x-1)=(u+v)(x-1)                  \\
+                  \Rightarrow u+v\in M
+              \end{matrix}
+          \]
+          נראה סגירות לכפל בסקלר. יהא $v\in M$ וכן $\lambda \in R$. נקבל:
+          \[
+              \begin{matrix}
+                  \lambda v \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
+                  (\lambda v)(x) = \lambda \cdot v(x) \underrel{v\in M}{=} \lambda \cdot v(x-1)= (\lambda v)(x-1)
+              \end{matrix}
+          \]
+          הראינו כי שלוש התכונות מתקיימות ולכן לפי $7.3.2$ $M$ מהווה מרחב לינארי.
+\end{enumerate}
 
 \end{document}
