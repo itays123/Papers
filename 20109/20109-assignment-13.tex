@@ -20,6 +20,7 @@
 \newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
 \DeclareMathOperator*{\equals}{=}
 \DeclareMathOperator\cis{cis}
+\DeclareMathOperator\Sp{Sp}
 
 \title{מטלת מנחה 13 - אלגברה לינארית 1}
 \author{328197462}
@@ -397,13 +398,17 @@ $z_0=\sqrt[6]{2} \cis{\frac{\pi}{6}}$.
           \]
           נשווה את מקדמיהם של שני הפולינומים ונקבל:
           \[
-              \left{
+              \left\{
               \begin{matrix}
-                  a & b \\
-                  c & d
+                  a=a                                              \\
+                  b-3a=b     & \Rightarrow                   & a=0 \\
+                  c-2b+3a=c  & \underrel{a=0}{\Rightarrow}   & b=0 \\
+                  d-c+b-a =d & \underrel{a=b=0}{\Rightarrow} & c=0
               \end{matrix}
               \right.
           \]
+          קיבלנו $p(x)=d$, ולכן $M=\{ p(x)=d \; | \; d\in \mathbb{R} \} = \Sp\{1\}$.
+    \item באופן דומה, נרצה למצוא קבוצה פורשת לקבוצה $L$ שהוגדרה לעיל.
 \end{enumerate}
 
 \end{document}
