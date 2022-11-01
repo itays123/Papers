@@ -292,123 +292,119 @@ $z_0=\sqrt[6]{2} \cis{\frac{\pi}{6}}$.
 
 \section*{שאלה 5}
 
-\subsection*{סעיף א}
+נבחן את ארבע הקבוצות בשאלה:
 
-\begin{enumerate}[i]
-    \item נראה כי הקבוצה $W$ להלן אינה מהווה מרחב לינארי מעל $\mathbb{R}$
-          \[
-              W=\{f: \mathbb{R} \rightarrow \mathbb{R} \; | \; f(x+1) = f(x)+1 \;\;\;\; x\in \mathbb{R} \text{לכל } \}
-          \]
-          הקבוצה אינה סגורה לפעולת חיבור הפונקציות המוגדרת בעמוד 155 בכרך ב: \\
-          ניקח למשל $u=x, v=x+1\in W$, אז:
-          \[
-              f(x)=u+v=
-              x+x+1=
-              2x+1
-          \]
-          אבל $f(x)\notin W$
-          כי
-          \[
-              \begin{matrix}
-                  f(1)=3 & f(0) = 1 & f(0+1)\ne f(0)+1
-              \end{matrix}
-          \]
-    \item נוכיח כי הקבוצה $M\subseteq \mathbb{R}_4[x]$ להלן מהווה מרחב לינארי מעל $\mathbb{R}$ בעזרת משפט $7.3.2$:
-          \[
-              M=\{p(x)\in \mathbb{R}_4[x] \; | \; p(x) = p(x-1) \;\;\;\; x\in \mathbb{R} \text{לכל } \}
-          \]
-          תחילה, $W\ne \emptyset$
-          כי הפולינום $p(x)=0\in \mathbb{R}_4[x]$ מקיים לכל $x\in \mathbb{R}$ $p(x)=0=p(x-1)$ ומכאן ש $p(x)\in M$.\\
-          נראה סגירות לחיבור המוגדר בעמוד 155 בכרך ב. יהיו $u,v\in M$. נקבל:
-          \[
-              \begin{matrix}
-                  (u + v)(x) = u(x)+v(x) \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
-                  (u+v)(x)=u(x)+v(x)\underrel{u,v\in M}{=} u(x-1)+v(x-1)=(u+v)(x-1)                  \\
-                  \Rightarrow u+v\in M
-              \end{matrix}
-          \]
-          נראה סגירות לכפל בסקלר. יהא $v\in M$ וכן $\lambda \in R$. נקבל:
-          \[
-              \begin{matrix}
-                  \lambda v \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
-                  (\lambda v)(x) = \lambda \cdot v(x) \underrel{v\in M}{=} \lambda \cdot v(x-1)= (\lambda v)(x-1)
-              \end{matrix}
-          \]
-          הראינו כי שלוש התכונות מתקיימות ולכן לפי $7.3.2$ $M$ מהווה מרחב לינארי.\
-    \item נראה כי הקבוצה $S$ להלן אינה מהווה מרחב לינארי מעל $\mathbb{R}$:
-          \[
-              S = \{ \begin{pmatrix}
-                  a & b \\
-                  c & d
-              \end{pmatrix} \in M_2(\mathbb{R}) \; | \;
-              ad=0   \}
-          \]
-          הקבוצה אינה סגורה לפעולת חיבור מטריצות: ניקח למשל $\begin{pmatrix}
-                  0 & 1 \\
-                  1 & 1
-              \end{pmatrix}, \begin{pmatrix}
-                  1 & 1 \\
-                  1 & 0
-              \end{pmatrix} \in S$ ונקבל:
-          \[
-              \begin{pmatrix}
-                  0 & 1 \\
-                  1 & 1
-              \end{pmatrix} + \begin{pmatrix}
-                  1 & 1 \\
-                  1 & 0
-              \end{pmatrix} = \begin{pmatrix}
-                  1 & 2 \\
-                  2 & 1
-              \end{pmatrix}
-              \underrel{1\cdot 1 \ne 0}{\notin} S
-          \]
-    \item נראה כי הקבוצה $L\subseteq \mathbb{C}^3$ שלהלן היא מרחב לינארי מעל $\mathbb{R}$
-          \[
-              L = \{(z_1,z_2,z_3)\in \mathbb{C}^3 \; | \; z_2 = \overline{z_1}\}
-          \]
-          תחילה, $L\ne \emptyset$
-          כי $(1,1,1)\in \mathbb{C}^3$ מקיימת $1=\overline{1}$ (1 ממשי ולפי משפט $6.4.2$),
-          ואי לכך $(1,1,1)\in L$. \\
-          נראה סגירות לחיבור שלשות. יהיו $(z_1,\overline{z_1}, z_3), (w_1, \overline{w_1}, w_3)\in L$. נקבל:
-          \[
-              (z_1,\overline{z_1}, z_3),+ (w_1, \overline{w_1}, w_3) =
-              (z_1+w_1, \overline{z_1}+\overline{w_1}, z_3+w_3) \equals_{6.4.2}
-              (z_1+w_1, \overline{z_1+w_1}, z_3+w_3)\in L
-          \]
-          בנוסף, נראה סגירות לכפל בסקלר מהשדה $\alpha \in \mathbb{R}$. יהא $(z_1, \overline{z_1}, z_3)\in L$ ונקבל אפוא:
-          \[
-              \alpha (z_1, \overline{z_1}, z_3) =
-              (\alpha z_1, \alpha \overline{z_1}, \alpha z_3) \equals_{\text{שאלה 6.4.3} }
-              (\alpha z_1, \overline{\alpha z_1}, \alpha z_3) \in L
-          \]
-          אי לכך, מתקיימים תנאי משפט $7.3.2$ והקבוצה, בצירוף הפעולות הרגילות, מהווה מרחב לינארי מעל $\mathbb{R}$.
-\end{enumerate}
+\subsubsection*{.1 קבוצת הפונקציות $W=\{f: \mathbb{R} \rightarrow \mathbb{R} \; | \; f(x+1) = f(x)+1 \;\;\;\; x\in \mathbb{R} \text{לכל } \}$}
 
-\subsection*{סעיף ב}
-\begin{enumerate}[i]
-    \item נמצא קבוצה פורשת סופית לקבוצה $M$ שהוגדרה לעיל. \\
-          תחילה נמצא איבר כללי לאיברי הסדרה. יהא $p(x)=ax^3+bx^2+cx+d\in M$. אז מתקיים:
-          \[
-              \begin{matrix}
-                  p(x-1)=a(x-1)^3+b(x-1)^2+c(x-1)+d=     \\
-                  a(x^3-3x^2+3x-1)+b(x^2-2x+1)+c(x-1)+d= \\
-                  ax^3+(b-3a)x^2+(c-2b+3a)x+(d-c+b-a)x = p(x)
-              \end{matrix}
-          \]
-          נשווה את מקדמיהם של שני הפולינומים ונקבל:
-          \[
-              \left\{
-              \begin{matrix}
-                  a=a                                              \\
-                  b-3a=b     & \Rightarrow                   & a=0 \\
-                  c-2b+3a=c  & \underrel{a=0}{\Rightarrow}   & b=0 \\
-                  d-c+b-a =d & \underrel{a=b=0}{\Rightarrow} & c=0
-              \end{matrix}
-              \right.
-          \]
-          קיבלנו $p(x)=d$, ולכן $M=\{ p(x)=d \; | \; d\in \mathbb{R} \} = \Sp\{1\}$.
-    \item באופן דומה, נרצה למצוא קבוצה פורשת לקבוצה $L$ שהוגדרה לעיל.
-\end{enumerate}
+נראה כי הקבוצה $W$ לעיל אינה מהווה מרחב לינארי מעל $\mathbb{R}$: \\
+הקבוצה אינה סגורה לפעולת חיבור הפונקציות המוגדרת בעמוד 155 בכרך ב: \\
+ניקח למשל $u=x, v=x+1\in W$, אז:
+\[
+    f(x)=u+v=
+    x+x+1=
+    2x+1
+\]
+אבל $f(x)\notin W$
+כי
+\[
+    \begin{matrix}
+        f(1)=3 & f(0) = 1 & f(0+1)\ne f(0)+1
+    \end{matrix}
+\]
+
+\subsubsection*{2. קבוצת הפולינומים $M=\{p(x)\in \mathbb{R}_4[x] \; | \; p(x) = p(x-1) \;\;\;\; x\in \mathbb{R} \text{לכל } \}$}
+
+נוכיח כי הקבוצה $M\subseteq \mathbb{R}_4[x]$לעיל מהווה מרחב לינארי מעל $\mathbb{R}$ בעזרת משפט $7.3.2$:
+\[
+    M=\{p(x)\in \mathbb{R}_4[x] \; | \; p(x) = p(x-1) \;\;\;\; x\in \mathbb{R} \text{לכל } \}
+\]
+תחילה, $W\ne \emptyset$
+כי הפולינום $p(x)=0\in \mathbb{R}_4[x]$ מקיים לכל $x\in \mathbb{R}$ $p(x)=0=p(x-1)$ ומכאן ש $p(x)\in M$.\\
+נראה סגירות לחיבור המוגדר בעמוד 155 בכרך ב. יהיו $u,v\in M$. נקבל:
+\[
+    \begin{matrix}
+        (u + v)(x) = u(x)+v(x) \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
+        (u+v)(x)=u(x)+v(x)\underrel{u,v\in M}{=} u(x-1)+v(x-1)=(u+v)(x-1)                  \\
+        \Rightarrow u+v\in M
+    \end{matrix}
+\]
+נראה סגירות לכפל בסקלר. יהא $v\in M$ וכן $\lambda \in R$. נקבל:
+\[
+    \begin{matrix}
+        \lambda v \underrel{\text{ מ"ל} \mathbb{R}_4[x]}{\in} \mathbb{R}_4[x] \\
+        (\lambda v)(x) = \lambda \cdot v(x) \underrel{v\in M}{=} \lambda \cdot v(x-1)= (\lambda v)(x-1)
+    \end{matrix}
+\]
+הראינו כי שלוש התכונות מתקיימות ולכן לפי $7.3.2$ $M$ מהווה מרחב לינארי.\\
+נמצא קבוצה פורשת סופית לקבוצה $M$ שהוגדרה לעיל. \\
+תחילה נמצא איבר כללי לאיברי הסדרה. יהא $p(x)=ax^3+bx^2+cx+d\in M$. אז מתקיים:
+\[
+    \begin{matrix}
+        p(x-1)=a(x-1)^3+b(x-1)^2+c(x-1)+d=     \\
+        a(x^3-3x^2+3x-1)+b(x^2-2x+1)+c(x-1)+d= \\
+        ax^3+(b-3a)x^2+(c-2b+3a)x+(d-c+b-a)x = p(x)
+    \end{matrix}
+\]
+נשווה את מקדמיהם של שני הפולינומים ונקבל:
+\[
+    \left\{
+    \begin{matrix}
+        a=a                                              \\
+        b-3a=b     & \Rightarrow                   & a=0 \\
+        c-2b+3a=c  & \underrel{a=0}{\Rightarrow}   & b=0 \\
+        d-c+b-a =d & \underrel{a=b=0}{\Rightarrow} & c=0
+    \end{matrix}
+    \right.
+\]
+קיבלנו $p(x)=d$, ולכן $M=\{ p(x)=d \; | \; d\in \mathbb{R} \} = \Sp\{1\}$.
+
+\subsubsection*{3. קבוצת המטריצות $S = \{ \begin{pmatrix}
+            a & b \\
+            c & d
+        \end{pmatrix} \in M_2(\mathbb{R}) \; | \;
+        ad=0\}$}
+נראה כי הקבוצה $S$ לעיל אינה מהווה מרחב לינארי מעל $\mathbb{R}$: \\
+הקבוצה אינה סגורה לפעולת חיבור מטריצות: ניקח למשל $\begin{pmatrix}
+        0 & 1 \\
+        1 & 1
+    \end{pmatrix}, \begin{pmatrix}
+        1 & 1 \\
+        1 & 0
+    \end{pmatrix} \in S$ ונקבל:
+\[
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 1
+    \end{pmatrix} + \begin{pmatrix}
+        1 & 1 \\
+        1 & 0
+    \end{pmatrix} = \begin{pmatrix}
+        1 & 2 \\
+        2 & 1
+    \end{pmatrix}
+    \underrel{1\cdot 1 \ne 0}{\notin} S
+\]
+
+\subsubsection*{4. קבוצת השלשות $
+        L = \{(z_1,z_2,z_3)\in \mathbb{C}^3 \; | \; z_2 = \overline{z_1}\}
+    $}
+נראה כי הקבוצה $L\subseteq \mathbb{C}^3$ לעיל היא מרחב לינארי מעל $\mathbb{R}$: \\
+תחילה, $L\ne \emptyset$
+כי $(1,1,1)\in \mathbb{C}^3$ מקיימת $1=\overline{1}$ (1 ממשי ולפי משפט $6.4.2$),
+ואי לכך $(1,1,1)\in L$. \\
+נראה סגירות לחיבור שלשות. יהיו $(z_1,\overline{z_1}, z_3), (w_1, \overline{w_1}, w_3)\in L$. נקבל:
+\[
+    (z_1,\overline{z_1}, z_3),+ (w_1, \overline{w_1}, w_3) =
+    (z_1+w_1, \overline{z_1}+\overline{w_1}, z_3+w_3) \equals_{6.4.2}
+    (z_1+w_1, \overline{z_1+w_1}, z_3+w_3)\in L
+\]
+בנוסף, נראה סגירות לכפל בסקלר מהשדה $\alpha \in \mathbb{R}$. יהא $(z_1, \overline{z_1}, z_3)\in L$ ונקבל אפוא:
+\[
+    \alpha (z_1, \overline{z_1}, z_3) =
+    (\alpha z_1, \alpha \overline{z_1}, \alpha z_3) \equals_{\text{שאלה 6.4.3} }
+    (\alpha z_1, \overline{\alpha z_1}, \alpha z_3) \in L
+\]
+אי לכך, מתקיימים תנאי משפט $7.3.2$ והקבוצה, בצירוף הפעולות הרגילות, מהווה מרחב לינארי מעל $\mathbb{R}$. \\
+נמצא קבוצה
 
 \end{document}
