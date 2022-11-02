@@ -145,4 +145,78 @@
 ולכן לפי משפט 4.8 הפולינום $P(x)$
 הוא פולינום מקלורן של $f(x)g(x)$.
 
+\pagebreak
+
+\section*{שאלה 3}
+
+\subsection*{סעיף א}
+
+נחשב את הגבול בעזרת פיתוחי מקלורן ידועים. נתחיל מפיתוח המכנה.
+לפי שאלה 19ג ביחידה 4, $\tan x = x + \frac{x^3}{3}+R_3(x)$
+
+\subsection*{סעיף ב}
+
+נגדיר פונקציה $f$ כלהלן:
+\[
+    f(x)=\frac{e^x -\sin x-\cos x}{\ln(1-x^2)}
+\]
+ונניח (נוכיח את הדבר בהמשך) כי קיים ל$f$ גבול ב-0, סופי או אינסופי. \\
+אז לפי הגדרת היינה מאינפי 1,עבור כל סדרה $(x_n)_{n=1}^\infty$ המקיימת $x_n\xrightarrow[n\rightarrow \infty]{} 0$,
+ובפרט עבור הסדרה $x_n=\frac{1}{n}$,
+נקבל:
+\[
+    \lim_{n\rightarrow \infty}f(x_n)=\lim_{x\rightarrow 0}f(x)
+\]
+נחשב:
+\[
+    f(x_n)=
+    f(\frac{1}{n})=
+    \frac{e^{1/n} -\sin \frac{1}{n} -\cos \frac{1}{n}}{\ln(1-\frac{1}{n^2})} \underrel{\ast}{=}
+    \frac{e^{1/n} -\sin \frac{1}{n} -\cos \frac{1}{n}}{\ln(n^2-1)-2\ln n}
+\]
+
+* כי $\ln(1-\frac{1}{n^2}) = \ln(\frac{n^2-1}{n^2})=\ln(n^2-1)-2\ln n$. \\
+אי לכך,
+\[
+    \lim_{n\rightarrow\infty} \frac{e^{1/n} -\sin \frac{1}{n} -\cos \frac{1}{n}}{\ln(n^2-1)-2\ln n} =
+    \lim_{x\rightarrow 0} \frac{e^x -\sin x-\cos x}{\ln(1-x^2)}
+\]
+\\\\
+על מנת לחשב את גבול הפונקציה ננסה לפתח את המונה והמכנה לפי $n=2$. \\
+ניעזר בפיתוחים הידועים:
+\[
+    \begin{matrix}
+        \ln(1+t) = t + R_1(t)               & \underrel{\text{שאלה 2א בעמוד 93}}{\Rightarrow} & \ln(1-x^2)=-x^2+R_2(x) \\
+        e^x = 1 + x + \frac{x^2}{2}+ S_2(x) &
+        \sin x = x - Q_1(x)                 &
+        \cos x = 1 - \frac{x^2}{2} + T_2(x)
+    \end{matrix}
+\]
+לכן המונה יהיה:
+\[
+    e^x-\sin x - \cos x =
+    (1 + x + \frac{x^2}{2}+ S_2(x)) - (x + Q_1(x)) - (1 - \frac{x^2}{2} + T_2(x)) =
+\]
+\[
+    1+x+\frac{x^2}{2}+ S_2(x) - x - Q_1(x) - 1 + \frac{x^2}{2} - T_2(x)=
+    x^2+S_2(x)-Q_1(x)-T_2(x)
+\]
+והמכנה יהיה $\ln(1-x^2)=-x^2+R_2(x)$. נקבל אפוא:
+\[
+    \lim_{x\rightarrow 0} f(x) =
+    \lim_{x\rightarrow 0} \frac{x^2+S_2(x)-Q_1(x)-T_2(x)}{-x^2+R_2(x)} =
+    \lim_{x\rightarrow 0} \frac{1+\frac{S_2(x)}{x^2}-\frac{Q_1(x)}{x^2}-\frac{T_2(x)}{x^2}}{-1+\frac{R_2(x)}{x^2}} = -1
+\]
+כי לפי הערת השוליים בעמוד 65 נקבל $Q_1(x)=Q_2(x)$, וכן ממשפט 4.7 נסיק:
+\[
+    \lim_{x\rightarrow 0} \frac{R_2(x)}{x^2} =
+    \lim_{x\rightarrow 0} \frac{S_2(x)}{x^2} =
+    \lim_{x\rightarrow 0} \frac{Q_2(x)}{x^2} =
+    \lim_{x\rightarrow 0} \frac{T_2(x)}{x^2} = 0
+\]
+לסיכום נקבל
+\[
+    \lim_{n\rightarrow \infty} f(\frac{1}{n}) = -1
+\]
+
 \end{document}
