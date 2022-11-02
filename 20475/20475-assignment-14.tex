@@ -152,7 +152,41 @@
 \subsection*{סעיף א}
 
 נחשב את הגבול בעזרת פיתוחי מקלורן ידועים. נתחיל מפיתוח המכנה.
-לפי שאלה 19ג ביחידה 4, $\tan x = x + \frac{x^3}{3}+R_3(x)$
+לפי שאלה 19ג ביחידה 4, $\tan x = x + \frac{x^3}{3}+R_3(x)$. \\
+אי לכך,
+\[
+    x(\tan x -x) =
+    x (x + \frac{x^3}{3}+R_3(x) - x) =
+    \frac{x^4}{3} + x\cdot R_3(x)
+\]
+מאחר ובמכנה נתקלנו בביטוי ממעלה 4, נפתח את המונה בסדר $n=4$.\\
+לפי פיתוחים ידועים:
+\[
+    \begin{matrix}
+        e^t = 1 + t + \frac{t^2}{2} + \frac{t^3}{6}+\frac{t^4}{24}+S_4(t) & \underrel{\text{שאלה 2א בעמוד 93}}{\Rightarrow} e^{x^2}=1+x^2+\frac{x^4}{4}+S_4(x) \\
+        \tan x = x+ \frac{x^3}{3} + V_3(x)                                & \sin x = x - \frac{x^3}{6} + M_3(x)
+    \end{matrix}
+\]
+נקבל, ע"פ שאלה 2 בממ"ן זה, כי פיתוח מקלורן של הביטוי $x(1+e^{x^2})\tan x$ יהיה:
+\[
+    x(2+x^2+\frac{x^4}{4}+\cdots)(x+\frac{x^3}{3}+\cdots)=(2x+x^3+\cdots)(x+\frac{x^3}{3}+\cdots)=2x^2+\frac{5x^4}{3}+T_4(x)
+\]
+וכן,
+\[
+    \sin^2 x = \sin x \cdot \sin x=
+    (x-\frac{x^3}{6}+\cdots)(x-\frac{x^3}{6}+\cdots) =
+    x^2-\frac{x^4}{3}+Q_4(x)
+\]
+נציב בגבול הנתון את הביטויים שקיבלנו:
+\[
+    \lim_{x\rightarrow 0} \frac{x(1+e^{x^2})\tan x - 2\sin^2 x}{x(\tan x - x)}=
+    \lim_{x\rightarrow 0} \frac{2x^2+\frac{5}{3}x^4+T_4(x) - 2x^2+\frac{2x^4}{3}-2Q_4(x)}{\frac{x^4}{3}+x\cdot R_3(x)}=
+    \lim_{x\rightarrow 0} \frac{\frac{7}{3}x^4+T_4(x)-2Q_4(x)}{\frac{x^4}{3}+x\cdot R_3(x)}=
+\]
+\[
+    \lim_{x\rightarrow 0} \frac{\frac{7}{3}+\frac{T_4(x)}{x^4}-2\frac{Q_4(x)}{x^4}}{\frac{1}{3}+\frac{R_3(x)}{x^3}} \underrel{4.7}{=}
+    \frac{\frac{7}{3}}{\frac{1}{3}} = 7
+\]
 
 \subsection*{סעיף ב}
 
