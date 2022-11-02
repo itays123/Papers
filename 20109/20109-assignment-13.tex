@@ -425,6 +425,39 @@ $z_0=\sqrt[6]{2} \cis{\frac{\pi}{6}}$.
 \section*{שאלה 6}
 
 \subsection*{סעיף א}
+נשתמש בשאלה $7.5.11$.
+לפי שאלה זו, ביצוע פעולות אלמנטריות (כפל וקטור מהקבוצה בסקלר מהשדה שאינו 0, והוספת מכפלה בסקלר מהשדה של וקטור מהקבוצה לוקטור אחר), לא משנה את תת-המרחב הנפרש.
+אי לכך,
+
+\[
+    \begin{matrix}
+        \Sp\{ u - v + 2w, -2u + v - w, -u + 2v + w \} &
+        \underrel{T_2\rightarrow T_2+2T_1}{=}
+        \Sp\{ u - v + 2w, -v + 3w, -u + 2v + w \}       \\
+                                                      &
+        \underrel{T_3\rightarrow T_3+T_1}{=}
+        \Sp\{ u - v + 2w, -v + 3w, v + 3w \}            \\
+                                                      &
+        \underrel{T_1\rightarrow T_1-T_2}{=}
+        \Sp\{ u - w, -v + 3w, v + 3w \}                 \\
+                                                      &
+        \underrel{T_3\rightarrow T_3+T_2}{=}
+        \Sp\{ u - w, -v + 3w, 6w \}                     \\
+                                                      &
+        \underrel{T_3\rightarrow 1/6\;T_3}{=}
+        \Sp\{ u - w, -v + 3w, w \}                      \\
+                                                      &
+        \underrel{T_1\rightarrow T_1+T_3}{=}
+        \Sp\{ u, -v + 3w, w \}                          \\
+                                                      &
+        \underrel{T_2\rightarrow T_2-3T_3}{=}
+        \Sp\{ u, -v, w \}                               \\
+                                                      &
+        \underrel{T_2\rightarrow -T_2}{=}
+        \Sp\{ u, v, w \}                                \\
+    \end{matrix}
+\]
+ואכן מתקיים שוויון בין תתי המרחבים הנפרשים מעל $\mathbb{R}$
 
 \subsection*{סעיף ב}
 
