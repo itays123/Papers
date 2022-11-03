@@ -302,14 +302,19 @@
     f(x)=f(x_m)+f'(x_m)(x-x_m)+\frac{f''(c)}{2}(x-x_m)^2=
     m + \frac{f''(c)}{2}(x-x_m)^2 \;\;\;\; \text{$c$ בין $x_m$ ו$x$}
 \]
-בפרט:
+
+לפי הנתון, יש $x_M\in [a,b]$
+כך ש $f(x_M)=M$. נציב בפיתוח ונקבל כי קיים $c$ בין $x_m, x_M$ כך ש:
 \[
-    \begin{cases}
-        f(a)=m+\frac{f''(c_1)}{2}(a-x_m)^2 \underrel{a<x_m<b}{\leq} m+\frac{f''(c_1)}{2}(b-a)^2 & c_1\in (a, x_m) \\
-        f(b)=m+\frac{f''(c_1)}{2}(b-x_m)^2 \underrel{a<x_m<b}{\leq} m+\frac{f''(c_2)}{2}(b-a)^2 & c_2\in (x_m, b)
-    \end{cases}
+    M=f(x_M) = m + \frac{f''(c)}{2}(x_M-x_m)^2
 \]
-
-
+נקבל $0\leq M-m=\frac{f''(c)}{2}(x_M-x_m)^2$.\\
+נשים לב כי $|x_M - x_m|$, המרחק בין שני איברים בקטע $[a,b]$, בוודאות קטן או שווה לאורך הקטע $|b-a|$. \\
+אי לכך, $(x_M-x_m)^2\leq (b-a)^2$, ומכאן נסיק $0\leq M-m\leq \frac{f''(c)}{2}(b-a)^2$\\
+נכפול את אי-השוויון ב-2 ונחלק ב $(b-a)^2\ne 0$ (ידוע כי $x_m\in (a,b)$ ולכן $|b-a|\ne 0$), ונקבל:
+\[
+    f''(c)\geq \frac{2(M-m)}{(b-a)^2} \geq 0
+\]
+ובאופן ישיר $|f''(c)|\geq \frac{2(M-m)}{(b-a)^2}$.
 
 \end{document}
