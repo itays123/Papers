@@ -1,0 +1,73 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{enumerate}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+
+\title{מטלת מנחה 15 - אינפי 2}
+\author{328197462}
+\date{06/01/2023}
+
+\begin{document}
+\long\def\/*#1*/{}
+\maketitle
+
+\section*{שאלה 1}
+
+\subsection*{סעיף א}
+
+נפריד לשני טורים ונבצע פעולות חיבור בעזרת משפט $5.9$. נסמן אפוא:
+\[
+    a_n = \frac{1}{\sqrt{n}\cdot 2^n}>0 \ \ \
+    b_n = \frac{(-2)^n\cdot \sin \frac{1}{n}}{\sqrt{n}\cdot 2^n}
+    = \frac{(-1)^n \cdot \sin \frac{1}{n}}{\sqrt{n}}
+\]
+\\
+ראשית, עבור הסדרה החיובית $a_n$ נקבל
+\[
+    0\leq a_n = \frac{1}{\sqrt{n}\cdot 2^n} \underrel{\sqrt{n}\geq 1}{\leq} \frac{1}{2^n}
+\]
+כאשר הטור $\sum \frac{1}{2^n}$ הוא טור הנדסי שמנתו $q=\frac{1}{2}$, ולכן מתכנס. \\
+אי לכך, לפי מבחן ההשוואה $5.14$, גם הטור $\sum a_n$ מתכנס, וכן מאחר ומדובר בסדרה חיובית הטור מתכנס בהחלט.
+\\\\
+כעת נבחן את התכנסות הטור $\Sigma|b_n|$. מתקיים:
+\[
+    0\leq|b_n|=\left|\frac{(-1)^n \cdot \sin \frac{1}{n}}{\sqrt{n}}\right| =
+    \frac{|(-1)^n| |\sin \frac{1}{n}|}{\sqrt{n}}=
+    \frac{|\sin \frac{1}{n}|}{\sqrt{n}} \underrel{|\sin x|\leq |x| \text{מאינפי 1 }}{\leq}
+    \frac{1}{n\sqrt{n}}
+\]
+הטור $\Sigma \frac{1}{n\sqrt{n}}=\Sigma \frac{1}{n^{1.5}}$
+מתכנס (לפי דוגמה 5.8א ביחידה 5 כאשר $\alpha=1.5>1$), \\
+ולכן לפי מבחן ההשוואה $5.14$ נסיק כי גם הטור $\Sigma |b_n|$ מתכנס.
+\\\\
+כעת נתבונן בטור הנתון בסעיף. מדובר בטור
+\[
+    \sum_{n=1}^\infty \frac{1+(-2)^n\sin\frac{1}{n}}{\sqrt{n}\cdot 2^n}=
+    \sum_{n=1}^\infty (a_n+b_n)
+\]
+נשים לב כי לפי אי-שוויון המשולש,
+\[
+    |a_n+b_n|\leq |a_n|+|b_n| \underrel{a_n>0}{=} a_n + |b_n|
+\]
+הטור $\Sigma(a_n +|b_n|)$ מתכנס כסכום של טורים מתכנסים לפי משפט .5.9 \\
+אי לכך, גם הטור $\Sigma|a_n+b_n|$ מתכנס, ומכאן נסיק התכנסות בהחלט של הטור הנתון בשאלה.
+
+\end{document}
