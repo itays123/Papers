@@ -144,4 +144,32 @@
 \\
 מהסתירה נובע כי הטור $\Sigma_{n=2}^\infty |a_n+b_n|$ לא מתכנס, ולכן הטור שבשאלה מתכנס בתנאי.
 
+\pagebreak
+
+\section*{שאלה 2}
+
+תהא $(u_n)$ המתכנסת לגבול שלילי, וכן יהא $a$ מספר חיובי. \\
+נסמן $a_n=a^{u_1+u_2+\cdots +u_n}$ ונראה כי $\Sigma a_n$ מתכנס אם ורק אם $a>1$.
+\\\\
+נחשב את הגבול:
+\[
+    c=\lim_{n\rightarrow \infty} \left| \frac{a_{n+1}}{a_n} \right| =
+    \lim_{n\rightarrow \infty} \left| \frac{a^{u_1+u_2+\cdots +u_n+u_{n+1}}}{a^{u_1+u_2+\cdots +u_n}} \right| =
+    \lim_{n\rightarrow \infty} |a^{u_{n+1}}|\underrel{a>0\Rightarrow a^x>0}{=}
+\]
+\[
+    \lim_{n\rightarrow \infty} a^{u_{n+1}}\underrel{\text{לפי אינפי 1}}{=}
+    (\lim_{n\rightarrow \infty} a)^{\lim_{n\rightarrow \infty}{u_{n+1}}}\underrel{\text{הזזה}}{=}
+    a^{{\lim_{n\rightarrow \infty}{u_{n}}}}\underrel{\text{נתון}}{=}
+    a^u
+\]
+אילו $a > 1$,
+אז מהנתון $u<0$ נסיק $c=a^u<1$ ולכן לפי משפט $5.17**$ הטור $\Sigma a_n$ מתכנס בהחלט, ובפרט מתכנס.\\
+אילו $a<1$,
+אז מהנתון $u<0$ נסיק $c=a^u>1$ ולכן לפי משפט $5.17**$ הטור $\Sigma a_n$ מתבדר.
+\\\\
+אילו $a=1$, אז נקבל לכל $n$ טבעי $a_n=1^{\cdots}=1=\frac{1}{n^0}$\\
+ולכן הטור $\Sigma a_n$ מתבדר, לפי דוגמה 5.8א ביחידה 5, כי $\alpha = 0 < 1$
+בכך הוכחנו כי הטור $\Sigma a_n$ מתכנס אם ורק אם $a > 1$.
+
 \end{document}
