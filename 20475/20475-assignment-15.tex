@@ -77,5 +77,71 @@
     a_n=\frac{n\cdot \cos 2n}{n^2-1} = \frac{n}{n^2-1} \cdot \cos 2n \ \ \
     b_n = \frac{\cos \pi n}{\ln n \cdot \ln(n^n+n)}=\frac{(-1)^n}{\ln n \cdot \ln(n^n+n)}
 \]
+\\\\
+נתבונן תחילה בטור $\Sigma a_n$. נרצה להוכיח כי הטור מתכנס לפי מבחן דיריכלה:
+\begin{enumerate}[i]
+    \item נראה כי הסדרה $\mu_n=\frac{n}{n^2-1}$ מונוטונית יורדת. \\
+          נגדיר $\mu(x)=\frac{x}{x^2-1}$. מתקיים:
+          \[
+              \mu'(x)=\frac{x^2-1-x\cdot 2x}{(x^2-1)^2}=
+              -\frac{x^2+1}{(x^2-1)^2} < 0
+          \]
+          ולכן $\mu$ פונקצייה יורדת, ובפרט לכל $n$ טבעי נקבל $\mu_{n+1}=\mu(n+1)<\mu(n)=\mu_n$.
+    \item כמו כן, $\mu_n=\frac{n}{n^2-1}\xrightarrow[n\rightarrow\infty]{}0$
+    \item בנוסף, על פי שאלה 33א ביחידה 5, $\Sigma \cos 2n$ סכום חסום.
+\end{enumerate}
+נקבל, על פי משפט $5.22$, כי הטור $\Sigma_{n=2}^\infty (\mu_n \cdot \cos 2n)=\Sigma_{n=2}^\infty a_n$ מתכנס.
+\\\\
+נבחן כעת את התכנסות הטור $|b_n|$. נשים לב כי $\ln(n^n+n)\geq \ln(n^n)=n\ln n$, ואי לכך:
+\[
+    |b_n|=\left|\frac{(-1)^n}{\ln n \cdot \ln(n^n+n)}\right| \underrel{x\geq 1 \Rightarrow \ln x > 0}{=}
+    \frac{|(-1)^n|}{\ln n \cdot \ln(n^n+n)} =
+    \frac{1}{\ln n \cdot \ln(n^n+n)} \underrel{\text{הסבר מקודם}}{\leq}
+    \frac{1}{\ln n \cdot n \ln n} = \frac{1}{n\ln^2n}
+\]
+הטור $\Sigma_{n=2}^\infty \frac{1}{n\ln^2n}$
+מתכנס לפי שאלה 27א ביחידה 5 עבור $\alpha = 2$,
+ולכן לפי מבחן ההשוואה $5.14$ נסיק כי $\Sigma_{n=2}^\infty |b_n|$ מתכנס, \\
+כלומר $\Sigma_{n=2}^\infty b_n$ מתכנס בהחלט ובפרט מתכנס.
+\\\\
+אי לכך, לפי משפט 5.9, הטור
+\[
+    \sum_{n=2}^\infty (\frac{n\cdot \cos 2n}{n^2-1}+\frac{\cos \pi n}{\ln n \cdot \ln(n^n+n)})=
+    \sum_{n=2}^\infty (a_n + b_n)
+\]
+מתכנס. כעת, נניח בשלילה כי הטור מתכנס בהחלט.
+אז לפי משפט $5.9$,
+הטור $\Sigma_{n=2}^\infty(|a_n+b_n|+|b_n|)$ מתכנס.
+מתקיים:
+\[
+    0\leq |a_n|=|(a_n+b_n)-b_n|\underrel{\text{א"ש המשולש}}{\leq}
+    |a_n+b_n|+|b_n|
+\]
+ועל כן, לפי מבחן ההשוואה $5.14$
+נסיק כי $\Sigma_{n=2}^\infty |a_n|$ מתכנס.
+ונקבל אפוא
+\[
+    |a_n|=\left|\frac{n\cdot \cos 2n}{n^2-1}\right| =
+    \frac{n\cdot |\cos 2n|}{n^2-1}\underrel{|\cos x| \geq \cos^2x}{\geq}
+    \frac{n\cdot \cos^2 2n}{n^2-1}\geq 0
+\]
+ומכאן, שוב לפי מבחן ההשוואה, $\Sigma_{n=2}^\infty \frac{n\cdot \cos^2 2n}{n^2-1}$ \\
+הוא טור מתכנס גם הוא. לפי הזהות $\cos^2 x = \frac{1}{2} + \frac{1}{2}\cos 2x$, נסיק:
+\[
+    \frac{n\cdot \cos^2 2n}{n^2-1} =
+    \frac{n}{2(n^2-1)} + \frac{n\cdot \cos 4n}{2(n^2-1)}
+\]
+הטור $\Sigma_{n=2}^\infty$ מתכנס, לפי מבחן דיריכלה, ובהוכחה שקולה להוכחה מקודם. \\
+אי לכך, לפי שאלה 11א ביחידה 5, נסיק כי
+גם הטור $\Sigma_{n=2}^\infty \frac{n}{2(n^2-1)}$ מתכנס.
+עם זאת,
+\[
+    \frac{\frac{n}{2(n^2-1)}}{\frac{1}{n}} =
+    \frac{n^2}{2(n^2-1)}\xrightarrow[n\rightarrow \infty ]{} \frac{1}{2}
+\]
+ולכן לפי מבחן ההשוואה $5.15$ גם הטור $\Sigma_{n=2}^\infty \frac{1}{n}$ מתכנס. \\
+נסיק כי לפי משפט 5.12 גם הטור $\Sigma_{n=1}^\infty \frac{1}{n}$ מתכנס, בסתירה לדוגמה 5.8א בספר!
+\\
+מהסתירה נובע כי הטור $\Sigma_{n=2}^\infty |a_n+b_n|$ לא מתכנס, ולכן הטור שבשאלה מתכנס בתנאי.
 
 \end{document}
