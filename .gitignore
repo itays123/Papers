@@ -18,12 +18,6 @@
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-*.pdf
-!*-booklet.pdf
-!20474/*.pdf
-!20407/*.pdf
-!20476/*.pdf
-!20272/*.pdf
 
 # Fonts
 *.ttf
@@ -31,6 +25,8 @@
 
 ## Generated if empty string is given at "Please type another file name for output:"
 .pdf
+test.pdf
+20441/**/*.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
