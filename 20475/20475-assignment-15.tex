@@ -326,4 +326,50 @@ $\Sigma|a_{n+1}-a_n|$ מתכנס,\\
 \]
 הסדרה מתבדרת ובהתאם הטור $\Sigma a_n$ מתבדר.
 
+\pagebreak
+
+\section*{שאלה 6}
+
+נסמן $b_n=(-1)^n\cdot \ln(\frac{n+1}{n})=(-1)^n\cdot \ln(1+\frac{1}{n})$
+ונוכיח כי הטור $\Sigma b_n$ מתכנס בתנאי.
+\\\\
+נוכיח התכנסות של $\Sigma b_n$ לפי מבחן לייבניץ.
+נסמן $a_n=\ln(1+\frac{1}{n})$ אי-שלילית כי $\ln$ חיובית בתחום $[1,\infty)$. \\
+הסדרה יורדת כי פונקציית ה $ln$ עולה והסדרה $(\frac{1}{n})$ יורדת. כמו כן, הסדרה אפסה:
+\[
+    \lim_{n\rightarrow\infty}a_n=
+    \lim_{n\rightarrow\infty} \ln(1+\frac{1}{n}) =
+    \begin{bmatrix}
+        x=\frac{1}{n} \\
+        \text{לפי היינה}
+    \end{bmatrix}=
+    \lim_{x\rightarrow 0} \ln(1+x) \underrel{\text{רציפות}}{=}
+    \ln(1+0)=0
+\]
+מתקיימים תנאי משפט לייבניץ $5.20$, ואי לכך הטור $\Sigma b_n=\Sigma (-1)^n a_n$ מתכנס.
+\\\\
+נראה כי הטור $\Sigma|b_n|$ לא מתכנס לפי מבחן ההשוואה הגבולי. תחילה, היות והסדרה $(a_n)$ אי-שלילית,
+\[
+    |b_n|=|(-1)^n||a_n|=a_n=\ln(1+\frac{1}{n})
+\]
+ניקח להשוואה את הטור $\Sigma \frac{1}{n}$. מתקיים:
+\[
+    \lim_{n\rightarrow\infty} \frac{\ln(1+\frac{1}{n})}{\frac{1}{n}} =
+    \begin{bmatrix}
+        x=\frac{1}{n} \\
+        \text{לפי היינה}
+    \end{bmatrix} =
+    \lim_{x\rightarrow 0} \frac{\ln(1+x)}{x} \underrel{\text{לופיטל}}{=}
+    \lim_{x\rightarrow 0} \frac{\frac{1}{1+x}}{1} = 1>0
+\]
+היות והטור $\Sigma \frac{1}{n}$ מתבדר לפי דוגמה $5.8$ א, נסיק כי גם הטור $\Sigma |b_n|$ מתבדר.
+\\\\
+הראינו כי הטור מתכנס בתנאי. לכן, לפי משפט רימן $5.27$,
+עבור $S=\ln(2023)$ קיים טור, המתקבל על ידי שינוי סדר איבריו של $b_n$, כך שסכומו $S$.
+את שינוי סדר האיברים ניתן לייצג על ידי פונקציה $f:\mathbb{N}\rightarrow\mathbb{N}$ חד חד ערכית ועל, ולכן עבור $f$ נקבל:
+\[
+    \sum_{n=1}^\infty b_{f(n)}=\ln(2023)
+\]
+וסיימנו.
+
 \end{document}
