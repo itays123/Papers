@@ -257,6 +257,73 @@ $\Sigma|a_{n+1}-a_n|$ מתכנס,\\
 
 \section*{שאלה 5}
 
+יהא $\Sigma a_n$ טור ויהיו $\Sigma b_n$, $\Sigma c_n$ טורים כמוגדר בשאלה. \\
+נסמן את סדרת הסכומים החלקיים של $\Sigma b_n$ ב $(\sigma_k)$, ואת סדרת הסכומים החלקיים של $\Sigma c_n$ ב$(\tau_k)$. \\
+כמו כן נסמן $\sigma = \lim_{k\rightarrow \infty}\sigma_k, \tau = \lim_{k\rightarrow\infty}\tau_k$
 
+\subsection*{סעיף א}
+
+הטענה נכונה. \\
+נניח כי $(a_n)$ אפסה. \\
+נשים לב כי עבור הסכומים החלקיים נקבל:
+\[
+    \begin{matrix}
+        \sigma_k=(a_1+a_2)+(a_3+a_4)+\cdots +(a_{2k-1}+a_{2k}) \\
+        \tau_k=a_1+(a_2+a_3)+(a_4+a_5)+\cdots+(a_{2k-2}+a_{2k-1})
+    \end{matrix}
+\]
+אי לכך,
+\[
+    \sigma_k-\tau_k=a_{2k}\xrightarrow[k\rightarrow\infty]{\text{לפי הנתון + תת סדרה}} 0
+\]
+ומכאן נסיק:
+\[
+    \sigma =
+    \lim_{k\rightarrow \infty} \sigma_k =
+    \lim_{k\rightarrow \infty} (\sigma_k-\tau_k+\tau_k) =
+    \lim_{k\rightarrow \infty} (\sigma_k-\tau_k)+\lim_{k\rightarrow \infty}\tau_k =
+    0 + \tau = \tau
+\]
+במילים אחרות, תנאי סעיף א גורר את תנאי סעיף ב, ונכונותו של סעיף א נובעת מנכונותו של סעיף ב כפי שנוכיח מיד.
+
+\subsection*{סעיף ב}
+
+הטענה נכונה. \\
+נסמן את סדרת הסכומים החלקיים של $\Sigma a_n$ ב $(S_k)$. אז לכל $k$ מתקיים:
+\[
+    \begin{matrix}
+        S_{2k-1}=a_1+a_2+\cdots+a_{2k-1}=a_1+(a_2+a_3)+(a_4+a_5)+\cdots+(a_{2k-2}+a_{2k-1})=\tau_k\xrightarrow{k\rightarrow\infty}\tau \\
+        S_{2k}=a_1+a_2+\cdots+a_{2k-1}=(a_1+a_2)+(a_3+a_4)+\cdots+(a_{2k-1}+a_{2k})=\sigma_k\xrightarrow{k\rightarrow\infty}\sigma     \\
+    \end{matrix}
+\]
+מההנחה נסיק כי שתי תתי-הסדרות $(S_{2k-1}), (S_{2k})$ המכסות את $(S_k)$, מתכנסות לאותו הגבול $\sigma=\tau=S$. \\
+אי לכך, לפי אינפי 1, הסדרה $(S_k)$ מתכנסת גם היא וגבולה הוא $S$ כנדרש בשאלה.
+
+\subsection*{סעיף ג}
+
+הטענה לא נכונה.
+נבחר כדוגמה נגדית $a_n=(-1)^n$. אז $c_1=a_1=-1$, ולכל $n$ טבעי:
+\[
+    \begin{matrix}
+        b_n=a_{2n-1}+a_{2n}=(-1)^{2n-1}+(-1)^{2n}=(-1)+1=0 \\
+        c_{n+1}=a_{2n}+a_{2n+1}=(-1)^{2n}+(-1)^{2n+1}=1+(-1)=0
+    \end{matrix}
+\]
+אי לכך סדרות הסכומים החלקיים יהיו:
+\[
+    \sigma_k=\sum_{n=1}^k b_n = k \cdot 0 = 0\xrightarrow[k\rightarrow \infty]{} 0 \;\;\;
+\]
+\[
+    \tau_k=\sum_{n=1}^{k} c_n = c_1 + \sum{n=2}^k c_n = -1 + (k-1)\cdot 0 = -1 \xrightarrow[k\rightarrow \infty]{}-1
+\]
+שתי הסדרות מתכנסות ולכן אכן מתקיימים תנאי השאלה. \\
+סדרת הסכומים החלקיים של $\Sigma a_n$ מוגדרת כך, בדומה לסעיף ב:
+\[
+    S_k=\begin{cases}
+        -1 & \text{ אי-זוגי} k \\
+        0  & \text{ זוגי} k
+    \end{cases}
+\]
+הסדרה מתבדרת ובהתאם הטור $\Sigma a_n$ מתבדר.
 
 \end{document}
