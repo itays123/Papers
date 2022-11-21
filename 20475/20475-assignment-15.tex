@@ -200,4 +200,39 @@ $\Sigma|a_{n+1}-a_n|$ מתכנס,\\
 בכיוון השני, אם נניח כי $\Sigma |\frac{1}{a_{n+1}}-\frac{1}{a_n}|$ מתכנס,
 אז לפי מבחן ההשוואה 5.14 ומשפט 5.10 נסיק כי הטור החיובי $\Sigma |a_{n+1}-a_n|$ מתכנס.
 
+\pagebreak
+
+\section*{שאלה 4}
+
+\subsection*{סעיף א}
+
+הטענה לא נכונה. \\
+יהא טור מתכנס $\Sigma a_n$,
+מתקיים לפי משפט 5.5 התנאי ההכרחי $a_n\xrightarrow[n\rightarrow\infty]{}0$. אי לכך,
+\[
+    \lim_{n\rightarrow\infty}\cos(a_n)=
+    \begin{bmatrix}
+        \text{לפי היינה} \\
+        x=a_n\rightarrow 0
+    \end{bmatrix} =
+    \lim_{x\rightarrow 0} \cos x \underrel{\text{רציפות}}{=}
+    \cos(0)=1
+\]
+לא מתקיים התנאי ההכרחי להתכנסות טור ולכן הטור $\Sigma \cos(a_n)$ לא מתכנס.
+
+\subsection*{סעיף ב}
+
+הטענה נכונה. נוכיח לפי מבחן ההשוואה 5.15
+
+נתון כי איברי הסדרה $a_n$ חיוביים. כמו כן, $a_n^2>0\Rightarrow a_n^2+a_n>0$
+כמו כן מתקיים:
+\[
+    \lim_{n\rightarrow \infty} \frac{a_n^2+a_n}{a_n}=
+    \lim_{n\rightarrow \infty} \left(\frac{a_n^2}{a_n}+\frac{a_n}{a_n}\right)=
+    \lim_{n\rightarrow \infty} (a_n+1) \underrel{\text{התנאי ההכרחי 5.5}}{=}
+    0+1=1>0
+\]
+אי לכך, לפי מבחן ההשוואה 5.5 הטורים $\Sigma a_n, \Sigma (a_n^2+a_n)$ מתכנסים ומתבדרים ביחד.
+
+
 \end{document}
