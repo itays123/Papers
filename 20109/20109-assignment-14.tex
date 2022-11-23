@@ -1,0 +1,82 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage{graphicx}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\niton{\not\mathrel{\text{\reflectbox{$\in$}}}}
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator\Sp{Sp}
+\def\reals{\mathbb{R}}
+\def\zerovec{\underline{0}}
+
+\title{מטלת מנחה 14 - אלגברה לינארית 1}
+\author{328197462}
+\date{15/01/2023}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+יהיו $U, W_1, W_2$ תתי-מרחבים לינאריים של מרחב לינארי $V$.
+
+\subsection*{סעיף א}
+
+יהא $v\in(U\cap W_1)+(U\cap W_2)$
+ועלינו להוכיח $v\in U\cap (W_1+W_2)$.
+\\
+מהגדרת החיבור, קיימים $v_1\in U\cap W_1, v_2\in U\cap W_2$ כך ש $v=v_1+v_2$.\\
+אי לכך, $v_1, v_2\in U$ ומסגירות החיבור הוקטורי במרחב הלינארי נסיק $v=v_1+v_2\in U$. \\
+כמו כן, מאחר ו $v_1\in W_1, v_2\in W_2$ נקבל מהגדרת החיבור כי $v=v_1+v_2\in W_1+W_2$. \\
+הראינו שייכות לשתי הקבוצות $U, W_1+W_2$ ולכן נסיק $v\in U\cap (W_1+W_2)$
+
+\subsection*{סעיף ב}
+
+עבור $V=\reals^2$ נגדיר:
+\[
+    \begin{matrix}
+        U=\Sp(\{ (1,1) \})   &
+        W_1=\Sp(\{ (1,0) \}) &
+        W_2=\Sp(\{ (0,1) \})
+    \end{matrix}
+\]
+אז לפי סעיף א של שאלה זו מתקיים $(U\cap W_1)+(U\cap W_2)\subseteq U\cap (W_1+W_2)$. \\\\
+ניקח $v=(1,1)$ ונראה כי $v\in U\cap (W_1+W_2)$ וגם $v\notin (U\cap W_1)+(U\cap W_2)$.\\
+נחשב:
+\begin{align*}
+    U\cap (W_1+W_2)
+     & =\Sp(\{ (1,1) \}) \cap (\Sp(\{ (1,0) \}) + \Sp(\{ (0,1) \})) \equals_{\text{שאלה 7.6.8}} \\
+     & =\Sp(\{ (1,1) \}) \cap (\Sp(\{ (1,0), (0,1) \}))=                                        \\
+     & =\Sp(\{ (1,1) \}) \cap \reals^2 =                                                        \\
+     & =\Sp(\{ (1,1) \})\ni (1,1)=v
+\end{align*}
+\begin{align*}
+    (U\cap W_1)+(U\cap W_2)
+     & =(\Sp(\{ (1,1) \})\cap \Sp(\{ (1,0) \}))+(\Sp(\{ (1,1) \}) + \Sp(\{ (0,1) \}))= \\
+     & =\{\zerovec\} + \{\zerovec\} =                                                  \\
+     & = \{\zerovec\}\niton (1,1)=v
+\end{align*}
+
+ולכן מתקיימת הכלה חזקה בין תתי-המרחבים.
+
+\pagebreak
+
+\section*{שאלה 2}
+
+\end{document}
