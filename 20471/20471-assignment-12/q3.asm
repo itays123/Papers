@@ -2,6 +2,7 @@
 	buf: .space 21
 	buf1: .space 20
 	enterString: .asciiz "\nPlease enter a string: \n"
+	newLine: .asciiz "\n"
 
 .text
 	.globl main
@@ -16,7 +17,7 @@
 	syscall
 	li $v0, 8 # Get input arg
 	la $a0, buf
-	addi $a1, $s0, 2 # Max capacity of string
+	addi $a1, $s0, 1 # Max capacity of string
 	move $t0, $a0
 	syscall
 	
@@ -48,8 +49,9 @@
 		j loop
 	
 	loopEnd:
-	# Load buffer
 	li $v0, 4 # Print arg
+	la $a0, newLine
+	syscall
 	la $a0, buf1
 	syscall
 		
