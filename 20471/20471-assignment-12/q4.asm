@@ -1,68 +1,36 @@
-.data
+.data 
 	TheCode: .word 0x014b4820, 0x112afffe, 0x8e49ff9c, 0xffffffff
 	OpcodeCounter: .space 4 # One byte will be enough since there are maximum 100 instructions
 	RegCounter: .space 64 # Two bytes * 32 registers
 .text
-	# REGISTER PURPOSE
-	# $t1 - index in the code. initialize at 0
-	# $t2 - current word in the code
-	# $t3 - mask
-	# $t4 - masked value (opcode, register) to be shifted and compared
-	# $t5 - index in Opcode Counter (0=R-type, 1=beq, 2=lw, 3=sw)
-	# $t6 - index in Reg Counter
-	# $s1 - current opcode
-	# $s2 - current rs
-	# $s3 - current rt
-	# $s4 - current rd, if existing
-	
 	.globl main
 	
 	main:
-	addi $t1, $zero, -4
-	mainLoop:
-		addi $t1, $t1, 4
-		lw $t2, TheCode($t1)
-		beq $t2, 0xffffffff, mainLoopEnd # stop condition
-		# Find opcode
-		li $t3, 0xfc000000 # Bits 26-31
-		and $t4, $t2, $t3
-		srl $s1, $t4, 26
-		# Find rs
-		li $t3, 0x03e00000 # Bits 21-25
-		and $t4, $t2, $t3
-		srl $s2, $t4, 21
-		# Find rt
-		li $t3, 0x001f0000 # Bits 16-20
-		and $t4, $t2, $t3
-		srl $s2, $t4, 16
-		# Load $t5 with matching index. and send to subsequent jobs
-		beq $s1, 0, handleRType
-		beq $s1, 0x4, handleBeq
-		beq $s1, 0x23, handleLw
-		beq $s1, 0x2b, handleSw
-		j handleInvalidOpcode
-	handleRType:
-		# TODO: handle rd=0
-		li $t5, 0
-		j mainLoopContinue
-	handleBeq:
-		li $t5, 1
-		# TODO: handle rs=rt
-		j mainLoopContinue
-	handleLw:
-		li $t5, 2
-		# TODO: Handle rt=0
-		j mainLoopContinue
-	handleSw:
-		li $t5, 3
-		j mainLoopContinue
-	handleInvalidOpcode:
-		# TODO: Print error
-		j mainLoop # jump to next word
-	mainLoopContinue:
-		# Increase matching counter
-		j mainLoop
+	li $a0, 0x12345678
+	li $a1, 24
+	li $a2, 27
+	jal takebits
+	j end
 	
-	mainLoopEnd:
-	# Print results
+	# Procedure: Take bits
+	# Input:
+	# 	$a0 - a 32-bit word
+	# 	$a1 - the minumum bit, 0-31
+	# 	$a2 - the maximum bit, 0-31, $a2 >= $a1
+	# Returns $a0[$a2:$a1]
+	takebits:
+		li $t0, 31 # The maximum number of bits
+		# Create mask
+		sub $t1, $a2, $a1 # t1 - (the number of bits -1)
+		sub $t2, $t0, $a2 # t2 - the number of bits to shift right
+		li $t3, 0x80000000 # 100000.....0000
+		srav $t3, $t3, $t1
+		srlv $t3, $t3, $t2
+		# Mask input
+		and $t4, $a0, $t3
+		srlv $v0, $t4, $a1
+		jr $ra
+		
 	
+	
+	end:
