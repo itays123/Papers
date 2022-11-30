@@ -118,6 +118,224 @@
 
 \section*{שאלה 3}
 
+יהיו תתי המרחבים הבאים של $V=\reals_4[x]$
+\begin{align*}
+    \begin{matrix}
+        U=\Sp\{ u_1=x^3+4x^2-x+3, & u_2=x^3+5x^2+5,   & u_3=3x^3+10x^2+5    \} \\
+        W=\Sp\{ w_1=x^3+4x^2+6,   & w_2=x^3+2x^2-x+5, & w_3=2x^3+2x^2-3x+9  \}
+    \end{matrix}
+\end{align*}
+נסמן בשאלה את הבסיס הסטנדרטי הסדור של $V$ ב $E=(x^3, x^2, x, 1)$.
+
+\subsection*{בסיס ל$U$}
+תחילה, וקטורי הקואורדינטות של הקבוצה הפורשת הנתונה של $U$, לפי הבסיס הסטנדרטי, הם:
+\begin{align*}
+    [u_1]_E=\begin{pmatrix}
+        1  \\
+        4  \\
+        -1 \\
+        3
+    \end{pmatrix} & , &
+    [u_2]_E=\begin{pmatrix}
+        1 \\
+        5 \\
+        0 \\
+        5
+    \end{pmatrix} & , &
+    [u_3]_E=\begin{pmatrix}
+        3  \\
+        10 \\
+        0  \\
+        5
+    \end{pmatrix}
+\end{align*}
+תת-המרחב $U'=\Sp\{ [u_1]_E, [u_2]_E, [u_3]_E \}$ הוא תת-מרחב של $\mathbb{F}^n$. נמצא לו בסיס. \\
+לשם כך, נכתוב את הוקטורים כשורות במטריצה ונדרג:
+\begin{align*}
+    \begin{pmatrix}
+        1 & 4  & -1 & 3 \\
+        1 & 5  & 0  & 5 \\
+        3 & 10 & 0  & 5
+    \end{pmatrix}
+    \xrightarrow[R_3\rightarrow R_3-3R_1]{R_2\rightarrow R_2-R_1}
+    \begin{pmatrix}
+        1 & 4  & -1 & 3  \\
+        0 & 1  & 1  & 2  \\
+        0 & -2 & 3  & -4
+    \end{pmatrix}
+    \xrightarrow[]{R_3\rightarrow R_3+2R_2}
+    \begin{pmatrix}
+        1 & 4 & -1 & 3 \\
+        0 & 1 & 1  & 2 \\
+        0 & 0 & 5  & 0
+    \end{pmatrix}
+    \xrightarrow[]{R_3\rightarrow \frac{1}{5}R_3}
+    \begin{pmatrix}
+        1 & 4 & -1 & 3 \\
+        0 & 1 & 1  & 2 \\
+        0 & 0 & 1  & 0
+    \end{pmatrix}
+\end{align*}
+לפי שאלה $7.5.12$, מרחב השורות של המטריצה המדורגת הינו גם $U'$. כמו כן, שורות המטריצה המדורגת אינן שורות אפס ולכן לפי למה $8.5.1$ בת"ל. \\
+קיבלנו כי הקבוצה הבאה בת"ל ופורשת את $\Sp\{ [u_1]_E, [u_2]_E, [u_3]_E \}$, ולכן בסיס לה:
+\[
+    B'=\left\{
+    \begin{pmatrix}
+        1  \\
+        4  \\
+        -1 \\
+        3
+    \end{pmatrix},
+    \begin{pmatrix}
+        0 \\
+        1 \\
+        1 \\
+        2
+    \end{pmatrix},
+    \begin{pmatrix}
+        0 \\
+        0 \\
+        1 \\
+        0
+    \end{pmatrix}
+    \right\}
+\]
+וקטורים אלה הם וקטורי הקואורדינטות לפי $E$ של איברי הקבוצה $B=\{x^3+4x^2-x+3, x^2+x+2, x\}$.\\
+כעת, לפי טענה $8.4.12$, מאחר ו$B'$ בסיס ל$U'$ נסיק כי $B$ בסיס ל$U$,
+וכן כי $\dim U=3$
+
+\subsection*{בסיס ל$W$}
+
+נשתמש בתהליך זהה. וקטורי הקואורדינטות של הקבוצה הפורשת הנתונה ל$W$:
+\begin{align*}
+    [w_1]_E=\begin{pmatrix}
+        1 \\
+        4 \\
+        0 \\
+        6
+    \end{pmatrix} & , &
+    [w_2]_E=\begin{pmatrix}
+        1  \\
+        2  \\
+        -1 \\
+        5
+    \end{pmatrix} & , &
+    [w_3]_E=\begin{pmatrix}
+        2  \\
+        2  \\
+        -3 \\
+        9
+    \end{pmatrix}
+\end{align*}
+תת-המרחב $W'=\Sp\{ [u_1]_E, [u_2]_E, [u_3]_E \}$ הוא תת-מרחב של $\mathbb{F}^n$. נמצא לו בסיס. \\
+לשם כך, נכתוב את הוקטורים כשורות במטריצה ונדרג:
+\begin{align*}
+    \begin{pmatrix}
+        1 & 4 & 0  & 6 \\
+        1 & 2 & -1 & 5 \\
+        2 & 2 & -3 & 9
+    \end{pmatrix}
+    \xrightarrow[R_3\rightarrow R_3-2R_1]{R_2\rightarrow R_2-R_1}
+    \begin{pmatrix}
+        1 & 4  & 0  & 6  \\
+        0 & -2 & -1 & -1 \\
+        0 & -6 & -3 & -3
+    \end{pmatrix}
+    \xrightarrow[]{R_3\rightarrow R_3-3R_2}
+    \begin{pmatrix}
+        1 & 4  & 0  & 6  \\
+        0 & -2 & -1 & -1 \\
+        0 & 0  & 0  & 0
+    \end{pmatrix}
+    \xrightarrow[]{R_3\rightarrow -R_3}
+    \begin{pmatrix}
+        1 & 4 & 0 & 6 \\
+        0 & 2 & 1 & 1 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+לפי שאלה $7.5.12$ ולמה $8.5.1$, הקבוצה הבאה בת"ל ופורשת את $W'$ ולכן מהווה בסיס.
+\[
+    C'=\left\{
+    \begin{pmatrix}
+        1 \\
+        4 \\
+        0 \\
+        6
+    \end{pmatrix},
+    \begin{pmatrix}
+        0 \\
+        2 \\
+        1 \\
+        1
+    \end{pmatrix}
+    \right\}
+\]
+וקטורי הקבוצה הם וקטורים הקואורדינטות לפי $E$ של $C=\{ x^3+4x^2+6, 2x^2+x+1 \}$.\\
+אי לכך, לפי טענה $8.4.12$, מאחר ו$C'$ בסיס ל$W'$ נסיק כי $C$ בסיס ל$W$,
+וכן באופן ישיר $\dim W=2$
+
+\subsection*{בסיס ל$U+W$}
+
+היות ו$U=\Sp(B), W=\Sp(C)$, נסיק לפי שאלה $7.6.8$ כי
+\[
+    U+W=\Sp(B\cup C)=\Sp\{x^3+4x^2-x+3, x^2+x+2, x, x^3+4x^2+6, 2x^2+x+1\}
+\]
+באופן דומה,
+\[
+    U'+W'=\Sp\{ (1, 4, -1, 3), (0, 1, 1, 2), (0, 0, 1, 0), (1, 4, 0, 6), (0, 2, 1, 1) \}
+\]
+נמצא בסיס ל$U'+W'$. לשם כך נחזור על התהליך מהחלקים הקודמים של השאלה:
+\begin{align*}
+    \begin{pmatrix}
+        1 & 4 & -1 & 3 \\
+        0 & 1 & 1  & 2 \\
+        0 & 0 & 1  & 0 \\
+        1 & 4 & 0  & 6 \\
+        0 & 2 & 1  & 1 \\
+    \end{pmatrix}
+    \xrightarrow[R_5\rightarrow R_5-2R_2]{R_4\rightarrow R_4-R_1}
+    \begin{pmatrix}
+        1 & 4 & -1 & 3  \\
+        0 & 1 & 1  & 2  \\
+        0 & 0 & 1  & 0  \\
+        0 & 0 & 1  & 3  \\
+        0 & 0 & -1 & -5 \\
+    \end{pmatrix}
+    \xrightarrow[R_5\rightarrow R_5+R_3]{R_4\rightarrow R_4-R_3}
+    \begin{pmatrix}
+        1 & 4 & -1 & 3  \\
+        0 & 1 & 1  & 2  \\
+        0 & 0 & 1  & 0  \\
+        0 & 0 & 0  & 3  \\
+        0 & 0 & 0  & -5 \\
+    \end{pmatrix} \\
+    \xrightarrow[]{R_4\rightarrow \frac{1}{3}R_4}
+    \begin{pmatrix}
+        1 & 4 & -1 & 3  \\
+        0 & 1 & 1  & 2  \\
+        0 & 0 & 1  & 0  \\
+        0 & 0 & 0  & 1  \\
+        0 & 0 & 0  & -5 \\
+    \end{pmatrix}
+    \xrightarrow[]{R_5\rightarrow R_5+5R_4}
+    \begin{pmatrix}
+        1 & 4 & -1 & 3 \\
+        0 & 1 & 1  & 2 \\
+        0 & 0 & 1  & 0 \\
+        0 & 0 & 0  & 1 \\
+        0 & 0 & 0  & 0 \\
+    \end{pmatrix}
+\end{align*}
+לפי שאלה 7.5.12 ולמה 8.5.1 4 השורות הראשונות של המטריצה המדורגת בת"ל ופורשות את $U'+W'$. \\
+שוב, לפי טענה $8.4.12$, 4 הפולינומים שוקטורי הקואורדינטות שלהם הם 4 שורות המטריצה מהווים בסיס ל$U+W$.
+נקבל $\dim(U+W)=4$, והיות ו$U+W\subseteq \reals_4[x]$ נקבל ממשפט $8.3.4$ כי $U+V=\reals_4[x]$. \\
+ניקח את הבסיס הסטנדרטי למרחב לינארי זה - E שהוגדר בתחילת השאלה.
+
+\subsection*{סעיף ב}
+
+
+
 \pagebreak
 
 \section*{שאלה 4}
