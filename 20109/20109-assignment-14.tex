@@ -200,7 +200,7 @@
     \end{pmatrix}
     \right\}
 \]
-וקטורים אלה הם וקטורי הקואורדינטות לפי $E$ של איברי הקבוצה $B=\{x^3+4x^2-x+3, x^2+x+2, x\}$.\\
+וקטורים אלה הם וקטורי הקואורדינטות לפי $E$ של איברי הקבוצה $B=\{b_1=x^3+4x^2-x+3, b_2=x^2+x+2, b_3=x\}$.\\
 כעת, לפי טענה $8.4.12$, מאחר ו$B'$ בסיס ל$U'$ נסיק כי $B$ בסיס ל$U$,
 וכן כי $\dim U=3$
 
@@ -271,7 +271,7 @@
     \end{pmatrix}
     \right\}
 \]
-וקטורי הקבוצה הם וקטורים הקואורדינטות לפי $E$ של $C=\{ x^3+4x^2+6, 2x^2+x+1 \}$.\\
+וקטורי הקבוצה הם וקטורים הקואורדינטות לפי $E$ של $C=\{ c_1=x^3+4x^2+6, c_2=2x^2+x+1 \}$.\\
 אי לכך, לפי טענה $8.4.12$, מאחר ו$C'$ בסיס ל$W'$ נסיק כי $C$ בסיס ל$W$,
 וכן באופן ישיר $\dim W=2$
 
@@ -334,9 +334,121 @@
 
 \subsection*{סעיף ב}
 
-
+ראשית, על מנת למצוא את המימד של $U\cap W$, ניעזר במשפט המימדים $8.3.6$:
+\[
+    \dim(U+W)=\dim U + \dim W -\dim(U\cap W)
+\]
+נציב ונקבל $4=2+2-\dim(U\cap W)$ ומכאן $\dim (U\cap W)=1$.\\\\
+כעת, יהא $p(x)\in \reals_4[x]$. על מנת ש$p(x)$ יהיה שייך לשני תתי-המרחבים הלינאריים $U,W$,
+נדרוש שיהיו קיימים $\lambda_1, \lambda_2, \lambda_3, \mu_1, \mu_2$ סקלרים כך ש:
+\begin{align*}
+    \lambda_1b_1+\lambda_2b_2+\lambda_3b_3=\mu_1c_1+\mu_2c_2   \\
+    \lambda_1b_1+\lambda_2b_2+\lambda_3b_3-\mu_1c_1-\mu_2c_2=0 \\
+    [\lambda_1b_1+\lambda_2b_2+\lambda_3b_3-\mu_1c_1-\mu_2c_2]_E=[0]_E
+\end{align*}
+ומלמה $8.4.3$ ושאלה $8.4.5$ נקבל:
+\begin{align*}
+    \lambda_1[b_1]_E+\lambda_2[b_2]_E+\lambda_3[b_3]_E-\mu_1[c_1]_E-\mu_2[c_2]_E=0 \\
+    \lambda_1 \begin{pmatrix}
+        1  \\
+        4  \\
+        -1 \\
+        3
+    \end{pmatrix}+
+    \lambda_2\begin{pmatrix}
+        0 \\
+        1 \\
+        1 \\
+        2
+    \end{pmatrix}+
+    \lambda_3\begin{pmatrix}
+        0 \\
+        0 \\
+        1 \\
+        0
+    \end{pmatrix}-
+    \mu_1\begin{pmatrix}
+        1 \\
+        4 \\
+        0 \\
+        6
+    \end{pmatrix}-
+    \mu_2\begin{pmatrix}
+        0 \\
+        2 \\
+        1 \\
+        1
+    \end{pmatrix}=0
+\end{align*}
+\[
+    \begin{pmatrix}
+        1  & 0 & 0 & -1 & 0  \\
+        4  & 1 & 0 & -4 & -2 \\
+        -1 & 1 & 1 & 0  & -1 \\
+        3  & 2 & 0 & -6 & -1
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+        \lambda_1 \\
+        \lambda_2 \\
+        \lambda_3 \\
+        \mu_1     \\
+        \mu_2
+    \end{pmatrix}=0
+\]
 
 \pagebreak
+נדרג את המטריצה על מנת לפתור את המערכת:
+\begin{align*}
+    \begin{pmatrix}
+        1  & 0 & 0 & -1 & 0  \\
+        4  & 1 & 0 & -4 & -2 \\
+        -1 & 1 & 1 & 0  & -1 \\
+        3  & 2 & 0 & -6 & -1
+    \end{pmatrix}
+    \xrightarrow[R_4\rightarrow R_4-3R_1]{R_2\rightarrow R_2-4R_1 \; R_3\rightarrow R_3+R_1}
+    \begin{pmatrix}
+        1 & 0 & 0 & -1 & 0  \\
+        0 & 1 & 0 & 0  & -2 \\
+        0 & 1 & 1 & -1 & -1 \\
+        0 & 2 & 0 & -3 & -1
+    \end{pmatrix}
+    \xrightarrow[R_4\rightarrow R_4-2R_2]{R_3\rightarrow R_3-R_2}
+    \begin{pmatrix}
+        1 & 0 & 0 & -1 & 0  \\
+        0 & 1 & 0 & 0  & -2 \\
+        0 & 0 & 1 & -1 & 1  \\
+        0 & 0 & 0 & -3 & 3
+    \end{pmatrix} \\
+    \xrightarrow[]{R_4\rightarrow -\frac{1}{3}R_4}
+    \begin{pmatrix}
+        1 & 0 & 0 & -1 & 0  \\
+        0 & 1 & 0 & 0  & -2 \\
+        0 & 0 & 1 & -1 & 1  \\
+        0 & 0 & 0 & 1  & -1
+    \end{pmatrix}
+    \xrightarrow[R_3\rightarrow R_3+R_4]{R_1\rightarrow R_1+R_4}
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & -1 \\
+        0 & 1 & 0 & 0 & -2 \\
+        0 & 0 & 1 & 0 & 0  \\
+        0 & 0 & 0 & 1 & -1
+    \end{pmatrix}
+    \rightarrow
+    \begin{cases}
+        \lambda_1-\mu_2=0  \\
+        \lambda_2-2\mu_2=0 \\
+        \lambda_3=0        \\
+        \mu_1-\mu_2=0      \\
+    \end{cases}
+\end{align*}
+קיבלנו כי $\mu_2$ משתנה חופשי. ניקח סקלר $a$ כלשהו כך ש $\mu_2=a$, אז $\mu_1=a$ ונקבל:
+\begin{align*}
+    p(x) & =\mu_1c_1+\mu_2c_2=          \\
+         & =a(x^3+4x^2+6) +a(2x^2+x+1)= \\
+         & = a(x^3+6x^2+x+7)
+\end{align*}
+במילים אחרות, $U\cap V=\Sp\{ x^3+6x^2+x+7 \}$ והקבוצה $\{ x^3+6x^2+x+7 \}$ בסיס ל$U\cap W$
 
 \section*{שאלה 4}
 
