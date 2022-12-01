@@ -522,4 +522,64 @@
 לכן, לפי חלקו השני של המשפט, נקבל $U\cap W = W$. \\
 אי לכך, מאחר ו $\{(1,2,3,4), (0,1,2,3)\}$ בסיס ל$U+W$ הקבוצה מהווה בסיס ל$W$.
 
+\pagebreak
+
+\section*{שאלה 5}
+
+תהא $A$ מטריצה ריבועית מסדר $n$ ומדרגה 1. בפרט $A\ne 0$. \\
+נסמן את השורה ב $A$ שאינה שורת אפסים ב $R=(a_1, a_2, ..., a_n)$. \\
+אז קיימים סקלרים $l_1, l_2, ..., l_n$, כולם 0 חוץ מסקלר יחיד $l_p=1$, כך ש:
+\[
+    A=\begin{pmatrix}
+        l_1a_1 & l_1a_2 & \cdots & l_1a_n \\
+        l_2a_1 & l_2a_2 & \cdots & l_2a_n \\
+        \vdots & \vdots & \ddots & \vdots \\
+        l_na_1 & l_na_2 & \cdots & l_na_n \\
+    \end{pmatrix}
+\]
+והעקבה של $A$ מקיימת:
+\[
+    tr(A)=
+    \sum_{i=1}^n A_{i, i}=
+    \sum_{i=1}^n l_ia_i
+\]
+
+\subsection*{סעיף א}
+
+נחשב את האיבר הכללי במטריצה $A\cdot A$:
+\[
+    (A^2)_{ij}=[A]^R_i\cdot [A]^C_j=(l_ia_1, l_ia_2, \cdots, l_ia_n) \cdot \begin{pmatrix}
+        l_1a_j \\
+        l_2a_j \\
+        \vdots \\
+        l_na_j
+    \end{pmatrix}=
+    \sum_{k=1}^n (l_ia_k)(l_k a_j)=
+    l_i a_j \sum_{k=1}^n l_ka_k =
+    A_{i,j} \cdot tr(A)
+\]
+ומכאן נסיק $A^2=tr(A) \cdot A$ באופן ישיר.
+
+\subsection*{סעיף ב}
+אם $tr(A)=0$ אז באופן מיידי נובע מהסעיף הקודם כי $A^2=0$\\\\
+נרצה להוכיח באינדוקציה כי לכל $k\geq 1$ טבעי, $A^k=(tr A)^{k-1}\cdot A$. \\
+בסיס האינדוקציה עבור $k=1$ טריוויאלי. בסעיף א הוכחנו עבור $k=2$.\\
+נניח באינדוקציה כי עבור $k$ מסוים מתקיים $A^k=(tr A)^{k-1}\cdot A$. אז:
+\[
+    A^{k+1}\equals_{\text{הגדרת חזקה}}
+    A^k \cdot A \equals_{\text{הנחה}}
+    (tr A)^{k-1} \cdot AA =
+    (tr A)^{k-1} \cdot A^2 \equals_{\text{סעיף א}}
+    (tr A)^{k-1} \cdot (tr A) \cdot A =
+    (tr A)^k \cdot A
+\]
+\\
+כעת, אם $tr A \ne 0$ אז מאחר ש $A\ne 0$ נקבל לכל $k\geq 1$ טבעי כי $A^k\ne 0$.
+
+\subsection*{סעיף ג}
+
+נניח כי עבור $k$ מסוים $A^k=0$. \\
+נקבל לפי הטענה בסעיף ב כי $(tr A)^{k-1} \cdot A=0$, ומאחר ו$A\ne 0$ נסיק $tr A=0$.
+ובאופן ישיר, מסעיף ב, נקבל כי $A^2=0$.
+
 \end{document}
