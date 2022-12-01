@@ -582,4 +582,150 @@
 נקבל לפי הטענה בסעיף ב כי $(tr A)^{k-1} \cdot A=0$, ומאחר ו$A\ne 0$ נסיק $tr A=0$.
 ובאופן ישיר, מסעיף ב, נקבל כי $A^2=0$.
 
+\pagebreak
+
+\section*{שאלה 6}
+
+מגדירים פונקציות $f,g,h,k: \reals \rightarrow \reals$
+\[
+    \begin{matrix}
+        f(x)= \sin x         & g(x)=\cos x  \\
+        h(x)=2\sin x+ \cos x & k(x)=3\cos x
+    \end{matrix}
+\]
+וכן מגדירים $V=\Sp\{ f, g \}$.
+
+\subsection*{סעיף א}
+
+הקבוצה $B=\{ f,g \}$ פורשת את $V$ ולכן על מנת שתהווה בסיס נוכיח שהיא בת"ל. \\
+כלומר נוכיח כי אין פתרון לא-טריוואלי למשוואה $\lambda f + \mu g = \zerovec$,
+כאשר $\zerovec$ מייצג את פונקציית האפס. \\
+במילים אחרות, מחפשים סקלרים $\lambda, \mu$ כך ש $\lambda \sin(x)+\mu \cos(x)=0$ לכל $x\in \reals$. בפרט: \\
+\begin{align*}
+    \lambda \sin(0)+\mu \cos(0)=0                             & \Rightarrow \mu =0    \\
+    \lambda \sin(\frac{\pi}{2}) + \mu \cos(\frac{\pi}{2}) = 0 & \Rightarrow \lambda=0
+\end{align*}
+
+מצאנו כי למשוואה יש פתרון יחיד - הפתרון הטריוויאלי, ומכאן שהקבוצה $B$ בת"ל ופורשת ולכן מהווה בסיס ל$V$.\\
+כמו כן נסיק $\dim V = 2$. \\\\
+הקבוצה $C$ בעלת 2 וקטורים ולכן די להוכיח כי היא פורשת את $V$. אכן, לפי שאלה 7.5.11 נקבל:
+\begin{align*}
+    V & =\Sp\{ f, g \}\equals^{T_1\rightarrow 2T_1}     \\
+      & =\Sp\{ 2f, g \}\equals^{T_1\rightarrow T_1+T_2} \\
+      & =\Sp\{ 2f+g, g \}\equals^{T_2\rightarrow 3T_2}  \\
+      & =\Sp\{ 2f+g, 3g \}=                             \\
+      & =\Sp\{ h, k \}
+\end{align*}
+ואכן לפי $8.3.2$ נסיק כי $C$ בסיס ל$V$.
+
+\subsection*{סעיף ב}
+
+קל לראות כי מתקייים:
+\begin{align*}
+    [h]_B = \begin{pmatrix}
+        2 \\
+        1
+    \end{pmatrix}, &
+    [k]_B=\begin{pmatrix}
+        0 \\
+        3
+    \end{pmatrix}
+\end{align*}
+אי-לכך, מטריצת המעבר מ$B$ ל $C$, לפי הגדרה $8.4.6$, היא:
+\[
+    M=([h]_B | [k]_B)=\begin{pmatrix}
+        2 & 0 \\
+        1 & 3
+    \end{pmatrix}
+\]
+נשתמש בטכניקה למציאת המטריצה הפוכה על מנת למצוא את $M^{-1}$. לפי משפט 8.4.9 זוהי מטריצת המעבר מ$C$ ל$B$.
+\begin{align*}
+    (M | I) =
+    \left(
+    \begin{matrix}
+            2 & 0 \\
+            1 & 3
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 \\
+            0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_1\rightarrow \frac{1}{2}R_1}
+    \left(
+    \begin{matrix}
+            1 & 0 \\
+            1 & 3
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            \frac{1}{2} & 0 \\
+            0           & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_2\rightarrow R_2-R_1}
+    \left(
+    \begin{matrix}
+            1 & 0 \\
+            0 & 3
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            \frac{1}{2}  & 0 \\
+            -\frac{1}{2} & 1
+        \end{matrix}
+    \right.
+    \right) \\
+    \xrightarrow{R_2\rightarrow \frac{1}{3}R_2}
+    \left(
+    \begin{matrix}
+            1 & 0 \\
+            0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            \frac{1}{2}  & 0           \\
+            -\frac{1}{6} & \frac{1}{3}
+        \end{matrix}
+    \right.
+    \right) =
+    (I | M^{-1})
+\end{align*}
+ולכן המטריצה $M^{-1}=\begin{pmatrix}
+        \frac{1}{2}  & 0           \\
+        -\frac{1}{6} & \frac{1}{3}
+    \end{pmatrix}$ היא מטריצת המעבר מ$C$ ל$B$.
+
+\pagebreak
+
+\subsection*{סעיף ג}
+
+הגדירו $l: \reals \rightarrow \reals$: $l(x)=5\sin(x)-2\cos(x)$. \\
+ע"פ משפט 8.4.8 מתקיים:
+\[
+    [l]_C=M^{-1}[l]_B =\begin{pmatrix}
+        \frac{1}{2}  & 0           \\
+        -\frac{1}{6} & \frac{1}{3}
+    \end{pmatrix}\cdot \begin{pmatrix}
+        5 \\
+        -2
+    \end{pmatrix}=
+    \begin{pmatrix}
+        \frac{5}{2} \\
+        -\frac{3}{2}
+    \end{pmatrix}
+\]
+קיבלנו $[l]_C=\begin{pmatrix}
+        \frac{5}{2} \\
+        -\frac{3}{2}
+    \end{pmatrix}$, ואכן:
+\[
+    \frac{5}{2}h(x)-\frac{3}{2}k(x)=
+    \frac{5}{2}(2\sin(x)+\cos(x))-\frac{3}{2}(3 \cos(x))=
+    5\sin(x)-2\cos(x)=l(x)
+\]
+
 \end{document}
