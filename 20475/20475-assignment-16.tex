@@ -1,0 +1,85 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{enumerate}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+
+\title{מטלת מנחה 15 - אינפי 2}
+\author{328197462}
+\date{20/01/2023}
+
+\begin{document}
+\long\def\/*#1*/{}
+\maketitle
+
+\section*{שאלה 1}
+
+נתונה סדרת הפונקציות $f_n(x)=\frac{nx}{e^x+n+x}$ המוגדרות (ורציפות) ב$[0, \infty)$. \\
+נחשב את הפונקציה הגבולית. לכל $x\in[0, \infty)$ מתקיים:
+
+\begin{align*}
+    f(x)=
+    \lim_{n\rightarrow \infty} f_n(x)=
+    \lim_{n\rightarrow \infty} \frac{nx}{e^x+n+x}=
+    \lim_{n\rightarrow \infty} \frac{x}{e^x \cdot \frac{1}{n}+1+x\cdot \frac{1}{n}}=
+    \frac{x}{1}=x
+\end{align*}
+
+כמו כן, מתקיים לכל $n\in \mathbb{N}, x\in[0, \infty)$:
+\begin{align*}
+    |f_n(x)-f(x)|=
+    |\frac{nx}{e^x+n+x}-x|=
+    |\frac{nx-x(e^x+n+x)}{e^x+n+x}|=
+    |\frac{-x^2-xe^x}{e^x+n+x}|=
+    \frac{x^2+xe^x}{e^x+n+x}
+\end{align*}
+
+\subsection*{סעיף א}
+
+ניקח את הסדרה $x_n=n$. מתקיים:
+\begin{align*}
+    \sup_{x\in[0, \infty)} |f_n(x)-f(x)| \geq
+    |f_n(x_n)-f(x_n)|=
+    \frac{n^2+ne^n}{e^n+2n}=
+    \frac{\frac{n^2}{e^n}+n}{1+2\cdot \frac{n}{e^n}}\xrightarrow[n\rightarrow \infty]{}
+    \infty
+\end{align*}
+
+מכאן, לפי למה $6.3$, נסיק כי $(f_n)$ לא מתכנסת במידה שווה ל$f$.
+
+\subsection*{סעיף ב}
+
+יהיו $0\leq a < b$ כלשהם. \\
+נדגיש כי מתקיים $[a,b]\subseteq [0,\infty)$ והפונקציה הגבולית $f$ נשארת זהה. \\
+נבחר את הסדרה $\mu_n=\frac{b^2+be^b}{e^a+n+a}$. לכל $x\in [a,b], n\in\mathbb{N}$ נקבל:
+\begin{align*}
+    |f_n(x)-f(x)| =
+    \frac{x^2+xe^x}{e^x+n+x} \underrel{a\leq x \leq b}{\leq}
+    \frac{b^2+be^b}{e^a+n+a}=\mu_n
+\end{align*}
+מתקיים $\mu_n\xrightarrow[n\rightarrow\infty]{}0$ ($a,b$ קבועים) ולכן לפי שאלה 7 ביחידה 6 נסיק כי $(f_n)$ מתכנסת במ"ש ל$f$. \\
+לכן, לפי משפט $6.8$ נקבל
+\begin{align*}
+    \lim_{n\rightarrow \infty} \int_a^bf_n(x)dx= \int_a^b f(x)dx
+\end{align*}
+ובכך סיימנו את ההוכחה.
+
+
+\end{document}
