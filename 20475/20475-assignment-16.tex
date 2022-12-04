@@ -126,6 +126,41 @@
     =\delta(x^n) \underrel{x^n\in[0,x_\epsilon)}{<} \epsilon_0
 \end{align*}
 
+\subsection*{סעיף ב}
+
+הפונקציה $f$ רציפה ולכן אינטגרבילית, וכמו כן הפונקציות $f_n$ רציפות ולכן אינטגרביליות כהרכבה של פונקציות רציפות. \\
+נוכיח לפי הגדרת הגבול, בהשראת הוכחת משפט $6.8$. אם כן, יהא $\epsilon>0$ ועלינו להוכיח שהחל מ$N\in\naturals$ מסוים מתקיים:
+\begin{align*}
+    \left|
+    \int_0^1 f_n(x)dx- f(0)
+    \right| < \epsilon
+\end{align*}
+נשים לב כי מאחר ו$f(0)$ פונקציה קבועה ורציפה ולכן אינטגרבילית, נקבל לפי שאלה 51 ביחידה 1:
+\begin{align*}
+    f(0)=(1-0)\cdot f(0) \leq \int_0^1 f(0) \leq (1-0) \cdot f(0)=f(0)
+\end{align*}
+ואכן נקבל לכל $N$ טבעי:
+\begin{align*}
+    \left|
+    \int_0^1 f_n(x)dx- \int_0^1 f(0)dx
+    \right| \equals_{1.24}
+    \left|
+    \int_0^1 (f_n(x)-f(x))dx
+    \right| \underrel{\text{שאלה 1.50}}{\leq}
+    \int_0^1 |f_n(x)-f(x)|dx\underrel{3.3}{=}
+    \lim_{a\rightarrow 1^-} \int_0^a |f_n(x)-f(x)|dx
+\end{align*}
+
+לכל $0<a<1$, לפי סעיף א, מתקיים $|f_n(x)-f(x)|<\frac{\epsilon}{2}$ החל מ$N$ מסוים.
+לכן, לפי $1.26$ ואינפי 1:
+\begin{align*}
+    \lim_{a\rightarrow 1^-} \int_0^a |f_n(x)-f(x)|dx \leq
+    \lim_{a\rightarrow 1^-} \int_0^a \frac{\epsilon}{2} =
+    \lim_{a\rightarrow 1^-} a \cdot \frac{\epsilon}{2} = \frac{\epsilon}{2} < \epsilon
+\end{align*}
+
+ובזאת סיימנו את ההוכחה.
+
 \pagebreak
 
 \section*{שאלה 4}
