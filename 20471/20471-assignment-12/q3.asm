@@ -3,6 +3,7 @@
 	buf1: .space 20
 	enterString: .asciiz "\nPlease enter a string: \n"
 	newLine: .asciiz "\n"
+	identicalSeq: .asciiz "\n The number of identical char in row is: "
 
 .text
 	.globl main
@@ -23,6 +24,9 @@
 	
 	# Iterate over chars
 	move $t2, $zero
+	# Saved temporaries regarding character count
+	li $s1, 1 # Max sequence length of same char
+	li $s2, 1 # Current .....
 	loop:
 		move $t1, $t2 # increase t1 	
 		addi $t2, $t1, 1 # increase t2
@@ -36,12 +40,19 @@
 		j bigger
 	equal: 
 		addi $t5, $zero, 61 #ascii value of =
+		# Handle character count
+		addi $s2, $s2, 1
+		slt $t6, $s1, $s2 # t6=0/1 the number to increase $s1 by
+		add $s1, $s1, $t6
+		
 		j loopContinue
 	smaller:
 		addi $t5, $zero, 45 #ascii value of -
+		li $s2, 1 # Reset counter
 		j loopContinue
 	bigger:
 		addi $t5, $zero, 43 #ascii value of +
+		li $s2, 1 # Reset counter
 		j loopContinue
 	loopContinue:
 		#t5 stores the relevant sign
@@ -54,6 +65,10 @@
 	syscall
 	la $a0, buf1
 	syscall
-		
+	la $a0, identicalSeq
+	syscall
+	li $v0, 1 # Print int
+	move $a0, $s1
+	syscall
 		
 	
