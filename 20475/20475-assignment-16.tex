@@ -87,6 +87,45 @@
 
 \section*{שאלה 2}
 
+מגדירים פונקציה רציפה $f: [0,1]\rightarrow \reals$, וכן לכל $n$ טבעי מגדירים $f_n: [0,1] \rightarrow\reals$ כך שלכל $x\in [0,1]$ מתקיים $f_n(x)=f(x^n)$. \\
+נגדיר $g(x)\equiv f(0)$ פונקציה קבועה.
+
+\subsection*{סעיף א}
+
+יהא $0<a<1$ כלשהו. \\
+נראה תחילה התכנסות נקודתית לפונקציה $g$. לכל $x\in [0,a]$:
+\begin{align*}
+    \lim_{n\rightarrow \infty}f_n (x) =
+    \lim_{n\rightarrow \infty} f(x^n) \equals_{t=x^n\rightarrow 0^+}
+    \lim_{t\rightarrow 0^+}f(t) \equals_{\text{רציפות $f$}}
+    f(0)
+\end{align*}
+\\\\
+נוכיח התכנסות במידה שווה לפי הגדרה. יהא $\epsilon_0>0$. \\
+הפונקציה $\delta(x)=|f(x)-f(0)|$ היא פונקציה רציפה ב$[0,1]$ כהפרש והרכבה של פונקציות רציפות. \\
+לכן, לפי אינפי 1, יש לה ערך מקסימלי בקטע $[0,1]$. נסמן ערך זה ב$x_\Delta\in [0,1]$. \\
+עבור $\epsilon_0 > \delta(x_\Delta)$, לכל $n$ טבעי ולכל $x\in [0,a]$ מתקיים $x^n\in [0,1]$ ולכן $|f_n(x)-f(0)|<|f(x_\Delta)-f(0)|<\epsilon_0$. \\
+בפרט, כאשר $x_\Delta=0$ נקבל $\delta(x_\Delta)=0$ ולכן $\epsilon_0>\delta(x_\Delta)$.\\
+נוכיח עבור שארית המקרים - $\epsilon_0<\delta(x_\Delta)$ וכן $x_\Delta\in(0,1]$.
+    \\\\
+    מרציפות פונקציית המרחק ואי-השוויון $\delta(0)=0<\epsilon_0<\delta(x_\Delta)$, קיים לפי משפט ערך הביניים מאיפני 1 $x_\epsilon\in [0,1]$ כלשהו כך ש $\delta(x_\epsilon)=\epsilon_0$.
+    לא ייתכן $x_\epsilon=0$ כי $\delta(x_\epsilon)>\delta(0)=0$. \\
+    נרצה לבחור את הנקודה $x_\epsilon$ השמאלית ביותר האפשרית,
+    כלומר, אילו קיים $x'\in (0,x_\epsilon)$ כך ש $\delta(x')>\epsilon_0$, משפט ערך הביניים מבטיח לנו קיומו של $x_\epsilon\in(0,x')$ נוסף כך ש $\delta(x_\epsilon)=\epsilon_0$.
+    בחירה זו מבטיחה לנו כי לכל $x\in [0, x_\epsilon)$ מתקיים $\delta(x)<\epsilon_0$
+\\\\
+לכן, מהגבול הידוע מאינפי 1 $\sqrt[n]{x_\epsilon}\xrightarrow[n\rightarrow \infty]{}1$ נסיק כי עבור $\epsilon=1-a>0$, החל מ $N\in\naturals$ כלשהו נקבל:
+\begin{align*}
+    |\sqrt[n]{x_\epsilon}-1|<1-a \underrel{\sqrt[n]{x_\epsilon}\leq 1}{\Rightarrow} 1 - \sqrt[n]{x_\epsilon} < 1 - a \Rightarrow \sqrt[n]{x_\epsilon} > a
+\end{align*}
+נבחר $N$ זה. לכל $n>N$ נקבל בקטע $[0,a]$ כי הפונקציה $x^n$ מונוטונית עולה,\\
+ולכן לכל $0\leq x \leq a < \sqrt[n]{x_\epsilon}$ מקבלים $0\leq x^n \leq a^n < x_\epsilon\Rightarrow x\in [0, x_\epsilon)$.
+אי לכך,
+\begin{align*}
+    |f_n(x)-f(0)| =|f(x^n)-f(0)|
+    =\delta(x^n) \underrel{x^n\in[0,x_\epsilon)}{<} \epsilon_0
+\end{align*}
+
 \pagebreak
 
 \section*{שאלה 4}
