@@ -20,6 +20,8 @@
 
 \newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
 \DeclareMathOperator*{\equals}{=}
+\def\reals{\mathbb{R}}
+\def\naturals{\mathbb{N}}
 
 \title{מטלת מנחה 15 - אינפי 2}
 \author{328197462}
@@ -80,6 +82,61 @@
     \lim_{n\rightarrow \infty} \int_a^bf_n(x)dx= \int_a^b f(x)dx
 \end{align*}
 ובכך סיימנו את ההוכחה.
+
+\pagebreak
+
+\section*{שאלה 2}
+
+\pagebreak
+
+\section*{שאלה 4}
+
+\subsection*{סעיף א}
+
+הטענה נכונה. \\
+נסמן לכל $n$ טבעי, $u_n(x): \reals\rightarrow\reals $ פונקציה כך שלכל $x$ ממשי $u_n(x)=\frac{x}{4+n^4x^2}$.
+נוכיח את ההתכנסות במ"ש של $f(x)=\Sigma u_n(x)$ בעזרת מבחן ויירשטראס.\\\\
+נבחר $\alpha_n=\frac{1}{4n^2}$ \\
+לכל $n\in \naturals$, $x\in \reals$ נקבל:
+\begin{align*}
+    u'_n(x) & =\frac{1(4+n^4x^2)-x(2n^4x)}{(4+n^4x^2)^2}= \\
+            & =\frac{4+n^4x^2-2n^4x^2}{(4+n^4x^2)^2}=     \\
+            & =\frac{4-n^4x^2}{(4+n^4x^2)^2}
+\end{align*}
+נקבל נקודות החשודות לערכי קיצון מקומיים כאשר $u'_n(x)=0$, כלומר עבור $x=\pm \frac{2}{n^2}$. \\
+מתקיים: $u_n(x)\xrightarrow[x\rightarrow \pm \infty]{}0$ ולכן:
+\begin{align*}
+    |u_n(x)| & \leq |u_n(\pm \frac{2}{n^2})|=                           \\
+             & =|\frac{\pm \frac{2}{n^2}}{4+n^4(\pm \frac{2}{n^2})^2}|= \\
+             & =\frac{\frac{|\pm 2|}{n^2}}{4+n^4\cdot \frac{4}{n^4}}=   \\
+             & =\frac{\frac{2}{n^2}}{8}=\frac{1}{4n^2}=\alpha_n
+\end{align*}
+\\\\
+הטור $\Sigma \alpha_n=\Sigma (\frac{1}{4} \cdot \frac{1}{n^2})$ מתכנס לפי דוגמה $5.8$א עבור $\alpha=2>1$ ולפי משפט 5.10 עבור $c=\frac{1}{4}\ne 0$
+אי לכך, לפי מבחן ויירשטראס 6.7 נסיק כי טור הפונקציות $\Sigma u_n(x)$ מתכנס במ"ש ב$\reals$.\\
+כעת, היות ו $u_n$ פנונקציות רציפות ב $\reals$ ומתכנסות במ"ש ב$\reals$ ל $f$, נסיק לפי $6.4*$ כי $f$ רציפה ב$\reals$.
+
+\subsection*{סעיף ב}
+
+הטענה לא נכונה. \\
+גם כאן נסמן $u_n: [0,1]\rightarrow \reals$ כך שלכל $x\in[0,1]$ נקבל $u_n(x)=(1-x)x^n=x^n-x^{n+1}$. \\
+נציין כי הפונקציות $u_n$ רציפות ב$\reals$ ובפרט ב$[0,1]$. \\\\
+נמצא התכנסות נקודתית של טור המספרים $\Sigma u_n(x_0)$ עבור $x_0\in[0,1]$ כלשהו. לכל $k$ נקבל:
+\begin{align*}
+    S_k & =\sum_{n=1}^k u_n(x_0)=\sum_{n=1}^k x_0^{n}-x_0^{n+1} \equals^{\text{טור טלסקופי}}= x_0 - x_0^{k+1}
+\end{align*}
+ולכן:
+\begin{align*}
+    S(x_0)=
+    \lim_{k\rightarrow \infty} S_k=
+    \lim_{k\rightarrow \infty} x_0 - x_0^{k+1}=
+    \begin{cases}
+        x_0 & 0\leq x_0 < 1 \\
+        0   & x_0 = 1
+    \end{cases}
+\end{align*}
+\\\\
+אילו היה טור הפונקציות $\Sigma u_n(x)$ מתכנס במידה שווה ב $[0,1]$, היינו מקבלים לפי $6.4*$ כי הפונקציה $S(x)$ רציפה, בסתירה לכך ש $S(x)$ אינה רציפה בנקודה $x=1$!
 
 
 \end{document}
