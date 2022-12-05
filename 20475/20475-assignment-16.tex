@@ -270,5 +270,61 @@
 \\\\
 אילו היה טור הפונקציות $\Sigma u_n(x)$ מתכנס במידה שווה ב $[0,1]$, היינו מקבלים לפי $6.4*$ כי הפונקציה $S(x)$ רציפה, בסתירה לכך ש $S(x)$ אינה רציפה בנקודה $x=1$!
 
+\pagebreak
+
+\section*{שאלה 5}
+
+נגדיר פונקציה $f$ וטור פונקציות להלן:
+\begin{align*}
+    f(x)=\sum_{n=0}^\infty \frac{x^{n+3}}{n! \cdot (n+3)}
+    =\sum_{k=3}^\infty \frac{x^{k}}{(k-3)! \cdot k}
+\end{align*}
+ונרצה לחשב $\frac{1}{27}f(3)$\\\\
+ראשית נמצא תחום התכנסות. \\
+לפנינו טור חזקות $\Sigma_{k=3}^\infty a_kx^k$ כך שלכל $k\geq 3$ נקבל $a_k=\frac{1}{(k-3)! \cdot k}>0$.\\
+רדיוס ההתכנסות יינתן לנו מלמה $6.11$:
+\begin{align*}
+    R=
+    \lim_{k\rightarrow\infty} \frac{a_k}{a_{k+1}}=
+    \lim_{k\rightarrow\infty} \frac{\frac{1}{(k-3)! \cdot k}}{\frac{1}{(k-2)! \cdot (k+1)}}=
+    \lim_{k\rightarrow\infty} \frac{(k-2)! \cdot (k+1)}{(k-3)! \cdot k}=
+    \lim_{k\rightarrow\infty} \frac{(k-2) \cdot (k+1)}{k}=
+    \infty
+\end{align*}
+מכאן שהטור מתכנס לכל $x$ ממשי.\\\\
+לכן לפי $6.12$ ניתן לגזור איבר-איבר, ותתקבל פונקציה $f'$ רציפה ב $\reals$ וערכה לכל $x\in \reals$ יהיה:
+\begin{align*}
+    f'(x)=(\sum_{n=0}^\infty \frac{x^{n+3}}{n! \cdot (n+3)})'\equals_{6.12}
+    \sum_{n=0}^\infty (\frac{x^{n+3}}{n! \cdot (n+3)})'=
+    \sum_{n=0}^\infty \frac{x^{n+2}}{n!}=
+    x^2\sum_{n=0}^\infty \frac{x^{n}}{n!}\equals_{\text{טור ידוע}}
+    x^2e^x
+\end{align*}
+פונקציה זו רציפה לכל אורך הישר ולכן אינטגרבילית. לפי הנוסחה היסודית, נקבל לכל $x\in \reals$:
+\begin{align*}
+    f(x)-f(0)=\int_0^x f'(t)dt
+\end{align*}
+היות ו $f(0)$ טור אפסים ולכן מתכנס לאפס, נקבל בסה"כ כי:
+\begin{align*}
+    f(x)=
+    \int_0^x t^2e^tdt =
+    \begin{bmatrix}
+        u=t^2 & v'=e^t \\
+        u'=2t & v=e^t
+    \end{bmatrix}=
+    t^2e^t\bigg|_0^x-\int_0^x 2t e^tdt =
+    x^2e^x - 2\int_0^x t e^tdt = \\
+    =\begin{bmatrix}
+        u=t  & v'=e^t \\
+        u'=1 & v=e^t
+    \end{bmatrix}=
+    x^2e^x - 2(te^t\bigg|_0^x-\int_0^x e^tdt)=
+    x^2e^x - 2xe^x+2e^t\bigg|_0^x=
+    (x^2-2x+2)e^x-2
+\end{align*}
+ובפרט,
+\begin{align*}
+    \sum_{n=0}^\infty \frac{3^n}{n!\cdot (n+3)} = \frac{1}{27}f(3) = \frac{5e^3-2}{27}
+\end{align*}
 
 \end{document}
