@@ -1,0 +1,243 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage{graphicx}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\niton{\not\mathrel{\text{\reflectbox{$\in$}}}}
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator\Sp{Sp}
+\DeclareMathOperator\Image{Im}
+\def\reals{\mathbb{R}}
+\def\field{\mathbb{F}}
+\def\zerovec{\underline{0}}
+
+\title{מטלת מנחה 15 - אלגברה לינארית 1}
+\author{328197462}
+\date{22/01/2023}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+\subsection*{סעיף א}
+
+נראה כי ההעתקה $T_1(x,y)=(\sin y, x)$ אינה עונה על הגדרה $9.1.1$. \\
+מצד אחד:
+\begin{align*}
+    T_1(2(0, \frac{\pi}{2}))=T_1(0, \pi)=(\sin \pi, 0) = (0,0)
+\end{align*}
+מצד שני:
+\begin{align*}
+    2T_1(0, \frac{\pi}{2})=2(\sin \frac{\pi}{2}, 0) = (2,0)
+\end{align*}
+עבור $v=(0,\frac{\pi}{2})\in\reals^2$ לא מתקיים $T_1(2v)=2T_1(v)$ ולכן ההעתקה אינה ליניארית.
+
+\subsection*{סעיף ב}
+
+נוכיח לפי $9.1.3$.
+יהיו $\lambda, \mu \in \field$ ויהיו $p(x), q(x)\in \reals_3[x]$.
+מקבלים:
+\begin{align*}
+    T_2(\lambda p(x)+\mu q(x)) & = (x+1)(\lambda p(x)+\mu q(x))'-(\lambda p(x)+\mu q(x))=        \\
+                               & = (x+1)\cdot (\lambda p'(x)+\mu q'(x))-\lambda p(x)-\mu q'(x) = \\
+                               & = \lambda \cdot [(x+1)p'(x)-p(x)]+\mu \cdot [(x+1)q'(x)-q(x)] = \\
+                               & = \lambda T_2(p(x))+\mu T_2(q(x))
+\end{align*}
+ולכן לפי 9.1.3 ההעתקה $T_2$ היא העתקה לינארית.
+
+\pagebreak
+
+\section*{שאלה 2}
+
+\subsection*{סעיף א}
+
+הטענה לא נכונה.\\
+תהא $T:\reals^3\rightarrow \reals^3$ העתקה המקיימת את התנאי (קיימת אחת כזאת לפחות - העתקת האפס).\\
+נסמן $u_1=(1,0,1), u_2=(1,2,1), u_3=(0,1,1), u_4=(2,3,3)$ וכן נסמן $T(u_1)=T(u_2)=T(u_3)=T(u_4)=(\alpha, \beta, \gamma)$.
+\\\\
+ארבע הוקטורים $u_1, u_2, u_3, u_4$ מהמרחב $\reals^3$ שמימדו 3 הם תלויים לינארית. בדיקה קצרה מראה כי $u_4=u_1+u_2+u_3$.  \\
+לכן, לפי 9.1.4 נקבל:
+\begin{align*}
+    (\alpha, \beta, \gamma)=T(u_4) & =T(u_1+u_2+u_3)\equals_{9.1.4}T(u_1)+T(u_2)+T(u_3)=3(\alpha, \beta, \gamma)
+\end{align*}
+נקבל $(\alpha, \beta, \gamma)=\zerovec$.
+\\\\
+נראה כעת כי שלוש הוקטורים $u_1, u_2, u_3$ מהווים בסיס ל$\reals^3$. אם נכתוב אותם כשורות במטריצה, נקבל מטריצה שהדטרמיננטה שלה היא:
+\begin{align*}
+    \begin{vmatrix}
+        1 & 0 & 1 \\
+        1 & 2 & 1 \\
+        0 & 1 & 1
+    \end{vmatrix}
+    \equals_{4.3.6}^{R_2\rightarrow R_2-R_1}
+    \begin{vmatrix}
+        1 & 0 & 1 \\
+        0 & 2 & 0 \\
+        0 & 1 & 1
+    \end{vmatrix}
+    \equals_{C_1 \text{פיתוח לפי}}
+    (-1)^{1+1} \cdot 1 \cdot \begin{vmatrix}
+        2 & 0 \\
+        1 & 1
+    \end{vmatrix}=
+    (2\cdot 1 - 1\cdot 0) = 1\ne 0
+\end{align*}
+לפי 4.4.1 המטריצה אינה הפיכה, ולכן לפי 3.10.6 שורותיה הן בת"ל. קיבלנו ש $u_1, u_2, u_3$ שלושה וקטורים בת"ל ב$\reals^3$ ולכן מהווים בסיס ל$\reals^3$.
+\\\\
+אי-לכך, כל $v\in \reals_3$ הוא צ"ל של $u_1, u_2, u_3$, ונקבל לכל $v\in\reals^3$:
+\begin{align*}
+    T(v)=T(\lambda_1u_1+\lambda_2u_2+\lambda_3u_3)\equals_{9.1.4}\lambda_1T(u_1)+\lambda_2T(u_2)+\lambda_3T(u_3)=\zerovec+\zerovec+\zerovec = \zerovec
+\end{align*}
+וקיבלנו ש$T$ העתקת האפס ולכן לא קיימת העתקה שאינה העתקת האפס המקיימת את התנאי.
+
+\subsection*{סעיף ב}
+נמצא בסיס כללי ל$V$. לפי הנתון $V$ מרחב לינארי מממד סופי, ונסמן $\dim V=n$.  \\
+כמו כן, עבור $U$ תת-מרחב של $V$ מתקיים לפי 8.3.4 $\dim U\leq \dim V$ ונסמן $\dim U=k$. \\
+אז ניקח $B=\{v_1, v_2, ..., v_k\}$ בסיס ל$U$. בפרט, $B$ קבוצה בת"ל של וקטורים מ$V$ ולכן לפי 8.3.5 קיימים $v_{k+1}, ..., v_{n}$ כך שהקבוצה $C=\{v_1, v_2, ..., v_n\}$ תהווה בסיס ל$V$.
+\\\\
+לפי 9.4.2 קיימת העתקה לינארית $T$ יחידה כך שלכל $v_i\in C$ מתקיים:
+\begin{align*}
+    T(v_i)=\begin{cases}
+        \zerovec & i=1,...,k     \\
+        v_i      & i=(k+1),...,n
+    \end{cases}
+\end{align*}
+נבחר את העתקה זו ונראה כי היא מקיימת את תנאי השאלה.\\
+לפי למה 9.3.6 מתקיים:
+\begin{align*}
+    \Image T  =\Sp\{ T(v_1), T(v_2), ..., T(v_k), T(v_{k+1}), ..., T(v_n) \}
+    = \Sp\{ \zerovec, v_{k+1}, ..., v_n \}\equals_{7.5.13 \text{שאלה }}
+    \Sp\{ v_{k+1}, ..., v_n \}
+\end{align*}
+כמו כן הוקטורים $v_{k+1},...,v_n$ בלתי תלויים לינארית (תת-קבוצה של בסיס ל$V$) ולכן מהווים בסיס ל$\Image T$ ובפרט $\dim\Image T=n-k$.
+\\\\
+כעת, לפי משפט המימדים 9.6.1 מתקיים $\dim \ker T + \dim \Image T = n$ ונסיק $\dim \ker T= n-(n-k)=k$. \\
+נראה כעת כי $U\subseteq \ker T$. יהא $u\in U$, אז קיימים סקלרים $\lambda_1, ..., \lambda_k\in \field$ כך ש $u=\lambda_1v_1+\cdots+\lambda_kv_k$, ולכן לפי 9.1.4 מתקיים:
+\begin{align*}
+    T(u) =T(\lambda_1v_1+\cdots+\lambda_kv_k)
+    =\lambda_1T(v_1)+\cdots+\lambda_kT(v_k)= \zerovec
+\end{align*}
+ולכן $u\in \ker T$, מתקיים $U\subseteq \ker T$ וממשפטים $8.3.4$א + $8.3.4$ב נקבל $U=\ker T$.
+\\\\
+לסיום, לפי שאלה $7.6.8$ נקבל:
+\begin{align*}
+    \ker T + \Image T= \Sp(\{ v_1, v_2, ..., v_k \}\cup\{ v_{k+1}, ..., v_n \})=\Sp(C)=V
+\end{align*}
+בפרט $\dim (\ker T + \Image T)=n$ וממשפט המימדים 8.3.6 נקבל:
+\begin{align*}
+    n = \dim (\ker T + \Image T)= \dim \Image T + \dim \ker T - \dim(\Image T\cap\ker T).
+\end{align*}
+נסיק $\dim(\Image T\cap\ker T)=n-(n-k)-k=0$, לכן לפי הגדרה $\Image T\cap\ker T=\{\zerovec\}$ ובכך סיימנו את ההוכחה.
+
+\subsection*{סעיף ג}
+
+נניח בשלילה כי קיימת העתקה לינארית $T: V\rightarrow V$ כך ש$\ker TS=\{ 0 \}$ אבל $\ker T\ne \{ 0 \}$.\\
+מאחר ו $TS$ העתקה לינארית שמרחב התחום ומרחב הטווח שלה נוצרים סופית וכמובן בעלי אותו מימד, נסיק ממסקנה 9.6.2 כי $TS$ הפיכה.\\
+לכן ההעתקה $T=(TS)\circ S^{-1}$ הפיכה כהרכבת שתי העתקות הפיכות.
+שוב ממסקנה $9.6.2$ נסיק כי $\ker T={0}$ בסתירה להנחת השלילה!
+
+\pagebreak
+
+\section*{שאלה 3}
+
+תהא $T$ העתקה לינארית ממרחב לינארי $V$ לעצמו כך שעבור $k$ טבעי מסוים $T^k=0$ אבל $T^{k-1}=0$.\\
+נדגיש כי ברור שלכל $n>k$, $T^{n}=T^{k}\circ T^{n-k}=0$, ועבור כל $v\in V$ כך ש $T^{k-1}(v)\ne 0$ מתקיים לכל $n<k$ $T^{n}(v)\ne 0$, שכן אחרת $T^{k-1}(v)=T({k-1-n})(T^{n}(v))=T^{k-1-n}(0)=0$.
+אשתמש בטעות אלה בהמשך התרגיל מבלי לנמק אותן שוב.
+
+\subsection*{סעיף א}
+
+יהא $u\in V$ כך ש $T^{k-1}(u)\ne 0$.
+צריך להוכיח כי $L=\{ u, T(u), T^2(u), ..., T^{k-1}(u) \}$ היא קבוצה בלתי-תלויה לינארית, כלומר שאין פתרון לא טריוויאלי למשוואה $(\ast) \ \alpha_1u+\alpha_2T(u)+\cdots + \alpha_k T^{k-1}(u)=\zerovec$.\\
+נפעיל את ההעתקה הלינארית $T^{k-1}$ על כל הצדדים. נקבל לפי 9.1.4 כי:
+\begin{align*}
+    T^{k-1}(\alpha_1u+\alpha_2T(u)+\cdots + \alpha_k T^{k-1}(u))=\alpha_1T^{k-1}(u)+\alpha_2T^{k}(u)+\cdots + \alpha_k T^{2k-2}(u)= \\
+    =\alpha_1 T^{k-1}(u)+\zerovec+\cdots+\zerovec = \alpha_1T^{k-1}(u)=\zerovec
+\end{align*}
+היות ו$T^{k-1}(u)\ne 0$ מובטח לנו $\alpha_1=0$.
+\\\\
+כעת המשוואה $(*)$ תהא כתובה כך: $\alpha_2T(u)+\alpha_3T^2(u)+\cdots+\alpha_kT^{k-1}(u)=\zerovec$.\\
+נפעיל הפעם $T^{k-2}$ על שני האגפים ונקבל, באופן דומה, $\alpha_2T^{k-1}(u)=\zerovec$ ולכן $\alpha_2=0$.
+נוכל לחזור שוב ושוב על התהליך ובסוף נקבל $\alpha_1=\alpha_2=\cdots=\alpha_k=0$.
+הפתרון הטריוויאלי הוא פתרון יחיד למשוואה, ולכן הקבוצה $L$ היא בלתי-תלויה ליניארית.
+
+\subsection*{סעיף ב}
+
+נניח בשלילה כי קיימת $A\in M_2(\reals)$ כך ש $A^2\ne 0$ אבל $A^3=0$.
+נבחר $V=\reals_2$ וכן נבחר העתקה לינארית $T: V\rightarrow V$ כך שלכל $v\in V$ נקבל $T(v)=Av$.\\
+זוהי בוודאות העתקה לינארית לפי דוגמה ח ביחידה 9 ושאלה $9.2.9$. \\
+מההנחה ומשאלה 9.8.6 נקבל לכל $v\in V$, $T^2(v)=A^2v$ וכן $T^3(v)=A^3v=0$.
+היות ו$A^2\ne 0$ נסיק כי $T^2\ne 0$. בפרט, קיים $u\in V$ כך ש $T^2(u)\ne 0$
+\\\\
+כעת, לפי סעיף א עבור $k=3$, הקבוצה $\{ u, T(u), T^2(u) \}$ בלתי תלויה לינארית, אבל זוהי קבוצה של שלושה וקטורים ממרחב במימד 2 וזו סתירה!
+
+\pagebreak
+
+\section*{שאלה 4}
+
+בשאלה מדובר על העתקה $T\ne 0$ לא הפיכה המקיימת $T^2=2T$.
+
+\subsection*{סעיף א}
+
+מימד מרחב המוצא $\reals^2$ הוא 2. אי-לכך, לפי 9.6.1 מקבלים:
+\begin{align*}
+    \dim \Image T + \dim \ker T = 2
+\end{align*}
+מההנחה $T\ne 0$ נובע $\ker T \ne 2$ ולכן $\ker T \leq 1$. נציב במשוואה לעיל ונקבל $\dim \Image T\geq 1$.\\
+כמו כן, מההנחה כי $T$ לא הפיכה נקבל ממסקנה 9.6.2 כי $\Im T\ne \reals^2$, לכן לפי 8.3.4 מקבלים $\dim \Image T\leq 1$. \\
+לכן, מאי-השוויונות לעיל נקבל $\dim \Image T=1$ ולכן $\dim \ker T=1$.
+
+\subsection*{סעיף ב}
+
+מכך ש $\dim \ker T=1$ נסיק כי קיים $u\in \ker T$ כך ש $u\ne\zerovec$. \\
+באופן דומה, מכך ש $\dim\Image T=1$ נסיק כי קיים $v\in \Image T$ כך ש $v\ne 0$. \\
+עבור $v$ זה קיים $w\in \reals^2$ כך ש $v=T(w)$. אי-לכך:
+\begin{align*}
+    T(v)=T(T(w))=T^2(w)=2T(w)=2v
+\end{align*}
+נראה כי $B=(u,v)$ בסיס ל$\reals^2$. נפתור את המשוואה $\lambda u+\mu v=\zerovec$ ונראה כי קיים רק הפתרון הטריוויאלי.\\
+נפעיל את $T$ על שני אגפי המשוואה. נקבל לפי 9.1.4 כי:
+\begin{align*}
+    T(\lambda u+\mu v)=\lambda T(u)+\mu T(v)=\lambda \cdot \zerovec + 2\mu v = \zerovec
+\end{align*}
+היות ו$v\ne 0$ נסיק כי $2\mu =0$ ולכן $\mu=0$.\\
+נחזור למשוואה המקורית ונקבל $\lambda u=0$. שוב, היות ו$u\ne0$ נקבל $\lambda=0$ וקיים רק הפתרון הטריוויאלי למשוואה.\\
+לכן $B=(u,v)$ סדרה בת 2 איברים ובת"ל ולכן מהווה בסיס ל$\reals^2$.\\\\
+כעת נחשב וקטורי קואורדינטות:
+\begin{align*}
+    [T(u)]_B=[\zerovec]_B=\begin{pmatrix}
+        0 \\
+        0
+    \end{pmatrix}
+     &  &
+    [T(v)]_B=[2v]_B-\begin{pmatrix}
+        0 \\
+        2
+    \end{pmatrix}
+\end{align*}
+ונקבל:
+\begin{align*}
+    [T]_B=([T(u)]_B \ | \ [T(v)]_B)=\begin{pmatrix}
+        0 & 0 \\
+        0 & 2
+    \end{pmatrix}
+\end{align*}
+ובזאת סיימנו את ההוכחה.
+
+\end{document}
