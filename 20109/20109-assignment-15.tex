@@ -240,4 +240,274 @@
 \end{align*}
 ובזאת סיימנו את ההוכחה.
 
+\pagebreak
+
+\section*{שאלה 5}
+
+נתונה העתקה לינארית $T: \reals^3\rightarrow \reals^3$, וכן נתון $B=(v_1=(1,1,1), v_2=(1,0,1), v_3=(1,1,0))$
+בסיס ל$\reals^3$.\\
+כמו כן ידוע כי $T(1,0,0)=\zerovec$.
+
+\subsection*{סעיף א}
+
+לפי משפט $10.2.1$:
+\begin{align*}
+    [T(1,0,0)]_B=[T]_B\cdot [(1,0,0)]_B
+\end{align*}
+נתונה לנו באופן חלקי המטריצה המייצגת של ההעתקה $T$, והיא $[T]_B=\begin{pmatrix}
+        a  & 0  & b \\
+        3  & 2a & 1 \\
+        2c & b  & a
+    \end{pmatrix}$ \\
+כעת נמצא את $([(1,0,0)]_B)$. צריך למצוא $\alpha, \beta, \gamma$ סקלרים כך ש $(1,0,0)=\alpha (1,1,1) + \beta (1,0,1) + \gamma (1,1,0)$. \\
+נוציא משוואות ונקבל:
+\begin{align*}
+    \begin{cases}
+        \alpha + \beta + \gamma = 1 \\
+        \alpha + \gamma = 0         \\
+        \alpha + \beta = 0
+    \end{cases}
+    \rightarrow
+    \left(
+    \begin{matrix}
+            1 & 1 & 1 \\
+            1 & 0 & 1 \\
+            1 & 1 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 \\
+            0 \\
+            0
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_2\rightarrow R_2-R_1]{R_3\rightarrow R_3-R_1}
+    \left(
+    \begin{matrix}
+            1 & 1  & 1  \\
+            0 & -1 & 0  \\
+            0 & 0  & -1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  \\
+            -1 \\
+            -1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_2\rightarrow -R_2]{R_3\rightarrow -R_3}
+    \left(
+    \begin{matrix}
+            1 & 1 & 1 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 \\
+            1 \\
+            1
+        \end{matrix}
+    \right.
+    \right)
+    \rightarrow
+    \begin{cases}
+        \alpha=-1 \\
+        \beta=1   \\
+        \gamma=1
+    \end{cases}
+\end{align*}
+אי-לכך,
+\begin{align*}
+    [T]_B \cdot [(1,0,0)]_B =
+    \begin{pmatrix}
+        a  & 0  & b \\
+        3  & 2a & 1 \\
+        2c & b  & a
+    \end{pmatrix} \cdot \begin{pmatrix}
+        -1 \\
+        1  \\
+        1
+    \end{pmatrix}=
+    \begin{pmatrix}
+        -a + b      \\
+        -3 + 2a + 1 \\
+        -2c + b + a
+    \end{pmatrix}=
+    \begin{pmatrix}
+        -a + b \\
+        2a - 2 \\
+        a + b -2c
+    \end{pmatrix}
+\end{align*}
+מאידך, ידוע לנו כי $[T(1,0,0)]_B=[\zerovec]_B=\zerovec$, ולכן נקבל:
+\begin{align*}
+    \begin{cases}
+        -a+b=0     & \Rightarrow b=1 \\
+        2a-2=0     & \Rightarrow a=1 \\
+        a+b-2c = 0 & \Rightarrow c=1
+    \end{cases}
+\end{align*}
+לסיכום, נקבל $a=b=1$ והמטריצה המייצגת תהיה $[T]_B=\begin{pmatrix}
+        1 & 0 & 1 \\
+        3 & 2 & 1 \\
+        2 & 1 & 1
+    \end{pmatrix}$
+
+\subsection*{סעיף ב}
+
+ניזכר במשפט $10.1.5$ - $\rho([T]_B)=\dim \Image T$. לכן נמצא את דרגתה של המטריצה המייצגת ע"י דירוג שלה:
+\begin{align*}
+    \begin{pmatrix}
+        1 & 0 & 1 \\
+        3 & 2 & 1 \\
+        2 & 1 & 1
+    \end{pmatrix}
+    \xrightarrow[R_3\rightarrow R_3-2R_1]{R_2\rightarrow R_2-3R_1}
+    \begin{pmatrix}
+        1 & 0 & 1  \\
+        0 & 2 & -2 \\
+        0 & 1 & -1
+    \end{pmatrix}
+    \xrightarrow[]{R_3\rightarrow \frac{1}{2}R_2}
+    \begin{pmatrix}
+        1 & 0 & 1  \\
+        0 & 2 & -2 \\
+        0 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+הגענו לצורה מדורגת של המטריצה וקיבלנו שתי שורות שאינן שורות אפס. מכאן, לפי 8.5.1 נקבל ש $\rho([T]_B)=2$ ומימד מרחב התמונות $\Image T$, בהתאם, יהיה $2$.
+נמצא שני וקטורים בלתי-תלויים לינארית ב $\Image T$ והם יהוו בסיס לפי $8.3.2$.
+\\\\
+מהגדרת המטריצה המייצגת נסיק $[T(v_2)]_B=(0 \ 2 \ 1)^t$, $[T(v_3)]_B=(1 \ 1 \ 1)^t$. שני הוקטורים הם בת"ל (אינם פרופורציונים) ולכן לפי 8.4.4 גם הוקטורים $T(v_2), T(v_3)\in \Image T$ הינם בלתי-תלויים לינארית ולכן מהווים בסיס ל$\Image T$. נחשב אותם במפורש:
+\begin{align*}
+    T(v_2) & =0v_1+2v_2+1v_3 = 2(1,0,1)+(1,1,0)=(3,1,2)      \\
+    T(v_3) & =1v_1+1v_2+1v_3=(1,1,1)+(1,0,1)+(1,1,0)=(3,2,2)
+\end{align*}
+ולכן הקבוצה $\{ (3,1,2), (3,2,2) \}$ בסיס ל$\Image T$.
+\\\\
+כעת, ניזכר במשפט המימדים $9.6.1$. מימד מרחב המוצא $\reals^3$ הוא $3$, ולכן נקבל $\dim \Image T + \dim \ker T=3$, ומכאן $\dim \ker T = 1$ \\
+כלומר, יש צורך בוקטור יחיד מ$\ker T$ (הקבוצה המכילה אותו בת"ל), למשל $(1,0,0)\in \ker T$, והקבוצה $\{ (1,0,0) \}$ בסיס ל$\ker T$.
+
+\pagebreak
+
+\subsection*{סעיף ג}
+
+יהא וקטור $v=(x,y,z)\in \reals^3$. נמצא וקטור קואורדינטות ביחס לבסיס $B$. \\
+מחפשים שוב $\alpha, \beta, \gamma$ כך ש$\alpha(1,1,1)+\beta(1,0,1)+\gamma(1,1,0)=(x,y,z)$ (נביע באמצעות $x,y,z$). נוציא משוואות:
+\begin{align*}
+    \begin{cases}
+        \alpha + \beta + \gamma = x \\
+        \alpha + \gamma = y         \\
+        \alpha + \beta = z
+    \end{cases}
+    \rightarrow                            &
+    \left(
+    \begin{matrix}
+            1 & 1 & 1 \\
+            1 & 0 & 1 \\
+            1 & 1 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            x \\
+            y \\
+            z
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_2\rightarrow R_2-R_1]{R_3\rightarrow R_3-R_1}
+    \left(
+    \begin{matrix}
+            1 & 1  & 1  \\
+            0 & -1 & 0  \\
+            0 & 0  & -1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            x   \\
+            y-x \\
+            z-x
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_2\rightarrow -R_2]{R_3\rightarrow -R_3}
+    \left(
+    \begin{matrix}
+            1 & 1 & 1 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            x   \\
+            x-y \\
+            x-z
+        \end{matrix}
+    \right.
+    \right)                                  \\
+    \xrightarrow[]{R_1\rightarrow R_1-R_2} &
+    \left(
+    \begin{matrix}
+            1 & 0 & 1 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            y   \\
+            x-y \\
+            x-z
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[]{R_1\rightarrow R_1-R_3}
+    \left(
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            -x+y+z \\
+            x-y    \\
+            x-z
+        \end{matrix}
+    \right.
+    \right)
+    \rightarrow
+    \begin{cases}
+        \alpha=-x+y+z \\
+        \beta = x-y   \\
+        \gamma= x-z
+    \end{cases}
+\end{align*}
+כעת, שוב לפי $10.2.1$, נקבל:
+\begin{align*}
+    [T(v)]_B=[T]_B\cdot [v]_B=
+    \begin{pmatrix}
+        1 & 0 & 1 \\
+        3 & 2 & 1 \\
+        2 & 1 & 1
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+        -x+y+z \\
+        x-y    \\
+        x-z
+    \end{pmatrix}
+    = \begin{pmatrix}
+        y    \\
+        y+2z \\
+        y+z
+    \end{pmatrix}
+\end{align*}
+"נתרגם" מוקטור הקואורדינטות:
+\begin{align*}
+    T(v)=y(1,1,1)+(y+2z)(1,0,1) + (y+z)(1,1,0)=(3y+3z, 2y+z, 2y+2z)
+\end{align*}
+לסיכום נקבל $T(x,y,z)=(3y+3z, 2y+z, 2y+2z)$.
+
 \end{document}
