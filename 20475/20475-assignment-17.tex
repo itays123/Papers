@@ -1,0 +1,102 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{enumerate}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+\def\reals{\mathbb{R}}
+\def\naturals{\mathbb{N}}
+
+\title{מטלת מנחה 15 - אינפי 2}
+\author{328197462}
+\date{31/01/2023}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+\subsection*{סעיף א1}
+
+\begin{align*}
+    \lim_{(x,y)\rightarrow(0,0)} \frac{\sin(2x^2+2y^2)+y^3}{x^2+y^2}=
+    \lim_{(x,y)\rightarrow(0,0)}\frac{\sin(2x^2+2y^2)}{x^2+y^2}+\lim_{(x,y)\rightarrow(0,0)}\frac{y^3}{x^2+y^2}
+\end{align*}
+כי מתקיים:
+\begin{align*}
+    \lim_{(x,y)\rightarrow(0,0)}\frac{\sin(2x^2+2y^2)}{x^2+y^2}=
+    [t=2x^2+2y^2\rightarrow 0^+]=
+    \lim_{t\rightarrow 0^+}\frac{\sin t}{t/2}=
+    2\lim_{t\rightarrow 0^+}\frac{\sin t}{t}=
+    2
+\end{align*}
+וכן, לפי כלל הסנדוויץ':
+\begin{align*}
+    0\leq \left|\frac{y^3}{x^2+y^2}\right|=
+    |y| \cdot \frac{y^2}{x^2+y^2} \leq
+    |y| \cdot \frac{y^2}{y^2} =
+    |y|\xrightarrow[(x,y)\rightarrow(0,0)]{}0
+\end{align*}
+ולכן $\frac{y^3}{x^2+y^2}\xrightarrow[(x,y)\rightarrow(0,0)]{}0$.
+לסיכום נקבל:
+\begin{align*}
+    \lim_{(x,y)\rightarrow(0,0)} \frac{\sin(2x^2+2y^2)+y^3}{x^2+y^2}=2+0=2
+\end{align*}
+
+\subsection*{סעיף א2}
+
+\begin{align*}
+    0\leq \left|x\arctan \left( \frac{x}{x^2+(y-2)^2} \right)\right|=
+    |x| \left|\arctan\left( \frac{x}{x^2+(y-2)^2} \right)\right|\leq
+    |x|\cdot \frac{\pi}{2} \xrightarrow[(x,y)\rightarrow(0,2)]{} 0 \cdot \frac{\pi}{2}= 0
+\end{align*}
+ולכן מתקיים $x\arctan \left( \frac{x}{x^2+(y-2)^2} \right)\xrightarrow[(x,y)\rightarrow(0,2)]{} 0$
+
+\subsection*{סעיף ב1}
+
+עלינו לבדוק האם קיים הגבול $f(x,y)\xrightarrow[(x,y)\rightarrow(0,0)]{}1$. \\
+נכתוב את הפונקציה בדרך נוחה יותר. לכל $(x,y)\ne (0,0)$:
+\begin{align*}
+    f(x,y)=\frac{e^{|x|+|y|}-1}{|x|+|y|}\cdot \ln(|xy|+e)
+\end{align*}
+מתקיים:
+\begin{align*}
+    \lim_{(x,y)\rightarrow(0,0)}\frac{e^{|x|+|y|}-1}{|x|+|y|} & =
+    [t=|x|+|y|\rightarrow 0^+]=
+    \lim_{t\rightarrow 0^+}\frac{e^t-1}{t}\equals_{\text{לופיטל}}
+    \lim_{t\rightarrow 0^+}\frac{e^t}{1}=1                        \\
+    \lim_{(x,y)\rightarrow(0,0)} \ln(|xy|+e)                  & =
+    [p=|xy|\rightarrow 0^+]=
+    \lim_{(x,y)\rightarrow(0,0)} \ln(t+e)=
+    \ln(e)=1
+\end{align*}
+ולכן $f(x,y)\xrightarrow[(x,y)\rightarrow(0,0)]{}1\cdot 1=1$ והפונקציה רציפה.
+
+\subsection*{סעיף ב2}
+
+הפונקציה לא רציפה בנקודה, כי לא מתקיים הגבול $g(x,y)\xrightarrow[(x,y)\rightarrow(0,0)]{}1$. \\
+ניקח למשל $P_n=(\frac{1}{n^2}, \frac{1}{n})$, ונקבל:
+\begin{align*}
+    \lim_{n\rightarrow\infty} g(P_n)=
+    \lim_{n\rightarrow\infty} \frac{\frac{1}{n^4}-\frac{1}{n^4}}{\frac{1}{n^4}+\frac{1}{n^4}}=
+    \lim_{n\rightarrow\infty} \frac{0}{\frac{2}{n^4}}=0
+\end{align*}
+לכן, לפי היינה, לא מתקיים $g(x,y)\xrightarrow[(x,y)\rightarrow(0,0)]{}1=g(0,0)$ והפונקציה לא רציפה בנקודה.
+
+\end{document}
