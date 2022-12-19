@@ -169,12 +169,39 @@
 
 \subsection*{סעיף א}
 
-נסמן את צלעות המשולש המשתנות ב$x,y$ ואת הזווית ביניהן ב$\alpha$. נרצה להביע את הזווית כפונקציה של הצלעות $\alpha = f(x,y)$. נסתמך על העובדה ששטח המשולש נשאר קבוע. לפי נוסחה טריגונומטרית ידועה, שטח המשולש יהיה:
+נסמן בשאלה את $x(t), y(t)$ ו$\alpha(t)$ את הגדלים של שתי הצלעות הנתונות בס"מ והזווית (ברדיאנים) שביניהן בנקודת זמן מסוימת (בשניות), בהתאמה. נתון בשאלה כי בנקודת זמן מסוימת $t_0$ מתקיים $x(t_0)=4, y(t_0)=3, \alpha(t_0)=\frac{\pi}{6}$ וכמו כן ערכי הנגזרות $x', y'$ המייצגות את קצב השינוי לשנייה מקיימים $x'(t_0)=y'(t_0)=1$.
+עלינו למצוא את $\alpha'(t_0)$.
+\\\\
+מנתוני השאלה, שטח המשולש בזמן $t_0$ הוא (לפי נוסחה ידועה) $\frac{1}{2}\cdot 4\cdot 3 \cdot \sin \frac{\pi}{6}=3$. נתון כי שטח המשולש נשאר קבוע, ולכן בכל נקודת זמן $t$ מתקיים:
 \begin{align*}
-    \frac{1}{2} \cdot xy \cdot \sin(f(x,y))=\frac{1}{2} \cdot 4 \cdot 3 \cdot \sin \frac{\pi}{6} = 3
+    \frac{1}{2} \cdot x(t) \cdot y(t) \cdot \sin(\alpha(t))=3
 \end{align*}
-מקבלים $f(x,y)=\arcsin(\frac{6}{xy})$. כמו כן נתון קצב ההשתנות $f_x(3,4)=1, f_y(3,4)=1$.\\
-נקבל $\triangledown f(3,4)=(1,1), ||\triangledown f(3,4)||=\sqrt{2}$ ולכן גרדיאנט מנורמל יהיה $(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})$.
+ומכאן נקבל $\alpha(t)=\arcsin\left(\frac{6}{x(t)\cdot y(t)}\right)$ בכל נקודת זמן $t$.
+\\\\
+אז נסמן $f(x,y)=\arcsin\left(\frac{6}{x\cdot y}\right)$. כאן נדרש $x\cdot y > 6$ וכן מהעובדה ש$x,y$ מייצגים אורכים חיוביים של צלעות נסיק $x,y>0$. \\
+נחשב נגזרות חלקיות לפי הכלל בעמוד $68$:
+\begin{align*}
+    f_x & =
+    \frac{1}{\sqrt{1-(\frac{6}{xy})^2}} \cdot \frac{6}{y}\cdot (\frac{1}{x})' =
+    \frac{|xy|}{\sqrt{x^2y^2-36}} \cdot \frac{6}{y}\cdot \frac{-1}{x^2} =
+    \frac{-6}{x\sqrt{x^2y^2-36}} \\
+    f_y & =
+    \frac{1}{\sqrt{1-(\frac{6}{xy})^2}} \cdot \frac{6}{x}\cdot (\frac{1}{y})' =
+    \frac{|xy|}{\sqrt{x^2y^2-36}} \cdot \frac{6}{x}\cdot \frac{-1}{y^2} =
+    \frac{-6}{y\sqrt{x^2y^2-36}}
+\end{align*}
+בפרט $f_x(4,3)=\frac{-6}{4\sqrt{108}}=-\frac{\sqrt{3}}{12}$ וכן $f_y(4,3)=\frac{-6}{3\sqrt{108}}=-\frac{\sqrt{3}}{9}$
+\\\\
+אי לכך, לפי כלל השרשרת 7.66 עבור $\alpha(t)=f(x(t), y(t))$ מקבלים:
+\begin{align*}
+    \alpha'(t)=f_x(x(t), y(t))\cdot x'(t)+f_y(x(t), y(t))\cdot y'(t)
+\end{align*}
+ובפרט עבור $t=t_0$ מקבלים:
+\begin{align*}
+    \alpha'(t_0) & =f_x(x(t_0), y(t_0))\cdot x'(t_0)+f_y(x(t_0), y(t_0))\cdot y'(t_0)=                                            \\
+                 & = f_x(4,3)\cdot 1 + f_y(4,3)\cdot 1= -\frac{\sqrt{3}}{12} - \frac{\sqrt{3}}{9} = -\frac{7\sqrt{3}}{36}=-0.3367
+\end{align*}
+כלומר ברגע זה קצב גדילתה של הזווית הוא $-0.3367$ רדיאנים בשנייה.
 
 \subsection*{סעיף ב}
 
