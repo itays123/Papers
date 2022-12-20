@@ -242,4 +242,49 @@
 באופן דומה מתקיים $f_y=h'(r)\cdot \frac{y}{r}$ וכן $f_{yy}=\frac{1}{r} \cdot (rh''(r)+h'(r))$.\\
 נקבל לפי הנתון $f_{xx}+f_{yy}=2\cdot \frac{1}{r} \cdot (rh''(r)+h'(r))=0$ ומכאן, היות ו$r\ne 0$, $rh''(r)+h'(r)=0$
 
+\pagebreak
+
+\section*{שאלה 4}
+
+\pagebreak
+
+\section*{שאלת רשות}
+
+תהא $f(x,y)$ דיפרנציאבילית בכל המישור ויהיו $p_1, p_2\in \reals^2$. \\
+נסמן $u=p2-p1=(x_2-x_1, y_2-y_1)$, אז $v=\frac{u}{||u||}$ וקטור היחידה בכיוון מ$p_1$ ל$p_2$.\\
+צריך להוכיח כי קיימת $p_0\in[p_1, p_2]$ כך ש$f(p_2)-f(p_1)=(D_v f)(p_0)\cdot ||p_1-p_2||$
+\\\\
+נגדיר פונקציה במשתנה יחיד $h(t)$ המוגדרת בתחום $[0,||u||]$ כך:
+\begin{align*}
+    h(t)=f(p_1+t\cdot v) = f(p_1+t\cdot \frac{p_2-p_1}{||p_2-p_1||})=
+    f((1-\frac{t}{||p_2-p_1||})p_1+\frac{t}{||p_2-p_1||}p_2)
+\end{align*}
+בפרט $h(0)=f(p_1), h(||p_2-p_1||)=f(p_2)$. מטעמי נוחות נסמן:
+\begin{align*}
+    x(t) & =(1-\frac{t}{||p_2-p_1||})x_1+\frac{t}{||p_2-p_1||}x_2  \\
+    y(t) & = (1-\frac{t}{||p_2-p_1||})y_1+\frac{t}{||p_2-p_1||}y_2
+\end{align*}
+ומקבלים $h(t)=f(x(t), y(t))$.
+\\\\
+הפונקציה גזירה בקטע זה כיוון שמייצגת "מסלול" בפונקציה דיפרנציאבילית בשני משתנים. בפרט, נגזרת הפונקציה בקטע לכל $t$ תהיה, לפי כלל השרשרת $7.66$,
+\begin{align*}
+    h'(t) & =f_x (x(t), y(t)) \cdot x'(t) + f_y(x(t), y(t)) \cdot y'(t)=                                                                                           \\
+          & =f_x (x(t), y(t)) \cdot (-\frac{x_1}{||p_2-p_1||}+\frac{x_2}{||p_2-p_1||}) + f_y(x(t), y(t)) \cdot (-\frac{y_1}{||p_2-p_1||}+\frac{y_2}{||p_2-p_1||})= \\
+          & = \frac{1}{||p_2-p_1||} \cdot (f_x(x(t), y(t)) \cdot (x_2-x_1) + f_y(x(t), y(t)) \cdot (y_2-y_1)) =                                                    \\
+          & = \frac{1}{||p_2-p_1||} \cdot \triangledown f(x(t), y(t)) \cdot (p_2-p_1)=
+    \triangledown f(x(t), y(t)) \cdot \frac{p_1-p_2}{||p_2-p_1||}=
+    \triangledown f(x(t), y(t)) \cdot v\equals_{7.67}
+    (D_v f)(x(t), y(t))
+\end{align*}
+\\
+היות והפונקציה גזירה, נקבל לפי לגראנז' מאינפי 1 כי קיים $t_0\in[0, ||p_2-p_1||]$ כך שמתקיים:
+\begin{align*}
+    h'(t_0)=\frac{h(||p_2-p_1||)-h(0)}{||p_2-p_1||-0}=\frac{f(p_2)-f(p_1)}{||p_2-p_1||}
+\end{align*}
+נבחר $p_0=(x(t_0), y(t_0))\in[p_1, p_2]$ ונקבל:
+\begin{align*}
+    f(p_2)-f(p_1) & =h'(t_0) \cdot ||p_2-p_1||=(D_v f)(p_0)\cdot ||p_2-p_1||
+\end{align*}
+ובכך סיימנו את ההוכחה.
+
 \end{document}
