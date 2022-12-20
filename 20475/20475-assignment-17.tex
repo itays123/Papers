@@ -246,6 +246,84 @@
 
 \section*{שאלה 4}
 
+\subsection*{סעיף א}
+
+נחשב נגזרות חלקיות לפונקציה $f(x,y)=\cos x + \cos y + \cos (x+y)$:
+\begin{enumerate}[i]
+    \item $f_x=-\sin x -\sin(x+y)$
+    \item $f_y = -\sin y - \sin (x+y)$
+\end{enumerate}
+עלינו למצוא נקודות $(x,y)\in D$ בהן $f_x=f_y=0$. נפתור את מערכת המשוואות:
+\begin{align*}
+    -\sin x -\sin(x+y) & =-\sin y - \sin (x+y)=0             \\
+    \sin x             & = \sin y                            \\
+    x = y + 2\pi k     & \ \text{או} \  x = \pi - y + 2\pi k
+\end{align*}
+נציב כל אחת מן האפשרויות במשוואה השנייה. עבור $x=y+2\pi k$ מקבלים:
+\begin{align*}
+    -\sin y - \sin (2y+2\pi k) & = 0 \\
+    -\sin y - 2\sin y \cos y   & = 0 \\
+    -\sin y (1+2\cos y)        & = 0
+\end{align*}
+נקבל שתי אפשרויות - באפשרות הראשונה $\sin y = 0$ ולכן $y=\pi k$ ובתחום הנתון מקבלים $(x,y)=(0,0)$. \\
+באפשרות השנייה מקבלים $\cos y = -\frac{1}{2}$ ולכן $y=\pm\frac{2}{3}\pi+2\pi k$ - לא בתחום!\\
+כמו כן, עבור $x=\pi-y+2\pi k$ מקבלים:
+\begin{align*}
+    -\sin y - \sin(\pi + 2\pi k) & = 0 \\
+    -\sin y                      & = 0
+\end{align*}
+ושוב מקבלים $y=\pi k$, ועבור $y=0$ בתחום הנתון נקבל את הנקודות $(\pi + 2\pi k, 0)\notin D$\\
+לסיכום - קיבלנו נקודה חשודה לקיצון יחידה $(0,0)\in D$
+\\\\
+נחשב נגזרות מסדר שני:
+\begin{enumerate}[i]
+    \item $f_{xy}=-\cos(x+y)$ $\Leftarrow$ $f_{xy}(0,0)=-1$
+    \item $f_{xx}=-\cos x - \cos(x+y)$ $\Leftarrow$ $f_{xx}(0,0)=-2$
+    \item $f_{yy}=-\cos y - \cos(x+y)$ $\Leftarrow$ $f_{yy}(0,0)=-2$
+\end{enumerate}
+מתקיימים תנאי משפט 7.72 ועבור הנקודה המדוברת מתקיים $D=(-1)^2-(-2)(-2)=-3<0$ ולכן לפי 7.72 זוהי נקודת מקסימום מקומי.\\
+אין נקודות חשודות נוספות ולכן תם החישוב.
+
+\subsection*{סעיף ב}
+
+נבדוק את שפות התחום:
+\begin{enumerate}[i]
+    \item $x=\frac{\pi}{2}, y\in (-\frac{\pi}{2}, \frac{\pi}{2})$ \\
+          מקבלים את הפונקציה $f(y)=0+\cos y + \cos (y+\frac{\pi}{2})=\cos y - \sin y$, ונגזרתה $f'(y)=-\sin y - \cos y$ מתאפסת כאשר:
+          \begin{align*}
+              \sin y & = -\cos y = \cos (\pi - y)                                             \\
+              \sin y & = \sin (y-\frac{\pi}{2})                                               \\
+              y      & =y-\frac{\pi}{2}+2\pi k \  \text{או} \ y = \frac{3\pi}{2} - y + 2\pi k \\
+              2y     & =\frac{3\pi}{2}+2\pi k                                                 \\
+              y      & = \frac{3\pi}{4}+\pi k
+          \end{align*}
+          נקבל נקודה לבדיקה $(\frac{\pi}{2}, -\frac{\pi}{4})$
+    \item $x=-\frac{\pi}{2}, y\in(-\frac{\pi}{2}, \frac{\pi}{2})$ \\
+          מקבלים את הפונקציה $g(y)=0+\cos y + \cos(y-\frac{\pi}{2})=\cos y + \sin y$, שנגזרתה $g'(y)=-\sin y + \cos y$ מתאפסת כאשר:
+          \begin{align*}
+              \sin y & = \cos y             \\
+              \tan y & = 1                  \\
+              y      & =\frac{\pi}{4}+\pi k
+          \end{align*}
+          נקבל נקודה לבדיקה $(-\frac{\pi}{2}, \frac{\pi}{4})$
+    \item $y=\frac{\pi}{2}, x\in (-\frac{\pi}{2}, \frac{\pi}{2})$ \\
+          מקבלים את הפונקציה $f(x)=\cos x + 0 + \cos(x+\frac{\pi}{2})$ והראינו כי נגזרתה מתאפסת כאשר $x=-\frac{\pi}{4}$. \\
+          נקבל נקודה לבדיקה $(-\frac{\pi}{4}, \frac{\pi}{2})$
+    \item $y=-\frac{\pi}{2}, x\in(-\frac{\pi}{2}, \frac{\pi}{2})$ \\
+          באופן דומה, מקבלים נקודה לבדיקה $(\frac{\pi}{4}, -\frac{\pi}{2})$
+\end{enumerate}
+כמובן יש לבדוק את הקצוות $(-\frac{\pi}{2}, -\frac{\pi}{2}), (-\frac{\pi}{2}, \frac{\pi}{2}), (\frac{\pi}{2}, -\frac{\pi}{2}), (\frac{\pi}{2}, \frac{\pi}{2})$. סה"כ עלינו לבדוק 8 נקודות קצה ונקודת קיצון פנימית.\\
+נחשב:
+\begin{align*}
+    \begin{matrix}
+        f(0,0)=3                                 & f(\frac{\pi}{2}, -\frac{\pi}{4})=\sqrt{2} & f(-\frac{\pi}{2}, \frac{\pi}{4})=\sqrt{2} \\
+        f(\frac{\pi}{2},-\frac{\pi}{4})=\sqrt{2} & f(-\frac{\pi}{2},\frac{\pi}{4})=\sqrt{2}  & f(\frac{\pi}{2}, \frac{\pi}{2})=-1        \\
+        f(-\frac{\pi}{2}, \frac{\pi}{2})=1       & f(\frac{\pi}{2}, -\frac{\pi}{2})=1        & f(-\frac{\pi}{2}, \frac{-\pi}{2})=-1
+    \end{matrix}
+\end{align*}
+נקבל ערך מינימלי $f(\frac{\pi}{2}, \frac{\pi}{2})=f(-\frac{\pi}{2}, -\frac{\pi}{2})=-1$
+וערך מקסימלי $f(0,0)=3$.
+
 \pagebreak
 
 \section*{שאלת רשות}
