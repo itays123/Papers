@@ -367,4 +367,107 @@ $ כך ש$\lambda_1, \lambda_2, ..., \lambda_n$ סקלרים. \\
 \end{align*}
 ולכן $p(A)=Pp(D)P^{-1}=0$
 
+\pagebreak
+
+\section*{שאלה 4}
+
+\subsection*{סעיף א}
+
+הטענה לא נכונה. ניקח למשל $A=\begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+    \end{pmatrix}, B=\begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}$ מדרגות שונות ונראה שיש להן אותו פולינום אופייני:
+\begin{align*}
+    p_A(x)=|xI-A| & =\left|x\cdot\begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix} - \begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+    \end{pmatrix}\right|=
+    \begin{vmatrix}
+        x & 0 \\
+        0 & x
+    \end{vmatrix}=x^2                                                               \\
+    p_B(x)=|xI-B| & =\left|x\cdot\begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix} - \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}\right|=
+    \begin{vmatrix}
+        x & -1 \\
+        0 & x
+    \end{vmatrix}=x^2                                                               \\
+\end{align*}
+
+\subsection*{סעיף ב}
+
+לפי 11.3.6 $A=\begin{pmatrix}
+        2         & -\sqrt{3} \\
+        -\sqrt{3} & -2
+    \end{pmatrix}$ דומה למטריצה האלכסונית $B=\begin{pmatrix}
+        -1 & 0 \\
+        0  & 1
+    \end{pmatrix}$ אם $-1,1$ ערכים עצמיים של $A$, כלומר שורשים של הפולינום האופייני שלה. ואכן, הפולינום האופייני של $A$ הוא:
+\begin{align*}
+    p(x)=|xI-A|=\left|x\cdot\begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix} - \begin{pmatrix}
+        2        & -\sqrt{3} \\
+        \sqrt{3} & -2
+    \end{pmatrix}\right|=
+    \begin{vmatrix}
+        x-2       & \sqrt{3} \\
+        -\sqrt{3} & x+2
+    \end{vmatrix}=(x-2)(x+2)+3=x^2-1=(x-1)(x+1)
+\end{align*}
+שורשי הפולינום האופייני הם אכן $\pm 1$ והמטריצה לכסינה ודומה ל$B$.
+
+\subsection*{סעיף ג}
+
+הטענה שגויה. \\
+נתחיל במציאות ערכים עצמיים למטריצות. הפולינומים האופייניים של המטריצות יהיו:
+\begin{align*}
+    p_A(x)=|xI-A| & =\begin{vmatrix}
+        x+3 & -1  & -1  \\
+        -1  & x+3 & -1  \\
+        -1  & -1  & x+3
+    \end{vmatrix}\equals^{R_1\rightarrow R_1+R_2+R_3}
+    \begin{vmatrix}
+        x+1 & x+1 & x+1 \\
+        -1  & x+3 & -1  \\
+        -1  & -1  & x+3
+    \end{vmatrix}=
+    (x+1)\begin{vmatrix}
+        1  & 1   & 1   \\
+        -1 & x+3 & -1  \\
+        -1 & -1  & x+3
+    \end{vmatrix}=                                                       \\
+                  & \equals^{R_1\rightarrow R_1+R_2}
+    (x+1)\begin{vmatrix}
+        0  & x+4 & 0   \\
+        -1 & x+3 & -1  \\
+        -1 & -1  & x+3
+    \end{vmatrix}=
+    (x+1)\cdot (-1)(x+4)\begin{vmatrix}
+        -1 & -1  \\
+        -1 & x+3
+    \end{vmatrix}=                                        \\
+                  & = -(x+1)(x+4)((-1)(x+3)-(-1)(-1))=
+    -(x+1)(x+4)(-(x+3)-1)=
+    (x+1)(x+4)^2                                                                           \\
+    p_B(x)=|xI-B| & =\begin{vmatrix}
+        x+4 & 0   & 0   \\
+        0   & x+1 & 0   \\
+        0   & -1  & x+1
+    \end{vmatrix}\equals_{\text{מטריצה משולשית}}(x+4)(x+1)^2
+\end{align*}
+למטריצות פולינומים אופייניים שונים ולכן לפי 11.4.3 אינן דומות.
+
 \end{document}
