@@ -1,0 +1,275 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{xparse}
+\usepackage[makeroom]{cancel}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{relsize}
+\usepackage{graphicx}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\setmainfont{[Arial.ttf]}
+\newfontfamily\hebrewfont{[Arial.ttf]}
+
+\newcommand\niton{\not\mathrel{\text{\reflectbox{$\in$}}}}
+\newcommand\underrel[2]{\mathrel{\mathop{#2}\limits_{#1}}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator\Sp{Sp}
+\DeclareMathOperator\Image{Im}
+\def\reals{\mathbb{R}}
+\def\field{\mathbb{F}}
+\def\zerovec{\underline{0}}
+
+\title{מטלת מנחה 16 - אלגברה לינארית 1}
+\author{328197462}
+\date{31/01/2023}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+\subsection*{סעיף א}
+
+נביע באמצעות $a$ את הפולינום האופייני של $A=\begin{pmatrix}
+        0 & a & 1  \\
+        a & 0 & -1 \\
+        0 & 0 & a
+    \end{pmatrix}$
+\begin{align*}
+    p(t)=|tI-A| & =\begin{vmatrix}
+        t  & -a & -1  \\
+        -a & t  & 1   \\
+        0  & 0  & t-a
+    \end{vmatrix}\equals^{R_3\text{פיתוח לפי }}
+    (t-a)\begin{vmatrix}
+        t  & -a \\
+        -a & t
+    \end{vmatrix}=
+    (t-a)(t^2-a^2)=
+    (t-a)^2(t+a)
+\end{align*}
+הערכים העצמיים של המטריצה יהיו $\lambda=0$ בריבוי אלגברי 3 כאשר $a=0$, ובמקרה אחר יהיו $\lambda=a$ בריבוי אלגברי 2 ו$\lambda=-a$ בריבוי אלגברי 1.
+\\\\
+נדון בריבוי הגיאומטרי של $\lambda=0$ כאשר $a=0$. זהו ממד מרחב האפס של המטריצה $0I-A$, שהוא מרחב האפס של $A$ - $P(A)$. \\
+לפי $8.6.1$, עבור $A$ מסדר 3 נקבל $\dim P(A)=3-\rho(A)=2$. הריבוי הגיאומטרי של $\lambda=0$ שונה מהריבוי האלגברי ולכן לפי 11.5.4 המטריצה לא לכסינה כאשר $a=0$.
+\\\\
+כעת נדון בריבויים הגיאומטריים של הערכים העצמיים של $A$ במקרה הנוסף. הריבוי הגיאומטרי של $\lambda=-a$ הוא לפחות 1 (שהרי יש בממד העצמי וקטור שאינו וקטור האפס) ולכל היותר (לפי  $11.5.3$) כריבוי האלגברי - $1$. נסיק כי בסך הכל הריבוי הגיאומטרי של $\lambda=-a$ הוא 1.\\
+הריבוי הגיאומטרי של $\lambda=a$ הוא ממד מרחב האפס של המטריצה $aI-A=\begin{pmatrix}
+        a  & -a & -1 \\
+        -a & a  & 1  \\
+        0  & 0  & 0
+    \end{pmatrix}$. נחשב את דרגת המטריצה:
+\begin{align*}
+    \rho(aI-A)=\rho\begin{pmatrix}
+        a  & -a & -1 \\
+        -a & a  & 1  \\
+        0  & 0  & 0
+    \end{pmatrix}\equals^{R_2\rightarrow R_2+R_1}_{8.5.1}
+    \rho\begin{pmatrix}
+        a & -a & -1 \\
+        0 & 0  & 0  \\
+        0 & 0  & 0
+    \end{pmatrix}=1
+\end{align*}
+ושוב לפי 8.6.1 נקבל שהריבוי הגיאומטרי של $\lambda=a$ הוא 2. במקרה זה, קיבלנו שעבור כל הערכים העצמיים הריבוי האלגברי שווה לריבוי הגיאומטרי ולכן לפי 11.5.4 המטריצה A לכסינה עבור $a\ne 0$.
+
+\subsection*{סעיף ב}
+
+עבור $a=-1$ נקבל $A=\begin{pmatrix}
+        0  & -1 & 1  \\
+        -1 & 0  & -1 \\
+        0  & 0  & -1
+    \end{pmatrix}$.
+הערכים העצמיים של המטריצה $A$ הם $\lambda=1$ בר"א ור"ג 1, ו$\lambda=-1$ בר"א ור"ג 2.\\
+לכן, $A$ לכסינה ודומה למטריצה $D=\begin{pmatrix}
+        1 & 0  & 0  \\
+        0 & -1 & 0  \\
+        0 & 0  & -1
+    \end{pmatrix}$. \\
+כמו כן, קיים במרחב העצמי של $\lambda=1$ וקטור השונה מאפס $v_1$ כך ש$Av_1=v_1$, וקיימים במרחב העצמי של $\lambda=-1$ שני וקטורים בלתי תלויים לינארית ושונים מאפס (כי ממד המרחב הוא 2) $v_2, v_3$ המקיימים $Av_2=-v_2, Av_3=-v_3$. \\
+הוקטור $v_1$ השייך לערך עצמי שונה לא תלוי לינארית ב$v_2, v_3$ לפי 11.2.4 ולכן השלשה $(v_1, v_2, v_3)$ בת"ל בת שלושה וקטורים עצמיים. \\
+המטריצה $P=(v_1 \ | \ v_2 \ | \ v_3)$ הפיכה ומתקיים לפי 11.3.7 $D=P^{-1}AP$.
+
+\pagebreak
+
+נמצא ערכים מתאימים ל$v_1, v_2, v_3$. עלינו למצוא פתרון לא טריוואלי $v_1$ למערכת ההומוגנית $(I-A)x=0$. נדרג:
+\begin{align*}
+    I-A=
+    \begin{pmatrix}
+        1 & 1 & -1 \\
+        1 & 1 & 1  \\
+        0 & 0 & 2
+    \end{pmatrix}
+    \rightarrow
+    \begin{pmatrix}
+        1 & 1 & -1 \\
+        0 & 0 & 2  \\
+        0 & 0 & 2
+    \end{pmatrix}
+    \rightarrow
+    \begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+הוקטור $v_1=(-1,1,0)$ פותר משוואה זו. באופן דומה נדרג את $-I-A$:
+\begin{align*}
+    -I-A=\begin{pmatrix}
+        -1 & 1  & -1 \\
+        1  & -1 & 1  \\
+        0  & 0  & 0
+    \end{pmatrix}\rightarrow
+    \begin{pmatrix}
+        -1 & 1 & -1 \\
+        0  & 0 & 0  \\
+        0  & 0 & 0
+    \end{pmatrix}
+\end{align*}
+נסמן $x_3=t, x_2=s$, אז $x_1=s-t$ ו-$(s-t, s, t)$ פתרונות למשוואה. ניקח למשל $v_2=(1,1,0), v_3=(-1, 0, 1)$. \\
+נקבל, לפי השיקולים שהוסברו לעיל, כי $P=\begin{pmatrix}
+        -1 & 1 & -1 \\
+        1  & 1 & 0  \\
+        0  & 0 & 1
+    \end{pmatrix}$ מלכסנת את $A$.
+\\\\
+נמצא את המטריצה ההופכית $P^{-1}$. מציאתה תסייע לנו בחישוב.
+\begin{align*}
+    (P | I) & =
+    \left(
+    \begin{matrix}
+            -1 & 1 & -1 \\
+            1  & 1 & 0  \\
+            0  & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_1\rightarrow R_1+R_3}
+    \left(
+    \begin{matrix}
+            -1 & 1 & 0 \\
+            1  & 1 & 0 \\
+            0  & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 & 1 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[]{R_2\rightarrow R_2+R_1}
+    \left(
+    \begin{matrix}
+            -1 & 1 & 0 \\
+            0  & 2 & 0 \\
+            0  & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 & 1 \\
+            1 & 1 & 1 \\
+            0 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \rightarrow                                                                \\
+            & \xrightarrow[R_2\rightarrow \frac{1}{2}R_2]{R_1\rightarrow -R_1}
+    \left(
+    \begin{matrix}
+            1 & -1 & 0 \\
+            0 & 1  & 0 \\
+            0 & 0  & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            -1  & 0   & -1  \\
+            0.5 & 0.5 & 0.5 \\
+            0   & 0   & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_1\rightarrow R_1+R_2}
+    \left(
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            -0.5 & 0.5 & -0.5 \\
+            0.5  & 0.5 & 0.5  \\
+            0    & 0   & 1
+        \end{matrix}
+    \right.
+    \right)
+    =(I | P^{-1})
+\end{align*}
+כעת, היות ו$D=P^{-1}AP$, נקבל $A=PDP^{-1}$ ולכן:
+\begin{align*}
+    A^{2023} & =(PDP^{-1})^{2023} =
+    (PDP^{-1})(PDP^{-1})\cdots(PDP^{-1})\equals_{\text{קיבוציות}}
+    PD(P^{-1}P)D(P^{-1}P)\cdots(P^{-1}P)DP^{-1}=PD^{2023}P^{-1}=             \\
+             & = \begin{pmatrix}
+        -1 & 1 & -1 \\
+        1  & 1 & 0  \\
+        0  & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        1 & 0  & 0  \\
+        0 & -1 & 0  \\
+        0 & 0  & -1
+    \end{pmatrix}^{2023}
+    \begin{pmatrix}
+        -0.5 & 0.5 & -0.5 \\
+        0.5  & 0.5 & 0.5  \\
+        0    & 0   & 1
+    \end{pmatrix}=
+    \begin{pmatrix}
+        -1 & 1 & -1 \\
+        1  & 1 & 0  \\
+        0  & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        1 & 0  & 0  \\
+        0 & -1 & 0  \\
+        0 & 0  & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        -0.5 & 0.5 & -0.5 \\
+        0.5  & 0.5 & 0.5  \\
+        0    & 0   & 1
+    \end{pmatrix}=                                              \\
+             & =\begin{pmatrix}
+        -1 & -1 & 1  \\
+        1  & -1 & 0  \\
+        0  & 0  & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        -0.5 & 0.5 & -0.5 \\
+        0.5  & 0.5 & 0.5  \\
+        0    & 0   & 1
+    \end{pmatrix}=
+    \begin{pmatrix}
+        0  & -1 & 1  \\
+        -1 & 0  & 0  \\
+        0  & 0  & -1
+    \end{pmatrix}
+\end{align*}
+
+
+\end{document}
