@@ -1,0 +1,333 @@
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\hebrewfont[Script=Hebrew]{Calibri}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+\usepackage{bidi}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\title{מטלת מנחה 11 - אלגברה לינארית 2}
+\author{328197462}
+\date{31/03/2023}
+
+\def\reals{\mathbb{R}}
+\def\complex{\mathbb{C}}
+\def\field{\mathbb{F}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{^\ast}
+\DeclareMathOperator{\tra}{^t}
+\DeclareMathOperator{\inv}{^{-1}}
+\DeclareMathOperator{\perc}{^\perp}
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+\subsection*{סעיף א}
+
+נוכיח ישירות לפי הגדרה כי לכל $A,B\in M^\complex_{n\times n}$ מתקיים $(T_P A, B)=(A, T_{P\adj}, B)$. \\
+אכן, יהיו $A,B$ מטריצות ונקבל:
+
+\begin{align*}
+    (T_P A, B)     & \equals^\text{הגדרה}
+    \trace (B \adj P\inv AP)              \\
+    (A, T_{P\adj}) & \equals^\text{הגדרה}
+    \trace (((P \adj) \inv B P \adj)\adj A) \equals^{2.1.4}
+    \trace (P B \adj P \inv A) \equals^{\ast}
+    \trace (B \adj P \inv A P) = (T_P A, B)
+\end{align*}
+
+נימוק ל(*): לפי לינארית 1, $\trace (CD) = \trace (DC)$.
+
+\subsection*{סעיף ב}
+
+איברי הבסיס הסטנדרטי הם $
+    E_{11} = \begin{pmatrix}
+        1 & 0 \\
+        0 & 0
+    \end{pmatrix},
+    E_{12} = \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix},
+    E_{21} = \begin{pmatrix}
+        0 & 0 \\
+        1 & 0
+    \end{pmatrix},
+    E_{22} = \begin{pmatrix}
+        0 & 0 \\
+        0 & 1
+    \end{pmatrix}
+$. \\
+כידוע מסעיף א, $(T_P) \adj = T_{P\adj}$. המטריצה $P\adj = \begin{pmatrix}
+        i  & 1  \\
+        -1 & -i
+    \end{pmatrix} \adj =
+    \begin{pmatrix}
+        -i & -1 \\
+        1  & i
+    \end{pmatrix}$ \\
+נחשב את המטריצה ההופכית $(P\adj) \inv$:
+\begin{align*}
+    ( P \adj | I ) & =
+    \left(
+    \begin{matrix}
+            -i & -1 \\
+            1  & i
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 \\
+            0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[]{R_1\rightarrow iR_1}
+    \left(
+    \begin{matrix}
+            1 & -i \\
+            1 & i
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            i & 0 \\
+            0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_2\rightarrow R_2-R_1}
+    \left(
+    \begin{matrix}
+            1 & -i \\
+            0 & 2i
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            i  & 0 \\
+            -i & 1
+        \end{matrix}
+    \right.
+    \right)                                                        \\
+    \cdots         & \xrightarrow{R_2\rightarrow -\frac 1 2 i R_2}
+    \left(
+    \begin{matrix}
+            1 & -i \\
+            0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            i          & 0            \\
+            -\frac 1 2 & -\frac 1 2 i
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow{R_1\rightarrow R_1+iR_2}
+    \left(
+    \begin{matrix}
+            1 & 0 \\
+            0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            \frac 1 2 i & \frac 1 2    \\
+            -\frac 1 2  & -\frac 1 2 i
+        \end{matrix}
+    \right.
+    \right) = ( I | (P \adj ) \inv)
+\end{align*}
+נחשב את תמונות ההעתקה $T_{P\adj}$ עבור איברי הבסיס הסטנדרטי.
+
+\begin{align*}
+    (T_{P\adj})E_{11} & = \begin{pmatrix}
+                              \frac 1 2 i & \frac 1 2    \\
+                              -\frac 1 2  & -\frac 1 2 i
+                          \end{pmatrix} \begin{pmatrix}
+                                            1 & 0 \\
+                                            0 & 0
+                                        \end{pmatrix} \begin{pmatrix}
+                                                          -i & -1 \\
+                                                          1  & i
+                                                      \end{pmatrix}
+    = \begin{pmatrix}
+          \frac 1 2 i & 0 \\
+          -\frac 1 2  & 0
+      \end{pmatrix} \begin{pmatrix}
+                        -i & -1 \\
+                        1  & i
+                    \end{pmatrix} =
+    \begin{pmatrix}
+        \frac 1 2   & -\frac 1 2 i \\
+        \frac 1 2 i & \frac 1 2
+    \end{pmatrix}                                       \\
+    (T_{P\adj})E_{12} & = \begin{pmatrix}
+                              \frac 1 2 i & \frac 1 2    \\
+                              -\frac 1 2  & -\frac 1 2 i
+                          \end{pmatrix} \begin{pmatrix}
+                                            0 & 1 \\
+                                            0 & 0
+                                        \end{pmatrix} \begin{pmatrix}
+                                                          -i & -1 \\
+                                                          1  & i
+                                                      \end{pmatrix}
+    = \begin{pmatrix}
+          0 & \frac 1 2 i \\
+          0 & - \frac 1 2
+      \end{pmatrix} \begin{pmatrix}
+                        -i & -1 \\
+                        1  & i
+                    \end{pmatrix} =
+    \begin{pmatrix}
+        \frac 1 2 i & - \frac 1 2   \\
+        - \frac 1 2 & - \frac 1 2 i
+    \end{pmatrix}                                      \\
+    (T_{P\adj})E_{21} & = \begin{pmatrix}
+                              \frac 1 2 i & \frac 1 2    \\
+                              -\frac 1 2  & -\frac 1 2 i
+                          \end{pmatrix} \begin{pmatrix}
+                                            0 & 0 \\
+                                            1 & 0
+                                        \end{pmatrix} \begin{pmatrix}
+                                                          -i & -1 \\
+                                                          1  & i
+                                                      \end{pmatrix}
+    = \begin{pmatrix}
+          \frac 1 2    & 0 \\
+          -\frac 1 2 i & 0
+      \end{pmatrix} \begin{pmatrix}
+                        -i & -1 \\
+                        1  & i
+                    \end{pmatrix} =
+    \begin{pmatrix}
+        - \frac 1 2 i & - \frac 1 2 \\
+        \frac 1 2     & \frac 1 2 i
+    \end{pmatrix}                                      \\
+    (T_{P\adj})E_{22} & = \begin{pmatrix}
+                              \frac 1 2 i & \frac 1 2    \\
+                              -\frac 1 2  & -\frac 1 2 i
+                          \end{pmatrix} \begin{pmatrix}
+                                            0 & 0 \\
+                                            0 & 1
+                                        \end{pmatrix} \begin{pmatrix}
+                                                          -i & -1 \\
+                                                          1  & i
+                                                      \end{pmatrix}
+    = \begin{pmatrix}
+          0 & \frac 1 2     \\
+          0 & - \frac 1 2 i
+      \end{pmatrix} \begin{pmatrix}
+                        -i & -1 \\
+                        1  & i
+                    \end{pmatrix} =
+    \begin{pmatrix}
+        \frac 1 2     & \frac 1 2 i \\
+        - \frac 1 2 i & \frac 1 2
+    \end{pmatrix}
+\end{align*}
+ולכן נקבל:
+
+\[
+    [T_{P \adj}]_E = \frac 1 2 \begin{pmatrix}
+        1  & i  & -i & 1  \\
+        -i & -1 & -1 & i  \\
+        i  & -1 & -1 & -i \\
+        1  & -i & i  & 1
+    \end{pmatrix}
+\]
+
+\pagebreak
+
+\section*{שאלה 2}
+
+נשים לב כי:
+
+\begin{align*}
+    U \adj & = (P+iQ) \adj \equals^{2.1.4} P \tra - iQ\tra & D \tra = \begin{pmatrix}
+                                                                          P \tra   & Q \tra \\
+                                                                          - Q \tra & P \tra
+                                                                      \end{pmatrix}
+\end{align*}
+
+\subsection*{סעיף א}
+
+נניח כי $U=U\adj$, כלומר $P+iQ=P\tra -iQ \tra$. \\
+נשווה חלק ממשי וחלק מדומה. מקבלים $P=P \tra, Q = -Q \tra$, ולכן:
+\[
+    D \tra = \begin{pmatrix}
+        P \tra   & Q \tra \\
+        - Q \tra & P \tra
+    \end{pmatrix}= \begin{pmatrix}
+        P & -Q \\
+        Q & P
+    \end{pmatrix} = D
+\]
+ובכך השלמנו את ההוכחה.
+
+\subsection*{סעיף ב}
+
+נניח כי $U$ אוניטרית. כלומר:
+\[
+    I=U\cdot U \adj = (P+iQ)(P\tra - iQ \tra) \equals^\text{פילוג}
+    PP \tra - iPQ \tra + iQP \tra + QQ\tra =
+    (PP\tra + QQ\tra) + i(QP \tra - PQ \tra)
+\]
+נשווה חלק ממשי וחלק מדומה ונקבל $PP\tra + QQ\tra=I, QP \tra - PQ \tra=0$. לכן:
+\[
+    D \cdot D^t =\begin{pmatrix}
+        P & -Q \\
+        Q & P
+    \end{pmatrix} \begin{pmatrix}
+        P \tra   & Q \tra \\
+        - Q \tra & P \tra
+    \end{pmatrix} =
+    \begin{pmatrix}
+        PP\tra + QQ \tra & PQ\tra - QP\tra  \\
+        QP\tra - PQ\tra  & QQ\tra + PP \tra
+    \end{pmatrix} =
+    \begin{pmatrix}
+        I_{n\times n} & O_{n\times n} \\
+        O_{n\times n} & I_{n\times n}
+    \end{pmatrix} =
+    I_{2n \times 2n}
+\]
+ולכן $D$ אורתוגונלית.
+
+
+\pagebreak
+
+\section*{שאלה 3}
+
+\pagebreak
+
+\section*{שאלה 4}
+
+ראשית:
+\begin{align*}
+    H\adj  & = (I-2ww\adj) \adj \equals^{2.1.4}
+    I - 2(w \adj) \adj w\adj = I - 2ww\adj = H            \\
+    HH\adj & = (I - 2ww\adj)(I - 2ww\adj) \equals^{פילוג}
+    I - 4ww\adj + 4 (ww\adj)^2
+\end{align*}
+נדרוש $I=HH\adj$. נקבל $4(ww\adj)^2 - 4ww\adj=0$, ולכן $ww\adj = (ww\adj)^2$. \\
+נשים לב כי:
+\[
+    (ww\adj)^2=(ww\adj) (w w\adj)\equals^{קיבוציות}w(w\adj w)w\adj=w||w||^2w\adj = ||w||^2 ww\adj
+\]
+נציב את שתי המסקנות האחרונות שלנו ביחד, ונקבל $ww\adj = ||w||^2ww\adj$, כלומר $||w||^2=1$ ולכן $||w||=1$ מתכונת החיוביות.\\\\
+מצאנו תנאי הכרחי עבור $w$: אם $H$ אוניטרית, אז $||w||=1$. נוכיח כי זהו תנאי מספיק.\\
+עבור $||w||=1$,
+\[
+    HH\adj = I - 4ww\adj + 4 (ww\adj)^2=I-4ww\adj + 4||w||^2ww\adj \equals^{||w||=1}I
+\]
+\\
+נוכיח את תכונת השיקוף.
+\begin{align*}
+    Hw=(I-2ww\adj)w=Iw-2ww\adj w \equals^{קיבוציות} w - 2||w||^2w=-w
+\end{align*}
+יהא $v\in {w}\perc$. אז $<v,w>=w\adj v = 0$, ומקבלים:
+\begin{align*}
+    Hv=(I-2ww\adj)v=Iv-2ww\adj v = v - 2w\cdot 0 = v
+\end{align*}
+
+\end{document}
