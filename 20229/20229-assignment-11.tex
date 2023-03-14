@@ -21,6 +21,7 @@
 \DeclareMathOperator{\tra}{^t}
 \DeclareMathOperator{\inv}{^{-1}}
 \DeclareMathOperator{\perc}{^\perp}
+\DeclareMathOperator{\Sp}{Sp}
 \begin{document}
 \maketitle
 
@@ -329,5 +330,39 @@ $. \\
 \begin{align*}
     Hv=(I-2ww\adj)v=Iv-2ww\adj v = v - 2w\cdot 0 = v
 \end{align*}
+
+\pagebreak
+
+\section*{שאלה 5}
+
+נסמן $U=\Sp({ w_1, w_2 })$. ברור כי ${w_1, w_2}$ בסיס אורתונורמלי ל$U$.\\
+ההעתקה $P_U(v)=(v, w_1)w_1+(v,w_2)w_2$ היא ההיטל האורתונוגלי של $v$ על $U$ לכל $v\in V$ על פי 1.5.6.\\
+אז ההעתקה $T$ שהגדירו היא אינה אלא $T=I-2P_U$.
+
+\subsection*{סעיף א}
+נראה כי T צמודה לעצמה:
+\[
+    T\adj = (I-2P_U)\adj \equals^{2.1.4}
+    I\adj - 2P_U\adj \equals^{2.2\text{ דוגמה }} I-2P_U=T
+\]
+אוניטריות:
+יהא $v\in V$, אז קיימים $u\in U, u'\in U\perc$ כך ש $v=u+u'$. נקבל:
+\[
+    P_U^2(v)=P_U(P_U(v))\equals^{\text{הגדרה}}P_U(u)\equals^{\text{הגדרה}}u=P_U(v)
+\]
+מכאן נקבל $P_U^2=P_U$. אי-לכך,
+\[
+    TT\adj = (I-2P_U)(I-2P_U)\equals^{\text{פילוג}} I - 4P_U + 4P_U^2 \equals^{P_U^2=P_U}I
+\]
+ולכן T אוניטרית לפי 2.1.1.
+
+\subsection*{סעיף ב}
+
+נשים לב כי:
+\[
+    Tw_1=(I-2P_U)w_1=w_1-2w_1=-w_1
+\]
+קיבלנו ש$\lambda=-1$ ע"ע של $T$, ולכן לפי שאלה 2.4.2ב נקבל ש$T$ אינה אי-שלילית.
+
 
 \end{document}
