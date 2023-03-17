@@ -1,0 +1,203 @@
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\hebrewfont[Script=Hebrew]{Calibri}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+\usepackage{bidi}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\title{מטלת מנחה 12 - אלגברה לינארית 2}
+\author{328197462}
+\date{14/04/2023}
+
+\def\reals{\mathbb{R}}
+\def\complex{\mathbb{C}}
+\def\field{\mathbb{F}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{^\ast}
+\DeclareMathOperator{\tra}{^t}
+\DeclareMathOperator{\inv}{^{-1}}
+\DeclareMathOperator{\perc}{^\perp}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Image}{Im}
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+\subsection*{סעיף א}
+
+המטריצה $A_1$ צמודה לעצמה, ובפרט נורמלית.
+\begin{align*}
+    A_2 \adj    & = \begin{pmatrix}
+                        -i  & 0 \\
+                        -2i & 1
+                    \end{pmatrix},
+    A_3 \adj = \begin{pmatrix}
+                   1  & 1   \\
+                   -i & 2-i
+               \end{pmatrix}                                    \\
+    A_2A_2 \adj & = \begin{pmatrix}
+                        5    & \ast \\
+                        \ast & \ast
+                    \end{pmatrix}, A_2 \adj A_2 = \begin{pmatrix}
+                                                      1    & \ast \\
+                                                      \ast & \ast
+                                                  \end{pmatrix} \\
+    A_3A_3 \adj & = \begin{pmatrix}
+                        2    & 2+2i \\
+                        2-2i & 6
+                    \end{pmatrix} = A_3 \adj A_3
+\end{align*}
+
+לכן $A_2$ לא נורמלית ו $A_3$ נורמלית. נמצא מטריצות אוניטריות המלכסנות את $A_1, A_3$.
+\begin{align*}
+    p_1(x)=|xI-A_1| & =\begin{vmatrix}
+                           x & -i \\
+                           i & x
+                       \end{vmatrix} = x^2-(-i)i = x^2 -1 = (x-1)(x+1) \\
+    p_3(x)=(xI-A_3) & = \begin{vmatrix}
+                            x-1 & -i      \\
+                            -1  & x-(2+i)
+                        \end{vmatrix} = (x-1)(x-(2+i))-(-i)(-1) =      \\
+                    & = x^2-(2+i)x-x+2+i-i= x^2-(3+i)x+2
+\end{align*}
+עבור $A_1$, נמצא בסיסים אורתונורמליים למרחבים העצמיים $V_{\lambda=1}, V_{\lambda=-1}$.
+
+\begin{itemize}
+    \item עבור $V_{\lambda=1}$ מדובר במרחב האפס של המטריצה: \\
+          \[
+              I-A=\begin{pmatrix}
+                  1 & -i \\
+                  i & 1
+              \end{pmatrix}\xrightarrow{R_2\rightarrow R_2-iR_1}
+              \begin{pmatrix}
+                  1 & -i \\
+                  0 & 0
+              \end{pmatrix}
+          \]
+          נקבל $V_{\lambda=1}=\Sp(\{ (i, 1) \})$.
+          ננרמל ונקבל $B_{\lambda=1}=\{ \frac{i}{\sqrt{2}}, \frac{1}{\sqrt{2}} \}$
+    \item עבור $V_{\lambda=-1}$ מדובר במרחב האפס של המטריצה: \\
+          \[
+              -I-A=\begin{pmatrix}
+                  -1 & -i \\
+                  i  & -1
+              \end{pmatrix}\xrightarrow{R_1\rightarrow R_2+iR_1}
+              \begin{pmatrix}
+                  -1 & -i \\
+                  0  & 0
+              \end{pmatrix}\xrightarrow{R_1\rightarrow -R_1}
+              \begin{pmatrix}
+                  1 & i \\
+                  0 & 0
+              \end{pmatrix}
+          \]
+          נקבל $V_{\lambda=-1}=\Sp(\{ (1, i) \})$.
+          ננרמל ונקבל $B_{\lambda=-1}=\{ \frac{1}{\sqrt{2}}, \frac{i}{\sqrt{2}} \}$
+\end{itemize}
+מטריצה אוניטרית המלכסנת את $A_1$ תהיה, לפי $Q=\frac{1}{\sqrt{2}}\begin{pmatrix}
+        i & 1 \\
+        1 & i
+    \end{pmatrix}$ ומקבלים $Q\adj A Q = \begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+    \end{pmatrix}$ \\
+עבור $A_3$, שורשי הפולינום האופייני יהיו: $\frac{-(3+i)\pm \sqrt{(3+i)^2-4\cdot 2}}{2}=\frac{-(3+i)\pm \sqrt{6i}}{2}=\frac{-(3+i)\pm \sqrt{3}(1+i)}{2}$ \\
+נסמן $\lambda_1=\frac{\sqrt{3}-3}{2}+\frac{\sqrt{3}-1}{2}i, \lambda_2=\frac{-\sqrt{3}-3}{2}+\frac{-\sqrt{3}-1}{2}i$. המרחבים העצמיים יהיו:
+\begin{itemize}
+    \item עבור $V_{\lambda_1}$ מדובר במרחב האפס של המטריצה: \\
+          \[
+              \lambda_1I-A=\begin{pmatrix}
+                  \frac{\sqrt{3}-5}{2}+\frac{\sqrt{3}-1}{2}i & -i                                         \\
+                  -1                                         & \frac{\sqrt{3}-7}{2}+\frac{\sqrt{3}-2}{2}i
+              \end{pmatrix}\xrightarrow{R_2\rightarrow R_2-iR_1}
+              \begin{pmatrix}
+                  1 & -i \\
+                  0 & 0
+              \end{pmatrix}
+          \]
+          נקבל $V_{\lambda=1}=\Sp(\{ (i, 1) \})$.
+          ננרמל ונקבל $B_{\lambda=1}=\{ \frac{i}{\sqrt{2}}, \frac{1}{\sqrt{2}} \}$
+\end{itemize}
+
+\pagebreak
+
+\section*{שאלה 2}
+
+תהא $T$ נורמלית במרחב מכפלה פנימית מממד סופי. \\
+נוכיח: \\
+(i) נוכיח בעזרת הכלה דו-כיוונית: \\
+יהא $v\in \ker T$.
+\[
+    0=(Tv,Tv)\equals^{\text{תכונות צמוד}}(v, T\adj T v)\equals^{TT\adj = T \adj T}(v, TT\adj v)=(T \adj v, T \adj v)
+\]
+ומתכונת החיוביות נסיק $T \adj v=0$. ההכלה בכיוון השני שקולה לחלוטין. \\\\
+(ii) נוכיח בעזרת הכלה ושוויון מימדים.
+יהא $u\in \Image T, v\in \ker T$. עבור $u$, קיים $w\in V: Tw=u$. נקבל:
+\[
+    (u,v)=(Tw, v)=(w, T \adj v)\equals^{(i)}(w,0)=0
+\]
+קיבלנו $\Image T \subseteq (\ker T) \perc$.
+אולם, מלינארית 1 ידוע לנו כי $\dim \Image T + \dim \ker T = \dim V = \dim \ker T + \dim (\ker T) \perc$. \\
+קיבלנו שוויון מימדים ולכן $\Image T = (\ker T)\perc$.\\\\
+(iii) נוכיח בעזרת התכונות שהוכחנו קודם:
+\[
+    \Image T \equals^{(ii)} (\ker T) \perc \equals^{(i)} (\ker T \adj) \perc \equals^{(ii)} \Image T \adj
+\]
+
+\section*{שאלה 3}
+
+נבודד את $T \adj$ מהשוויון הנתון:
+\begin{align*}
+    T^2                & = \frac{1}{2} (T + T \adj) \Leftrightarrow \\
+    \frac{1}{2} T \adj & = T^2 - \frac{1}{2} T \Leftrightarrow      \\
+    T \adj             & = 2T^2 - T
+\end{align*}
+
+נראה כי $T$ מתחלפת עם הצמודה לה:
+\begin{align*}
+    TT\adj   & = T(2T^2-T)=2T^3-T^2          \\
+    T \adj T & = (2T^2-T)T=2T^3-T^2 = TT\adj
+\end{align*}
+הוכחנו כי $T$ נורמלית. נראה כ $T$ צמודה לעצמה:
+יהא $\lambda$ שורש (ממשי או מרוכב) כלשהו של הפולינום האופייני של $T$. נוכיח כי בהכרח $\lambda$ ממשי.
+יהא $B$ בסיס א"נ כלשהו של $V$, ותהא $A\in M_n(\complex)$ מטריצה כך ש $[T]_B=A$. \\
+משוויון הפולינומים האופייניים של $T$ ו-$A$ נסיק כי $\lambda$ שורש של הפולינום האופייני של $A$. בגלל ש$A$ מרוכבת, $\lambda$ ערך עצמי של $A$. \\
+לפי לינארית 1, $v$ וקטור עצמי של $A^2$ השייך ל$\lambda^2$. \\
+נפעיל את ההעתקה $[\cdot]_B$ על השוויון שמצאנו לעיל:
+\[
+    A \adj \equals^{2.1.3} [T \adj]_B = [2T^2-T]_B = 2[T]_B^2-[T]_B = 2A^2-A
+\]
+לכן, $A \adj v = (2A^2-A)v=(2\lambda^2-\lambda)v$.
+בנוסף, לפי למה 3.2.5 בתרגום למטריצות, $A \adj v = \overline{\lambda}v$. נשווה ונקבל $(\lambda^2-\lambda-\overline{\lambda})v=0$. היות ו $v\ne 0$, בהכרח מקבלים $\lambda^2-\lambda-\overline{\lambda}=0$. נראה כי ממשיותו של $\lambda$ הכרחית לקיום שוויון זה.\\
+נסמן אפוא $\lambda=x+iy$.
+\begin{align*}
+    \lambda^2-\lambda-\overline{\lambda} & =(x+iy)^2-(x+iy)-(x-iy) =            \\
+                                         & = x^2 + 2ixy - y^2 -x - iy -x + iy = \\
+                                         & = (x^2-2x-y^2)+(2xy)i = 0            \\
+                                         & \rightarrow \begin{cases}
+                                                           x^2-2x-y^2=0 \\
+                                                           xy = 0
+                                                       \end{cases}
+\end{align*}
+מהשוויון השני, בהכרח $x=0$ או $y=0$. נניח כי $x=0$ ונציב בשוויון הראשון. נקבל $-y^2=0$ ובשני המקרים $y=0$ ו$\lambda$ מספר ממשי. \\
+אי-לכך, ממשפט 3.3.1 מקבלים ש$T$ צמודה לעצמה, ולכן:
+\[
+    T^2=\frac{1}{2}(T+T\adj) = \frac{1}{2}(T+T) = T
+\]
+
+\pagebreak
+
+\section*{שאלה 4}
+
+תהא מטריצה $H$ ממשית סימטרית. לפי משפט הלכסון האורתוגונלי, $H$ לכסינה אורתוגונלית, ונסמן ב $Q$ מטריצה אורתוגונלית המלכסנת אותה.\\
+נסמן את עמודות $Q$ ב $B=\{v_1, v_2, ..., v_n\}$. אלו $n$ וקטורים עצמיים של $H$, ולכל אחד מהם נסמן $Hv_i=\lambda_iv_i$. \\
+ע"פ משפט 2.3.6, $B$ בסיס אורתונורמלי ל$\reals^n$. יהא $v\in \reals^n$ כך ש $||v||=1$. נציג את $v$ כצירוף לינארי של וקטורי $B$:
+\begin{align*}
+    v & =\sum_{i=1}^{n}a_iv_i & Hv =\sum_{i=1}^{n} Ha_iv_i = \sum_{i=1}^{n} a_i \lambda_i v_i
+\end{align*}
+
+\end{document}
