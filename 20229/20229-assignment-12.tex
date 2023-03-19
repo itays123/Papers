@@ -302,10 +302,116 @@
 ההעתקה $T_A$ נורמלית מעל $\field=\complex$, לכן ניתן להשתמש במשפט הפירוק הספקטרלי 3.4.2. נמצא את הפולינום האופייני של $T_A$:
 \begin{align*}
     p(x)=\det(xI-[T_A]_E) & =\begin{vmatrix}
-                                 x-(2-i) & 1       & 0       \\
-                                 1       & x-(1-i) & -1      \\
-                                 0       & -1      & x-(2-i)
-                             \end{vmatrix}
+                                 x-2+i & 1     & 0     \\
+                                 1     & x-1+i & -1    \\
+                                 0     & -1    & x-2+i
+                             \end{vmatrix}=                 \\
+                          & = (x-2+i)\begin{vmatrix}
+                                         x-1+i & -1    \\
+                                         -1    & x-2+i
+                                     \end{vmatrix}-\begin{vmatrix}
+                                                       1 & -1      \\
+                                                       0 & (x-2+i)
+                                                   \end{vmatrix} = \\
+                          & = (x-2+i)(x^2-(3-2i)x+1-3i-1)-(x-2+i)= \\
+                          & = (x-2+i)(x^2-(3-2i)x-1-3i)=           \\
+                          & = (x-2+i)(x+i)(x-3+i)
+\end{align*}
+נקבל 3 ע"ע $\lambda_1=-i, \lambda_2=2-i, \lambda_3=3-i$.
+\begin{itemize}
+    \item המרחב העצמי $V_{\lambda_1}$ הוא מרחב האפס של המטריצה: \\
+          \[
+              \begin{pmatrix}
+                  -2 & 1  & 0  \\
+                  1  & -1 & -1 \\
+                  0  & -1 & -2
+              \end{pmatrix} \xrightarrow[]{R_1\leftrightarrow R_2}
+              \begin{pmatrix}
+                  1  & -1 & -1 \\
+                  -2 & 1  & 0  \\
+                  0  & -1 & -2
+              \end{pmatrix} \xrightarrow{R_2\rightarrow R_1+2R_1}
+              \begin{pmatrix}
+                  1 & -1 & -1 \\
+                  0 & -1 & -2 \\
+                  0 & -1 & -2
+              \end{pmatrix} \xrightarrow[R_3\rightarrow R_3-R_2]{R_1\rightarrow R_1-R_2}
+              \begin{pmatrix}
+                  1 & 0  & 1  \\
+                  0 & -1 & -2 \\
+                  0 & 0  & 0
+              \end{pmatrix}
+          \]
+          לכן $V_{\lambda_1}=\Sp\{ (1, 2, -1) \}$ ונקבל בסיס א"נ $B_1=\{ \frac{1}{\sqrt{6}}(1, 2, -1) \}$
+    \item המרחב העצמי $V_{\lambda_2}$ הוא מרחב האפס של המטריצה: \\
+          \[
+              \begin{pmatrix}
+                  0 & 1  & 0  \\
+                  1 & 1  & -1 \\
+                  0 & -1 & 0
+              \end{pmatrix} \xrightarrow[]{R_1\leftrightarrow R_2}
+              \begin{pmatrix}
+                  1 & 1  & -1 \\
+                  0 & 1  & 0  \\
+                  0 & -1 & 0
+              \end{pmatrix} \xrightarrow[R_3\rightarrow R_3+R_1]{R_1\rightarrow R_1-R_2}
+              \begin{pmatrix}
+                  1 & 0 & -1 \\
+                  0 & 1 & 0  \\
+                  0 & 0 & 0
+              \end{pmatrix}
+          \]
+          לכן $V_{\lambda_1}=\Sp\{ (1, 0, -1) \}$ ונקבל בסיס א"נ $B_2=\{ \frac{1}{\sqrt{2}}(1, 0, -1) \}$
+    \item המרחב העצמי $V_{\lambda_3}$ הוא מרחב האפס של המטריצה: \\
+          \[
+              \begin{pmatrix}
+                  1 & 1  & 0  \\
+                  1 & 2  & -1 \\
+                  0 & -1 & 1
+              \end{pmatrix} \xrightarrow[]{R_2\rightarrow R_2-R_1}
+              \begin{pmatrix}
+                  1 & 1  & 0  \\
+                  0 & 1  & -1 \\
+                  0 & -1 & 1
+              \end{pmatrix} \xrightarrow[]{R_3\rightarrow R_3+R_2}
+              \begin{pmatrix}
+                  1 & 1 & 0  \\
+                  0 & 1 & -1 \\
+                  0 & 0 & 0
+              \end{pmatrix}
+          \]
+          לכן $V_{\lambda_3}=\Sp\{ (1, -1, -1) \}$ ונקבל בסיס א"נ $B_3=\{ \frac{1}{\sqrt{3}}(1, -1, -1) \}$
+\end{itemize}
+נסמן ב $P_i$ את ההטלה האורתוגונלית על המרחב $V_{\lambda_i}$.\\
+על פי משפט הפירוק הספקטראלי, מקבלים $T_A=-iP_1+(2-i)P_2+(3-i)P_3$. \\
+נפעיל את ההעתקה $[\cdot]_E$ ונקבל $A = -i[P_1]_E+(2-i)[P_2]_E+(3-i)[P_3]_E$. \\
+על פי משפט 1.5.4,
+\begin{align*}
+    P_1(e_1) & = \langle (1,0,0), \frac{1}{\sqrt{6}}(1, 2, -1) \rangle \frac{1}{\sqrt{6}}(1, 2, -1) = \frac{1}{6} (1, 2, -1)     \\
+    P_1(e_2) & = \langle (0,1,0), \frac{1}{\sqrt{6}}(1, 2, -1) \rangle \frac{1}{\sqrt{6}}(1, 2, -1) = \frac{2}{6} (1, 2, -1)     \\
+    P_1(e_3) & = \langle (0,0,1), \frac{1}{\sqrt{6}}(1, 2, -1) \rangle \frac{1}{\sqrt{6}}(1, 2, -1) = \frac{-1}{6} (1, 2, -1)    \\
+    P_2(e_1) & = \langle (1,0,0), \frac{1}{\sqrt{2}}(1, 0, -1) \rangle\frac{1}{\sqrt{2}}(1, 0, -1) = \frac{1}{2} (1, 0, -1)      \\
+    P_2(e_2) & = \langle (0,1,0), \frac{1}{\sqrt{2}}(1, 0, -1) \rangle \frac{1}{\sqrt{2}}(1, 0, -1) = 0                          \\
+    P_2(e_3) & = \langle (0,0,1), \frac{1}{\sqrt{2}}(1, 0, -1) \rangle \frac{1}{\sqrt{2}}(1, 0, -1) = \frac{1}{2} (1, 0, -1)     \\
+    P_3(e_1) & = \langle (1,0,0), \frac{1}{\sqrt{3}}(1, -1, -1) \rangle \frac{1}{\sqrt{3}}(1, -1, -1) = \frac{1}{3} (1, -1, -1)  \\
+    P_3(e_2) & = \langle (0,1,0), \frac{1}{\sqrt{3}}(1, -1, -1) \rangle\frac{1}{\sqrt{3}}(1, -1, -1) = \frac{-1}{3} (1, -1, -1)  \\
+    P_3(e_3) & = \langle (0,0,1), \frac{1}{\sqrt{3}}(1, -1, -1) \rangle \frac{1}{\sqrt{3}}(1, -1, -1) = \frac{-1}{3} (1, -1, -1) \\
+\end{align*}
+ולכן:
+\begin{align*}
+    A & = -i\begin{pmatrix}
+                1/6  & 2/6  & -1/6 \\
+                2/6  & 4/6  & -2/6 \\
+                -1/6 & -2/6 & 1/6  \\
+            \end{pmatrix}+(2-i)\begin{pmatrix}
+                                   1/2  & 0 & 1/2 \\
+                                   0    & 0 & 0   \\
+                                   -1/2 & 0 & 1/2 \\
+                               \end{pmatrix}+(3-i)\begin{pmatrix}
+                                                      1/3  & -1/3 & -1/3 \\
+                                                      -1/3 & 1/3  & 1/3  \\
+                                                      -1/3 & 1/3  & 1/3  \\
+                                                  \end{pmatrix}
 \end{align*}
 
 \end{document}
