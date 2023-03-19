@@ -98,30 +98,95 @@
           נקבל $V_{\lambda=-1}=\Sp(\{ (1, i) \})$.
           ננרמל ונקבל $B_{\lambda=-1}=\{ \frac{1}{\sqrt{2}}, \frac{i}{\sqrt{2}} \}$
 \end{itemize}
-מטריצה אוניטרית המלכסנת את $A_1$ תהיה, לפי $Q=\frac{1}{\sqrt{2}}\begin{pmatrix}
+מטריצה אוניטרית המלכסנת את $A_1$ תהיה $Q=\frac{1}{\sqrt{2}}\begin{pmatrix}
         i & 1 \\
         1 & i
     \end{pmatrix}$ ומקבלים $Q\adj A Q = \begin{pmatrix}
         1 & 0  \\
         0 & -1
     \end{pmatrix}$ \\
-עבור $A_3$, שורשי הפולינום האופייני יהיו: $\frac{-(3+i)\pm \sqrt{(3+i)^2-4\cdot 2}}{2}=\frac{-(3+i)\pm \sqrt{6i}}{2}=\frac{-(3+i)\pm \sqrt{3}(1+i)}{2}$ \\
-נסמן $\lambda_1=\frac{\sqrt{3}-3}{2}+\frac{\sqrt{3}-1}{2}i, \lambda_2=\frac{-\sqrt{3}-3}{2}+\frac{-\sqrt{3}-1}{2}i$. המרחבים העצמיים יהיו:
+עבור $A_3$, שורשי הפולינום האופייני יהיו: $\frac{(3+i)\pm \sqrt{(3+i)^2-4\cdot 2}}{2}=\frac{(3+i)\pm \sqrt{6i}}{2}=\frac{-(3+i)\pm \sqrt{3}(1+i)}{2}$ \\
+נסמן $\lambda_1=\frac{3+\sqrt{3}}{2}+\frac{1+\sqrt{3}}{2}i, \lambda_2=\frac{3-\sqrt{3}}{2}+\frac{1-\sqrt{3}}{2}i$. המרחבים העצמיים יהיו:
 \begin{itemize}
     \item עבור $V_{\lambda_1}$ מדובר במרחב האפס של המטריצה: \\
           \[
               \lambda_1I-A=\begin{pmatrix}
-                  \frac{\sqrt{3}-5}{2}+\frac{\sqrt{3}-1}{2}i & -i                                         \\
-                  -1                                         & \frac{\sqrt{3}-7}{2}+\frac{\sqrt{3}-2}{2}i
-              \end{pmatrix}\xrightarrow{R_2\rightarrow R_2-iR_1}
+                  \frac{1+\sqrt{3}}{2}+\frac{1+\sqrt{3}}{2}i & -i                                           \\
+                  -1                                         & \frac{-1+\sqrt{3}}{2}+\frac{-1+\sqrt{3}}{2}i
+              \end{pmatrix}\xrightarrow{R_1\rightarrow \frac{-1+\sqrt{3}}{2}+\frac{1-\sqrt{3}}{2}i}
               \begin{pmatrix}
-                  1 & -i \\
+                  1  & \frac{1-\sqrt{3}}{2} + \frac{1-\sqrt{3}}{2}i \\
+                  -1 & \frac{-1+\sqrt{3}}{2}+\frac{-1+\sqrt{3}}{2}i
+              \end{pmatrix}
+              \rightarrow
+              \begin{pmatrix}
+                  1 & \frac{1-\sqrt{3}}{2} + \frac{1-\sqrt{3}}{2}i \\
                   0 & 0
               \end{pmatrix}
           \]
-          נקבל $V_{\lambda=1}=\Sp(\{ (i, 1) \})$.
-          ננרמל ונקבל $B_{\lambda=1}=\{ \frac{i}{\sqrt{2}}, \frac{1}{\sqrt{2}} \}$
+          נקבל $V_{\lambda_1}=\Sp\{ (0.366 + 0.366i, 1) \}=\Sp\{ \frac{1}{1.126}(0.366 + 0.366i, 1) \}$ ו$B_1=\{(0.325+0.325i, 0.888)\}$ בסיס א"נ ל $V_{\lambda_1}$
+    \item עבור $V_{\lambda_2}$ מדובר במרחב האפס של המטריצה: \\
+          \[
+              \lambda_2I-A=\begin{pmatrix}
+                  \frac{1-\sqrt{3}}{2}+\frac{1-\sqrt{3}}{2}i & -i                                           \\
+                  -1                                         & \frac{-1-\sqrt{3}}{2}+\frac{-1-\sqrt{3}}{2}i
+              \end{pmatrix}\xrightarrow{R_1\rightarrow \frac{-1-\sqrt{3}}{2}+\frac{1+\sqrt{3}}{2}i}
+              \begin{pmatrix}
+                  1  & \frac{1+\sqrt{3}}{2} + \frac{1+\sqrt{3}}{2}i \\
+                  -1 & \frac{-1-\sqrt{3}}{2}+\frac{-1-\sqrt{3}}{2}i
+              \end{pmatrix}
+              \rightarrow
+              \begin{pmatrix}
+                  1 & \frac{1+\sqrt{3}}{2} + \frac{1+\sqrt{3}}{2}i \\
+                  0 & 0
+              \end{pmatrix}
+          \]
+          נקבל $V_{\lambda_2}=\Sp\{ (-1.366 -1.366i, 1) \}=\Sp\{ \frac{1}{2.1753}(-1.366 -1.366i, 1) \}$ ו$B_2=\{(-0.628-0.628i, 0.4597)\}$ בסיס א"נ ל $V_{\lambda_2}$
 \end{itemize}
+מטריצה אוניטרית המלכסת את $A_3$ תהיה $P=\begin{pmatrix}
+        0.325+0.325i & -0.628-0.628i \\
+        0.888        & 0.4597
+    \end{pmatrix}$ ונקבל $P\adj A P=\begin{pmatrix}
+        \frac{3+\sqrt{3}}{2}+\frac{1+\sqrt{3}}{2}i & 0                                          \\
+        0                                          & \frac{3-\sqrt{3}}{2}+\frac{1-\sqrt{3}}{2}i
+    \end{pmatrix}$
+
+\subsection*{סעיף ב}
+
+תנאי הכרחי לחיוביות (לחלוטין) של מטריצות הוא היותן צמודות לעצמן. המטריצות $C_3, C_4, C_6$ אינן צמודות לעצמן:
+\begin{align*}
+    C_3\adj = \begin{pmatrix}
+                  0 & -1 \\
+                  1 & 0
+              \end{pmatrix}\ne C_3 \;\;\;
+    C_4\adj = \begin{pmatrix}
+                  1 & 0 \\
+                  1 & 1
+              \end{pmatrix}\ne C_4 \;\;\;
+    C_6 \adj = \begin{pmatrix}
+                   1 & 3 \\
+                   2 & 1
+               \end{pmatrix}\ne C_6
+\end{align*}
+המטריצות $C_1, C_2, C_5$ צמודות לעצמן ובפרט נורמליות. תנאי הכרחי ומספיק להיותן חיוביות (לחלוטין) נתון לנו לפי משפט 3.3.2: המטריצות חיוביות (לחלוטין) אם ורק אם ערכיהם העצמיים אי-שליליים (חיוביים). נחשב פ"א:
+\begin{align*}
+    p_1(x)=|xI-C_1| & =\begin{vmatrix}
+                           x-1 & -1  \\
+                           -1  & x-1
+                       \end{vmatrix}=x^2-2x+1-1=x(x-2)             \\
+    p_2(x)=|xI-C_2| & =\begin{vmatrix}
+                           x & -i \\
+                           i & x
+                       \end{vmatrix}=x^2-1=(x-1)(x+1)              \\
+    p_5(x)=|xI-C_5| & =\begin{vmatrix}
+                           x-2 & -1  \\
+                           -1  & x-2
+                       \end{vmatrix}=(x-2)^2-1=x^2-4x+3=(x-3)(x-1)
+\end{align*}
+עבור $C_1$ נקבל ע"ע $\lambda_1=0, \lambda_2=2$, והמטריצה אי-שלילית (אך לא חיובית לחלוטין).\\
+עבור $C_2$ נקבל ע"ע $\lambda=-1$, קיומו של ע"ע שלילי מצביע על כך שהמטריצה לא חיובית (וגם לא לחלוטין).
+עבור $C_5$ נקבל ע"ע $\lambda_1=3, \lambda_2=1$, והמטריצה חיובית (לחלוטין).
+
 
 \pagebreak
 
@@ -198,6 +263,49 @@
 ע"פ משפט 2.3.6, $B$ בסיס אורתונורמלי ל$\reals^n$. יהא $v\in \reals^n$ כך ש $||v||=1$. נציג את $v$ כצירוף לינארי של וקטורי $B$:
 \begin{align*}
     v & =\sum_{i=1}^{n}a_iv_i & Hv =\sum_{i=1}^{n} Ha_iv_i = \sum_{i=1}^{n} a_i \lambda_i v_i
+\end{align*}
+נחשב:
+\begin{align*}
+    1=||v||^2=\langle v, v \rangle    & = \langle \sum_{i=1}^{n}a_iv_i, \sum_{i=1}^{n}a_iv_i \rangle \equals^{\text{לינאריות}}
+    \sum_{i=1}^{n}\sum_{j=1}^{n}a_ia_j \langle v_i , v_j \rangle \;
+    \equals^{\langle v_i, v_j \rangle=0}_{\langle v_i, v_i \rangle = 1} \;\;
+    \sum_{i=1}^{n}a_i^2                                                                                                                  \\
+    v \tra Hv = \langle Hv, v \rangle & = \langle \sum_{i=1}^{n}a_iv_i, \sum_{i=1}^{n}a_i\lambda_i v_i \rangle \equals^{\text{לינאריות}}
+    \sum_{i=1}^{n}\sum_{j=1}^{n}a_i a_j\lambda_j\langle v_i, v_j \rangle \;
+    \equals^{\langle v_i, v_j \rangle=0}_{\langle v_i, v_i \rangle = 1} \;\;
+    \sum_{i=1}^{n} \lambda_i a_i^2 \leq
+    \sum_{i=1}^{n} \lambda a_i^2 =
+    \lambda \sum_{i=1}^{n}  a_i^2 = \lambda
+\end{align*}
+
+\section*{שאלה 5}
+
+עבור $A=\begin{pmatrix}
+        2-i & -1  & 0   \\
+        -1  & 1-i & 1   \\
+        0   & 1   & 2-i
+    \end{pmatrix}$ מקבלים $A\adj = \begin{pmatrix}
+        2+i & -1  & 0   \\
+        -1  & 1+i & 1   \\
+        0   & 1   & 2+i
+    \end{pmatrix}$. נחשב:
+\begin{align*}
+    AA \adj = \begin{pmatrix}
+                  6  & -3 & -1 \\
+                  -3 & 4  & 3  \\
+                  -1 & 3  & 6
+              \end{pmatrix} = A \adj A
+\end{align*}
+ולכן $A$ נורמלית. \\
+נסמן ב $E=(e_1, e_2, e_3)$ את הבסיס הסטנדרטי ל $V=\complex^3$ ונגדיר את ההעתקה $T_A: V \rightarrow V$ כך שלכל $v\in V$, $T_A(v)=Av$. \\
+אז $E$ בסיס א"נ ומתקיים $[T_A]_E=A$, לכן לפי שאלה 3.1.4 $A$ נורמלית $T_A\Leftarrow$ נורמלית.\\
+ההעתקה $T_A$ נורמלית מעל $\field=\complex$, לכן ניתן להשתמש במשפט הפירוק הספקטרלי 3.4.2. נמצא את הפולינום האופייני של $T_A$:
+\begin{align*}
+    p(x)=\det(xI-[T_A]_E) & =\begin{vmatrix}
+                                 x-(2-i) & 1       & 0       \\
+                                 1       & x-(1-i) & -1      \\
+                                 0       & -1      & x-(2-i)
+                             \end{vmatrix}
 \end{align*}
 
 \end{document}
