@@ -1,0 +1,255 @@
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\hebrewfont[Script=Hebrew]{Calibri}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+\usepackage{bidi}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\title{מטלת מנחה 13 - אלגברה לינארית 2}
+\author{328197462}
+\date{28/04/2023}
+
+\def\reals{\mathbb{R}}
+\def\complex{\mathbb{C}}
+\def\field{\mathbb{F}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{^\ast}
+\DeclareMathOperator{\tra}{^t}
+\DeclareMathOperator{\inv}{^{-1}}
+\DeclareMathOperator{\perc}{^\perp}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Image}{Im}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+לאורך שאלה זו נשתמש בתכונות הבאות של תבנית ההעתקה: $\trace(A+B)=\trace A + \trace B$ וכן $\trace(A\tra) = \trace A$.\
+
+\subsection*{סעיף א}
+
+נוכיח כי $f$ סימטרית אם ורק אם $M$ סימטרית. \\
+כיוון ראשון: נניח כי $M$ סימטרית ונוכיח כי $f$ סימטרית. לכל $A,B\in V$ נקבל אם כן:
+\begin{align*}
+    f(A,B) & =\trace(A\tra M B)                                                                                                         \\
+    f(B,A) & = \trace(B \tra M A) = \trace ((B \tra M A)\tra) = \trace(A \tra M \tra B) \equals^{M\tra = M} \trace(A \tra M B) = f(A,B)
+\end{align*}
+כיוון שני: נניח כי $f$ סימטרית. בפרט נבחר $A=I, B=(M-M\tra)\tra$ ונקבל $f(A,B)=f(B,A)$.
+\begin{align*}
+    f(A,B) & = \trace(I \tra M (M-M\tra)\tra)=\trace(M (M-M\tra)\tra)                                          \\
+    f(B,A) & \equals^{\text{פיתוח לעיל}} \trace (I \tra M \tra (M-M\tra)\tra) = \trace(M \tra (M-M \tra) \tra)
+\end{align*}
+על פי השוויו, נסיק $f(A,B)-f(B,A)=0$ ולכן:
+\begin{align*}
+    f(A,B)-f(B,A)=\trace(M (M-M\tra)\tra)-\trace(M \tra (M-M\tra)\tra)=\trace((M-M\tra)(M-M\tra)\tra)=||M-M\tra||^2
+\end{align*}
+ומתכונת החיוביות של המכפלה הפנימית, השוויון $||M-M\tra||=0$ גורר $M-M \tra = 0$ ולכן $M=M\tra$.
+
+\subsection*{סעיף ב}
+
+נסמן את הבסיס הסטנדרטי של $V$ ב $E=(E_{11}, E_{12}, E_{21}, E_{22})$, וכן נסמן $M=[m_ij]$ \\
+נשים לב כי $(E_{ij})\tra = E_{ji}$. נרצה לחשב בצורה כללית כל אחת מ16 המכפלות.
+
+\subsection*{סעיף ג}
+
+ניזכר בטענה חשובה מלינארית 1: מרחב המטריצות הממשיות מסדר $n\times n$ הוא סכום ישר של מרחב המטריצות הסימטריות עם מרחב המטריצות האנסימטריות מאותו סדר.
+לכן, קיימות ויחידות $M_1$ סימטרית ו$M_2$ אנסיטמרית כך ש $M_1+M_2=M$. \\
+במקרה שלנו $M=\begin{pmatrix}
+        1   & 2.5 \\
+        2.5 & 5
+    \end{pmatrix} +\begin{pmatrix}
+        0   & -0.5 \\
+        0.5 & 0
+    \end{pmatrix}$ ולכן ניקח $M_1=\begin{pmatrix}
+        1   & 2.5 \\
+        2.5 & 5
+    \end{pmatrix}, M_2=\begin{pmatrix}
+        0   & -0.5 \\
+        0.5 & 0
+    \end{pmatrix}$ \\\\
+הוכחנו כי $f_1(A,B)=\trace(A \tra M_1 B)$ תבנית סימטרית. נוכיח באותו האופן כי $f_2(A,B)=\trace(A \tra M_2 B)$ אנסימטרית:
+\begin{align*}
+    f_2(B,A) = \trace(B \tra M_2 A) = \trace ((B \tra M_2 A)\tra) = \trace(A \tra M_2 \tra B) = -\trace (A \tra M_2 B) = -f_2(A,B)
+\end{align*}
+ומקבלים:
+\begin{align*}
+    f(A,B)=\trace(A \tra M B) = \trace (A \tra (M_1+M_2) B) & =\trace(A \tra M_1 B + A \tra M_2 B)=                              \\
+                                                            & = \trace(A \tra M_1 B) + \trace (A \tra M_2 B) = f_1(A,B)+f_2(A,B)
+\end{align*}
+
+\pagebreak
+
+\section*{שאלה 2}
+
+כיוון ראשון: נניח כי $f$ ניתנת להצגה כמכפלה של שתי תבניות לינאריות, ונוכיח כי $\rho(f)=1$. \\
+יהא אפוא $(w)=(w_1, w_2, ..., w_n)$ בסיס ל$V$ עבורו $f$ מקבלת את הצורה הנתונה. נמצא את $[f]_{(w)}$. \\
+לכל $i,j$ מקבלים $[w_i]_{(w)}=e_i, [w_j]_{(w)}=e_j$. לכן:
+\begin{align*}
+    f(w_i, w_j)=(b_1\cdot 0 + \cdots + b_i \cdot 1 + \cdots + b_n \cdot 0)(c_1\cdot 0 + \cdots + c_j \cdot 1 + \cdots + c_n \cdot 0)=b_ic_j
+\end{align*}
+ומקבלים $[f]_{(w)} = [b_ic_j]_{ij}$. \\
+נסמן $c=(c_1, c_2, ..., c_n)$. שורות המטריצה $[f]_{(w)}$ הם כולם כפל בסקלר של וקטור זה. לכן, מרחב השורות של $[f]_{(w)}$ מוכל ב $\Sp(\{c\})$, ונקבל $\rho([f]_w)\leq \Sp(\{c\})\leq 1$. \\
+מנגד, מהנתון $f\ne 0$ נסיק $\rho(f)>0$, וקיבלנו $\rho(f)=1$.\\\\
+כיוון שני: נניח $\rho(f)=1$ ונוכיח כי $f$ ניתנת להצגה כמכפלת שתי תבניות לינאריות.\\
+יהא $(w)$ בסיס כלשהו של $V$. אז המטריצה $[f]_{(w)}$ היא מדרגה 1 על פי 5.1.4. \\
+תהא אם כן $c=(c_1, c_2, ..., c_n)\in F^n$ שורה כלשהי ב $[f]_{(w)}$ שאינה אפס. בהכרח קיימת שורה כזו, כי דרגת המטריצה שונה מאפס. \\
+היות ודרגת המטריצה היא $1$, השורה ה $i$ של המטריצה היא בהכרח כפל בסקלר $b_i$ (יכול להיות אפס) של $c$.\\
+לכל $x,y\in V$ נקבל:
+\begin{align*}
+    f(x,y)=[x]_{(w)}\tra [f]_{(w)} [y]_{(w)} & =\begin{pmatrix}
+                                                    x_1 & x_2 & \cdots & x_n
+                                                \end{pmatrix} \begin{pmatrix}
+                                                                  b_1c_1 & b_1c_2 & \cdots & b_1c_n \\
+                                                                  b_2c_1 & b_2c_2 & \cdots & b_2c_n \\
+                                                                  \vdots & \vdots & \ddots & \vdots \\
+                                                                  b_nc_1 & b_nc_2 & \cdots & b_nc_n
+                                                              \end{pmatrix} \begin{pmatrix}
+                                                                                y_1    \\
+                                                                                y_2    \\
+                                                                                \cdots \\
+                                                                                y_n
+                                                                            \end{pmatrix}=                                                      \\
+                                             & = \sum_{i=1}^{n}(x_i \cdot \sum_{j=1}^{n}b_ic_j y_j) = \sum_{i=1}^{n}b_ix_i \cdot \sum_{j=1}^n c_jy_j
+\end{align*}
+ובכך סיימנו את ההוכחה.
+
+\pagebreak
+
+\section*{שאלה 3}
+
+\subsection*{סעיף א}
+
+נוכיח לפי 4.1.5. התבנית $f$ נקבעת ע"י הפולינום הבילינארי:
+\begin{align*}
+    \begin{pmatrix}
+        x_1 & x_2
+    \end{pmatrix} \begin{pmatrix}
+                      1 & 2 \\
+                      2 & 4
+                  \end{pmatrix} \begin{pmatrix}
+                                    y_1 \\
+                                    y_2
+                                \end{pmatrix}=
+    x_1y_1 + 2x_1y_2+2x_2y_1+4x_2y_2=f((x_1, x_2), (y_1, y_2))
+\end{align*}
+יתר על כך, $[f]_E$ סימטרית ($E$ הוא הבסיס הסטנדרטי ל $\reals^2$) ולכן $f$ סימטרית על פי 4.2.2 והתבנית הריבועית המוסמכת ל$f$ תהיה:
+\begin{align*}
+    q((x_1, x_2))=f((x_1, x_2), (x_1, x_2))=x_1^2+4x_1x_2+4x_2^2
+\end{align*}
+נמצא ייצוג אלכסוני ל $q$ ול$f$ על פי שיטת לגראנז'. מקבלים באופן מיידי:
+\begin{align*}
+    q((x_1, x_2))=1\cdot (x_1+2x_2)^2 + 0 \cdot x_2^2
+\end{align*}
+אם כן, עלינו למצוא בסיס $(w')$ כך שלכל $v\in \reals^2$, $[v]_{(w')}=\begin{pmatrix}
+        x_1' \\
+        x_2'
+    \end{pmatrix}=\begin{pmatrix}
+        x_1+2x_2 \\
+        x_2
+    \end{pmatrix}=\begin{pmatrix}
+        1 & 2 \\
+        0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        x_1 \\
+        x_2
+    \end{pmatrix}=\begin{pmatrix}
+        1 & 2 \\
+        0 & 1
+    \end{pmatrix}[v]_E
+$. \\
+נקבל שמטריצת המעבר $M\inv_{(w')\rightarrow E}=\begin{pmatrix}
+        1 & 2 \\
+        0 & 1
+    \end{pmatrix}$, וההופכית לה $M_{E\rightarrow (w')}=\begin{pmatrix}
+        1 & -2 \\
+        0 & 1
+    \end{pmatrix}$ מטריצת המעבר מ $E$ ל$(w')$.\\
+מכאן מקבלים $(w')=((1,0), (-2,1))$ ו$[f]_{(w')}=\begin{pmatrix}
+        1 & 0 \\
+        0 & 0
+    \end{pmatrix}$
+
+\subsection*{סעיף ב}
+
+נבדוק באופן ישיר על פי משפט 4.5.1. מטריצת המעבר $M_{E\rightarrow (w')}=\begin{pmatrix}
+        1 & -2 \\
+        0 & 1
+    \end{pmatrix}$ ומקבלים:
+\begin{align*}
+    [q]_{(w')}=M\tra [q]_E M & =\begin{pmatrix}
+                                    1  & 0 \\
+                                    -2 & 1
+                                \end{pmatrix} \begin{pmatrix}
+                                                  1 & 2 \\
+                                                  2 & 4
+                                              \end{pmatrix} \begin{pmatrix}
+                                                                1 & -2 \\
+                                                                0 & 1
+                                                            \end{pmatrix}
+    = \begin{pmatrix}
+          1 & 2 \\
+          0 & 0
+      \end{pmatrix}\begin{pmatrix}
+                       1 & -2 \\
+                       0 & 1
+                   \end{pmatrix}=\begin{pmatrix}
+                                     1 & 0 \\
+                                     0 & 0
+                                 \end{pmatrix}
+\end{align*}
+\pagebreak
+
+\section*{שאלה 4}
+
+נפתור ביחד את סעיפים א + ב על פי טכניקת החפיפה האלמנטרית.
+ראשית, עבור הבסיס הסטנדרטי $E$, מקבלים:
+\[
+    [q]_E = \begin{pmatrix}
+        1      & 1/2    & \cdots & 1/2    \\
+        1/2    & 1      & \cdots & 1/2    \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1/2    & 1/2    & \cdots & 1
+    \end{pmatrix}
+\]
+ואז:
+\begin{align*}
+    ([q]_E | I)=\left(
+    \begin{matrix}
+            1      & 1/2    & \cdots & 1/2    \\
+            1/2    & 1      & \cdots & 1/2    \\
+            \vdots & \vdots & \ddots & \vdots \\
+            1/2    & 1/2    & \cdots & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1      & 0      & \cdots & 0      \\
+            0      & 1      & \cdots & 0      \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0      & 0      & \cdots & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[C_{1}\rightarrow C_1-\frac{1}{2}C_2]{R_{1}\rightarrow R_{1}-\frac{1/2}R_2}
+    \begin{matrix}
+        3/4    & 0      & \cdots & 1/2    \\
+        1/2    & 1      & \cdots & 1/2    \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1/2    & 1/2    & \cdots & 1
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        1      & 0      & \cdots & 0      \\
+        0      & 1      & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & 1
+    \end{matrix}
+    \right.
+    \right)
+\end{align*}
+
+\end{document}
