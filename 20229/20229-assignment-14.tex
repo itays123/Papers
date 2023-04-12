@@ -1,0 +1,263 @@
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\hebrewfont[Script=Hebrew]{Calibri}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+\usepackage{bidi}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\title{מטלת מנחה 13 - אלגברה לינארית 2}
+\author{328197462}
+\date{12/05/2023}
+
+\def\reals{\mathbb{R}}
+\def\complex{\mathbb{C}}
+\def\field{\mathbb{F}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{^\ast}
+\DeclareMathOperator{\tra}{^t}
+\DeclareMathOperator{\inv}{^{-1}}
+\DeclareMathOperator{\perc}{^\perp}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\diag}{diag}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+\subsection*{סעיף א}
+
+המטריצה האלכסונית המייצגת של התבנית $q$ לפי הבסיס הסטנדרטי היא:
+\[
+    [q]_E = \begin{pmatrix}
+        0   & 1/2 & 1   & 3/2 \\
+        1/2 & 0   & 1/2 & 1   \\
+        1   & 1/2 & 0   & 1/2 \\
+        3/2 & 1   & 1/2 & 0
+    \end{pmatrix}
+\]
+
+\pagebreak
+
+\section*{שאלה 2}
+
+יהא $L_0$ תת הקבוצה הנתונה. נוכיח כי תת-קבוצה זו מהווה תת מרחב ממימד $n-\rho$.
+נתבונן בצורה הקנונית של $q$. על פי 6.1.1 ו6.3.2, קיים בסיס $(w)=(w_1, w_2, ..., w_n)$ כלשהו של $V$ כך ש:
+\[
+    [q]_{(w)} = \begin{pmatrix}
+        I_{\rho} & 0 \\
+        0        & 0
+    \end{pmatrix} = \diag\{1, 1, 1, ..., 1, 0, 0, ..., 0\}
+\]
+כלומר, לכל $v\in V$ כך ש $[v]_{(w)}=(x_1, x_2, ..., x_n)\tra$, מקבלים:
+\[
+    q(x_1, x_2, ..., x_n) = x_1^2+x_2^2+\cdots+x_\rho^2+0x_{\rho+1}^2+\cdots+0x_n^2
+\]
+נתבונן אפוא בתת המרחב $U=\Sp\{ w_{\rho+1}, ..., w_n \}$ ממימד $n-\rho$. נוכיח כי קבוצת איברי $W$ היא בדיוק $L_0$.\\\\
+כיוון ראשון: יהא $u\in U$, אז עבור $[u]_{(w)}=(x_1, x_2, ..., x_n)\tra$ נקבל $x_1=x_2=\cdots=x_\rho=0$. לכן:
+\[
+    q(u)=0^2+0^2+\cdots+0^2+0x_{\rho+1}^2+\cdots+0x_n^2=0
+\]
+ומכאן $u\in L_0$ ולכן $U\subseteq L_0$.\\\\
+כיוון שני: יהא $s\in L_0$ ונסמן $[s]_{(w)}=(s_1, s_2, ..., s_n) \tra$. \\
+על פי הנתון נסיק:
+\[
+    q(s)=s_1^2+s_2^2+\cdots+s_\rho^2=0
+\]
+מכאן בהכרח $s_1=s_2=\cdots=s_\rho=0$ ולכן $s\in \Sp\{  w_{\rho+1}, ..., w_n \}=U$ ונקבל $L_0\subseteq U$. \\
+קיבלנו ש$L_0$ הוא בדיוק תת-המרחב $U$ ממימד $n-\rho$ ותמה הוכחת השאלה.
+
+\section*{שאלה 3}
+
+נוכיח את השאלה על דרך השלילה. \\
+נניח בשלילה כי $q$ אינה שומרת סימן.
+בהכרח, על פי 6.3.2, בהצגה הקנונית של $q$ על פי בסיס $(w)=(w_1, w_2, ..., w_n)$, נקבל לפחות איבר אחד בעל מקדם 1 שנסמנו $x_1$, ולפחות איבר אחד בעל מקדם $(-1)$ שנסמנו $x_{\pi +1}$. ההצגה תהיה, בסימוני 6.3.2,
+\[
+    q(x_1, x_2, ..., x_n)=x_1^2+\cdots+x_{\pi}^2-x_{\pi+1}^2-\cdots-x_{\rho}^2+0x_{\rho+1}^2+\cdots+0x_n^2
+\]
+\\
+יהא $u_1=w_1$, אז $[u_1]_{(w)}=(1, 0, ..., 0)\tra$ ולכן $q(u_1)=1$ ו$u_2\in L$. \\
+יהא $u_2=w_{\pi+1}+2w_1$. אז $q(u_1)=2^2-1^2=3$ ולכן $u_2\in L$ \\
+אבל $q(u_2-2u_1)=q(w_{\pi+1})=-1$ ולכן $u_2-2u_1\notin L$ בסתירה לתכונת הסגירות לחיבור של המרחב הלינארי $L$!
+
+\pagebreak
+
+\section*{שאלה 4}
+
+\subsection*{סעיף א}
+
+המטריצה המייצגת של $q$ לפי הבסיס הסטנדרטי תהיה:
+
+\[
+    [q]_E = \begin{pmatrix}
+        1       & \lambda & 5 \\
+        \lambda & 4       & 3 \\
+        5       & 3       & 1
+    \end{pmatrix}
+\]
+נשתמש בשיטת יעקובי על מנת למצוא תנאים הכרחיים ומספיקים לחיוביות של $q$: זוהי מסקנה 6.4.3. נקבל אפוא - תנאי הכרחי ומספיק לחיוביות של $q$ יהיה סיפוקם של שלושת אי השוויונות הבאים:
+\begin{align*}
+    \Delta_1 & =|[1]|=1>0                                                            \\
+    \Delta_2 & = \begin{vmatrix}
+                     1       & \lambda \\
+                     \lambda & 4
+                 \end{vmatrix} = 4-\lambda^2>0                                       \\
+    \Delta_3 & = \begin{vmatrix}
+                     1       & \lambda & 5 \\
+                     \lambda & 4       & 3 \\
+                     5       & 3       & 1
+                 \end{vmatrix} = 1\begin{vmatrix}
+                                      4 & 3 \\
+                                      3 & 1
+                                  \end{vmatrix}-\lambda\begin{vmatrix}
+                                                           \lambda & 3 \\
+                                                           5       & 1
+                                                       \end{vmatrix}+5\begin{vmatrix}
+                                                                          \lambda & 4 \\
+                                                                          5       & 3
+                                                                      \end{vmatrix}= \\
+             & = 1(4-9)-\lambda(\lambda-15)+5(3\lambda-20)=                          \\
+             & = -\lambda^2+30\lambda-105 > 0
+\end{align*}
+נקבל $\Delta_2>0$ אם ורק אם $-2<\lambda<2$.\\
+כמו כן, הערכים $\lambda=15\pm2\sqrt{30}$ מאפסים את $\Delta_3$ ו$\Delta_3>0$ אם ורק אם $4.05\approx 15-2\sqrt{30}<\lambda<15+2\sqrt{30}\approx25.95$.\\
+קיבלנו שני אי-שוויונות שלא ניתן לספק במקביל עבור שום ערך של $\lambda$ ולכן $q$ אינה חיובית לחלוטין עבור שום ערך של $\lambda$.
+
+\subsection*{סעיף ב}
+
+הסעיף עוסק בשיטת יעקובי וביישום מרכזי שלה - לכסון סימולטני. \\
+בסימוני 6.5.1':
+\begin{align*}
+    A=[q_2]_E=\begin{pmatrix}
+                  2 & 4 & 1 \\
+                  4 & 8 & 2 \\
+                  1 & 2 & 3
+              \end{pmatrix} &  & B=[q_1]_E=\begin{pmatrix}
+                                               1  & 1 & -1 \\
+                                               1  & 2 & 0  \\
+                                               -1 & 0 & 3
+                                           \end{pmatrix}
+\end{align*}
+שלבי הפתרון הם כלהלן, על פי הוכחת משפט 6.5.1':
+\begin{itemize}
+    \item נמצא מטריצה $P$ כך ש $P\tra B P=I$.
+    \item נגדיר $S=P\tra A P$. המטריצה $S$ תהא סימטרית ממשית ולכן לכסינה אורתוגונלית.
+    \item נמצא מטריצה $Q$ אורתוגונלית כך ש $Q \adj S Q=\diag\{ \delta_1, \delta_2, \delta_3 \}$
+    \item המטריצה המלכסנת שלנו תהיה $M=PQ$ ונקבל $q_1=\delta_1y_1^2\delta_2y_2^2+\delta_3y_3^2$
+\end{itemize}
+נעבור לפתרון. נמצא את $P$ בעזרת חפיפה אלמנטרית:
+\begin{align*}
+    (B | I) & = \left(
+    \begin{matrix}
+            1  & 1 & -1 \\
+            1  & 2 & 0  \\
+            -1 & 0 & 3
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_3\rightarrow R_3+R_1]{R_2\rightarrow R_2-R_1}
+    \left(
+    \begin{matrix}
+            1 & 1 & -1 \\
+            0 & 1 & 1  \\
+            0 & 1 & 2
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0 & 0 \\
+            -1 & 1 & 0 \\
+            1  & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \rightarrow
+    \left(
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 1 \\
+            0 & 1 & 2
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0 & 0 \\
+            -1 & 1 & 0 \\
+            1  & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \rightarrow                                      \\
+            & \xrightarrow[]{R_3\rightarrow R_3-R_2}
+    \left(
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 1 \\
+            0 & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0  & 0 \\
+            -1 & 1  & 0 \\
+            2  & -1 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \rightarrow
+    \left(
+    \begin{matrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1  & 0  & 0 \\
+            -1 & 1  & 0 \\
+            2  & -1 & 1
+        \end{matrix}
+    \right.
+    \right)=(I | P\tra)
+\end{align*}
+נקבל אפוא כי $B$ אכן חיובית לחלוטין וכן $P=\begin{pmatrix}
+        1 & -1 & 2  \\
+        0 & 1  & -1 \\
+        0 & 0  & 1
+    \end{pmatrix}$
+
+
+\pagebreak
+
+\section*{שאלה 5}
+
+\subsection*{סעיף א}
+
+עלינו להוכיח כי מטריצה סימטרי כלשהי $A_{n\times n}$ המייצגת את $q$ אינה הפיכה. \\
+על פי 6.2.1, $A$ חופפת למטריצה אלכסונית $B$. על פי חלק ב של אותו המשפט, למטריצה $B$ אותה דרגה ונסמן $\rho=\rho(B)=\rho(A)$. \\
+על פי 6.3.2 נקבל $0<\rho<n$. לכן $\rho(A)<n$ ו$A$ סינגולרית!
+
+\subsection*{סעיף ב}
+
+המטריצה $A=[\alpha_{ij}]$ מטריצה סימטרית ממשית ולכן לפי 3.2.1 לכסינה אורתוגונלית על ידי מטריצה אוניטרית $Q$. \\
+מהנתון נסיק כי לכל $x=(\xi_1, \xi_2, ..., \xi_n)\in \reals^n$,
+\[
+    q(x)=\sum_{i=1}^{n}\sum_{j=1}^{n} \alpha_{ij}\xi_i\xi_j>0
+\]
+אי לכך, על פי הגדרה $A$ חיובית לחלוטין ולכן לפי 3.3.2 כל ערכיה העצמיים של $A$ ממשיים חיוביים. \\
+הכיוון הראשון טריוויאלי: אם $A=I$ אז בפרט $A$ אורתוגונלית. \\
+אילו $A$ אורתוגונלית אז לכל ערך עצמי $\lambda$ של $A$ מתקיים $|\lambda|=1$ ולכן ל$A$ ערך עצמי יחיד $\lambda=1$.
+היות ו$A$ לכסינה, הריבוי הגיאומטרי של ערך עצמי זה הוא $n$ ו$A$ דומה ל$I$. \\
+נקבל אפוא:
+\[
+    A=Q\adj I Q = Q \inv Q = I
+\]
+
+\end{document}
