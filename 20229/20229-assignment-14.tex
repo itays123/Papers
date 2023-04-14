@@ -348,6 +348,151 @@
         0 & 0  & 1
     \end{pmatrix}$
 
+\pagebreak
+
+נחשב את $S$:
+\begin{align*}
+    S=P\tra A P = \begin{pmatrix}
+                      1  & 0  & 0 \\
+                      -1 & 1  & 0 \\
+                      2  & -1 & 1
+                  \end{pmatrix} \begin{pmatrix}
+                                    2 & 4 & 1 \\
+                                    4 & 8 & 2 \\
+                                    1 & 2 & 3
+                                \end{pmatrix} \begin{pmatrix}
+                                                  1 & -1 & 2  \\
+                                                  0 & 1  & -1 \\
+                                                  0 & 0  & 1
+                                              \end{pmatrix} =
+    \begin{pmatrix}
+        2 & 4 & 1 \\
+        2 & 4 & 1 \\
+        1 & 2 & 3
+    \end{pmatrix} \begin{pmatrix}
+                      1 & -1 & 2  \\
+                      0 & 1  & -1 \\
+                      0 & 0  & 1
+                  \end{pmatrix} = \begin{pmatrix}
+                                      2 & 2 & 1 \\
+                                      2 & 2 & 1 \\
+                                      1 & 1 & 3
+                                  \end{pmatrix}
+\end{align*}
+המטריצה $S$ היא מטריצה סימטרית ממשית ולכן לכסינה אורתוגונלית. נמצא את הערכים העצמיים של $S$:
+\begin{align*}
+    p(x)=|xI-S| & =\begin{vmatrix}
+                       x-2 & -2  & -1  \\
+                       -2  & x-2 & -1  \\
+                       -1  & -1  & x-3
+                   \end{vmatrix} \equals^{R_1=\Sigma R_i}
+    \begin{vmatrix}
+        x-5 & x-5 & x-5 \\
+        -2  & x-2 & -1  \\
+        -1  & -1  & x-3
+    \end{vmatrix} =                                                                   \\
+                & = (x-5)\begin{vmatrix}
+                             1  & 1   & 1   \\
+                             -2 & x-2 & -1  \\
+                             -1 & -1  & x-3
+                         \end{vmatrix} \equals^{R_3\rightarrow R_3+R_1}
+    (x-5)\begin{vmatrix}
+             1  & 1   & 1   \\
+             -2 & x-2 & -1  \\
+             0  & 0   & x-2
+         \end{vmatrix} =                                                              \\
+                & = (x-5)(x-2)\begin{vmatrix}
+                                  1  & 1   \\
+                                  -2 & x-2
+                              \end{vmatrix} = (x-5)(x-2)(x-2-(-2\cdot 1))=x(x-5)(x-2)
+\end{align*}
+נקבל שלושה ערכים עצמיים $0, 2, 5$ עם ריבוי אלגברי וגיאומטרי 1. נמצא בסיסים אורתוגונליים לכל אחד משלוש המרחבים העצמיים $V_0, V_2, V_5$:
+\begin{itemize}
+    \item עבור $V_0$ נקבל את מרחב האפס של $S$. דירוג ייתן לנו: \[
+              \begin{pmatrix}
+                  2 & 2 & 1 \\
+                  2 & 2 & 1 \\
+                  1 & 1 & 3
+              \end{pmatrix} \xrightarrow[]{R_1\leftrightarrow R_3}
+              \begin{pmatrix}
+                  1 & 1 & 3 \\
+                  2 & 2 & 1 \\
+                  2 & 2 & 1
+              \end{pmatrix} \xrightarrow[]{R_3\rightarrow R_3-R_1}
+              \begin{pmatrix}
+                  1 & 1 & 3 \\
+                  2 & 2 & 1 \\
+                  0 & 0 & 0
+              \end{pmatrix} \xrightarrow[]{R_2\rightarrow R_2-2R_1}
+              \begin{pmatrix}
+                  1 & 1 & 3  \\
+                  0 & 0 & -4 \\
+                  0 & 0 & 0
+              \end{pmatrix}\rightarrow
+              \begin{pmatrix}
+                  1 & 1 & 0 \\
+                  0 & 0 & 1 \\
+                  0 & 0 & 0
+              \end{pmatrix}
+          \]
+          נקבל וקטור עצמי $v_0=(1,-1,0)$. ננרמל ונקבל $v_0*=\frac{1}{\sqrt{2}}(1,-1,0)$.
+    \item עבור $V_2$ נרצה למצוא את מרחב האפס של המטריצה: \[
+              \begin{pmatrix}
+                  0  & -2 & -1 \\
+                  -2 & 0  & -1 \\
+                  -1 & -1 & -1
+              \end{pmatrix}\rightarrow
+              \begin{pmatrix}
+                  -1 & -1 & -1 \\
+                  -2 & 0  & -1 \\
+                  0  & -2 & -1
+              \end{pmatrix}\rightarrow
+              \begin{pmatrix}
+                  1  & 1  & 1  \\
+                  -2 & 0  & -1 \\
+                  0  & -2 & -1
+              \end{pmatrix} \xrightarrow[]{R_2\rightarrow R_2+2R_1}
+              \begin{pmatrix}
+                  1 & 1  & 1  \\
+                  0 & 2  & 1  \\
+                  0 & -2 & -1
+              \end{pmatrix} \rightarrow
+              \begin{pmatrix}
+                  1 & -1 & 0 \\
+                  0 & 2  & 1 \\
+                  0 & 0  & 0
+              \end{pmatrix}
+          \]
+          נקבל וקטור עצמי $v_2=(1, 1, -2)$ ווקטור מנורמל $v_2*=\frac{1}{\sqrt{6}}(1, 1, -2)$
+    \item עבור המרחב העצמי $V_5$ ניעזר בעובדה שסכום כל שורה במטריצה הוא 5, ולכן ניקח $v_5=(1,1,1)$ ו-$v_5*=\frac{1}{\sqrt{3}}(1,1,1)$
+\end{itemize}
+מקבלים:
+\begin{align*}
+    Q    & =\begin{pmatrix}
+                \frac{1}{\sqrt{2}}   & \frac{1}{\sqrt{6}}  & \frac{1}{\sqrt{3}} \\
+                - \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}}  & \frac{1}{\sqrt{3}} \\
+                0                    & \frac{-2}{\sqrt{6}} & \frac{1}{\sqrt{3}}
+            \end{pmatrix} = \frac{1}{\sqrt{6}} \begin{pmatrix}
+                                                   \sqrt{3}  & 1  & \sqrt{2} \\
+                                                   -\sqrt{3} & 1  & \sqrt{2} \\
+                                                   0         & -2 & \sqrt{2}
+                                               \end{pmatrix}, \\
+    M=PQ & = \frac{1}{\sqrt{6}}\begin{pmatrix}
+                                   1 & -1 & 2  \\
+                                   0 & 1  & -1 \\
+                                   0 & 0  & 1
+                               \end{pmatrix}\begin{pmatrix}
+                                                \sqrt{3}  & 1  & \sqrt{2} \\
+                                                -\sqrt{3} & 1  & \sqrt{2} \\
+                                                0         & -2 & \sqrt{2}
+                                            \end{pmatrix}=\frac{1}{\sqrt{6}}\begin{pmatrix}
+                                                                                2\sqrt{3} & -4 & 2\sqrt{2} \\
+                                                                                -\sqrt{3} & 3  & 0         \\
+                                                                                0         & -1 & \sqrt{2}
+                                                                            \end{pmatrix}
+\end{align*}
+מקבלים $M\tra B M = Q \tra P \tra B P Q = Q\inv I Q = I$, וכן $M\tra A M=Q\tra S Q = \diag\{0, 2, 5\}$.
+הבסיס המבוקש הוא שורות המטריצה $M$, וערכי $\delta_i$ הם $0, 2, 5$.
 
 \pagebreak
 
