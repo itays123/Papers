@@ -40,6 +40,121 @@
         3/2 & 1   & 1/2 & 0
     \end{pmatrix}
 \]
+נבצע חפיפות אלמנטריות:
+\begin{align*}
+    ([q]_E | I) & = \left(
+    \begin{matrix}
+            0   & 1/2 & 1   & 3/2 \\
+            1/2 & 0   & 1/2 & 1   \\
+            1   & 1/2 & 0   & 1/2 \\
+            3/2 & 1   & 1/2 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            1 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[]{R_i\rightarrow 2R_i}
+    \left(
+    \begin{matrix}
+            0 & 2 & 4 & 6 \\
+            2 & 0 & 2 & 4 \\
+            4 & 2 & 0 & 2 \\
+            6 & 4 & 2 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            2 & 0 & 0 & 0 \\
+            0 & 2 & 0 & 0 \\
+            0 & 0 & 2 & 0 \\
+            0 & 0 & 0 & 2
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[]{R_1\rightarrow R_1+R_2}                                     \\
+                & \rightarrow
+    \left(
+    \begin{matrix}
+            4  & 2 & 6 & 10 \\
+            2  & 0 & 2 & 4  \\
+            6  & 2 & 0 & 2  \\
+            10 & 4 & 2 & 0
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            2 & 2 & 0 & 0 \\
+            0 & 2 & 0 & 0 \\
+            0 & 0 & 2 & 0 \\
+            0 & 0 & 0 & 2
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[R_3\rightarrow R_3-3/2R_1, R_4\rightarrow R_4-5/2R_1]{R_2\rightarrow R_2-1/2R_1}
+    \left(
+    \begin{matrix}
+            4 & 0  & 0   & 0   \\
+            0 & -1 & -1  & -1  \\
+            0 & -1 & -9  & -13 \\
+            0 & -1 & -13 & -25
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            2  & 2  & 0 & 0 \\
+            -1 & 1  & 0 & 0 \\
+            -3 & -3 & 2 & 0 \\
+            -5 & -5 & 0 & 2
+        \end{matrix}
+    \right.
+    \right)\rightarrow                                                         \\
+                & \xrightarrow[R_4\rightarrow R_4-R_2]{R_3\rightarrow R_3-R_2}
+    \left(
+    \begin{matrix}
+            4 & 0  & 0   & 0   \\
+            0 & -1 & 0   & 0   \\
+            0 & 0  & -8  & -12 \\
+            0 & 0  & -12 & -24
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            2  & 2  & 0 & 0 \\
+            -1 & 1  & 0 & 0 \\
+            -2 & -4 & 2 & 0 \\
+            -4 & -6 & 0 & 2
+        \end{matrix}
+    \right.
+    \right)
+    \xrightarrow[]{R_4\rightarrow R_4-3/2R_4}
+    \left(
+    \begin{matrix}
+            4 & 0  & 0  & 0  \\
+            0 & -1 & 0  & 0  \\
+            0 & 0  & -8 & 0  \\
+            0 & 0  & 0  & -6
+        \end{matrix}
+    \left|
+    \begin{matrix}
+            2  & 2  & 0  & 0 \\
+            -1 & 1  & 0  & 0 \\
+            -2 & -4 & 2  & 0 \\
+            -1 & 0  & -3 & 2
+        \end{matrix}
+    \right.
+    \right)
+\end{align*}
+ומכאן שבבסיס $B=(v_1=(2, 2, 0, 0), v_2=(-1, 1, 0, 0), v_3=(-2, -4, 2, 0), v_4=(-1, 0, -3, 2))$ נקבל $q=4x_1^2-x_2^2-8x_3^2-6x_4^2$. \\
+הדרגה של $q$ היא 4 והסימנית $\sigma=1-3=-2$.
+\subsection*{סעיף ב}
+
+נרצה להוכיח כי $U=\Sp\{ v_1 \}$ הוא תת המרחב המקסימלי עליו $q$ חיובית. תחילה נוכיח כי $q$ חיובית על מרחב זה. \\
+יהא $u\in U$, אז $[u]_B=(\alpha, 0, 0, 0)$ עבור $\alpha\in \reals$ כלשהו ולכן $q(u)=4\alpha^2>0$. \\
+המרחב המשלים $U'=\Sp\{ v_2, v_3, v_4 \}$ מקיים ש$q$ שלילית לחלוטין עליו (ההוכחה זהה לחלוטין).\\
+כעת, נניח בשלילה כי קיים מרחב $W$ כך ש $\dim W > 1$ וגם $q$ חיובית לחלוטין על $W$. \\
+משיקולי מימדים, בהכרח $\dim (U'\cap W)>0$ ולכן קיים וקטור שאינו אפס ב$v\in U'\cap W$. \\
+עבור וקטור זה מתקיים $v\in U'$ $\Leftarrow$ $q(v)<0$, אבל גם $v\in W$ ולכן $q(v)>0$ וזו סתירה!
 
 \pagebreak
 
