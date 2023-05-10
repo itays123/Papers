@@ -1,0 +1,551 @@
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\hebrewfont[Script=Hebrew]{Calibri}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+\usepackage{bidi}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\title{מטלת מנחה 16 - אלגברה לינארית 2}
+\author{328197462}
+\date{16/06/2023}
+
+\def\reals{\mathbb{R}}
+\def\complex{\mathbb{C}}
+\def\field{\mathbb{F}}
+\DeclareMathOperator*{\equals}{=}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{^\ast}
+\DeclareMathOperator{\tra}{^t}
+\DeclareMathOperator{\inv}{^{-1}}
+\DeclareMathOperator{\perc}{^\perp}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\diag}{diag}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+\subsection*{סעיף א}
+
+נמצא ערכים עצמיים של $A$:
+\begin{align*}
+    P_A(x)=|xI-A| & =\begin{vmatrix}
+                         x-6 & 9 \\
+                         -1  & x
+                     \end{vmatrix}=x(x-6)-(-1)9=x^2-6x+9=(x-3)^2
+\end{align*}
+קיבלנו ערך עצמי יחיד בעל ריבוי אלגברי 2. נמצא את הריבוי הגיאומטרי של ערך עצמי זה, המסמן לפי משפט ז'ורדן את מספר בלוקי הז'ורדן במטריצה:
+\begin{align*}
+    3I-A=\begin{pmatrix}
+             -3 & 9 \\
+             -1 & 3
+         \end{pmatrix} => \dim\ker(3I-A)=1
+\end{align*}
+אי-לכך, צורת ז'ורדן של המטריצה תהיה $G=J_2(3)=\begin{pmatrix}
+        3 & 1 \\
+        0 & 3
+    \end{pmatrix}$. \\\\
+כעת, תהא $T_A$ העתקה כך ש $[T_A]_E=A$ עבור הבסיס הסטנדרטי $E$. נרצה למצוא בסיס $B=\{ b_1, b_2 \}$ כך ש $[T_A]_B=G$. \\
+כלומר, מתקיים:
+\begin{align*}
+    \begin{cases}
+        Ab_1=3b_1 \\
+        Ab_2=b_1+3b_2
+    \end{cases} \rightarrow \begin{cases}
+                                (A-3I)b_1=0 \\
+                                (A-3I)b_2=b_1
+                            \end{cases}
+\end{align*}
+הוקטור $b_1$ הוא וקטור מהמרחב העצמי $V_{\lambda=3}$. ניקח למשל $b_1=(3,1)$. נפתור:
+\begin{align*}
+    (A-3I | b_1) & =
+    \left(
+    \begin{matrix}
+        3 & -9 \\
+        1 & -3
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        3 \\
+        1
+    \end{matrix}
+    \right.
+    \right) \rightarrow
+    \left(
+    \begin{matrix}
+        1 & -3 \\
+        0 & 0
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        1 \\
+        0
+    \end{matrix}
+    \right.
+    \right)
+\end{align*}
+ניקח למשל $b_2=(1,0)$, אז מקבלים $[T_A]_B=G$ כנדרש. \\
+מטריצת המעבר $P_{E\rightarrow B}$ תהא $\begin{pmatrix}
+        3 & 1 \\
+        1 & 0
+    \end{pmatrix}$ ומתקיים $G=[T_A]_B=P\inv [T_A]P=P\inv A P$.
+
+\subsection*{סעיף ב}
+נחשב באופן כללי את $G^n$ ואת $A^n$ עבור $n$ טבעי כלשהו. \\
+על פי נוסחת הבינום, ולאור העובדה כי $\lambda I$ מטריצה סקלארית מתחלפת עם כל מטריצה, נקבל:
+\begin{align*}
+    G^n = (J_2(0)+3I)^n & =\sum_{i=0}^{n} { n \choose i } J_2(0)^i \cdot 3^{n-i}=   [J_2(0)^k = 0, k \geq 2]= \\
+                        & =\sum_{i=0}^{1} { n \choose i } J_2(0)^i \cdot 3^{n-i}=                             \\
+                        & = 1 \cdot J_2(0)^0 \cdot 3^n + n \cdot J_2(0)^1 \cdot 3^{n-1}=\begin{pmatrix}
+                                                                                            3^n & n \cdot 3^{n-1} \\
+                                                                                            0   & 3^n
+                                                                                        \end{pmatrix}
+\end{align*}
+ידוע כי אם $Q$ פולינום, $P\inv A P = G$ אז גם $P\inv Q(A)=Q(G)$ לפי טענה 9.1.7. לכן, מתקיים $A^n=PG^nP\inv$.\\
+נחשב את $P\inv$:
+\begin{align*}
+    (P | I) = \left(
+    \begin{matrix}
+        3 & 1 \\
+        1 & 0
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        1 & 0 \\
+        0 & 1
+    \end{matrix}
+    \right.
+    \right)
+    \rightarrow
+    \left(
+    \begin{matrix}
+        1 & 0 \\
+        3 & 1
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        0 & 1 \\
+        1 & 0
+    \end{matrix}
+    \right.
+    \right)
+    \rightarrow
+    \left(
+    \begin{matrix}
+        1 & 0 \\
+        0 & 1
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        0 & 1  \\
+        1 & -3
+    \end{matrix}
+    \right.
+    \right)
+    =(I | P\inv)
+\end{align*}
+אי-לכך,
+\begin{align*}
+    A^n = \begin{pmatrix}
+              3 & 1 \\
+              1 & 0
+          \end{pmatrix}\begin{pmatrix}
+                           3^n & n \cdot 3^{n-1} \\
+                           0   & 3^n
+                       \end{pmatrix}\begin{pmatrix}
+                                        0 & 1  \\
+                                        1 & -3
+                                    \end{pmatrix}=\begin{pmatrix}
+                                                      3^{n+1} & (n+1) \cdot 3^n \\
+                                                      3^n     & n\cdot 3^{n-1}
+                                                  \end{pmatrix}\begin{pmatrix}
+                                                                   0 & 1  \\
+                                                                   1 & -3
+                                                               \end{pmatrix}=\begin{pmatrix}
+                                                                                 (n+1) \cdot 3^n & -n \cdot 3^{n+1} \\
+                                                                                 n \cdot 3^{n-1} & -(n-1) \cdot 3^n
+                                                                             \end{pmatrix}
+\end{align*}
+ובפרט $G^{100}=\begin{pmatrix}
+        3^{100} & 100 \cdot 3^{99} \\
+        0       & 3^{100}
+    \end{pmatrix}, A^{100}=\begin{pmatrix}
+        101 \cdot 3^{100} & -100 \cdot 3^{101} \\
+        100 \cdot 3^{99}  & -99 \cdot 3^{100}
+    \end{pmatrix}$
+
+\subsection*{סעיף ג}
+
+נשים לב כי מתקיים $\begin{pmatrix}
+        a_{n+2} \\
+        a_{n+1}
+    \end{pmatrix}=\begin{pmatrix}
+        6 & -9 \\
+        1 & 0
+    \end{pmatrix}\begin{pmatrix}
+        a_{n+1} \\
+        a_{n}
+    \end{pmatrix}$ לכל $n\geq 0$. \\
+נוכיח באינדוקציה כי $\begin{pmatrix}
+        a_{n} \\
+        a_{n-1}
+    \end{pmatrix}=A^{n-1}\begin{pmatrix}
+        b \\
+        a
+    \end{pmatrix}$ לכל $n\geq 2$. \\
+בסיס האינדוקציה נובע מיידית מהשוויון לעיל. נניח כי השוויון מתקיים עבור $n$ כלשהו. אז לפי קיבוציות כפל מטריצות נקבל:
+\begin{align*}
+    \begin{pmatrix}
+        a_{n+1} \\
+        a_{n}
+    \end{pmatrix}\equals^{\text{נתון}}A\begin{pmatrix}
+                                           a_{n} \\
+                                           a_{n-1}
+                                       \end{pmatrix}\equals^{\text{הנחה}}A(A^{n-1}\begin{pmatrix}
+                                                                                      b \\
+                                                                                      a
+                                                                                  \end{pmatrix})\equals^{\text{קיבוציות}} A^n\begin{pmatrix}
+                                                                                                                                 b \\
+                                                                                                                                 a
+                                                                                                                             \end{pmatrix}
+\end{align*}
+בכך השלמנו את ההוכחה. כעת, נחשב:
+\begin{align*}
+    \begin{pmatrix}
+        a_{n} \\
+        a_{n-1}
+    \end{pmatrix}=A^{n-1}\begin{pmatrix}
+                             b \\
+                             a
+                         \end{pmatrix}=
+    \begin{pmatrix}
+        n \cdot 3^{n-1}     & -(n-1) \cdot 3^{n}   \\
+        (n-1) \cdot 3^{n-2} & -(n-2) \cdot 3^{n-1}
+    \end{pmatrix}\begin{pmatrix}
+                     b \\
+                     a
+                 \end{pmatrix}=
+    \begin{pmatrix}
+        n \cdot 3^{n-1}\cdot b - (n-1) \cdot 3^n\cdot  a \\
+        \ast
+    \end{pmatrix}
+\end{align*}
+ולכן $a_n=n \cdot 3^{n-1}\cdot b - (n-1) \cdot 3^n \cdot a$
+
+\pagebreak
+
+\section*{שאלה 2}
+
+\pagebreak
+
+\section*{שאלה 3}
+
+נמצא פולינומים אופיניים למטריצות:
+\begin{align*}
+    P_A(x)=|xI-A| & =\begin{vmatrix}
+                         x-1 & 3   & 0   & -3  \\
+                         2   & x+6 & 0   & -13 \\
+                         0   & 3   & x-1 & -3  \\
+                         1   & 4   & 0   & x-8
+                     \end{vmatrix}\equals^{C_3 \text{פיתוח }}                        \\
+                  & = (x-1)\begin{vmatrix}
+                               x-1 & 3   & -3  \\
+                               2   & x+6 & -13 \\
+                               1   & 4   & x-8
+                           \end{vmatrix}=(x-1)P_B(x)                                 \\
+    P_B(x)=|xI-B| & =\begin{vmatrix}
+                         x-1 & 3   & -3  \\
+                         2   & x+6 & -13 \\
+                         1   & 4   & x-8
+                     \end{vmatrix}=(x-1)\begin{vmatrix}
+                                            x+6 & -13 \\
+                                            4   & x-8
+                                        \end{vmatrix}-3\begin{vmatrix}
+                                                           2 & -13 \\
+                                                           1 & x-8
+                                                       \end{vmatrix}-3\begin{vmatrix}
+                                                                          2 & x-6 \\
+                                                                          1 & 4
+                                                                      \end{vmatrix}= \\
+                  & =(x-1)[x^2-2x-48+52]-3(2x-16+13)-3(8-(x-6))=                     \\
+                  & = (x-1)(x^2-2x+4) -3[(2x-3)+(2-x)]=                              \\
+                  & = (x-1)(x^2-2x+4) -3(x-1)=                                       \\
+                  & = (x-1)(x^2-2x+4-3)=(x-1)^3
+\end{align*}
+קיבלנו $P_A(x)=(x-1)^4, P_B(x)=(x-1)^3$.
+
+\subsection*{סעיף א}
+
+האפשרויות לפולינום המינימלי של $A$ הן $(x-1), (x-1)^2, (x-1)^3, (x-1)^4$. המטריצה A לא סקלארית ולכן $x-1$ נפסל. נבדוק האם $A$ מאפסת את $(x-1)^2, (x-1)^3$:
+\begin{align*}
+    (A-I)^2=\begin{pmatrix}
+                0  & -3 & 0 & 3  \\
+                -2 & -7 & 0 & 13 \\
+                0  & 3  & 0 & 3  \\
+                -1 & -4 & 0 & 7
+            \end{pmatrix}^2=\begin{pmatrix}
+                                3    & \ast & \ast & \ast \\
+                                \ast & \ast & \ast & \ast \\
+                                \ast & \ast & \ast & \ast \\
+                                \ast & \ast & \ast & \ast \\
+                            \end{pmatrix}\ne 0
+\end{align*}
+מנגד, נמצא את הריבוי הגיאומטרי של הערך העצמי 1:
+\begin{align*}
+    \begin{pmatrix}
+        0  & -3 & 0 & 3  \\
+        -2 & -7 & 0 & 13 \\
+        0  & 3  & 0 & 3  \\
+        -1 & -4 & 0 & 7
+    \end{pmatrix} \rightarrow
+    \begin{pmatrix}
+        1  & 4  & 0 & -7 \\
+        0  & -3 & 0 & 3  \\
+        -2 & -7 & 0 & 13 \\
+        0  & 3  & 0 & 3
+    \end{pmatrix}\rightarrow
+    \begin{pmatrix}
+        1 & 4  & 0 & -7 \\
+        0 & -3 & 0 & 3  \\
+        0 & 1  & 0 & -1 \\
+        0 & 3  & 0 & 3
+    \end{pmatrix}\rightarrow
+    \begin{pmatrix}
+        1 & 4 & 0 & -7 \\
+        0 & 1 & 0 & -1 \\
+        0 & 0 & 0 & 0  \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+קיבלנו $\rho(A-I)=2$ ולכן הריבוי הגיאומטרי של ערך עצמי זה הוא 2, וכך גם לפי שאלה 11.9.2 מספר הבלוקים.
+אילו $A$ לא מאפסת את $(x-1)^3$, נקבל שבלוק הז'ורדן הגדול ביותר בצורת הז'ורדן הוא מסדר 4, כלומר יש בלוק אחד בדיוק וזו סתירה.\\
+נקבל שבצורת הז'ורדן של $A$ יש שני בלוקים, והגדול ביניהם הוא בגודל 3 בדיוק. כלומר צורת הז'ורדן תהיה:
+\begin{align*}
+    \diag\{ J_3(1), J_1(1) \}=\begin{pmatrix}
+                                  1 & 1 & 0 & 0 \\
+                                  0 & 1 & 1 & 0 \\
+                                  0 & 0 & 1 & 0 \\
+                                  0 & 0 & 0 & 1
+                              \end{pmatrix}
+\end{align*}
+
+\subsection*{סעיף ב}
+האפשרויות לפולינום המינימלי של $B$ הן $(x-1), (x-1)^2, (x-1)^3$. שוב נפסלת האפשרות $x-1$. נבדוק האם $(x-1)^2$ מתאפס ע"י $B$:
+\begin{align*}
+    (B-I)^2=\begin{pmatrix}
+                0  & -3 & 3  \\
+                -2 & -7 & 13 \\
+                -1 & -4 & 7
+            \end{pmatrix}^2=\begin{pmatrix}
+                                3    & \ast & \ast \\
+                                \ast & \ast & \ast \\
+                                \ast & \ast & \ast \\
+                            \end{pmatrix}\ne 0
+\end{align*}
+הפולינום המינימלי של $B$ יהיה $M_B(x)=(x-1)^3$, ובצורת הז'ורדן של $B$ יש בלוק ז'ורדן בגודל 3. \\
+נקבל את צורת הז'ורדן $J=J_3(1)=\begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 1 & 1 \\
+        0 & 0 & 1
+    \end{pmatrix}$. \\\\
+נגדיר העתקה $T_B: v \rightarrowtail Bv$, אז $[T_B]_E=B$ עבור הבסיס הסטנדרטי $E$, ונרצה למצוא בסיס $(v)=(v_1, v_2, v_3)$ כך ש:
+\begin{align*}
+    \begin{cases}
+        Bv_1=v_1     \\
+        Bv_2=v_1+v_2 \\
+        Bv_3=v_2+v_3
+    \end{cases} \rightarrow
+    \begin{cases}
+        (B-I)v_1=0   \\
+        (B-I)v_2=v_1 \\
+        (B-I)v_3=v_2
+    \end{cases}
+\end{align*}
+נפתור את המערכות. עבור $v_1$ נרצה וקטור הפותר את:
+\begin{align*}
+    \begin{pmatrix}
+        0  & -3 & 3  \\
+        -2 & -7 & 13 \\
+        -1 & -4 & 7
+    \end{pmatrix}\rightarrow
+    \begin{pmatrix}
+        1  & 4  & -7 \\
+        0  & -3 & 3  \\
+        -2 & -7 & 13
+    \end{pmatrix}\rightarrow
+    \begin{pmatrix}
+        1 & 4  & -7 \\
+        0 & -3 & 3  \\
+        0 & 1  & -1
+    \end{pmatrix}\rightarrow
+    \begin{pmatrix}
+        1 & 4 & -7 \\
+        0 & 1 & -1 \\
+        0 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+נבחר למשל $v_1=(3,1,1)$ ונפתור עבור $v_2$:
+\begin{align*}
+    (B-I | v_1) & =
+    \left(
+    \begin{matrix}
+        0  & -3 & 3  \\
+        -2 & -7 & 13 \\
+        -1 & -4 & 7
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        3 \\
+        1 \\
+        1
+    \end{matrix}
+    \right.
+    \right)\rightarrow
+    \left(
+    \begin{matrix}
+        1  & 4  & -7 \\
+        0  & -3 & 3  \\
+        -2 & -7 & 13
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        -1 \\
+        3  \\
+        1
+    \end{matrix}
+    \right.
+    \right)\rightarrow
+    \left(
+    \begin{matrix}
+        1 & 4  & -7 \\
+        0 & -3 & 3  \\
+        0 & 1  & -1
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        -1 \\
+        3  \\
+        -1
+    \end{matrix}
+    \right.
+    \right)\rightarrow \\
+    \rightarrow &
+    \left(
+    \begin{matrix}
+        1 & 4  & -7 \\
+        0 & -1 & 1  \\
+        0 & 1  & -1
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        -1 \\
+        1  \\
+        -1
+    \end{matrix}
+    \right.
+    \right)\rightarrow
+    \left(
+    \begin{matrix}
+        1 & 0  & -3 \\
+        0 & -1 & 1  \\
+        0 & 0  & 0
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        3 \\
+        1 \\
+        0
+    \end{matrix}
+    \right.
+    \right)
+\end{align*}
+נבחר למשל $v_2=(0, -2, -1)$ ונפתור עבור $v_3$:
+\begin{align*}
+    (B-I | v_2) & =
+    \left(
+    \begin{matrix}
+        0  & -3 & 3  \\
+        -2 & -7 & 13 \\
+        -1 & -4 & 7
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        0  \\
+        -2 \\
+        -1
+    \end{matrix}
+    \right.
+    \right)\rightarrow
+    \left(
+    \begin{matrix}
+        1  & 4  & -7 \\
+        0  & -3 & 3  \\
+        -2 & -7 & 13
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        1 \\
+        0 \\
+        -2
+    \end{matrix}
+    \right.
+    \right)\rightarrow
+    \left(
+    \begin{matrix}
+        1 & 4  & -7 \\
+        0 & -3 & 3  \\
+        0 & 1  & -1
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        1 \\
+        0 \\
+        0
+    \end{matrix}
+    \right.
+    \right)\rightarrow \\
+    \rightarrow &
+    \left(
+    \begin{matrix}
+        1 & 4  & -7 \\
+        0 & -1 & 1  \\
+        0 & 1  & -1
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        1 \\
+        0 \\
+        0
+    \end{matrix}
+    \right.
+    \right)\rightarrow
+    \left(
+    \begin{matrix}
+        1 & 0  & -3 \\
+        0 & -1 & 1  \\
+        0 & 0  & 0
+    \end{matrix}
+    \left|
+    \begin{matrix}
+        1 \\
+        0 \\
+        0
+    \end{matrix}
+    \right.
+    \right)
+\end{align*}
+נבחר למשל $v_3=(1,0,0)$, אז אכן מתקיים $[T_B]_{(v)}=\begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 1 & 1 \\
+        0 & 0 & 1
+    \end{pmatrix}$ ומטריצת המעבר היא $P_{E\rightarrow (v)}=\begin{pmatrix}
+        3 & 0  & 1 \\
+        1 & -2 & 0 \\
+        1 & -1 & 0
+    \end{pmatrix}$.
+
+\end{document}
