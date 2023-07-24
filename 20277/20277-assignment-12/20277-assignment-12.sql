@@ -108,6 +108,65 @@ values (22, '2020-03-02', 'nature party', 100),
 	(77, '2020-03-02', 'life party', 25),
 	(33, '2020-03-02', 'nature party', 13),
 	(33, '2020-03-02', 'science group', 740),
-	(33, '2020-03-02', 'life party', 670);
+	(33, '2020-03-02', 'life party', 670),
+	(22, '2019-04-09', 'nature party', 1000);
 
 -- d1
+select pname, nofvotes
+from city natural join votes
+where cname='ryde end' and edate='2020-03-02'
+
+-- d2
+select pname, region, sum(nofvotes) as region_votes
+from city natural join votes natural join running natural join election
+where kno = 3
+group by pname, region;
+
+-- d3
+select cname, region
+from city
+where cid not in (select cid
+				 from votes
+				 where pname='life party')
+
+-- d4
+with running_count(edate, nofparties) as (select edate, count(pname) from running group by edate)
+select edate, kno
+from running_count natural join election
+where nofparties >= all (select nofparties from running_count)
+
+-- d5
+with available_parties(pname, totalvotes) as (
+	select pname, sum(totalvotes) as totalvotes
+	from running
+	where pname not in (
+			select pname
+			from votes natural join city
+			where region='hills')
+		and pname in (
+			select pname
+			from running natural join election
+			where kno=3 
+		)
+	group by pname)
+select pname
+from available_parties
+where totalvotes <= all (select totalvotes from available_parties)
+
+-- d6
+with maxvotes(votes) as (select max(totalvotes) from running natural join election where kno=3)
+select pname
+from running natural join election, maxvotes
+where kno=3 and totalvotes < maxvotes.votes and 
+	totalvotes >= all (select totalvotes from running natural join election where kno=3 and totalvotes < maxvotes.votes)
+
+-- d7
+with party_dous(p1name, p2name, running_count) as (
+	select r1.pname, r2.pname, count(r1.edate)
+	from running as r1, running as r2
+	where r1.edate = r2.edate and r1.pname < r2.pname
+	group by r1.pname, r2.pname)
+select p1name, p2name
+from party_dous
+where running_count = (select count(*) from running where pname=p1name)
+	and running_count = (select count(*) from running where pname=p2name)
