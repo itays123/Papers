@@ -161,12 +161,9 @@ where kno=3 and totalvotes < maxvotes.votes and
 	totalvotes >= all (select totalvotes from running natural join election where kno=3 and totalvotes < maxvotes.votes)
 
 -- d7
-with party_dous(p1name, p2name, running_count) as (
-	select r1.pname, r2.pname, count(r1.edate)
-	from running as r1, running as r2
-	where r1.edate = r2.edate and r1.pname < r2.pname
-	group by r1.pname, r2.pname)
-select p1name, p2name
-from party_dous
-where running_count = (select count(*) from running where pname=p1name)
-	and running_count = (select count(*) from running where pname=p2name)
+select r1.pname, r2.pname
+from running as r1, running as r2
+where r1.edate = r2.edate and r1.pname < r2.pname
+group by r1.pname, r2.pname
+having count(r1.edate) = (select count(*) from running where pname=r1.pname)
+	and count(r1.edate) = (select count(*) from running where pname=r2.pname)
