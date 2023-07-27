@@ -1,0 +1,380 @@
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\hebrewfont[Script=Hebrew]{Calibri}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+\usepackage{polyglossia}
+\usepackage{amsmath}
+\usepackage{bidi}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+\title{מטלת מנחה 12 - קורס 20218}
+\author{328197462}
+\date{20/08/2023}
+
+\DeclareMathOperator{\sech}{sech}
+
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+לפנינו משוואה חסרה מטיפוס 2 עם שלושה תנאי התחלה שונים.
+נניח בשלילה כי קיים פתרון $u(x)$ למשוואה, עבורו $u(0)=0, u'(0)=1$. אז מתקיים:
+\begin{align*}
+    u(0)u''(0)     & =3(u'(0))^2-4u(0)u'(0)          \\
+    0 \cdot u''(0) & = 3\cdot 1^2 - 4\cdot 0 \cdot 1 \\
+    0              & = 3
+\end{align*}
+וזו סתירה! אין פתרון לבעיית ההתחלה עבורה $y(0)=0, y'(0)=1$.\\\\
+נוכל לזהות פתרון סינגולרי מהצורה $y=C$, שכן אז נקבל $y'=y=0$ ולכן שני אגפי השוויון מתאפסים.
+הפתרון הסינגולרי $y\equiv-1$ מתאים לבעיית ההתחלה בה $y'(0)=0$.
+נניח אפוא $y'\ne 0$ נפתור את המשוואה החסרה עבור תנאי שנותר. \\
+בהצבת $z=y'$ מקבלים $\frac{dz}{dy}=\frac{dz}{dx}\cdot \frac{dx}{dy} = y''\cdot \frac{1}{z}$. נציב במשוואה ונקבל:
+\begin{align*}
+    yz\cdot \frac{dz}{dy} = 3z^2-4yz
+\end{align*}
+נחלק ב $z=y'\ne 0$ ונקבל:
+\begin{align*}
+    y \frac{dz}{dy} = 3z-4y
+\end{align*}
+אם נגביל את עצמנו ל$y<0$ (בסביבה כלשהי של $y=-1$) אז נחלק את המשוואה ב$y$ ונקבל משוואה הומוגנית:
+\begin{align*}
+    \frac{dz}{dy} = 3\frac{z}{y} - 4
+\end{align*}
+בהצבת $z=uy$, נקבל $dz/dy = u + yu'$ ומכאן:
+\begin{align*}
+    u+yu'=u-4
+    yu'=-4
+    du=\frac{-4}{y}dy
+    u=-4\ln|y|=-4\ln(-y)
+    y'=z = -4y\ln(-y)
+    y'=-4y\ln(-y)
+    \frac{dy}{y\ln(-y)}=-4dx
+\end{align*}
+ומקבלים:
+\begin{align*}
+    \int \frac{dy}{y\ln(-y)} = \begin{bmatrix}
+                                   y=-t \\
+                                   dy = -dt
+                               \end{bmatrix} = \int \frac{-dt}{-t\ln t} = \int \frac{dt}{t\ln t} =_{343} \ln(\ln(t)) = \ln(\ln(-y))
+\end{align*}
+ולכן:
+\begin{align*}
+    \ln(\ln(-y))=-4x+C
+\end{align*}
+נציב $x=0, y=-1$
+
+\pagebreak
+
+\section*{שאלה 4}
+לפנינו משוואה לינארית אי-הומוגנית מסדר שני עם מקדמים קבועים. נפתור את המשוואה האופיינית של המשוואה ההומוגנית המתאימה:
+\begin{align*}
+    \lambda^2     & +\lambda+b  =0                                                                                                           \\
+    \lambda_{1,2} & =\frac{-1\pm\sqrt{1^2-4\cdot 1 \cdot b}}{2}=-\frac{1}{2}\pm \sqrt{\frac{1-4b}{4}} = -\frac{1}{2}\pm \sqrt{\frac{1}{4}-b}
+\end{align*}
+נחלק למקרים. עבור $b>\frac{1}{4}$ המספר $\sqrt{\frac{1}{4}-b}$ מדומה טהור. \\
+נסמן $i\beta=\sqrt{\frac{1}{4}-b}, \beta\ne 0$ ופתרונות המשוואה יהיו $y_1=e^{-1/2x}\sin (\beta x), y_2=e^{-1/2x}\cos(\beta x)$. \\
+עבור $b=1/4$ נקבל פתרון יחיד $\lambda=-1/2$, ופתרונות המשוואה יהיו $y_1=e^{-1/2x}, y_2=xe^{-1/2x}$. \\
+עבור $b<1/4$ נקבל שני פתרונות ממשיים $-\frac{1}{2}\pm \sqrt{\frac{1}{4}-b}$, שנסמנם $\lambda, \mu$. פתרונות המשוואה יהיו $y_1=e^{\lambda x}, y_2=e^{\mu x}$.\\\\
+נמצא פתרון פרטי למשוואה בעזרת שיטת המקדמים. "ננחש" כי קיים פתרון מהצורה $y=Ae^{bx}$, ונקבל:
+\begin{align*}
+    y'    & =Abe^{bx}                                \\
+    y''   & =Ab^2e^{bx}                              \\
+    y''   & +y'+by=e^{bx}(Ab^2+Ab+b\cdot A) = e^{bx} \\
+    Ab^2  & +2Ab=1                                   \\
+    A(b^2 & +2b)=1                                   \\
+    A     & =\frac{1}{b^2+2b}
+\end{align*}
+מצאנו פתרון פרטי $y_p=\frac{1}{b^2+2b}e^{bx}$.
+פתרון זה לא מוגדר עבור $b=0,-2$. נטפל במקרים אלה בנפרד. \\
+עבור $b=0$, המשוואה תהיה $y+y'=1$ וקל לראות ש $y\equiv1$ פתרון למשוואה. \\
+עבור $b=-2$, המשוואה תהיה $y+y'-2y=e^{-2x}$. נחפש פתרון פרטי מהצורה $y=e^{-2x}u$:
+\begin{align*}
+    y'  & =-2e^{-2x}u+e^{-2x}u'                                                          \\
+    y'' & = 4e^{-2x}u-2e^{-2x}u'-2e^{-2x}u'+e^{-2x}u''=4e^{-2x}u-4e^{-2x}u'+e^{-2x}u''   \\
+    y'' & +y'-2y = e^{-2x}(u''-4u'+4u)+e^{-2x}(u'-2u)-2ue^{-2x}=e^{-2x}(u''-3u')=e^{-2x} \\
+        & u''-3u'=1
+\end{align*}
+נחפש פתרון מהצורה $u=kx$, אז $u'=k,u''=0$ ומקבלים $-3k=1$ ולכן $k=-\frac{1}{3}$
+ונקבל פתרון פרטי $y_p=-\frac{1}{3}xe^{-2x}$.
+
+נשים לב כי $-\beta^2=(i\beta)^2=\frac{1}{4}-b$ ולכן $\beta=\sqrt{b-\frac{1}{4}}$ ונקבל:
+\begin{align*}
+    y=\begin{cases}
+          e^{-1/2x}(C_1\sin(\sqrt{b-\frac{1}{4}}x) + C_2\cos(\sqrt{b-\frac{1}{4}}x))+\frac{1}{b^2+2b}e^{bx} & b>\frac{1}{4}   \\
+          e^{-1/2x}(C_1+C_2x)+\frac{16}{9}e^{\frac{1}{4}x}                                                  & b=\frac{1}{4}   \\
+          e^{-1/2x}(C_1e^{\sqrt{\frac{1}{4}-b}x}+C_2e^{-\sqrt{\frac{1}{4}-b}x})+\frac{1}{b^2+2b}e^{bx}      & 0<b<\frac{1}{4} \\
+          e^{-1/2x}(C_1e^{\sqrt{\frac{1}{4}-b}x}+C_2e^{-\sqrt{\frac{1}{4}-b}x})+1                           & b=0             \\
+          e^{-1/2x}(C_1e^{\sqrt{\frac{1}{4}-b}x}+C_2e^{-\sqrt{\frac{1}{4}-b}x})+\frac{1}{b^2+2b}e^{bx}      & -2<b<0          \\
+          e^{-1/2x}(C_1e^{\sqrt{\frac{1}{4}-b}x}+C_2e^{-\sqrt{\frac{1}{4}-b}x})-\frac{1}{3}xe^{-2x}         & b=-2            \\
+          e^{-1/2x}(C_1e^{\sqrt{\frac{1}{4}-b}x}+C_2e^{-\sqrt{\frac{1}{4}-b}x})+\frac{1}{b^2+2b}e^{bx}      & b<-2            \\
+      \end{cases}
+\end{align*}
+
+\pagebreak
+\section*{שאלה 5}
+לפנינו משוואה לינארית אי-הומוגנית מסדר שני עם מקדמים קבועים. \\
+ראשית, נמצא לפי השיטה בסעיף 2.4.1 מערכת פתרונות למשוואה ההומוגנית המתאימה. \\
+המשוואה האופיינית תהיה:
+\begin{align*}
+    \lambda^2     & -4\lambda+5=0                                                                         \\
+    \lambda_{1,2} & =\frac{4\pm\sqrt{(-4)^2-4\cdot 1 \cdot 5}}{2\cdot 1}=2\pm \frac{1}{2}\sqrt{-4}=2\pm i
+\end{align*}
+ולכן מערכת מתאימה של פתרונות תהיה, על פי סעיף 2.4.1, $y_1=e^{2x}\sin x$ ו$y_2=e^{2x}\cos x$.\\\\
+מקבלים:
+\begin{align*}
+    \Delta=W(x) & =\begin{vmatrix}
+                       e^{2x}\sin x                 & e^{2x}\cos x                 \\
+                       2e^{2x}\sin x + e^{2x}\cos x & 2e^{2x}\cos x - e^{2x}\sin x
+                   \end{vmatrix} =        \\
+                & = e^{4x} \begin{vmatrix}
+                               \sin x           & \cos x           \\
+                               2\sin x + \cos x & 2\cos x - \sin x
+                           \end{vmatrix} =                        \\
+                & = e^{4x}((2\sin x \cos x - \sin^2 x)-(2\sin x \cos x + \cos^2 x)) = \\
+                & = -e^{4x} (\sin^2 x + \cos^2 x) = -e^{4x}\ne 0
+\end{align*}
+
+עלינו למצוא פונקציות מקדמים $C_1(x), C_2(x)$ כך ש:
+\begin{align*}
+    \begin{cases}
+        e^{2x}\sin x C_1' + e^{2x}\cos x C_2' = 0 \\
+        e^{2x}(2\sin x + \cos x) C_1' + e^{2x}(2\cos x - \sin x) C_2' = (\frac{e^x}{\sin x})^2
+    \end{cases}
+\end{align*}
+על פי כלל קרמר, נקבל:
+\begin{align*}
+    \Delta{C_1'} & =\begin{vmatrix}
+                        0                & e^{2x}\cos x           \\
+                        e^{2x} / \sin^2x & e^2x(2\cos x - \sin x)
+                    \end{vmatrix} = -e^{4x} \frac{\cos x}{\sin^2x}                                                             \\
+    C_1'         & =\frac{\Delta_{C_1'}}{\Delta} = \frac{\cos x}{\sin^2 x}                                                     \\
+    C_1          & = \int \frac{\cos x dx}{\sin ^2 x} = \begin{bmatrix}
+                                                            t = \sin x \\
+                                                            dt = \cos x dx
+                                                        \end{bmatrix} = \int \frac{dt}{t^2} = -\frac{1}{t} = -\frac{1}{\sin x}
+\end{align*}
+וכן:
+\begin{align*}
+    \Delta{C_2'} & =\begin{vmatrix}
+                        e^{2x}\sin x             & 0                \\
+                        e^{2x}(2\sin x + \cos x) & e^{2x} / \sin^2x
+                    \end{vmatrix} = e^{4x} \frac{1}{\sin x}                                                       \\
+    C_2'         & =\frac{\Delta_{C_2'}}{\Delta} = -\frac{1}{\sin x}                                                  \\
+    C_2          & = \int \frac{-dx}{\sin x} = [240 \text{חוברת אינט' }] = -\ln(\tan\frac x 2) = \ln (\cot \frac x 2)
+\end{align*}
+ונקבל פתרון פרטי:
+\begin{align*}
+    y_p & = -\frac{1}{\sin x}\cdot e^{2x}\sin x + \ln(\cot \frac{x}{2}) e^{2x} \cos x =
+    e^{2x}(\cos x \cdot \ln(\cot \frac{x}{2}) - 1)
+\end{align*}
+ופתרון כללי:
+\begin{align*}
+    y & = C_1 e^{2x}\sin x + C_2 e^{2x}\cos x + e^{2x}(\cos x \cdot \ln(\cot \frac{x}{2}) - 1) = \\
+      & = e^{2x}(C_1\sin x + (C_2 + \ln(\cot \frac{x}{2}))\cos x - 1)
+\end{align*}
+
+\pagebreak
+
+\section*{שאלה 6}
+לפנינו משוואה לינארית אי-הומוגנית מסדר שני. נעביר אותה לצורה הרצויה לפתרון משוואות:
+\begin{align*}
+    y''+\frac{2}{x}y'+\frac{1}{4x^2}y=\frac{1}{2x^2\sqrt{x}}
+\end{align*}
+על פי הרמז שקיבלנו, "ננחש" כי קיים פתרון מהצורה $u=x^\alpha$ למשוואה ההומוגנית המתאימה. נקבל:
+\begin{align*}
+    u'                                & =\alpha x^{\alpha -1}                                          \\
+    u''                               & =\alpha(\alpha-1) x^{\alpha -2}                                \\
+    \alpha(\alpha-1)x^{\alpha-2}      & + \frac{2}{x}\alpha x^{\alpha -1}+\frac{1}{4x^2}x^{\alpha} = 0 \\
+    \alpha(\alpha-1)x^{\alpha-2}      & + 2\alpha x^{\alpha -2}+\frac{1}{4}x^{\alpha-2} = 0            \\
+    x^{\alpha -2} (\alpha ^2 - \alpha & + 2\alpha + \frac{1}{4}) = 0                                   \\
+    x^{\alpha -2} (\alpha             & + \frac{1}{2})^2 = 0
+\end{align*}
+היות והפונקציות במשוואה המקורית לא רציפות ב $x=0$, לא נוכל להבטיח קיום פתרון שם, ונוכל לצמצם ב $x^{\alpha-2}$. נקבל פתרון יחיד $\alpha=-\frac{1}{2}$, כלומר $u=\frac{1}{\sqrt{x}}$ מהווה פתרון למשוואה ההומוגנית המתאימה. \\
+נבצע הצבה $y=x^{-1/2}z$ כמתואר בסעיף 2.4.2, על מנת למצוא פתרון נוסף למשוואה ההומוגנית:
+\begin{align*}
+    y'  & =-\frac{1}{2}x^{-3/2}z + x^{-1/2}z'                                                    \\
+    y'' & = \frac{3}{4}x^{-5/2}z - \frac{1}{2}x^{-3/2}z' - \frac{1}{2}x^{-3/2}z' + x^{-1/2}z'' = \\
+        & = \frac{3}{4}x^{-5/2}z - x^{-3/2}z' + x^{-1/2}z''                                      \\
+\end{align*}
+נציב במשוואה ההומוגנית המתאימה ונקבל:
+\begin{align*}
+    (\frac{3}{4}x^{-5/2}z & - x^{-3/2}z' + x^{-1/2}z'')+\frac{2}{x}(-\frac{1}{2}x^{-3/2}z + x^{-1/2}z')+\frac{1}{4x^2}(x^{-1/2}z) = 0 \\
+    \frac{3}{4}x^{-5/2}z  & - x^{-3/2}z' + x^{-1/2}z'' -x^{-5/2}z + 2x^{-3/2}z' + \frac{1}{4}x^{-5/2}z = 0                            \\
+    x^{-1/2}z''           & + (-x^{3/2}+2x^{-3/2})z'+(\frac{3}{4}x^{-5/2}-x^{-5/2}+\frac{1}{4}x^{-5/2})z=0                            \\
+    x^{-1/2}z''           & + x^{-3/2}z'=0                                                                                            \\
+    z''                   & + \frac{1}{x}z' = 0
+\end{align*}
+קיבלנו משוואה חסרה.
+נציב $u=z'$ ונקבל $u'+\frac{1}{x}u=0$.
+זוהי משוואה לינארית מסדר ראשון. כפל בגורם האינגטרציה $e^{\ln x}=x$ ייתן לנו:
+\begin{align*}
+    xu'+u & =0            \\
+    (xu)' & =0            \\
+    xu    & = C           \\
+    u     & = \frac{C}{x}
+\end{align*}
+נבחר למשל $C=1$, ונקבל $z'=u=1/x$, כלומר $z=\ln(x)$ ו$y=\frac{\ln x}{\sqrt{x}}$ מהווה פתרון שני למשוואה ההומוגנית המתאימה.\\
+נחזור על התהליך שנית למציאת פתרון פרטי למשוואה המקורית:
+\begin{align*}
+    x^{-1/2}z'' & +x^{-3/2}z'=\frac{1}{2}x^{-5/2}               \\
+    z''         & + \frac{1}{x}z'=\frac{1}{2}x^{-2}             \\
+    [u=z']      & \Rightarrow u'+\frac{1}{x}u=\frac{1}{2}x^{-2} \\
+                & xu'+u=\frac{1}{2}\cdot \frac{1}{x}            \\
+                & (xu)'=\frac{1}{2}\frac{1}{x}                  \\
+                & xu = \frac{1}{2}\ln x + C                     \\
+                & u = \frac{1}{2}\frac{\ln x+C}{x}
+\end{align*}
+נבחר למשל $C=0$, אז $z'=u=\frac{1}{2x}\ln x$, ונקבל:
+\begin{align*}
+    z = \frac{1}{2}\int \ln x \cdot \frac{dx}{x} = \begin{bmatrix}
+                                                       t = \ln x \\
+                                                       dt = dx/x
+                                                   \end{bmatrix} = \frac{1}{2}\int t dt = \frac{1}{4}t^2=\frac{1}{4} \ln^2 x
+\end{align*}
+ונקבל פתרון פרטי $y_p=\frac{\ln^2x}{4\sqrt{x}}$, והפתרון הכללי למשוואה יהיה:
+\begin{align*}
+    y & =C_1\cdot \frac{1}{\sqrt{x}}+C_2 \cdot \frac{\ln x}{\sqrt{x}} + \frac{\ln^2x}{4\sqrt{x}} = \\
+      & = \frac{1}{\sqrt{x}}(C_1 + C_2 \ln x + \frac{1}{4}\ln^2x)
+\end{align*}
+
+\pagebreak
+
+\section*{שאלה 7}
+לפנינו משוואה לינארית אי-הומוגנית מסדר 3 במקדמים קבועים. המשוואה האופיינית תהיה:
+\begin{align*}
+    \lambda^3-\lambda             & =0 \\
+    \lambda(\lambda^2-1)          & =0 \\
+    \lambda(\lambda-1)(\lambda+1) & =0
+\end{align*}
+ונקבל כי $e^{0x}\equiv1, e^{x}, e^{-x}$ מהווים מערכת בסיסית של פתרונות. נמצא פתרון פרטי על פי כלל קרמר ווריאצית הפרמטרים:
+\begin{align*}
+    \Delta = W(x) & = \begin{vmatrix}
+                          1 & e^{x} & e^{-x}  \\
+                          0 & e^{x} & -e^{-x} \\
+                          0 & e^{x} & e^{-x}
+                      \end{vmatrix} = \begin{vmatrix}
+                                          e^{x} & -e^{-x} \\
+                                          e^{x} & e^{-x}
+                                      \end{vmatrix}=1+1=2                                                                                                             \\
+    \Delta_{C_1'} & = \begin{vmatrix}
+                          0                    & e^{x} & e^{-x}  \\
+                          0                    & e^{x} & -e^{-x} \\
+                          \frac{1}{e^x+e^{-x}} & e^{x} & e^{-x}
+                      \end{vmatrix} = \frac{1}{e^x+e^{-x}} \begin{vmatrix}
+                                                               0 & e^{x} & e^{-x}  \\
+                                                               0 & e^{x} & -e^{-x} \\
+                                                               1 & e^{x} & e^{-x}
+                                                           \end{vmatrix} =
+    \frac{1}{e^x+e^{-x}} \begin{vmatrix}
+                             e^x & e^{-x}  \\
+                             e^x & -e^{-x}
+                         \end{vmatrix}=\frac{-2}{e^x+e^{-x}}=-\sech x                                                                                                 \\
+    \Delta_{C_2'} & =\begin{vmatrix}
+                         1 & 0                    & e^{-x}  \\
+                         0 & 0                    & -e^{-x} \\
+                         0 & \frac{1}{e^x+e^{-x}} & e^{-x}
+                     \end{vmatrix}=\begin{vmatrix}
+                                       0                    & -e^{-x} \\
+                                       \frac{1}{e^x+e^{-x}} & e^{-x}
+                                   \end{vmatrix} = \frac{e^{-x}}{e^x+e^{-x}}=\frac{1}{e^{2x}+1}                                                                       \\
+    \Delta_{C_3'} & = \begin{vmatrix}
+                          1 & e^x & 0                                          \\
+                          0 & e^x & 0                                          \\
+                          0 & e^x & \frac{1}{e^x+e^{-x}} = \frac{1}{e^{-2x}+1} \\
+                      \end{vmatrix} = \begin{vmatrix}
+                                          e^x & 0                    \\
+                                          e^x & \frac{1}{e^x+e^{-x}}
+                                      \end{vmatrix} = \frac{e^x}{e^x+e^{-x}}                                                                     \\
+    C_1'          & = -\frac{1}{2} \sech x \Rightarrow_{369} C_1 = - \arctan(e^x)                                                                                     \\
+    C_2'          & = \frac{1}{2} \frac{1}{e^{2x}+1} \Rightarrow_{361} C_2 = \frac{1}{2} \cdot (x-\frac{1}{2}\ln(1+e^{2x})) = \frac{1}{2}x - \frac{1}{4}\ln(1+e^{2x}) \\
+    C_3'          & = \frac{1}{2} \frac{1}{e^{-2x}+1} \Rightarrow_{361} C_3 = \frac{1}{2}(x+\frac{1}{2}\ln(1+e^{-2x}))=\frac{1}{2}x+\frac{1}{4}\ln(1+e^{-2x})         \\
+    y_p           & = -\arctan(e^x)+\frac{1}{2}x(e^x+e^{-x}) +\frac{1}{4}\ln(\frac{1+e^{-2x}}{1+e^{2x}}) =                                                            \\
+                  & =-\arctan(e^x)+\frac{1}{2}x(e^x+e^{-x}) + \frac{1}{4}\ln(\frac{e^{-x}(e^x+e^{-x})}{e^x(e^x+e^{-x})}) =                                            \\
+                  & =-\arctan(e^x)+\frac{1}{2}x(e^x+e^{-x}) + \frac{1}{4}\ln(e^{-2x}) =                                                                               \\
+                  & =-\arctan(e^x)+\frac{1}{2}x(e^x+e^{-x}) - \frac{1}{2}x =                                                                                          \\
+                  & =-\arctan(e^x)+\frac{1}{2}x(e^x+e^{-x}-1) =                                                                                                       \\
+    y             & = C_1 + C_2e^x + C_3e^{-x}-\arctan(e^x)+\frac{1}{2}x(e^x+e^{-x}-1)
+\end{align*}
+
+\pagebreak
+
+\section*{שאלה 8}
+
+בהצבת 0, נקבל:
+\begin{align*}
+    f'(0)+2\int_0^0 f(t)dt & = \sin 0 + 3f(0) \\
+    f'(0) = 3f(0)
+\end{align*}
+ומהדרישה $f(0)=0$ נקבל $f'(0)=0$. נגזור את המשוואה הנתונה משני צדדיה:
+\begin{align*}
+    f''(x) + 2f(x) = \cos x + 3 f'(x)
+\end{align*}
+בצירוף 2 הדרישות לעיל, נקבל את בעיית ההתחלה:
+\begin{align*}
+    \begin{cases}
+        y''-3y'+2y = \cos x \\
+        y'(0) = y(0) = 0
+    \end{cases}
+\end{align*}
+על פי משפט הקיום והיחידות 2.3.5, והיות וכל הפונקציות במשוואה רציפות ב$(-\infty, \infty)$, נקבל כי קיים פתרון לבעיית ההתחלה ב $(-\infty, \infty)$ והוא יחיד.\\
+על מנת למצוא פתרון זה, ראשית נפתור את המשוואה האופיינית של המשוואה ההומוגנית המתאימה:
+\begin{align*}
+    \lambda^2 & -3\lambda+2=0 \\
+    (\lambda-2)(\lambda-1)=0
+\end{align*}
+ונקבל על פי סעיף 2.4.1 כי $y_1=e^{x}, y_2=e^{2x}$ מהווים מערכת של פתרונות למשוואה ההומוגנית המתאימה.
+\begin{align*}
+    \Delta = W(x) = \begin{vmatrix}
+                        e^x & e^{2x}  \\
+                        e^x & 2e^{2x}
+                    \end{vmatrix} = 2e^{3x} - e^{3x} = e^{3x} \ne 0
+\end{align*}
+על מנת למצוא פתרון פרטי למשוואה, עלינו למצוא פונקציות $C_1(x), C_2(x)$ כך שמתקיים:
+\begin{align*}
+    \begin{cases}
+        e^x C_1' + e^{2x} C_2' = 0 \\
+        e^x C_1' + 2 e^{2x} C_2' = \cos x
+    \end{cases}
+\end{align*}
+נפתור על פי כלל קרמר.
+\begin{align*}
+    \Delta_{C_1'} & = \begin{vmatrix}
+                          0      & e^{2x}  \\
+                          \cos x & 2e^{2x}
+                      \end{vmatrix} = -e^{2x}\cos x                                                                                                            \\
+    C_1'          & =\frac{\Delta_{C_1'}}{\Delta} = -e^{-x}\cos x                                                                                              \\
+    C_1           & = -\int e^{-x}\cos x dx = [359 \text{חוברת אינט' }] = - \frac{e^{-x}(-\cos x + \sin x)}{(-1)^2+1^2}=\frac{1}{2}e^{-x}(\cos x - \sin x)     \\
+    \Delta_{C_2'} & = \begin{vmatrix}
+                          e^x & 0      \\
+                          e^x & \cos x
+                      \end{vmatrix} = e^x\cos x                                                                                                                \\
+    C_2'          & = \frac{\Delta_{C_2'}}{\Delta} = e^{-2x}\cos x                                                                                             \\
+    C_2           & = \int e^{-2x}\cos x dx = [359 \text{חוברת אינט' }] = \frac{e^{-2x}(-2\cos x + \sin x)}{(-2)^2+1^2} = \frac{1}{5}e^{-2x}(\sin x - 2\cos x)
+\end{align*}
+ונקבל פתרון פרטי למשוואה:
+\begin{align*}
+    y_p & = \frac{1}{2}e^{-x}(\cos x - \sin x) \cdot e^x + \frac{1}{5}e^{-2x}(\sin x - 2\cos x) \cdot e^{2x} = \\
+        & = \frac{1}{2}\cos x - \frac{1}{2} \sin x + \frac {1}{5}\sin x - \frac{2}{5}\cos x =                  \\
+        & = \frac{1}{10}\cos x - \frac{3}{10}\sin x
+\end{align*}
+הפתרון הכללי למשוואה יהיה:
+\begin{align*}
+    y  & =C_1e^x+C_2e^{2x}+\frac{1}{10}\cos x - \frac{3}{10}\sin x       \\
+    y' & = C_1e^x + 2C_2e^{2x} - \frac{1}{10}\sin x - \frac{3}{10}\cos x
+\end{align*}
+נציב 0 בשני הביטויים ונקבל:
+\begin{align*}
+    \begin{cases}
+        y(0)=C_1+C_2+\frac{1}{10} = 0 \\
+        y'(0)=C_1+2C_2-\frac{3}{10}=0
+    \end{cases}
+\end{align*}
+נחסר את המשוואה הראשונה מהשנייה ונקבל $C_2-\frac{4}{10}=0$, כלומר $C_2=\frac{4}{10}$ ולכן $C_1=-\frac{5}{10}$
+מקבלים:
+\begin{align*}
+    f(x)=0.4e^{2x}-0.5e^x+0.1\cos x - 0.3 \sin x
+\end{align*}
+זהו, כאמור, פתרון יחיד לבעיה הנתונה.
+
+\end{document}
