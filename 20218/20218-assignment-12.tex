@@ -43,26 +43,127 @@
 \end{align*}
 בהצבת $z=uy$, נקבל $dz/dy = u + yu'$ ומכאן:
 \begin{align*}
-    u+yu'=u-4
-    yu'=-4
-    du=\frac{-4}{y}dy
-    u=-4\ln|y|=-4\ln(-y)
-    y'=z = -4y\ln(-y)
-    y'=-4y\ln(-y)
-    \frac{dy}{y\ln(-y)}=-4dx
+    u+yu'=3u-4 \\
+    yu'-2u=-4  \\
+    u'-\frac{2}{y}u=-\frac{4}{y}
 \end{align*}
-ומקבלים:
+נכפול בגורם האינטגרציה $e^{-2\ln|y|=y^{-2}}$ ונקבל:
 \begin{align*}
-    \int \frac{dy}{y\ln(-y)} = \begin{bmatrix}
-                                   y=-t \\
-                                   dy = -dt
-                               \end{bmatrix} = \int \frac{-dt}{-t\ln t} = \int \frac{dt}{t\ln t} =_{343} \ln(\ln(t)) = \ln(\ln(-y))
+    y^{-2}u'-2y^{-3} = -4y^{-3}
+    (y^{-2}u)'=-4y^{-3}
+\end{align*}
+ובאינטגרציה:
+\begin{align*}
+    y^{-2}u     & =-4\cdot\frac{y^{-2}}{-2}+C=2y^{-2}+C \\
+    u           & = 2 + Cy^2                            \\
+    \frac{z}{y} & = 2 + Cy^2                            \\
+    y'=z        & =2y+Cy^3
+\end{align*}
+נציב $y(0)=-1, y'(0)=1$ על מנת למצוא את ערכו של הקבוע C:
+\begin{align*}
+    1=-2-C & \Rightarrow C = -3 \\
+    y'     & =2y-3y^3           \\
+    \frac{dy}{y(2-3y^2)}=dx
+\end{align*}
+נבצע אינטגרציה:
+\begin{align*}
+    \int \frac{dy}{y(2-3y^2)} & =\begin{bmatrix}
+                                     y=\frac{1}{t} \\
+                                     dy = \frac{-1}{t^2}dt
+                                 \end{bmatrix}
+    = \int \frac{-\frac{1}{t^2}dt}{\frac{1}{t}(2-3(\frac{1}{t^2}))}
+    = \int \frac{tdt}{-t^2(2-\frac{3}{t^2})} =            \\
+                              & = \int \frac{tdt}{3-2t^2}
+    = -\frac{1}{4} \int \frac{-4tdt}{3-2t^2}
+    = -\frac{1}{4}\ln(3-2t^2)+C
+    = -\frac{1}{4}\ln(3-\frac{2}{y^2})+C
 \end{align*}
 ולכן:
 \begin{align*}
-    \ln(\ln(-y))=-4x+C
+    -\frac{1}{4}\ln(3-\frac{2}{y^2}) & = x + C            \\
+    \ln(3-\frac{2}{y^2})             & = -4x + C          \\
+    3-\frac{2}{y^2}                  & =C_1e^{-4x}, C_1>0
 \end{align*}
-נציב $x=0, y=-1$
+נציב $x=0, y(0)=-1$ על מנת למצוא את ערכו של $C_1$:
+\begin{align*}
+    3-\frac{2}{(-1)^2}          & =C_1e^0                          \\
+    1                           & =C_1                             \\
+    \Rightarrow 3-\frac{2}{y^2} & =e^{-4x}                         \\
+    \frac{2}{y^2}               & = 3-e^{-4x}                      \\
+    y^2                         & = \frac{2}{3-e^{-4x}}            \\
+    y                           & = \pm \sqrt{\frac{2}{3-e^{-4x}}}
+\end{align*}
+נרצה לבחור, כמובן, את החלק השלילי של הפתרון המתאים לבעית ההתחלה שלנו. מקבלים את הפתרון:
+\begin{align*}
+    y=-\sqrt{\frac{2}{3-e^{-4x}}}
+\end{align*}
+
+\pagebreak
+
+\section*{שאלה 2}
+
+נניח בשלילה כי $y_1=x^2e^x, y_2=\sin^2x$ הם פתרונות למשוואה לינארית הומוגנית. מכאן ש $W(y_1,y_2;x)$ מתאפס זהותית ב $(-a,a)$ או שאינו מתאפס באף נקודה.
+\begin{align*}
+    W(x) & =\begin{vmatrix}
+                \sin^2x        & e^xx^2      \\
+                2\sin x \cos x & e^x(x^2+2x)
+            \end{vmatrix}
+    = \sin^2x \cdot e^x(x^2+2x) - 2\sin x \cos x \cdot e^xx^2 =                                      \\
+         & = e^x \sin x \cdot ((x^2+2x)\sin x-2x^2\cos x) =xe^x\sin x \cdot ((x+2)\sin x - 2x\cos x)
+\end{align*}
+מתקיים $W(0)=0$, ומכאן $W(x)\equiv 0$ בכל הקטע $(-a,a)$.\\
+בפרט לכל $x\in(0,\min(a, \frac{\pi}{2}))$ מתקיים:
+\begin{align*}
+    xe^x\sin x ((x+2)\sin x - 2x \cos x) = 0
+\end{align*}
+נחלק ב $x,e^x,\sin x > 0$ ונקבל:
+\begin{align*}
+    (x+2)\sin x -2x\cos x & = 0              \\
+    (x+2)\sin x           & = 2x\cos x       \\
+    \tan x                & = \frac{2x}{x+2}
+\end{align*}
+קיבלנו זהות $\tan x \equiv \frac{2x}{x+2}$ בכל הקטע. \\
+זהות זו כמובן לא מתקיימת, שכן $\tan x$ אינה פונקציה רציונלית, ולכן נקבל סתירה!
+
+\pagebreak
+
+\section*{שאלה 3}
+
+\subsection*{סעיף א}
+
+שוב, נניח בשלילה כי $y_1=\sin x, y_2=x$ פתרונות של משוואה לינארית הומוגנית בכל הישר הממשי. אז $W(y_1,y_2;x)$ מתאפס בכל הישר הממשי או באף נקודה בו.
+\begin{align*}
+    W(x) & =\begin{vmatrix}
+                \sin x & x \\
+                \cos x & 1
+            \end{vmatrix} = \sin x - x\cos x
+\end{align*}
+מחד:
+\[
+    W(0)=\sin 0 - 0\cos 0 = 0
+\]
+ומאידך:
+\[
+    W(\frac{\pi}{2})=\sin \frac{\pi}{2} - \frac{\pi}{2} \cos \frac{\pi}{2} = 1
+\]
+ונקבל סתירה! לכן לא קיימת משוואה לינארית הומוגנית מסדר שני עבורה $x, \sin x$ פתרונות שלה בכל הישר הממשי.
+
+\subsection*{סעיף ב}
+
+נניח בשלילה כי $y_1=x, y_2=\sin x$ פתרונות למשוואה מהצורה $y^{(3)}+ay''+by'+cy=0$ בכל הישר הממשי. \\
+נקבל $y_1'=1, y^{(3)}_1=y_1''=0$ ולכן מתקיים בכל הישר הממשי:
+\begin{align*}
+    0+a\cdot 0 + b \cdot 1 + c\cdot x & \equiv 0 \\
+    b+cx \equiv 0
+\end{align*}
+בפרט בהצבת $x=0$ נקבל $b=0$ ובהצבת $x=1$ נקבל $c=0$.\\
+כמו כן, מתקיים $y_2'=\cos x, y_2''=-\sin x, y^{(3)}_2=-\cos x$. לכן:
+\begin{align*}
+    -\cos x - a \sin x \equiv 0
+\end{align*}
+בפרט נציב $x=\frac{\pi}{2}$ ונקבל $a=0$. \\
+מקבלים $-\cos x \equiv 0$ בכל הישר הממשי, אך זה כמובן לא נכון! למשל עבור $x=0$ נקבל $-1=0$ וזו סתירה! \\
+מכאן ש$x, \sin x$ לא יכולים להיות פתרון לאותה משוואה בעלת מקדמים קבועים מסדר 3.
 
 \pagebreak
 
