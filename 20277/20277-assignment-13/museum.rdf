@@ -1,1 +1,26 @@
 galileo-art instanceOf gallery
+galileo-art locatedIn loc1
+loc1 instanceOf location
+loc1 building "5"
+loc1 floor "3"
+כוכבים instanceOf exhibition
+כוכבים inGallery galileo-art
+כוכבים subject "planets"
+כוכבים curator "דניאלה פרץ"
+rectangle instanceOf shape-type
+circle instanceOf shape-type
+נוגה instanceOf item
+נוגה inExhibition כוכבים
+נוגה artist "נוגה ס"
+נוגה type "painting"
+נוגה shape rect1
+rect1 instanceOf rectangle
+rect1 length "200"
+rect1 width "100"
+מאדים instanceOf item
+מאדים inExhibition כוכבים
+מאדים artist מ אדום
+מאדים type "painting"
+מאדים shape circ1
+circ1 instanceOf circle
+circ1 diameter "125"

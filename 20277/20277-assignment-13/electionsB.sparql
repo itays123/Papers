@@ -1,0 +1,6 @@
+select ?kno, ?pname
+where {
+    ?kno instanceOf knesset
+    ?kno kin ?rid
+    ?pname pin ?rid
+}

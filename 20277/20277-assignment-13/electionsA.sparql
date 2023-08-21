@@ -1,0 +1,8 @@
+select ?pname, ?chid
+where {
+    ?kno instanceOf knesset
+    ?kno edate "27.3.2023"
+    ?kno kin ?rid
+    ?pname pin ?rid
+    ?rid chid ?chid
+}
