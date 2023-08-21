@@ -1,0 +1,40 @@
+<gallery>
+    <name>galileo art</name>
+    <location>
+        <building>5</building>
+        <floor>3</floor>
+    </location>
+
+    <exhibitions>
+        <exhibition>
+            <name>כוכבים</name>
+            <subject>planets</subject>
+            <curator>דניאלה פרץ</curator>
+
+            <items>
+                <item>
+                    <name>נוגה</name>
+                    <artist>נוגה ס</artist>
+                    <type>painting</type>
+                    <shape>
+                        <rectangle>
+                            <length>200</length>
+                            <width>100</width>
+                        </rectangle>
+                    </shape>
+                </item>
+                <item>
+                    <name>מאדים</name>
+                    <artist>מ אדום</artist>
+                    <type>painting</type>
+                    <shape>
+                        <circle>
+                            <diameter>125</diameter>
+                        </circle>
+                    </shape>
+                </item>
+            </items>
+        </exhibition>
+    </exhibitions>
+
+</gallery>

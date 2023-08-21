@@ -1,0 +1,39 @@
+{
+    "gallery": {
+        "name": "galileo art",
+        "location": {
+            "building": 5,
+            "floor": 3
+        },
+        "exhibitions": [
+            {
+                "name": "כוכבים",
+                "subject": "planets",
+                "curator": "דניאלה פרץ",
+                "items": [
+                    {
+                        "name": "נוגה",
+                        "artist": "נוגה ס",
+                        "type": "painting",
+                        "shape": {
+                            "rectangle": {
+                                "length": 200,
+                                "width": 100
+                            }
+                        }
+                    },
+                    {
+                        "name": "מאדים",
+                        "artist": "מ אדום",
+                        "type": "painting",
+                        "shape": {
+                            "circle": {
+                                "diameter": 125
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
