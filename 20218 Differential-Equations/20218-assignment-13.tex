@@ -8,6 +8,8 @@
 \setdefaultlanguage{hebrew}
 \setotherlanguage{english}
 
+\DeclareMathOperator*{\equals}{=}
+
 \title{מטלת מנחה 13 - קורס 20218}
 \author{328197462}
 \date{08/09/2023}
@@ -86,7 +88,105 @@
                            \end{pmatrix}
 \end{align*}
 ראשית נמצא פתרון למערכת ההומוגנית $x'=Ax$. המטריצה A בעלת ערכים קבועים ולכן נמצא את ערכיה העצמיים:
-
+\begin{align*}
+    |\lambda I - A| & =\begin{vmatrix}
+                           \lambda - 2 & 5         \\
+                           -1          & \lambda+2
+                       \end{vmatrix}=(\lambda-2)(\lambda+2)-(-1)\cdot 5 = \lambda^2-4+5=\lambda^2+1
+\end{align*}
+קיבלנו כי למטריצה A שני ערכים עצמיים, $\pm i$. נמצא וקטור עצמי השייך לע"ע $\lambda=i$:
+\begin{align*}
+    iI-A & =\begin{pmatrix}
+                i-2 & 5   \\
+                -1  & i+2 \\
+            \end{pmatrix}\xrightarrow[]{R_1\rightarrow R_1-2R_2}\begin{pmatrix}
+                                                                    i  & 1-2i \\
+                                                                    -1 & i+2
+                                                                \end{pmatrix}\xrightarrow[]{R_1\rightarrow iR_1}\begin{pmatrix}
+                                                                                                                    -1 & i+2 \\
+                                                                                                                    -1 & i+2
+                                                                                                                \end{pmatrix}
+\end{align*}
+ועבור $v=\begin{pmatrix}
+        a \\
+        b
+    \end{pmatrix}$ וקטור עצמי נקבל $-a+(i+2)b=0$, כלומר $a=(i+2)b$ ולכן $v=b\begin{pmatrix}
+        i+2 \\
+        1
+    \end{pmatrix}$. נבחר למשל $b=1$ ונקבל 2 פתרונות מרוכבים בת"ל למערכת ההומוגנית:
+\begin{align*}
+    \begin{cases}
+        x(t)=e^{it}v=(\cos t + i\sin t)\begin{pmatrix}
+                                           i+2 \\
+                                           1
+                                       \end{pmatrix} \\
+        x^{\ast}(t)=e^{-it}v*=(\cos t - i\sin t)\begin{pmatrix}
+                                                    -i+2 \\
+                                                    1
+                                                \end{pmatrix}
+    \end{cases}
+\end{align*}
+על פי שאלה 4.2.14, החלק הממשי והחלק המדומה של $x(t)$ מהווים זוג פתרונות בת"ל גם הם וניתן להחליף בין הזוגות. אם כן,
+\begin{align*}
+    x(t) & =(\cos t + i\sin t)(\begin{pmatrix}
+                                   2 \\
+                                   1
+                               \end{pmatrix}+i\begin{pmatrix}
+                                                  1 \\
+                                                  0
+                                              \end{pmatrix}) = \cos t \begin{pmatrix}
+                                                                          2 \\
+                                                                          1
+                                                                      \end{pmatrix} + i\sin t \begin{pmatrix}
+                                                                                                  2 \\
+                                                                                                  1
+                                                                                              \end{pmatrix} + i \cos t \begin{pmatrix}
+                                                                                                                           1 \\
+                                                                                                                           0
+                                                                                                                       \end{pmatrix} - \sin t \begin{pmatrix}
+                                                                                                                                                  1 \\
+                                                                                                                                                  0
+                                                                                                                                              \end{pmatrix} \\
+         & = \cos t \begin{pmatrix}
+                        2 \\
+                        1
+                    \end{pmatrix} + \sin t \begin{pmatrix}
+                                               -1 \\
+                                               0
+                                           \end{pmatrix} + i(\cos t \begin{pmatrix}
+                                                                        1 \\
+                                                                        0
+                                                                    \end{pmatrix}+\sin t \begin{pmatrix}
+                                                                                             2 \\
+                                                                                             1
+                                                                                         \end{pmatrix})
+\end{align*}
+ונקבל זוג פתרונות:
+\begin{align*}
+    \begin{cases}
+        x_1(t)=Re\;x(t)=\cos t \begin{pmatrix}
+                                   2 \\
+                                   1
+                               \end{pmatrix} + \sin t \begin{pmatrix}
+                                                          -1 \\
+                                                          0
+                                                      \end{pmatrix} =\begin{pmatrix}
+                                                                         2\cos t - \sin t \\
+                                                                         \cos t
+                                                                     \end{pmatrix} \\
+        x_2(t)=Im\;x(t)=\cos t \begin{pmatrix}
+                                   1 \\
+                                   0
+                               \end{pmatrix}+\sin t \begin{pmatrix}
+                                                        2 \\
+                                                        1
+                                                    \end{pmatrix} = \begin{pmatrix}
+                                                                        \cos t + 2\sin t \\
+                                                                        \sin t
+                                                                    \end{pmatrix}
+    \end{cases}
+\end{align*}
+נמצא פתרון פרטי למערכת המקורית בעזרת וריאציית הפרמטרים:
 
 \pagebreak
 
@@ -100,8 +200,178 @@
           -2 & 1  & -1
       \end{pmatrix}
 \end{align*}
-נמצא ערכים עצמיים של המטריצה A:
+נמצא ערכים עצמיים של המטריצה $A$. נפשט את הפ"א בעזרת הרמז שקיבלנו.
+\begin{align*}
+    |\lambda I -A| & =\begin{vmatrix}
+                          \lambda-2 & 1       & 2         \\
+                          1         & \lambda & 2         \\
+                          2         & -1      & \lambda+1
+                      \end{vmatrix}\equals^{R_1\rightarrow R_1+R_3}_{R_2\rightarrow R_2+\lambda R_3} \begin{vmatrix}
+                                                                                                         \lambda    & 0  & \lambda+3           \\
+                                                                                                         1+2\lambda & 0  & \lambda^2+\lambda+2 \\
+                                                                                                         2          & -1 & \lambda+1
+                                                                                                     \end{vmatrix} = \\
+                   & = \begin{vmatrix}
+                           \lambda    & \lambda+3           \\
+                           1+2\lambda & \lambda^2+\lambda+2
+                       \end{vmatrix} = \lambda^3+\lambda^2+2\lambda - (2\lambda+1)(\lambda+3) =                                            \\
+                   & = \lambda^3+\lambda^2+2\lambda - (2\lambda^2+\lambda+6\lambda+3)=                                                     \\
+                   & = \lambda^3-\lambda^2-5\lambda-3 =                                                                                    \\
+                   & = \lambda^2(\lambda-3)+2\lambda^2-5\lambda-3 =                                                                        \\
+                   & = \lambda^2(\lambda-3)+2\lambda^2-6\lambda+\lambda-3                                                                  \\
+                   & = \lambda^2(\lambda-3)+2\lambda(\lambda-3)+\lambda-3                                                                  \\
+                   & = (\lambda^2+2\lambda+1)(\lambda-3)                                                                                   \\
+                   & = (\lambda+1)^2(\lambda-3)                                                                                            \\
+\end{align*}
+נקבל שני ערכים עצמיים - $\lambda_1=3$ עם ריבוי אלגברי 1, ו$\lambda_2=-1$ עם ריבוי אלגברי 2.
+נמצא פתרון מהצורה $e^{\lambda t}v$ לכל ערך עצמי:
+\begin{align*}
+    3I-A=\begin{pmatrix}
+             1 & 1  & 2 \\
+             1 & 3  & 2 \\
+             2 & -1 & 4
+         \end{pmatrix} \rightarrow \begin{pmatrix}
+                                       1 & 1  & 2 \\
+                                       0 & 2  & 0 \\
+                                       2 & -1 & 4
+                                   \end{pmatrix} \rightarrow \begin{pmatrix}
+                                                                 1 & 1  & 2 \\
+                                                                 0 & 1  & 0 \\
+                                                                 2 & -1 & 4
+                                                             \end{pmatrix} \rightarrow \begin{pmatrix}
+                                                                                           1 & 0 & 2 \\
+                                                                                           0 & 1 & 0 \\
+                                                                                           2 & 0 & 4
+                                                                                       \end{pmatrix} \rightarrow \begin{pmatrix}
+                                                                                                                     1 & 0 & 2 \\
+                                                                                                                     0 & 1 & 0 \\
+                                                                                                                     0 & 0 & 0
+                                                                                                                 \end{pmatrix}
+\end{align*}
+ועבור $v=\begin{pmatrix}
+        a \\
+        b \\
+        c
+    \end{pmatrix}$ נקבל $b=0, a+2c=0$, כלומר $v=c\begin{pmatrix}
+        -2 \\
+        0  \\
+        1
+    \end{pmatrix}$. נבחר למשל $c=-1$ ונקבל פתרון למערכת $x_1(t)=e^{3t}\begin{pmatrix}
+        2 \\
+        0 \\
+        -1
+    \end{pmatrix}$
 
+\begin{align*}
+    -I-A=\begin{pmatrix}
+             -3 & 1  & 2 \\
+             1  & -1 & 2 \\
+             2  & -1 & 0
+         \end{pmatrix} \rightarrow \begin{pmatrix}
+                                       -2 & 0  & 4 \\
+                                       1  & -1 & 2 \\
+                                       2  & -1 & 0
+                                   \end{pmatrix} \rightarrow \begin{pmatrix}
+                                                                 -2 & 0  & 4 \\
+                                                                 1  & -1 & 2 \\
+                                                                 0  & -1 & 4
+                                                             \end{pmatrix} \rightarrow \begin{pmatrix}
+                                                                                           1 & 0  & -2 \\
+                                                                                           1 & -1 & 2  \\
+                                                                                           0 & -1 & 4
+                                                                                       \end{pmatrix}\rightarrow \begin{pmatrix}
+                                                                                                                    1 & 0  & -2 \\
+                                                                                                                    1 & 0  & -2 \\
+                                                                                                                    0 & -1 & 4
+                                                                                                                \end{pmatrix}
+\end{align*}
+ועבור $v=\begin{pmatrix}
+        a \\
+        b \\
+        c
+    \end{pmatrix}$ נקבל $a-2c=0, -b+4c=0$, כלומר $v=c\begin{pmatrix}
+        2 \\
+        4 \\
+        1
+    \end{pmatrix}$. נבחר למשל $c=1$ ונקבל פתרון למערכת $x_2(t)=e^{-t}\begin{pmatrix}
+        2 \\
+        4 \\
+        1
+    \end{pmatrix}$\\
+עבור הפתרון השלישי במערכת הפתרונות נמצא וקטור $w$ כך ש$(-I-A)w=\begin{pmatrix}
+        2 \\
+        4 \\
+        1
+    \end{pmatrix}$. נחזור על פעולות הדירוג שביצענו קודם לכן:
+\begin{align*}
+    \begin{pmatrix}
+        2 \\
+        4 \\
+        1
+    \end{pmatrix}\rightarrow\begin{pmatrix}
+                                6 \\
+                                4 \\
+                                1
+                            \end{pmatrix}\rightarrow\begin{pmatrix}
+                                                        6 \\
+                                                        4 \\
+                                                        7
+                                                    \end{pmatrix}\rightarrow\begin{pmatrix}
+                                                                                -3 \\
+                                                                                4  \\
+                                                                                7
+                                                                            \end{pmatrix}\rightarrow\begin{pmatrix}
+                                                                                                        -3 \\
+                                                                                                        -3 \\
+                                                                                                        7
+                                                                                                    \end{pmatrix}
+\end{align*}
+ועבור $w=\begin{pmatrix}
+        a
+        b
+        c
+    \end{pmatrix}$ מקבלים $a-2c=-3, -b+4c=7$ ולכן $w=\begin{pmatrix}
+        -3 \\
+        -7 \\
+        0
+    \end{pmatrix}+c\begin{pmatrix}
+        2 \\
+        4 \\
+        1
+    \end{pmatrix}$. נבחר למשל $c=2$ ונקבל $w=\begin{pmatrix}
+        1 \\
+        1 \\
+        2
+    \end{pmatrix}$. \\
+פתרון נוסף למערכת יהיה $x_3(t)=te^{-t}\begin{pmatrix}
+        2 \\
+        4 \\
+        1
+    \end{pmatrix}+e^{-t}\begin{pmatrix}
+        1 \\
+        1 \\
+        2
+    \end{pmatrix}=e^{-t}\begin{pmatrix}
+        2t+1 \\
+        4t+1 \\
+        t+2
+    \end{pmatrix}$, והפתרון הכללי יהיה:
+\begin{align*}
+    x=C_1e^{3t}\begin{pmatrix}
+                   2 \\
+                   0 \\
+                   -1
+               \end{pmatrix}
+    +e^{-t}(C_2\begin{pmatrix}
+                   2 \\
+                   4 \\
+                   1
+               \end{pmatrix}+C_3\begin{pmatrix}
+                                    2t+1 \\
+                                    4t+1 \\
+                                    t+2
+                                \end{pmatrix})
+\end{align*}
 
 \pagebreak
 
@@ -120,6 +390,112 @@
                                  \end{pmatrix}
 \end{align*}
 ראשית נמצא פתרון למערכת ההומוגנית $x'=Ax$. נמצא ערכים עצמיים לA:
+\begin{align*}
+    |\lambda I - A| & =\begin{vmatrix}
+                           \lambda-1 & -1        & -2        \\
+                           0         & \lambda-2 & -2        \\
+                           1         & -1        & \lambda-3
+                       \end{vmatrix}\equals^{R_2\rightarrow R_2-R_1}\begin{vmatrix}
+                                                                        \lambda-1 & -1        & -2        \\
+                                                                        1-\lambda & \lambda-1 & 0         \\
+                                                                        1         & -1        & \lambda-3
+                                                                    \end{vmatrix}=(\lambda-1)\begin{vmatrix}
+                                                                                                 \lambda-1 & -1 & -2        \\
+                                                                                                 -1        & 1  & 0         \\
+                                                                                                 1         & -1 & \lambda-3
+                                                                                             \end{vmatrix}= \\
+                    & \equals^{R_2\rightarrow R_2+R_3} (\lambda-1)\begin{vmatrix}
+                                                                      \lambda-1 & -1 & -2        \\
+                                                                      0         & 0  & \lambda-3 \\
+                                                                      1         & -1 & \lambda-3
+                                                                  \end{vmatrix}=-(\lambda-1)(\lambda-3)\begin{vmatrix}
+                                                                                                           \lambda-1 & -1 \\
+                                                                                                           1         & -1
+                                                                                                       \end{vmatrix} =  \\
+                    & = -(\lambda-1)(\lambda-3)(-\lambda+1-(-1)\cdot 1)=(\lambda-1)(\lambda-2)(\lambda-3)
+\end{align*}
+קיבלנו 3 ע"ע. נמצא 3 פתרונות למשוואה ההומוגנית מהצורה $e^{\lambda t}v$.
+\begin{align*}
+    I-A=\begin{pmatrix}
+            0 & -1 & -2 \\
+            0 & -1 & -2 \\
+            1 & -1 & -2
+        \end{pmatrix}-\cdots\rightarrow\begin{pmatrix}
+                                           0 & 1 & 2 \\
+                                           1 & 0 & 0 \\
+                                           0 & 0 & 0
+                                       \end{pmatrix}
+\end{align*}
+ועבור וקטור עצמי $v=\begin{pmatrix}
+        a \\
+        b \\
+        c
+    \end{pmatrix}$ השייך לע"ע $\lambda=1$ נקבל $b+2c=0, a=0$ ולכן $v=c\begin{pmatrix}
+        0  \\
+        -2 \\
+        1
+    \end{pmatrix}$. \\ נבחר למשל $c=-1$ ונקבל $x_1(t)=e^t\begin{pmatrix}
+        0 \\
+        2 \\
+        -1
+    \end{pmatrix}$ פתרון למערכת ההומוגנית.
+\begin{align*}
+    2I-A=\begin{pmatrix}
+             1 & -1 & 2  \\
+             0 & 0  & -2 \\
+             1 & -1 & -1
+         \end{pmatrix} \rightarrow \begin{pmatrix}
+                                       1 & -1 & 2  \\
+                                       0 & 0  & 1  \\
+                                       1 & -1 & -1
+                                   \end{pmatrix} - \cdots \rightarrow \begin{pmatrix}
+                                                                          1 & -1 & 0 \\
+                                                                          0 & 0  & 1 \\
+                                                                          0 & 0  & 0
+                                                                      \end{pmatrix}
+\end{align*}
+ועבור וקטור עצמי $v=\begin{pmatrix}
+        a \\
+        b \\
+        c
+    \end{pmatrix}$ השייך לע"ע $\lambda=2$ נקבל $a-b=0, c=0$ ולכן $v=a\begin{pmatrix}
+        1 \\
+        1 \\
+        0
+    \end{pmatrix}$. \\ נבחר למשל $a=1$ ונקבל $x_2(t)=e^{2t}\begin{pmatrix}
+        1 \\
+        1 \\
+        0
+    \end{pmatrix}$ פתרון למערכת ההומוגנית.
+\begin{align*}
+    3I-A=\begin{pmatrix}
+             2 & -1 & -2 \\
+             0 & 1  & -2 \\
+             1 & -1 & 0
+         \end{pmatrix}\rightarrow \begin{pmatrix}
+                                      2 & -2 & 0  \\
+                                      0 & 1  & -2 \\
+                                      1 & -1 & 0
+                                  \end{pmatrix}-\cdots\rightarrow \begin{pmatrix}
+                                                                      1 & -1 & 0  \\
+                                                                      0 & 1  & -2 \\
+                                                                      0 & 0  & 0
+                                                                  \end{pmatrix}
+\end{align*}
+ועבור וקטור עצמי $v=\begin{pmatrix}
+        a \\
+        b \\
+        c
+    \end{pmatrix}$ השייך לע"ע $\lambda=3$ נקבל $a-b=0, b-2c=0$ ולכן $v=c\begin{pmatrix}
+        2 \\
+        2 \\
+        1
+    \end{pmatrix}$. \\ נבחר למשל $c=1$ ונקבל $x_3(t)=e^{3t}\begin{pmatrix}
+        2 \\
+        2 \\
+        1
+    \end{pmatrix}$ פתרון למערכת ההומוגנית.\\
+נמצא פתרון פרטי למערכת המקורית בעזרת וריאציית הפרמטרים.
 
 \pagebreak
 
@@ -130,6 +506,27 @@
         b & b
     \end{pmatrix}x$ כך ש$a,b$ קבועים ממשיים.\\
 עלינו להוכיח שכל רכיביו של פתרון למשוואה זו אפסים באינסוף אם ורק אם $a<b<0$. תחילה נמצא ערכים עצמיים ל-A.
+\begin{align*}
+    |\lambda I - A|=\begin{vmatrix}
+                        \lambda-a & -b        \\
+                        -b        & \lambda-b
+                    \end{vmatrix}=(\lambda-a)(\lambda-b)-(-b)(-b)=\lambda^2-(a+b)\lambda+ab-b^2
+\end{align*}
+נמצא שורשים לפ"א:
+\begin{align*}
+    \Delta=(a+b)^2-4(ab-b^2)=a^2+2ab+b^2-4ab+4b^2=a^2-2ab+b^2+4b^2=(a-b)^2+4b^2\geq 0
+\end{align*}
+נחלק למקרים. אילו $\Delta=0$, כלומר יש פתרון יחיד למשוואה וע"ע יחיד למטריצה, הדבר מחייב $b=0, a-b=0$ ולכן $a=b=0$.\\
+במקרה זה נקבל פתרונות מהצורה $C_1\begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix}+C_2\begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix}$, שעבור $C_1\ne 0$ או $C_2\ne 0$ יכילו רכיבים שאינם אפסים באינסוף.\\
+נתייחס למקרה בו יש שני שורשים שונים, $\lambda_1, \lambda_2$. נקבל מערכת של פתרונות $e^{\lambda_1t}v_1, e^{\lambda_2t}v_2$ כאשר $v_1, v_2$ וקטורים עצמיים השייכים לע"ע $\lambda_1, \lambda_2$ בהתאמה.\\
+היות ו$v_1, v_2$ וקטורים קבועים, רכיבי שני פתרונות אלה אפסים באינסוף אם ורק אם $\lambda_1, \lambda_2<0$. במקרה זה כל פתרונות המערכת יהיו צירוף לינארי של שני הפתרונות שלהם וגם הם יהיו אפסים באינסוף.\\
+במילים אחרות, כל רכיב בכל פתרון למערכת אפס באינסוף אם ורק אם $\lambda_1, \lambda_2<0$
 
 \pagebreak
 
