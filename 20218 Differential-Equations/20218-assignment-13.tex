@@ -1,0 +1,254 @@
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily\hebrewfont[Script=Hebrew]{Calibri}
+\usepackage[left=2.0cm, top=2.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+\usepackage{polyglossia}
+\usepackage{amsmath}
+\usepackage{bidi}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+
+\title{מטלת מנחה 13 - קורס 20218}
+\author{328197462}
+\date{08/09/2023}
+
+\begin{document}
+\maketitle
+
+\section*{שאלה 1}
+
+נניח כי קיימת מעכת הומונית $x'=Ax$ עבורה הפונקציות הבאות מהוות פתרון:
+\begin{align*}
+    x_1(t)=e^t\begin{pmatrix}
+                  1 \\
+                  2 \\
+                  3
+              \end{pmatrix} &  &
+    x_2(t)=e^{-t}\begin{pmatrix}
+                     2 \\
+                     4 \\
+                     6
+                 \end{pmatrix}
+\end{align*}
+אז גם הפונקציה $u=2x_1-x_2$, שהיא צירוף לינארי של פתרונות למערכת ההומוגנית. מהווה פתרון למערכת.\\
+מתקיים:
+\begin{align*}
+    u(0)=2\cdot e^0 \begin{pmatrix}
+                        1 \\
+                        2 \\
+                        3
+                    \end{pmatrix} - e^0\begin{pmatrix}
+                                           2 \\
+                                           4 \\
+                                           6
+                                       \end{pmatrix} = \begin{pmatrix}
+                                                           0 \\
+                                                           0 \\
+                                                           0
+                                                       \end{pmatrix}
+\end{align*}
+ולכן לפי למה 4.1.7, $u$ הוא הפתרון הטריוויאלי, כלומר $u(t)=0$ לכל $t\in(-1,1)$.
+אולם:
+\begin{align*}
+    u(0.5)=2\cdot e^{0.5} \begin{pmatrix}
+                              1 \\
+                              2 \\
+                              3
+                          \end{pmatrix} - e^{-0.5}\begin{pmatrix}
+                                                      2 \\
+                                                      4 \\
+                                                      6
+                                                  \end{pmatrix}=
+    (e^{0.5}-e^{-0.5})\begin{pmatrix}
+                          2 \\
+                          4 \\
+                          6
+                      \end{pmatrix}=\underline{0}
+\end{align*}
+ונקבל סתירה היות ו $e^{0.5}-e^{-0.5}\ne 0$ וכן $\begin{pmatrix}
+        2 \\
+        4 \\
+        6
+    \end{pmatrix}\ne \underline{0}$
+
+\pagebreak
+
+\section*{שאלה 2}
+
+לפנינו המשוואה $x'=Ax+b$ כך ש:
+\begin{align*}
+    A=\begin{pmatrix}
+          2 & -5 \\
+          1 & -2
+      \end{pmatrix} &  & b=\begin{pmatrix}
+                               5e^{2t} \\
+                               0
+                           \end{pmatrix}
+\end{align*}
+ראשית נמצא פתרון למערכת ההומוגנית $x'=Ax$. המטריצה A בעלת ערכים קבועים ולכן נמצא את ערכיה העצמיים:
+
+
+\pagebreak
+
+\section*{שאלה 3}
+
+לפנינו המערכת $x'=Ax$ כך ש:
+\begin{align*}
+    A=\begin{pmatrix}
+          2  & -1 & -2 \\
+          -1 & 0  & -2 \\
+          -2 & 1  & -1
+      \end{pmatrix}
+\end{align*}
+נמצא ערכים עצמיים של המטריצה A:
+
+
+\pagebreak
+
+\section*{שאלה 4}
+
+לפנינו המערכת $x'=Ax+b$ כך ש:
+\begin{align*}
+    A=\begin{pmatrix}
+          1  & 1 & 2 \\
+          0  & 2 & 2 \\
+          -1 & 1 & 3
+      \end{pmatrix} &  & b=e^{2t}\begin{pmatrix}
+                                     -1 \\
+                                     -2 \\
+                                     0
+                                 \end{pmatrix}
+\end{align*}
+ראשית נמצא פתרון למערכת ההומוגנית $x'=Ax$. נמצא ערכים עצמיים לA:
+
+\pagebreak
+
+\section*{שאלה 5}
+
+לפנינו המערכת $x'=\begin{pmatrix}
+        a & b \\
+        b & b
+    \end{pmatrix}x$ כך ש$a,b$ קבועים ממשיים.\\
+עלינו להוכיח שכל רכיביו של פתרון למשוואה זו אפסים באינסוף אם ורק אם $a<b<0$. תחילה נמצא ערכים עצמיים ל-A.
+
+\pagebreak
+
+\section*{שאלה 6}
+
+לפנינו המערכת $x'=Ax+b$ כך ש:
+\begin{align*}
+    A=\begin{pmatrix}
+          \frac{7}{2t}   & \frac{-t}{2}  \\
+          \frac{3}{2t^3} & \frac{-1}{2t}
+      \end{pmatrix}=\frac{1}{2t^3}\begin{pmatrix}
+                                      7t^2 & -t^4 \\
+                                      3    & -t^2
+                                  \end{pmatrix} &  & b=\begin{pmatrix}
+                                                           -t \\
+                                                           -t^3
+                                                       \end{pmatrix}
+\end{align*}
+נמצא פתרון למשוואה ההומוגנית המתאימה, $x'=Ax$, שבו הרכיב השני קבוע. נסמן אפוא $x=\begin{pmatrix}
+        u(t) \\
+        C
+    \end{pmatrix}$. מתקיים:
+\begin{align*}
+    \begin{pmatrix}
+        u'(t) \\
+        0
+    \end{pmatrix}=x' & =Ax=\frac{1}{2t^3}\begin{pmatrix}
+                                             7t^2 & -t^4 \\
+                                             3    & -t^2
+                                         \end{pmatrix}\begin{pmatrix}
+                                                          u(t) \\
+                                                          C
+                                                      \end{pmatrix}=\frac{1}{2t^3}\begin{pmatrix}
+                                                                                      7t^2u(t)-Ct^4 \\
+                                                                                      3u(t)-Ct^2
+                                                                                  \end{pmatrix} \\
+                     & \rightarrow \begin{cases}
+                                       2t^3\cdot u' = 7t^2u - Ct^4 \\
+                                       3u-Ct^2=0
+                                   \end{cases} \rightarrow \begin{cases}
+                                                               2t^3\cdot u' = t^2(4u+3u-Ct^2) \\
+                                                               3u-Ct^2 = 0
+                                                           \end{cases}
+\end{align*}
+נציב את המשוואה השנייה בראשונה ונקבל:
+\begin{align*}
+    2t^3\cdot u' & = 4t^2u                   \\
+    \frac{u'}{u} & = \frac{2}{t}             \\
+    \frac{du}{u} & = \frac{2}{t}dt           \\
+    \ln|u|       & =2\ln|t|+C_1=\ln(t^2)+C_1 \\
+    |u|          & =e^{C_1}t^2               \\
+    u            & =\pm e^{C_1}t^2=C_2t^2
+\end{align*}
+נבחר למשל $u=t^2$, אז $Ct^2=3u=3t^2$ ולכן $C=3$ ו$x_1=\begin{pmatrix}
+        t^2 \\
+        3
+    \end{pmatrix}$ מהווה פתרון ל$x'=Ax$. \\
+נמצא פתרון נוסף למערכת ההומוגנית על פי הטכניקה בסעיף 4.2.5. נמצא פונקציה וקטורית $y=\begin{pmatrix}
+        y_1 \\
+        y_2
+    \end{pmatrix}$ ונסמן $x=\begin{pmatrix}
+        y_1+t^2y_2 \\
+        3y_2
+    \end{pmatrix}$. \\
+אז:
+\begin{align*}
+    \begin{pmatrix}
+        y_1'+2ty_2+t^2y_2' \\
+        3y_2'
+    \end{pmatrix}=x' & =Ax=\frac{1}{2t^3}\begin{pmatrix}
+                                             7t^2 & -t^4 \\
+                                             3    & -t^2
+                                         \end{pmatrix}\begin{pmatrix}
+                                                          y_1+t^2y_2 \\
+                                                          3y_2
+                                                      \end{pmatrix}=
+    \frac{1}{2t^3}\begin{pmatrix}
+                      7t^2y_1+7t^4y_2-3t^4y_2 \\
+                      3y_1 + 3t^2y_2-3t^2y_2
+                  \end{pmatrix}=\frac{1}{2t^3}\begin{pmatrix}
+                                                  7t^2y_1+4t^4y_2 \\
+                                                  3y_1
+                                              \end{pmatrix}                      \\
+    \rightarrow           & \begin{cases}
+                                y_1'+2ty_2+t^2y_2' = \frac{7}{2t}y_1+2ty_2 \\
+                                y_2'=\frac{1}{2t^3}y_1
+                            \end{cases} \rightarrow \begin{cases}
+                                                        y_1'+t^2y_2' = \frac{7}{2t}y_1 \\
+                                                        y_2'=\frac{1}{2t^3}y_1
+                                                    \end{cases}
+\end{align*}
+נציב את המשוואה השנייה בראשונה ונקבל: \\
+\begin{align*}
+    y_1'+\frac{t^2}{2t^3}y_1 & =\frac{7}{2t}y_1          \\
+    y_1'+\frac{1}{2t}y_1     & =\frac{7}{2t}y_1          \\
+    y_1'                     & =\frac{3}{t}y_1           \\
+    \frac{dy_1}{y_1}         & =\frac{3}{t}dt            \\
+    \ln|y_1|                 & =3\ln|t|+C_3=\ln|t^3|+C_3 \\
+    |y_1|                    & =e^{C_3}|t^3|             \\
+    y_1                      & = \pm e^{C_3}t^3=C_4t^3
+\end{align*}
+נבחר למשל $y_1=t^3$, אז $y_2'=\frac{1}{2t^3}y_1=\frac{1}{2}$ ולכן $y_2=\frac{t}{2}+C_5$. נבחר למשל $y_2=\frac{t}{2}$ ונקבל פתרון:
+\begin{align*}
+    \begin{pmatrix}
+        t^3+t^2\cdot \frac{t}{2} \\
+        \frac{3t}{2}
+    \end{pmatrix}=
+    \begin{pmatrix}
+        \frac{3t^3}{2} \\
+        \frac{3t}{2}
+    \end{pmatrix}=\frac{3}{2}\begin{pmatrix}
+                                 t^3 \\
+                                 t
+                             \end{pmatrix}
+\end{align*}
+ו$x_2=\begin{pmatrix}
+        t^3 \\
+        t
+    \end{pmatrix}$ פתרון נוסף למערכת ההומוגנית.\\
+נמצא פתרון פרטי למערכת המקורית בעזרת וריאציית הפרמטרים:
+
+\end{document}
