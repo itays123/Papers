@@ -704,8 +704,8 @@
                                       7t^2 & -t^4 \\
                                       3    & -t^2
                                   \end{pmatrix} &  & b=\begin{pmatrix}
-                                                           -t \\
-                                                           -t^3
+                                                           -t^3 \\
+                                                           -t
                                                        \end{pmatrix}
 \end{align*}
 נמצא פתרון למשוואה ההומוגנית המתאימה, $x'=Ax$, שבו הרכיב השני קבוע. נסמן אפוא $x=\begin{pmatrix}
@@ -815,24 +815,41 @@
     \Delta = W(t)                     & =\begin{vmatrix}
                                              t^2 & t^3 \\
                                              3   & t
-                                         \end{vmatrix} = t^3 - 3t^3=-2t^3                                                             \\
+                                         \end{vmatrix} = t^3 - 3t^3=-2t^3                 \\
     \Delta_{C_1'}                     & =\begin{vmatrix}
-                                             -t   & t^3 \\
-                                             -t^3 & t
-                                         \end{vmatrix} = -t^2+t^6                                                                     \\
-    C_1'=\frac{\Delta_{C_1'}}{\Delta} & =\frac{1}{2t} - \frac{1}{2}t^3 \Rightarrow C_1=\frac{1}{2}\ln|t|-\frac{1}{8}t^4               \\
+                                             -t^3 & t^3 \\
+                                             -t   & t
+                                         \end{vmatrix} = -t^4+t^4=0                       \\
+    C_1'=\frac{\Delta_{C_1'}}{\Delta} & =0 \Rightarrow C_1=0                              \\
     \Delta_{C_2'}                     & =\begin{vmatrix}
-                                             t^2 & -t   \\
-                                             3   & -t^3
-                                         \end{vmatrix} = -t^5+t                                                                       \\
-    C_2'=\frac{\Delta_{C_2'}}{\Delta} & =\frac{1}{2}t^2 - \frac{1}{2}t^{-2} \Rightarrow C_2=\frac{1}{6}t^3+\frac{1}{2t}               \\
-    x_p                               & = (\frac{1}{2}\ln|t|-\frac{1}{8}t^4)\begin{pmatrix}
-                                                                                t^2 \\
-                                                                                3
-                                                                            \end{pmatrix}+(\frac{1}{6}t^3+\frac{1}{2t})\begin{pmatrix}
-                                                                                                                           t^3 \\
-                                                                                                                           t
-                                                                                                                       \end{pmatrix}
+                                             t^2 & -t^3 \\
+                                             3   & -t
+                                         \end{vmatrix} = -t^3+3t^3=2t^3                   \\
+    C_2'=\frac{\Delta_{C_2'}}{\Delta} & =-1 \Rightarrow C_2=-t                            \\
+    x_p                               & = 0\begin{pmatrix}
+                                               t^2 \\
+                                               3
+                                           \end{pmatrix}+(-t)\begin{pmatrix}
+                                                                 t^3 \\
+                                                                 t
+                                                             \end{pmatrix}=\begin{pmatrix}
+                                                                               -t^4 \\
+                                                                               -t^2
+                                                                           \end{pmatrix}
 \end{align*}
+והפתרון הכללי למשוואה יהיה:
+\begin{align*}
+    x=\begin{pmatrix}
+          -t^4 \\
+          -t^2
+      \end{pmatrix}+C_1\begin{pmatrix}
+                           t^2 \\
+                           3
+                       \end{pmatrix}+C_2\begin{pmatrix}
+                                            t^3 \\
+                                            t
+                                        \end{pmatrix}
+\end{align*}
+
 
 \end{document}
