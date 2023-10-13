@@ -17,6 +17,13 @@ public class SecretWord {
     private boolean[] revealed;
 
     /**
+     * Generates a secret word from a random word from the word bank
+     */
+    public SecretWord() {
+        this.reset();
+    }
+
+    /**
      * Create a secret word from a known word
      * 
      * @param word the secret word
@@ -26,11 +33,19 @@ public class SecretWord {
     }
 
     /**
+     * Resets the secret word with a random word from the word bank
+     * 
+     */
+    public void reset() {
+        this.reset(WordBank.getRandomWord());
+    }
+
+    /**
      * Resets the secret word
      * 
-     * @param word
+     * @param word the new secret word
      */
-    public void reset(String word) {
+    private void reset(String word) {
         this.word = word;
         this.revealed = new boolean[word.length()]; // all false
     }
