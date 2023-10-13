@@ -14,7 +14,12 @@ public class SecretWord {
     /**
      * Letters revealed bitmap
      */
-    private boolean[] revealed;
+    private boolean[] revealedBitmap;
+
+    /**
+     * Word revealed indicator
+     */
+    private boolean revealed;
 
     /**
      * Generates a secret word from a random word from the word bank
@@ -47,36 +52,42 @@ public class SecretWord {
      */
     private void reset(String word) {
         this.word = word;
-        this.revealed = new boolean[word.length()]; // all false
+        this.revealedBitmap = new boolean[word.length()]; // all false
+        this.revealed = false;
     }
 
     /**
      * Records the guess of a letter.
      * 
      * @param letter the letter guessed
-     * @return true if word is fully revealed, false otherwise
      */
-    public boolean recordGuess(char letter) {
-        boolean wordRevealed = true; // change to false if there are unrevealed letetrs
+    public void recordGuess(char letter) {
+        revealed = true; // change to false if there are unrevealed letetrs
         for (int i = 0; i < word.length(); i++) {
-            if (revealed[i]) // letter revealed already
+            if (revealedBitmap[i]) // letter revealed already
                 continue;
             if (word.charAt(i) == letter) // correct guess
-                revealed[i] = true;
+                revealedBitmap[i] = true;
             else // letter not revealed previously, and should not reveal now
-                wordRevealed = false;
+                revealed = false;
         }
-        return wordRevealed;
     }
 
     /**
-     * A string representation of the secret wםrd, hiding non-revealed letters
+     * @return true if word is revealed, false otherwise
+     */
+    public boolean isRevealed() {
+        return revealed;
+    }
+
+    /**
+     * A string representation of the secret word, hiding non-revealed letters
      */
     @Override
     public String toString() {
         String result = "";
         for (int i = 0; i < word.length(); i++) {
-            if (revealed[i])
+            if (revealedBitmap[i])
                 result += word.charAt(i);
             else
                 result += '_';
