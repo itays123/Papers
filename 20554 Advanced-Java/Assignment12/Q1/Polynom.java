@@ -9,6 +9,13 @@ public class Polynom {
     private ArrayList<PolynomElement> elements;
 
     /**
+     * Empty constructor
+     */
+    public Polynom() {
+        this.elements = new ArrayList<>();
+    }
+
+    /**
      * private constructor, create polynomial using a preconstructed arraylist of
      * elements.
      * Note that this creates an aliasing situation, so it's up to the class
@@ -92,7 +99,7 @@ public class Polynom {
             thisIdx++;
         }
         while (otherIdx < otherSize) {
-            sumElements.add(other.elements.get(otherSize));
+            sumElements.add(other.elements.get(otherIdx));
             otherIdx++;
         }
 
