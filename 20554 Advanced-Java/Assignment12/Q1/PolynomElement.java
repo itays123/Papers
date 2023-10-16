@@ -31,6 +31,15 @@ public class PolynomElement {
     }
 
     /**
+     * Returns the element's scalar
+     * 
+     * @return the element's scalar
+     */
+    public double getScalar() {
+        return scalar;
+    }
+
+    /**
      * Adds the polynom element to another one
      * 
      * @param other the element to add
@@ -79,10 +88,19 @@ public class PolynomElement {
         if (abs != 1.0 || power == 0)
             scalarAbs += abs;
 
-        if (power != 0)
+        if (power != 0 && power != 1)
             xPowered = "x^" + power;
+        else if (power == 1)
+            xPowered = "x";
 
         return sign + scalarAbs + xPowered;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof PolynomElement))
+            return false;
+        return power == ((PolynomElement) obj).power && scalar == ((PolynomElement) obj).scalar;
     }
 
 }
