@@ -16,6 +16,13 @@ public class NumberBuilder {
      * Constructs an empty number
      */
     public NumberBuilder() {
+        this.reset();
+    }
+
+    /**
+     * Reset the state
+     */
+    public void reset() {
         integerPart = UNDEFINED;
         decimalPart = UNDEFINED;
         digitsAfterDecimal = 0;

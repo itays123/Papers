@@ -3,20 +3,15 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 public class CalculatorController {
 
-    public static final int BUTTON_PREF_SIZE = 80;
-    public static final int BUTTON_CORNDER_RADIUS = 8;
     public static final Color DIGIT_BUTTON_COLOR = Color.LIGHTGRAY;
+    public static final Color OP_BUTTON_COLOR = Color.ORANGE;
 
     @FXML
     private GridPane buttonGrid;
@@ -25,13 +20,12 @@ public class CalculatorController {
     private TextField textField;
 
     private NumberBuilder numberBuilder;
-    private StringProperty calculatorState;
+    private Expression expression;
 
     @FXML
     public void initialize() {
-
         numberBuilder = new NumberBuilder();
-        calculatorState = textField.textProperty();
+        expression = new Expression();
         // Build buttons on grid
         // Grid structure:
         // Row 0: 7 8 9 /
@@ -39,22 +33,24 @@ public class CalculatorController {
         // Row 2: 1 2 3 -
         // Row 3: +/- 0 . +
         // Row 4: =
-        Button button;
 
         // digit buttons:
         for (int i = 0; i < NumberBuilder.BASE; i++) {
-            button = new Button(String.valueOf(i));
-            button.setOnAction(new DigitButtonEventHandler(i));
-            button.setBackground(new Background(
-                    new BackgroundFill(DIGIT_BUTTON_COLOR, new CornerRadii(BUTTON_CORNDER_RADIUS), Insets.EMPTY)));
-            button.setPrefSize(BUTTON_PREF_SIZE, BUTTON_PREF_SIZE);
+            Button button = new CalculatorButton(String.valueOf(i), DIGIT_BUTTON_COLOR, new DigitButtonEventHandler(i));
             if (i == 0)
                 buttonGrid.add(button, 1, 3);
             else
                 buttonGrid.add(button, (i - 1) % 3, 2 - (i - 1) / 3);
         }
 
-        // bind textField to represent the state
+        // operator buttons
+        char[] operators = new char[] { Expression.OP_DIV, Expression.OP_MUL, Expression.OP_SUB, Expression.OP_ADD };
+        for (int i = 0; i < operators.length; i++) {
+            char op = operators[i];
+            buttonGrid.add(new CalculatorButton(String.valueOf(op), OP_BUTTON_COLOR,
+                    new OperatorPointEventHandler(op)), 3, i);
+        }
+
     }
 
     // this button event handler binds the current button clicked to the text state
@@ -68,6 +64,7 @@ public class CalculatorController {
 
         @Override
         public void handle(ActionEvent event) {
+            StringProperty calculatorState = textField.textProperty();
             calculatorState.setValue(calculatorState.getValue() + value);
         }
     }
@@ -99,6 +96,23 @@ public class CalculatorController {
         @Override
         public void handle(ActionEvent event) {
             numberBuilder.addDecimalPoint();
+            super.handle(event);
+        }
+    }
+
+    // this handler is for the mathematical operator buttons
+    public class OperatorPointEventHandler extends TextBinderEventHandler {
+
+        private char operator;
+
+        public OperatorPointEventHandler(char operator) {
+            super(String.valueOf(operator));
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+            expression.addNumAndOp(numberBuilder.build(), operator, numberBuilder.isDecimal());
+            numberBuilder.reset();
             super.handle(event);
         }
     }
