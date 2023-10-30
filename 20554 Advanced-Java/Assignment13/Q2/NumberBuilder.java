@@ -8,6 +8,7 @@ public class NumberBuilder {
                                             // the undefined constant
     public static final byte BASE = 10;
 
+    private String state;
     private int integerPart, decimalPart, digitsAfterDecimal;
     private boolean isDecimalPart;
     private boolean isNegative;
@@ -23,6 +24,7 @@ public class NumberBuilder {
      * Reset the state
      */
     public void reset() {
+        state = "";
         integerPart = UNDEFINED;
         decimalPart = UNDEFINED;
         digitsAfterDecimal = 0;
@@ -52,13 +54,14 @@ public class NumberBuilder {
      * Checks if the number has a decimal part
      */
     public boolean isDecimal() {
-        return isDecimalPart && decimalPart != UNDEFINED && decimalPart != 0;
+        return isDecimalPart && decimalPart != UNDEFINED;
     }
 
     /**
      * Adds a digit to the number
      */
     public void addDigit(int digit) {
+        state += digit;
         if (!isDecimalPart) // add to integer part
             integerPart = addDigit(integerPart, digit);
         else { // add to decimal part
@@ -81,15 +84,25 @@ public class NumberBuilder {
      */
     public void negate() {
         isNegative = !isNegative;
+        if (isNegative)
+            state = "-" + state;
+        else
+            state = state.substring(1);
     }
 
     /**
      * Emit when a decimal point is pressed
      */
     public void addDecimalPoint() {
+        state += '.';
         if (integerPart == UNDEFINED)
             throw new UnsupportedOperationException("Must define integer part before defining decimal part");
         isDecimalPart = true;
+    }
+
+    @Override
+    public String toString() {
+        return state;
     }
 
 }

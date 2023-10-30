@@ -94,4 +94,23 @@ public class Expression {
         return isDecimalExpression;
     }
 
+    @Override
+    public String toString() {
+        String result = "";
+        int i;
+        for (i = 0; i < operators.size(); i++) {
+            result += valueOf(operands.get(i));
+            result += operators.get(i);
+        }
+        if (i < operands.size())
+            result += operands.get(i);
+        return result;
+    }
+
+    private String valueOf(double num) {
+        if (!isDecimalExpression)
+            return String.valueOf((int) num);
+        return String.valueOf(num);
+    }
+
 }

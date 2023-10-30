@@ -1,5 +1,4 @@
 
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,7 +35,16 @@ public class CalculatorController {
 
         // digit buttons:
         for (int i = 0; i < NumberBuilder.BASE; i++) {
-            Button button = new CalculatorButton(String.valueOf(i), DIGIT_BUTTON_COLOR, new DigitButtonEventHandler(i));
+            int digit = i;
+            Button button = new CalculatorButton(String.valueOf(i), DIGIT_BUTTON_COLOR,
+                    new CalculatorButtonActionHandler() {
+
+                        @Override
+                        public void beforeUpdate(ActionEvent event) {
+                            numberBuilder.addDigit(digit);
+                        }
+
+                    });
             if (i == 0)
                 buttonGrid.add(button, 1, 3);
             else
@@ -48,73 +56,38 @@ public class CalculatorController {
         for (int i = 0; i < operators.length; i++) {
             char op = operators[i];
             buttonGrid.add(new CalculatorButton(String.valueOf(op), OP_BUTTON_COLOR,
-                    new OperatorPointEventHandler(op)), 3, i);
+                    new CalculatorButtonActionHandler() {
+
+                        @Override
+                        public void beforeUpdate(ActionEvent event) {
+                            expression.addNumAndOp(numberBuilder.build(), op, numberBuilder.isDecimal());
+                            numberBuilder.reset();
+                        }
+
+                    }), 3, i);
         }
 
+        // point button
+        buttonGrid.add(new CalculatorButton(".", OP_BUTTON_COLOR, new CalculatorButtonActionHandler() {
+
+            @Override
+            public void beforeUpdate(ActionEvent event) {
+                numberBuilder.addDecimalPoint();
+            }
+
+        }), 2, 3);
     }
 
-    // this button event handler binds the current button clicked to the text state
-    public class TextBinderEventHandler implements EventHandler<ActionEvent> {
-
-        private String value; // the value to add
-
-        public TextBinderEventHandler(String value) {
-            this.value = value;
-        }
+    // "Bind" the text property to the expression plus the current number
+    public abstract class CalculatorButtonActionHandler implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
-            StringProperty calculatorState = textField.textProperty();
-            calculatorState.setValue(calculatorState.getValue() + value);
+            beforeUpdate(event);
+            textField.textProperty().set(expression.toString() + numberBuilder.toString());
         }
+
+        abstract void beforeUpdate(ActionEvent event);
+
     }
-
-    // this handler handles the clicking on digit buttons
-    public class DigitButtonEventHandler extends TextBinderEventHandler {
-
-        private int digit; // the value to add
-
-        public DigitButtonEventHandler(int digit) {
-            super(String.valueOf(digit));
-            this.digit = digit;
-        }
-
-        @Override
-        public void handle(ActionEvent event) {
-            numberBuilder.addDigit(digit);
-            super.handle(event);
-        }
-    }
-
-    // this handler is for the decimal point button
-    public class DecimalPointEventHandler extends TextBinderEventHandler {
-
-        public DecimalPointEventHandler() {
-            super(".");
-        }
-
-        @Override
-        public void handle(ActionEvent event) {
-            numberBuilder.addDecimalPoint();
-            super.handle(event);
-        }
-    }
-
-    // this handler is for the mathematical operator buttons
-    public class OperatorPointEventHandler extends TextBinderEventHandler {
-
-        private char operator;
-
-        public OperatorPointEventHandler(char operator) {
-            super(String.valueOf(operator));
-        }
-
-        @Override
-        public void handle(ActionEvent event) {
-            expression.addNumAndOp(numberBuilder.build(), operator, numberBuilder.isDecimal());
-            numberBuilder.reset();
-            super.handle(event);
-        }
-    }
-
 }
