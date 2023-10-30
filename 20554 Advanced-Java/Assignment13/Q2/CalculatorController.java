@@ -76,6 +76,27 @@ public class CalculatorController {
             }
 
         }), 2, 3);
+
+        // negate button
+        buttonGrid.add(new CalculatorButton("+/-", OP_BUTTON_COLOR, new CalculatorButtonActionHandler() {
+
+            @Override
+            public void beforeUpdate(ActionEvent event) {
+                numberBuilder.negate();
+            }
+
+        }), 0, 3);
+
+        // evaluate button
+        buttonGrid.add(new CalculatorButton("=", OP_BUTTON_COLOR, new CalculatorButtonActionHandler() {
+
+            @Override
+            public void beforeUpdate(ActionEvent event) {
+                expression.evaluate(numberBuilder.build());
+                numberBuilder.reset();
+            }
+
+        }), 0, 4, 4, 1);
     }
 
     // "Bind" the text property to the expression plus the current number

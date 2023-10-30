@@ -75,7 +75,7 @@ public class Expression {
 
         // After all multiplication and division is resolved, resolve addition and
         // subtraction
-        while (operators.size() >= 0) {
+        while (operands.size() > 1) {
             resolve(0);
         }
     }
