@@ -1,3 +1,4 @@
+
 /**
  * Builds a number from a series of digits. Supports decimals and negatives.
  */
@@ -7,7 +8,6 @@ public class NumberBuilder {
                                             // the undefined constant
     public static final byte BASE = 10;
 
-    private String state;
     private int integerPart, decimalPart, digitsAfterDecimal;
     private boolean isDecimalPart;
     private boolean isNegative;
@@ -16,7 +16,6 @@ public class NumberBuilder {
      * Constructs an empty number
      */
     public NumberBuilder() {
-        state = "";
         integerPart = UNDEFINED;
         decimalPart = UNDEFINED;
         digitsAfterDecimal = 0;
@@ -53,7 +52,6 @@ public class NumberBuilder {
      * Adds a digit to the number
      */
     public void addDigit(int digit) {
-        state += digit;
         if (!isDecimalPart) // add to integer part
             integerPart = addDigit(integerPart, digit);
         else { // add to decimal part
@@ -75,10 +73,6 @@ public class NumberBuilder {
      * Negate the number
      */
     public void negate() {
-        if (isNegative)
-            state = state.substring(1); // take the string without the minus sign
-        else
-            state = "-" + state;
         isNegative = !isNegative;
     }
 
@@ -89,12 +83,6 @@ public class NumberBuilder {
         if (integerPart == UNDEFINED)
             throw new UnsupportedOperationException("Must define integer part before defining decimal part");
         isDecimalPart = true;
-        state += ".";
-    }
-
-    @Override
-    public String toString() {
-        return state;
     }
 
 }
