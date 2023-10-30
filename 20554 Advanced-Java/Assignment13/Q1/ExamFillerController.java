@@ -80,6 +80,26 @@ public class ExamFillerController {
      * Render finish exam, showing the score and an option to return
      */
     private void renderExamFinished() {
+
+        // Add finish screen
+        ObservableList<Node> children = statePane.getChildren();
+
+        children.add(new Label("Finished!"));
+        children.add(new Label("Your grade: " + exam.getGrade()));
+
+        // Add reset action
+        Button resetButton = new Button("Reset");
+        resetButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                clearScreen();
+                exam.reset();
+                renderCurrentQuestion();
+            }
+
+        });
+        actions.getChildren().add(resetButton);
     }
 
     /**
