@@ -43,6 +43,13 @@ public class NumberBuilder {
     }
 
     /**
+     * Checks if the number has a decimal part
+     */
+    public boolean isDecimal() {
+        return isDecimalPart && decimalPart != UNDEFINED && decimalPart != 0;
+    }
+
+    /**
      * Adds a digit to the number
      */
     public void addDigit(int digit) {
