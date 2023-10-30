@@ -1,10 +1,8 @@
 import java.io.IOException;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -27,7 +25,7 @@ public class ExamFillerController {
             exam = new FileBasedExam();
             renderCurrentQuestion();
         } catch (IOException e) {
-            renderError("There was an issue reading the exam data");
+            renderText("There was an issue reading the exam data");
         }
     }
 
@@ -41,11 +39,10 @@ public class ExamFillerController {
      * Render the current question on the screen
      */
     private void renderCurrentQuestion() {
-        ObservableList<Node> children = statePane.getChildren();
         MultipleChoiceQuestion currentQuestion = exam.getCurrentQuestion();
 
         // initialize question label
-        children.add(new Label(currentQuestion.getQuestion()));
+        renderText(currentQuestion.getQuestion());
 
         // initialize option buttons
         RadioButton[] optionButtons = new RadioButton[MultipleChoiceQuestion.NUM_OF_INCORRECT_OPTIONS + 1];
@@ -53,15 +50,8 @@ public class ExamFillerController {
             optionButtons[i] = new RadioButton(currentQuestion.getOptions()[i]);
             optionButtons[i].setOnAction(new AnswerButtonEventHandler(optionButtons, i));
         }
-        children.addAll(optionButtons);
+        statePane.getChildren().addAll(optionButtons);
 
-    }
-
-    /**
-     * Render correct/incorrect based on answer score
-     */
-    private void renderAnswerFeedback(boolean isTrue) {
-        statePane.getChildren().add(new Label(isTrue ? "Correct!" : "Incorrect :("));
     }
 
     /**
@@ -81,10 +71,8 @@ public class ExamFillerController {
     private void renderExamFinished() {
 
         // Add finish screen
-        ObservableList<Node> children = statePane.getChildren();
-
-        children.add(new Label("Finished!"));
-        children.add(new Label("Your grade: " + exam.getGrade()));
+        renderText("Finished!");
+        renderText("Your grade: " + exam.getGrade());
 
         // Add reset action
         Button resetButton = new Button("Reset");
@@ -101,7 +89,7 @@ public class ExamFillerController {
         actions.getChildren().add(resetButton);
     }
 
-    private void renderError(String string) {
+    private void renderText(String string) {
         statePane.getChildren().add(new Label(string));
     }
 
@@ -124,7 +112,11 @@ public class ExamFillerController {
                 radioButton.setDisable(true);
             }
 
-            renderAnswerFeedback(exam.checkOption(answerIndex));
+            if (exam.checkOption(answerIndex))
+                renderText("Correct!");
+            else
+                renderText("Incorrect :(");
+
             renderAction();
         }
     }
