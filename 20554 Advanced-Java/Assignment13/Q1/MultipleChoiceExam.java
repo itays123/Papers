@@ -45,8 +45,11 @@ public class MultipleChoiceExam {
     /**
      * Sets the exam state to face the next question
      */
-    public MultipleChoiceQuestion nextQuestion() {
+    public void nextQuestion() {
         currentQuestionIndex++;
+    }
+
+    public MultipleChoiceQuestion getCurrentQuestion() {
         return questions.get(currentQuestionIndex);
     }
 
