@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,15 +23,12 @@ public class ExamFillerController {
 
     @FXML
     void initialize() {
-        exam = new MultipleChoiceExam();
-        exam.addQuestion(new MultipleChoiceQuestion("Question 1",
-                new String[] { "Correct", "Incorrect 1", "Incorrect 2", "Incorrect 3" }, 0));
-        exam.addQuestion(new MultipleChoiceQuestion("Question 2",
-                new String[] { "Correct", "Incorrect 1", "Incorrect 2", "Incorrect 3" }, 0));
-        exam.addQuestion(new MultipleChoiceQuestion("Question 3",
-                new String[] { "Correct", "Incorrect 1", "Incorrect 2", "Incorrect 3" }, 0));
-        exam.reset();
-        renderCurrentQuestion();
+        try {
+            exam = new FileBasedExam();
+            renderCurrentQuestion();
+        } catch (IOException e) {
+            renderError("There was an issue reading the exam data");
+        }
     }
 
     // reset the screen content
@@ -100,6 +99,10 @@ public class ExamFillerController {
 
         });
         actions.getChildren().add(resetButton);
+    }
+
+    private void renderError(String string) {
+        statePane.getChildren().add(new Label(string));
     }
 
     /**

@@ -25,7 +25,8 @@ public class MultipleChoiceQuestion {
             throw new IllegalArgumentException(
                     "Correct option index must be between 0 and " + NUM_OF_INCORRECT_OPTIONS);
 
-        this.options = options;
+        this.options = new String[NUM_OF_INCORRECT_OPTIONS + 1];
+        System.arraycopy(options, 0, this.options, 0, NUM_OF_INCORRECT_OPTIONS + 1);
         this.correctOptionIndex = correctOptionIndex;
     }
 
