@@ -28,6 +28,7 @@ public class NumberBuilder {
         integerPart = UNDEFINED;
         decimalPart = UNDEFINED;
         digitsAfterDecimal = 0;
+        isDecimalPart = false;
         isNegative = false;
     }
 
