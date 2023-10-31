@@ -83,8 +83,8 @@ public class Expression {
     /**
      * Get the value of the expression, defined as the first of its operands
      */
-    public double getValue() {
-        return operands.get(0);
+    public double pop() {
+        return operands.remove(0);
     }
 
     /**

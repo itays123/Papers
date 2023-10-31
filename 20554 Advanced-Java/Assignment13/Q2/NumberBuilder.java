@@ -32,6 +32,25 @@ public class NumberBuilder {
         isNegative = false;
     }
 
+    public void set(double number) {
+        integerPart = (int) Math.abs(number);
+        isNegative = number < 0;
+        if (Math.floor(number) == number) {// is not decimal
+            state = String.valueOf((int) number);
+            decimalPart = UNDEFINED;
+            digitsAfterDecimal = 0;
+            isDecimalPart = false;
+            return;
+        }
+        state = String.valueOf(number);
+        integerPart = (int) Math.abs(number);
+        double decimal = Math.abs(number) - integerPart;
+        digitsAfterDecimal = (int) -Math.floor(Math.log10(decimal));
+        decimalPart = (int) (decimal * Math.pow(BASE, digitsAfterDecimal));
+        System.out.println("Decimal part=" + decimalPart + "; digits =" + digitsAfterDecimal);
+        isDecimalPart = true;
+    }
+
     /**
      * Build the number from the current state
      */

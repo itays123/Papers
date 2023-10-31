@@ -68,7 +68,7 @@ public class CalculatorController {
         }
 
         // point button
-        buttonGrid.add(new CalculatorButton(".", OP_BUTTON_COLOR, new CalculatorButtonActionHandler() {
+        buttonGrid.add(new CalculatorButton(".", DIGIT_BUTTON_COLOR, new CalculatorButtonActionHandler() {
 
             @Override
             public void beforeUpdate(ActionEvent event) {
@@ -78,7 +78,7 @@ public class CalculatorController {
         }), 2, 3);
 
         // negate button
-        buttonGrid.add(new CalculatorButton("+/-", OP_BUTTON_COLOR, new CalculatorButtonActionHandler() {
+        buttonGrid.add(new CalculatorButton("+/-", DIGIT_BUTTON_COLOR, new CalculatorButtonActionHandler() {
 
             @Override
             public void beforeUpdate(ActionEvent event) {
@@ -88,15 +88,17 @@ public class CalculatorController {
         }), 0, 3);
 
         // evaluate button
-        buttonGrid.add(new CalculatorButton("=", OP_BUTTON_COLOR, new CalculatorButtonActionHandler() {
+        Button evaluateButton = new CalculatorButton("=", OP_BUTTON_COLOR, new CalculatorButtonActionHandler() {
 
             @Override
             public void beforeUpdate(ActionEvent event) {
                 expression.evaluate(numberBuilder.build());
-                numberBuilder.reset();
+                numberBuilder.set(expression.pop());
             }
 
-        }), 0, 4, 4, 1);
+        });
+        evaluateButton.setPrefWidth(CalculatorButton.BUTTON_PREF_SIZE * 4);
+        buttonGrid.add(evaluateButton, 0, 4, 4, 1);
     }
 
     // "Bind" the text property to the expression plus the current number
