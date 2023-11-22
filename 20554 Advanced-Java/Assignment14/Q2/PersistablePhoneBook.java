@@ -31,7 +31,7 @@ public class PersistablePhoneBook extends PhoneBook {
             // initialize a new map
             entries = new TreeMap<>((Comparator<String> & Serializable) (o1, o2) -> {
                 return o1.compareTo(o2);
-            });
+            }); // make the comparable serializable, such that we can write the object to disk.
         } catch (ClassNotFoundException e) {
             // should not happen, do nothing
         }
