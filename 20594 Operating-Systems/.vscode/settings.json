@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.rdf": "plaintext",
+        "signal.h": "c"
+    }
+}
