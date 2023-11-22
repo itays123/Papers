@@ -17,7 +17,7 @@ public class App extends Application {
         PhoneBookController controller = loader.getController();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setOnHidden(e -> controller.persist()); // persists phone book on window close
+        stage.setOnHidden(e -> controller.savePhoneBook()); // persists phone book on window close
         stage.show();
     }
 }

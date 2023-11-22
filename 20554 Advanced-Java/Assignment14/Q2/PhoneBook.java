@@ -1,5 +1,4 @@
 import java.util.TreeMap;
-import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 /**
@@ -33,9 +32,10 @@ public class PhoneBook {
     /**
      * Search for contacts in the phone book
      */
-    public Stream<Entry<String, String>> search(String query) {
+    public Stream<Contact> search(String query) {
         return entries.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith(query));
+                .filter(entry -> entry.getKey().startsWith(query))
+                .map(entry -> new Contact(entry.getKey(), entry.getValue()));
     }
 
 }
