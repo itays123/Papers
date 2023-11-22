@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 
 public class PhoneBookController {
 
-    private PersistablePhoneBook phoneBook;
+    private PhoneBook phoneBook;
 
     @FXML
     void initialize() {
@@ -12,14 +12,14 @@ public class PhoneBookController {
             phoneBook = new PersistablePhoneBook();
             System.out.println(phoneBook.entries);
         } catch (IOException e) {
-            System.out.println("Error creating phone book");
-            // close window
+            phoneBook = new PhoneBook();
         }
     }
 
     public void persist() {
         try {
-            phoneBook.persist();
+            if (phoneBook instanceof PersistablePhoneBook)
+                ((PersistablePhoneBook) phoneBook).persist();
         } catch (IOException e) {
             System.out.println("Error saving phone book");
         }
