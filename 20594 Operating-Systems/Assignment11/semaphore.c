@@ -6,6 +6,9 @@
 #include <signal.h>
 #include <string.h>
 #include <unistd.h>
+#include <pthread.h>
+
+#define ITERATIONS 5 /* number of iterations */
 
 typedef struct
 {
@@ -14,6 +17,7 @@ typedef struct
 } semaphore;
 
 semaphore s;
+sigset_t waitset;
 
 /**
  * Syncronously wait for signal SIGUSR1
@@ -21,10 +25,6 @@ semaphore s;
 void wait_for_signal()
 {
     int sig;
-    sigset_t waitset;
-    sigemptyset(&waitset);
-    sigaddset(&waitset, SIGUSR1);           /* init waiting list */
-    sigprocmask(SIG_BLOCK, &waitset, NULL); /* Line copied from SignaalsOUSSyncrony example in order to make things work. */
 
     /* waiting happens here */
     if (sigwait(&waitset, &sig) != 0)
@@ -48,6 +48,11 @@ void sem_init(int status)
 
     s.status = status;
     s.waiting = 0;
+
+    /* Signal waitset config */
+    sigemptyset(&waitset);
+    sigaddset(&waitset, SIGUSR1);           /* init waiting list */
+    sigprocmask(SIG_BLOCK, &waitset, NULL); /* Line copied from SignaalsOUSSyncrony example in order to make things work. */
 }
 
 /**
@@ -72,9 +77,43 @@ void sem_up()
 {
     if (s.waiting == 1)
     {
-        s.waiting = 0;
         kill(getpid(), SIGUSR1); /* send signal to wake up waiting thread */
+        s.waiting = 0;
     }
     else
         s.status++;
+}
+
+void *thread_critical_section_test(void *thread_name)
+{
+    int i;
+    char *str = (char *)thread_name;
+    for (i = 0; i < ITERATIONS; i++)
+    {
+        printf("thread %s wants to enter critical section\n", str);
+        sem_down();
+        printf("thread %s in critical section\n", str);
+        sleep(1);
+        sem_up();
+        printf("thread %s exited critical section\n", str);
+        sleep(1);
+    }
+}
+
+/**
+ * Test the semaphore
+ */
+int main()
+{
+    pthread_t thread1, thread2;
+    int *exit;
+
+    sem_init(1);
+
+    pthread_create(&thread1, NULL, thread_critical_section_test, (void *)"thread1");
+    pthread_create(&thread2, NULL, thread_critical_section_test, (void *)"thread2");
+
+    pthread_join(thread1, (void **)&exit);
+    pthread_join(thread2, (void **)&exit);
+    return 0;
 }
