@@ -562,6 +562,8 @@ int process_status(void)
     acquire(&ptable.lock);
     for (currentProc = ptable.proc; currentProc < &ptable.proc[NPROC]; currentProc++)
     {
+        if ((currentProc->state != RUNNING) && (currentProc->state != SLEEPING))
+            continue;
         pid = currentProc->pid;
         state = (currentProc->state == RUNNING) ? "RUNNING" : "SLEEPING"; // select process status string
         ppid = pid == INIT_PID ? 0 : (currentProc->parent)->pid;          // select pid. 0 if init process, parent process otherwise.
