@@ -260,5 +260,5 @@ int sys_kmemtest(void)
 
 int sys_cps162(void)
 {
-    return 0;
+    return process_status();
 }

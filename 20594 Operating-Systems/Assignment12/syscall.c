@@ -1,4 +1,4 @@
-// Added system call sys_cps162 by Itay Schechner 328197462
+// Added syscall cps162 by Itay Schechner 328197462
 #include "types.h"
 #include "defs.h"
 #include "param.h"
@@ -111,7 +111,7 @@ extern int sys_getppid(void);
 extern int sys_getcpu(void);
 extern int sys_getmem(void);
 extern int sys_kmemtest(void);
-extern int sys_cps162(void); // my system call function
+extern int sys_cps162(void); // Added function
 
 static int (*syscalls[])(void) = {
     [SYS_fork] sys_fork,
@@ -146,7 +146,7 @@ static int (*syscalls[])(void) = {
     [SYS_getcpu] sys_getcpu,
     [SYS_getmem] sys_getmem,
     [SYS_kmemtest] sys_kmemtest,
-    [SYS_cps162] sys_cps162, // added syscall
+    [SYS_cps162] sys_cps162,
 };
 
 void syscall(void)

@@ -1,4 +1,4 @@
-// syscall numbers. Created by Itay Schechner 328197462
+// System call numbers, added 162 by Itay Schechner 328197462
 #define SYS_fork 1
 #define SYS_exit 2
 #define SYS_wait 3

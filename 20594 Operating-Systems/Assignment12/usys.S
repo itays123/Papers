@@ -1,4 +1,4 @@
-// Added line SYSCALL(cps162) by Itay Schechner 328197462
+/* Added syscall cps162 by Itay Schechner 328197462 */
 #include "syscall.h"
 #include "traps.h"
 
