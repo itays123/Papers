@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A class representing a polynomial, or a collection of polynom elements.
@@ -45,7 +46,8 @@ public class Polynom {
         }
 
         // sort elements by power in descending order. I chose bubble sort for
-        // simplicity, but more efficient sorts could be easily implemeneted.
+        // simplicity, but more efficient sorts could be easily implemeneted with more
+        // advanced topics of the course.
         PolynomElement temp;
         for (int i = 0; i < length - 1; i++) {
             for (int j = 0; j < length - i - 1; j++) {
