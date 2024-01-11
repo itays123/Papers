@@ -23,6 +23,13 @@ public class Expression {
         this.operators = new LinkedList<>();
     }
 
+    // reset expression
+    public void reset() {
+        this.isDecimalExpression = false;
+        this.operands.clear();
+        this.operators.clear();
+    }
+
     /**
      * Add a number and an operator
      */

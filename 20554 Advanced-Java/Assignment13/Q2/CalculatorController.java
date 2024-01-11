@@ -27,11 +27,11 @@ public class CalculatorController {
         expression = new Expression();
         // Build buttons on grid
         // Grid structure:
-        // Row 0: 7 8 9 /
-        // Row 1: 4 5 6 *
-        // Row 2: 1 2 3 -
-        // Row 3: +/- 0 . +
-        // Row 4: =
+        // Row 0: 7 8 9 AC
+        // Row 1: 4 5 6 /
+        // Row 2: 1 2 3 *
+        // Row 3: +/- 0 . -
+        // Row 4: = = = +
 
         // digit buttons:
         for (int i = 0; i < NumberBuilder.BASE; i++) {
@@ -51,6 +51,17 @@ public class CalculatorController {
                 buttonGrid.add(button, (i - 1) % 3, 2 - (i - 1) / 3);
         }
 
+        // AC button
+        buttonGrid.add(new CalculatorButton("AC", DIGIT_BUTTON_COLOR.darker(), new CalculatorButtonActionHandler() {
+
+            @Override
+            public void beforeUpdate(ActionEvent event) {
+                numberBuilder.reset();
+                expression.reset();
+            }
+
+        }), 3, 0);
+
         // operator buttons
         char[] operators = new char[] { Expression.OP_DIV, Expression.OP_MUL, Expression.OP_SUB, Expression.OP_ADD };
         for (int i = 0; i < operators.length; i++) {
@@ -64,7 +75,7 @@ public class CalculatorController {
                             numberBuilder.reset();
                         }
 
-                    }), 3, i);
+                    }), 3, i + 1);
         }
 
         // point button
@@ -92,13 +103,17 @@ public class CalculatorController {
 
             @Override
             public void beforeUpdate(ActionEvent event) {
-                expression.evaluate(numberBuilder.build());
-                numberBuilder.set(expression.pop());
+                try {
+                    expression.evaluate(numberBuilder.build());
+                    numberBuilder.set(expression.pop());
+                } catch (Exception e) {
+                    // empty expression, do nothing
+                }
             }
 
         });
-        evaluateButton.setPrefWidth(CalculatorButton.BUTTON_PREF_SIZE * 4);
-        buttonGrid.add(evaluateButton, 0, 4, 4, 1);
+        evaluateButton.setPrefWidth(CalculatorButton.BUTTON_PREF_SIZE * 3);
+        buttonGrid.add(evaluateButton, 0, 4, 3, 1);
     }
 
     // "Bind" the text property to the expression plus the current number
