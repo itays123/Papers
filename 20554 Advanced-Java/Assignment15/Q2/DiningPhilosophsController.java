@@ -16,11 +16,17 @@ public class DiningPhilosophsController {
             philosophPanes[i] = new PhilosophPane(i, chopsticksMonitor);
             hbox.getChildren().add(philosophPanes[i]);
         }
+
+        for (int i = 0; i < philosophPanes.length; i++) {
+            philosophPanes[i].startThread();
+        }
     }
 
     @FXML
     void onStopButtonPressed(ActionEvent event) {
-
+        for (int i = 0; i < philosophPanes.length; i++) {
+            philosophPanes[i].stopThread();
+        }
     }
 
 }

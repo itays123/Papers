@@ -48,12 +48,12 @@ public abstract class PhiliosphThread extends Thread {
 
     // represents the first of the sticks the philosoph should acquire
     public int getFirstChopstickNum() {
-        return Math.min((philoId - 1) % NUM_PHILOSOPHS, philoId);
+        return Math.min((philoId + NUM_PHILOSOPHS - 1) % NUM_PHILOSOPHS, philoId);
     }
 
     // represents the second of the sticks the philosoph should acquire
     public int getSecondChopstickNum() {
-        return Math.max((philoId - 1) % NUM_PHILOSOPHS, philoId);
+        return Math.max((philoId + NUM_PHILOSOPHS - 1) % NUM_PHILOSOPHS, philoId);
     }
 
     /**
@@ -101,7 +101,7 @@ public abstract class PhiliosphThread extends Thread {
             afterStickRelease(getFirstChopstickNum());
 
             chopsticks.releaseStick(getSecondChopstickNum());
-            afterStickRelease(getFirstChopstickNum());
+            afterStickRelease(getSecondChopstickNum());
 
             // thinking
             onThinking();
