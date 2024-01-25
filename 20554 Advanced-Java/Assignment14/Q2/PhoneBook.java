@@ -33,6 +33,7 @@ public class PhoneBook {
      * Search for contacts in the phone book
      */
     public Stream<Contact> search(String query) {
+        // inspired by Study Guide chapter 17 methods.
         return entries.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith(query))
                 .map(entry -> new Contact(entry.getKey(), entry.getValue()));
