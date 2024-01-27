@@ -913,7 +913,7 @@ int process_status()
 
         // Check status
         if (p->state == SLEEPING)
-            status = "RUNNING";
+            status = "SLEEPING";
         else if (p->state == RUNNING)
             status = "RUNNING";
         else
