@@ -85,8 +85,9 @@ void mount_nsleave(struct mount_ns *mount_ns)
     { // case 1
         // unmount mount list
         // acquire(mount list lock) not needed since there are no refernces to the mount namespace
-        umountlist(mount_ns->list_mounts);
         umount(mount_ns->root);
+        umountlist(mount_ns->list_mounts);
+        mount_ns->list_mounts = 0;
     }
     release(&mountnstable.lock);
 }
