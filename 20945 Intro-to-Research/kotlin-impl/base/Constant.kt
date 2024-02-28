@@ -8,4 +8,8 @@ class Constant<TDomain>(val value: TDomain) : AtomicTerm<TDomain>() {
 
         return value == other.value
     }
+
+    override fun hashCode(): Int {
+        return value?.hashCode() ?: 0
+    }
 }

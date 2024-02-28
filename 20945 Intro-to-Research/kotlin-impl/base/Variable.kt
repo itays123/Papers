@@ -7,4 +7,8 @@ class Variable<TDomain>(val name: String) : AtomicTerm<TDomain>() {
 
         return name == other.name
     }
+
+    override fun hashCode(): Int {
+        return name.hashCode()
+    }
 }
