@@ -6,10 +6,10 @@ package analytikt.base
 class Constant<TDomain : Any>(val value: TDomain) : AtomicTerm<TDomain>(value::class) {
 
     override fun equals(other: Any?): Boolean {
-        if (other == null || other !is Constant<*>)
+        if (other == null)
             return false
 
-        return value == other.value
+        return (other is Constant<*> && value == other.value) || value == other // this makes constant(value) == value
     }
 
     override fun hashCode(): Int {
