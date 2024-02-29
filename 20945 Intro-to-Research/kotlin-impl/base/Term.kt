@@ -1,11 +1,13 @@
 package analytikt.base
 
+import kotlin.reflect.KClass
+
 /**
  * A Term of a domain is a mathematical structure that is in the domain, such as:
  * - A rational number in the rational numbers domain
  * - A Matrix in the matrix domain
  */
-abstract class Term<TDomain> : Structure<TDomain> {
+abstract class Term<TDomain: Any>(val domain: KClass<out TDomain>) : Structure<TDomain> {
 
 
     /**
