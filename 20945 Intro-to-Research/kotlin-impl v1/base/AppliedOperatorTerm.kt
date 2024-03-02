@@ -1,5 +1,8 @@
 package analytikt.base
 
+/**
+ * A pair of an operator and its arguments of the matching domain is called an Applied Operator Term.
+ */
 class AppliedOperatorTerm<TArgsDomain: Any, TResultDomain: Any>(val operator: Operator<TArgsDomain, TResultDomain>, val args: Collection<Term<TArgsDomain>>): Term<TResultDomain>(operator.resultDomain) {
 
     override fun put(sub: Term<TResultDomain>, source: Term<TResultDomain>): Term<TResultDomain> {

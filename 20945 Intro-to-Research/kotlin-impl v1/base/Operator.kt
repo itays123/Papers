@@ -33,9 +33,11 @@ abstract class Operator<TArgDomain: Any, TResultDomain: Any>(val argDomain: KCla
     /**
      * Apply the operator
      */
-    open fun apply(args: Collection<Term<TArgDomain>>): Term<TResultDomain> {
-        return AppliedOperatorTerm(this, args)
+    fun apply(args: Collection<Term<TArgDomain>>): Term<TResultDomain> {
+        return tryApply(args) ?: AppliedOperatorTerm(this, args)
     }
+
+    protected abstract fun tryApply(args: Collection<Term<TArgDomain>>): Term<TResultDomain>?
 
     /**
      * Create a string representation of the operator

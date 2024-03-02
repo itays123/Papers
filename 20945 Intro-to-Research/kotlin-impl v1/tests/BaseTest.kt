@@ -16,7 +16,7 @@ class Negate : Operator<Boolean, Boolean>(
     override val name: String
         get() = "!"
 
-    override fun apply(args: Collection<Term<Boolean>>): Term<Boolean> {
+    override fun tryApply(args: Collection<Term<Boolean>>): Term<Boolean> {
         // Get and extract 1 argument
         if (args.size != 1)
             throw IllegalArgumentException("Negate accepts 1 argument only")
