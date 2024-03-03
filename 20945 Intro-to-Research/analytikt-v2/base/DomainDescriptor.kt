@@ -19,6 +19,10 @@ interface DomainDescriptor<TDomain> : Entity<TDomain> {
         throw DomainCastException("Can't change domains of term")
     }
 
+    fun parse(value: TDomain): Constant<TDomain> {
+        return Constant(value, this)
+    }
+
     /**
      * Throw when attempting to change a term's domain
      */

@@ -1,6 +1,14 @@
 package analytikt.base
 
 class Constant<TDomain>(val value: TDomain, domain: DomainDescriptor<TDomain>): AtomicTerm<TDomain>(domain) {
+
+    /**
+     * We don't allow substituting in constants
+     */
+    override fun <E> put(sub: Term<E>, source: Term<E>): Term<TDomain> {
+        return this
+    }
+
     override fun equals(other: Any?): Boolean {
         if (other == null)
             return false

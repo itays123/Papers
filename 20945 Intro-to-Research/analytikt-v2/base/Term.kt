@@ -17,4 +17,8 @@ abstract class Term<TDomain>(val domain: DomainDescriptor<TDomain>): Entity<TDom
         return this
     }
 
+    fun put(sub: TDomain, source: Term<TDomain>): Term<TDomain> {
+        return put(domain.parse(sub), source)
+    }
+
 }

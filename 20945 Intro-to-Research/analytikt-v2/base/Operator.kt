@@ -63,4 +63,20 @@ abstract class Operator<TAccept, TResDomain>(val resultDomain: DomainDescriptor<
         return result
     }
 
+    // String methods
+
+    /**
+     * Generates a string representing the operator.
+     * Default implementation is prefix form.
+     */
+    open fun toString(args: TAccept): String {
+        var result = name
+        when (args) {
+            is Term<*> -> result += " " + args
+            is Pair<*, *> -> result += "(" + args.first + "," + args.second + ")"
+            is Collection<*> -> result += args.joinToString(",", "(", ")")
+        }
+        return result
+    }
+
 }
