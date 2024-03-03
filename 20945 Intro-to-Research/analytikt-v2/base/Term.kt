@@ -11,6 +11,10 @@ abstract class Term<TDomain>(val domain: DomainDescriptor<TDomain>): Entity<TDom
      * @param sub the term to replace with
      * @param source the term to replace its appearances with
      */
-    abstract fun<E> put(sub: Term<E>, source: Term<E>): Term<TDomain>
+    open fun<E> put(sub: Term<E>, source: Term<E>): Term<TDomain> {
+        if (this == source)
+            return domain.parse(sub)
+        return this
+    }
 
 }
