@@ -3,7 +3,9 @@ import analytikt.base.*
 // String domain -
 class StringDomain : DomainDescriptor<String>
 
-class Join: Operator<Collection<Term<String>>, String>(StringDomain()) {
+class Join() : Operator<String, String>() {
+    override val resultDomain: DomainDescriptor<String>
+        get() = StringDomain()
     override val name: String
         get() = "Join"
 
@@ -19,35 +21,27 @@ class Join: Operator<Collection<Term<String>>, String>(StringDomain()) {
         return super.apply(args)
     }
 
-    override fun composeFrom(
-        args: Collection<Term<String>>,
-        targetArgs: Collection<Term<String>>
-    ): Collection<Term<String>>? {
-        return null
-    }
-
 }
 
-class Reverse : Operator<Term<String>, String>(StringDomain()) {
+class Reverse : Operator<String, String>() {
+    override val resultDomain: DomainDescriptor<String>
+        get() = StringDomain()
     override val name: String
         get() = "Rev"
 
-    override fun apply(args: Term<String>): Term<String> {
-        when (args) {
-            is Constant -> return Constant(args.value.reversed(), args.domain)
-            is Variable -> return super.apply(args)
+    override fun apply(args: Collection<Term<String>>): Term<String> {
+        assertArgCount(args, 1);
+        when (val arg = args.last()) {
+            is Constant -> return Constant(arg.value.reversed(), arg.domain)
             is AppliedOperatorTerm<*, *> -> {
-                if (args.operator is Reverse)
-                    return args.args as Term<String>
-                if (args.operator is Join) {
-                    args.operator.let { return it.apply((args.args as Collection<Term<String>>).reversed().map { apply(it) }) }
+                if (arg.operator is Reverse)
+                    return arg.args.last() as Term<String>
+                if (arg.operator is Join) {
+                    return Join().apply((arg.args as Collection<Term<String>>).reversed().map { apply(it) })
                 }
             }
         }
         return super.apply(args)
     }
 
-    override fun composeFrom(args: Term<String>, targetArgs: Term<String>): Term<String>? {
-        return null
-    }
 }

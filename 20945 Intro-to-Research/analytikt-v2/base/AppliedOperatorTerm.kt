@@ -3,20 +3,15 @@ package analytikt.base
 /**
  * A pair of an operator and its arguments of the matching domain is called an Applied Operator Term.
  */
-class AppliedOperatorTerm<TAccept, TArgsDomain>(val operator: Operator<TAccept, TArgsDomain>, val args: TAccept, domain: DomainDescriptor<TArgsDomain>) : Term<TArgsDomain>(domain) {
-    override fun <E> put(sub: Term<E>, source: Term<E>): Term<TArgsDomain> {
+class AppliedOperatorTerm<TArgDomain, TResDomain>(val operator: Operator<TArgDomain, TResDomain>, val args: Collection<Term<TArgDomain>>, domain: DomainDescriptor<TResDomain>) : Term<TResDomain>(domain) {
+    override fun <E> put(sub: Term<E>, source: Term<E>): Term<TResDomain> {
         // 2 cases to handle:
         // Put in args, like x^2[2t+1/x] -> (2t+1)^2
         // Put in self, like x^2[t/x^2] -> t
         // When putting in self, note collection laws. E.G: x^4[t/x^2] -> t^2, (x+2)[t/x+1] -> x+1
-        if (this == source)
-            return domain.parse(sub)
-        if (source is AppliedOperatorTerm<*, *> && source.operator == operator) {
-            val newArgs = operator.composeFrom(args, source.args as TAccept)
-            if (newArgs != null)
-                return operator.putInArgs(newArgs, sub, source as Term<E>)
-        }
-        return operator.putInArgs(args, sub, source)
+        if (source is AppliedOperatorTerm<*, *> && source.operator == operator)
+            return operator.put(args, sub, source.args as Collection<Term<TArgDomain>>)
+        return operator.apply(args.map { it.put(sub, source) })
     }
 
     override fun equals(other: Any?): Boolean {
@@ -32,5 +27,4 @@ class AppliedOperatorTerm<TAccept, TArgsDomain>(val operator: Operator<TAccept, 
     override fun toString(): String {
         return operator.toString(args)
     }
-
 }
