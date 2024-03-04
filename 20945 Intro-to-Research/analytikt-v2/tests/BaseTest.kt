@@ -34,4 +34,12 @@ class BaseTest {
         assertEquals(Join().apply(listOf(hello, hello, x, hello)).toString(), "Join(hellohello,x,hello)")
         assertEquals(Join().apply(listOf(hello, x, hello)).put("world", x), "helloworldhello")
     }
+
+    @Test
+    fun complexOp() {
+        val joined = Join().apply(x, hello, hello, Reverse().apply(x), hello)
+        assertEquals(joined.toString(), "Join(x,hellohello,Rev x,hello)")
+        assertEquals(Reverse().apply(joined).toString(), "Join(olleh,x,olleholleh,Rev x)")
+        assertEquals(joined.put(Reverse().apply(x), x).toString(), "Join(Rev x,hellohello,x,hello)")
+    }
 }
