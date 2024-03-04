@@ -12,7 +12,7 @@ interface DomainDescriptor<TDomain> : Entity<TDomain> {
      * Safely casts a term of any domain to a term of this domain
      */
     fun parse(term: Term<*>): Term<TDomain> {
-        if (term.domain == this) {
+        if (compareDomains(this, term.domain)) {
             @Suppress("UNCHECKED_CAST")
             return term as Term<TDomain>
         }
@@ -28,4 +28,8 @@ interface DomainDescriptor<TDomain> : Entity<TDomain> {
      */
     class DomainCastException(s: String) : UnsupportedOperationException(s)
 
+}
+
+fun compareDomains(thisDom: DomainDescriptor<*>, other: DomainDescriptor<*>): Boolean {
+    return thisDom.javaClass == other.javaClass
 }

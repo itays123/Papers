@@ -12,13 +12,15 @@ class Join() : Operator<String, String>() {
     override fun apply(args: Collection<Term<String>>): Term<String> {
         val reducedArgs: MutableList<Term<String>> = mutableListOf()
         for (arg in args) {
-            if (reducedArgs.isEmpty())
-                reducedArgs.add(arg)
-            if (reducedArgs.last() is Constant && arg is Constant) {
+            if (reducedArgs.isNotEmpty() && reducedArgs.last() is Constant && arg is Constant) {
                 reducedArgs[reducedArgs.size - 1] = Constant((reducedArgs.last() as Constant).value + arg.value, arg.domain)
             }
+            else
+                reducedArgs.add(arg)
         }
-        return super.apply(args)
+        if (reducedArgs.size == 1)
+            return reducedArgs.last()
+        return super.apply(reducedArgs)
     }
 
 }

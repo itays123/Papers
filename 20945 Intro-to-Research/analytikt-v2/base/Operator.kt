@@ -60,7 +60,7 @@ abstract class Operator<TArgDomain, TResDomain>: Entity<TResDomain> {
      * Check equality (in computer science terms) between two operators
      */
     override fun equals(other: Any?): Boolean {
-        return other != null && other is Operator<*, *> && other.name == name && resultDomain == other.resultDomain
+        return other != null && other is Operator<*, *> && other.name == name && compareDomains(resultDomain, other.resultDomain)
     }
 
     override fun hashCode(): Int {
