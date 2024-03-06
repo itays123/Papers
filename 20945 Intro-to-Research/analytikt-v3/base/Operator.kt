@@ -39,10 +39,13 @@ abstract class Operator<TArgDomain, TResDomain> {
      * Add.put(x+2, t, x+1) -> t+1
      * LogicalAnd.put(p and q and r, s, p and q) -> s and r
      */
-    open fun put(args: Collection<Term<TArgDomain>>, sub: Term<*>, sourceArgs: Collection<Term<in @UnsafeVariance TArgDomain>>): Term<TResDomain> {
+    open fun put(
+        args: Collection<Term<TArgDomain>>,
+        sub: Term<*>, sourceArgs:
+        Collection<Term<TArgDomain>>): Term<TResDomain>? {
         if (args == sourceArgs)
             return resultDomain.parse(sub)
-        return apply(args)
+        return null
     }
 
     /**
@@ -81,6 +84,10 @@ abstract class Operator<TArgDomain, TResDomain> {
         if (parenthesize)
             res += ")"
         return res
+    }
+
+    override fun toString(): String {
+        return name
     }
 
 }

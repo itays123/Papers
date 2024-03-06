@@ -9,8 +9,10 @@ class AppliedOperatorTerm<TArgDomain, TResDomain>(val operator: Operator<TArgDom
         // Put in args, like x^2[2t+1/x] -> (2t+1)^2
         // Put in self, like x^2[t/x^2] -> t
         // When putting in self, note collection laws. E.G: x^4[t/x^2] -> t^2, (x+2)[t/x+1] -> x+1
-        if (source is AppliedOperatorTerm<*, *> && source.operator == operator)
-            return operator.put(args, sub, source.args as Collection<Term<TArgDomain>>)
+        if (source is AppliedOperatorTerm<*, *> && source.operator == operator) {
+            val res = operator.put(args, sub, source.args as Collection<Term<TArgDomain>>)
+            if (res != null) return res;
+        }
         return operator.apply(args.map { it.put(sub, source) })
     }
 
