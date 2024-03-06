@@ -1,3 +1,5 @@
+package base
+
 import analytikt.base.*
 
 // String domain -

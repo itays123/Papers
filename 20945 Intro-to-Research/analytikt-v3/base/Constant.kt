@@ -1,6 +1,6 @@
 package analytikt.base
 
-class Constant<TDomain>(val value: TDomain, domain: DomainDescriptor<TDomain>): AtomicTerm<TDomain>(domain) {
+class Constant<TDomain>(val value: TDomain, domain: DomainDescriptor<TDomain>): Term<TDomain>(domain) {
 
     /**
      * We don't allow substituting in constants

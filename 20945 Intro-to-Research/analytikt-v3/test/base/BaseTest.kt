@@ -1,3 +1,5 @@
+package base
+
 import analytikt.base.Constant
 import analytikt.base.Variable
 import org.junit.jupiter.api.Assertions.*
