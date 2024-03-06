@@ -46,17 +46,6 @@ abstract class Operator<TArgDomain, TResDomain> {
     }
 
     /**
-     * Assert argument count
-     * @param args the arguments to check
-     * @param count the required argument count
-     * @throws IllegalArgumentException
-     */
-    @Throws(IllegalArgumentException::class)
-    protected fun assertArgCount(args: Collection<Term<TArgDomain>>, count: Int) {
-        if (args.size != count) throw IllegalArgumentException("Function $name accepts exactly $count operand(s)")
-    }
-
-    /**
      * Check equality (in computer science terms) between two operators
      */
     override fun equals(other: Any?): Boolean {

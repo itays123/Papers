@@ -34,7 +34,8 @@ class Reverse : Operator<String, String>() {
         get() = "Rev"
 
     override fun apply(args: Collection<Term<String>>): Term<String> {
-        assertArgCount(args, 1);
+        if (args.size != 1)
+            throw IllegalArgumentException("Expected argument list with length of 1")
         when (val arg = args.last()) {
             is Constant -> return Constant(arg.value.reversed(), arg.domain)
             is AppliedOperatorTerm<*, *> -> {
