@@ -11,21 +11,21 @@ import kotlin.jvm.Throws
  * The TAccept type can be a Term of some domain, a Pair of terms, or a collection of terms.
  * We maintain flexibility by using a generic type to suit all cases
  */
-abstract class Operator<TArgDomain, TResDomain>: Entity<TResDomain> {
+abstract class Operator<in TArgDomain, TResDomain>: Entity<TResDomain> {
     abstract val resultDomain: DomainDescriptor<TResDomain>
     abstract val name: String
 
     /**
      * Interface method
      */
-    fun apply(vararg args: Term<TArgDomain>): Term<TResDomain> {
+    fun apply(vararg args: Term<in @UnsafeVariance TArgDomain>): Term<TResDomain> {
         return apply(args.asList())
     }
 
     /**
      * Accept values if needed and apply the operator
      */
-    open fun apply(args: Collection<Term<TArgDomain>>): Term<TResDomain> {
+    open fun apply(args: Collection<Term<in @UnsafeVariance TArgDomain>>): Term<TResDomain> {
         return AppliedOperatorTerm(this, args, resultDomain)
     }
 
@@ -39,7 +39,7 @@ abstract class Operator<TArgDomain, TResDomain>: Entity<TResDomain> {
      * Add.put(x+2, t, x+1) -> t+1
      * LogicalAnd.put(p and q and r, s, p and q) -> s and r
      */
-    open fun put(args: Collection<Term<TArgDomain>>, sub: Term<*>, sourceArgs: Collection<Term<TArgDomain>>): Term<TResDomain> {
+    open fun put(args: Collection<Term<in @UnsafeVariance TArgDomain>>, sub: Term<*>, sourceArgs: Collection<Term<in @UnsafeVariance TArgDomain>>): Term<TResDomain> {
         if (args == sourceArgs)
             return resultDomain.parse(sub)
         return apply(args)
@@ -52,7 +52,7 @@ abstract class Operator<TArgDomain, TResDomain>: Entity<TResDomain> {
      * @throws IllegalArgumentException
      */
     @Throws(IllegalArgumentException::class)
-    protected fun assertArgCount(args: Collection<Term<TArgDomain>>, count: Int) {
+    protected fun assertArgCount(args: Collection<Term<in @UnsafeVariance TArgDomain>>, count: Int) {
         if (args.size != count) throw IllegalArgumentException("Function $name accepts exactly $count operand(s)")
     }
 
@@ -73,7 +73,7 @@ abstract class Operator<TArgDomain, TResDomain>: Entity<TResDomain> {
      * Generates a string representing the operator.
      * Default implementation is prefix form.
      */
-    open fun toString(args: Collection<Term<TArgDomain>>): String {
+    open fun toString(args: Collection<Term<in @UnsafeVariance TArgDomain>>): String {
         var res = name
         var delim = ""
         val parenthesize = args.size > 1 || args.any { it !is AtomicTerm<*> }

@@ -3,7 +3,7 @@ package analytikt.base
 /**
  * A pair of an operator and its arguments of the matching domain is called an Applied Operator Term.
  */
-class AppliedOperatorTerm<TArgDomain, TResDomain>(val operator: Operator<TArgDomain, TResDomain>, val args: Collection<Term<TArgDomain>>, domain: DomainDescriptor<TResDomain>) : Term<TResDomain>(domain) {
+class AppliedOperatorTerm<in TArgDomain, TResDomain>(val operator: Operator<TArgDomain, TResDomain>, val args: Collection<Term<in TArgDomain>>, domain: DomainDescriptor<TResDomain>) : Term<TResDomain>(domain) {
     override fun <E> put(sub: Term<E>, source: Term<E>): Term<TResDomain> {
         // 2 cases to handle:
         // Put in args, like x^2[2t+1/x] -> (2t+1)^2
@@ -20,7 +20,7 @@ class AppliedOperatorTerm<TArgDomain, TResDomain>(val operator: Operator<TArgDom
 
     override fun hashCode(): Int {
         var result = operator.hashCode()
-        result = 31 * result + (args?.hashCode() ?: 0)
+        result = 31 * result + args.hashCode()
         return result
     }
 
