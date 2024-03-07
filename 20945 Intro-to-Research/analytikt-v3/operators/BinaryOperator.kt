@@ -53,6 +53,7 @@ class NoInverseException(operator: Operator<*,*>, term: Term<*>) : ArithmeticExc
  * Helps collect an associative binary operator's arguments using polymorphism
  */
 private abstract class Collector<TDomain> : Iterable<List<Term<TDomain>>> {
+
     /**
      * Append an expression to the matching list, according to its key
      */
@@ -100,14 +101,70 @@ private class NonCommutativeCollector<TDomain>: Collector<TDomain>() {
 
 }
 
+/*
+************************ Putters - Used for placing args in associative operators **********
+ */
+
+
+/**
+ * Helps collect an associative binary operator's arguments using polymorphism
+ */
+private abstract class Putter<TDomain, out TColl: MutableCollection<Term<TDomain>>> {
+
+    abstract val terms: TColl
+
+    /**
+     * Replace (once) occurrences of targetTerms with an occurrence of sub
+     * @throws UnsupportedOperationException didn't manage to replace
+     */
+    @Throws(UnsupportedOperationException::class)
+    abstract fun replace(targetTerms: Collection<Term<TDomain>>, sub: Term<TDomain>)
+}
+
+/**
+ * Substitutes (once) arguments for commutative operators
+ */
+private class CommutativePutter<TDomain>: Putter<TDomain, MutableSet<Term<TDomain>>>() {
+
+    override val terms: MutableSet<Term<TDomain>>
+        get() = HashSet() // use TreeSet() for sorted terms!
+
+    override fun replace(targetTerms: Collection<Term<TDomain>>, sub: Term<TDomain>) {
+        targetTerms.forEach { if (!terms.remove(it)) throw UnsupportedOperationException("Could not replace") }
+        terms.add(sub)
+    }
+
+}
+
+/**
+ * Substitutes (once) terms for non-commutative operators
+ */
+private class NonCommutativePutter<TDomain>: Putter<TDomain, MutableList<Term<TDomain>>>() {
+
+    override val terms: MutableList<Term<TDomain>>
+        get() = mutableListOf()
+
+    override fun replace(targetTerms: Collection<Term<TDomain>>, sub: Term<TDomain>) {
+        val startIndex = terms.windowed(targetTerms.size).indexOfFirst { it == targetTerms }
+        if (startIndex == -1)
+            throw UnsupportedOperationException("Replacement unsuccessful")
+        terms[startIndex] = sub
+        for (i in 1..<terms.size)
+            terms.removeAt(startIndex + i)
+    }
+
+}
+
 
 /**
  * Represents a (domain-closed) Binary operators: These are operators who take exactly two operands and return a term of the same domain. This would include:
  * Addition of numbers, vectors, matrices, …
  * Multiplying numbers, matrices, …
+ * Logical and, or, xor
+ * Set union, intersection, difference
+ * Cartesian product of domains and sets
  *
- *
- * We should be able to distinguish, and simplify accordingly, when binary operators are commutative and associative, and whether or not they have a neutral element. Some binary operators have an inverse operator which returns a term that, combined with the original one, will produce the neutral element when applied with the result.
+ * We should be able to distinguish, and simplify accordingly, when binary operators are commutative and associative, and whether they have a neutral element. Some binary operators have an inverse operator which returns a term that, combined with the original one, will produce the neutral element when applied with the result.
  *
  * If almost all elements of a domain have an inverse element (like the real numbers in multiplication, which are all invertible but 0), or at least an infinite amount of them is (like square matrices of rank n in the square matrix set over multiplication), the operator should still implement the Invertible method and throw an exception if the term provided is not invertible.
  *
@@ -146,9 +203,8 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
             }
         }
 
-        // TODO:
         // 1. Flatten list - this has to happen right now, and shouldn't happen again
-        // 2. Collecting elements using the getKey() method, according commutativity rules.
+        // 2. Collect elements using the getKey() method, according to commutativity rules.
         // 3. Identity element removal - this should happen after collecting elements,
         // such that a collection won't accidentally return an identity element
 
@@ -156,19 +212,24 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
             CommutativeCollector()
         else
             NonCommutativeCollector()
-
-        for (term in args) {
-            if (term !is AppliedOperatorTerm<*, *> || term.operator != this)
-                collector.appendToKey(getKey(term), term)
-            else // flatten list
-                (term.args as Collection<Term<TDomain>>).forEach() { collector.appendToKey(getKey(it), it) }
-        }
+        args.forEach { collect(collector, it) }
 
         return apply(
             collector.map { list -> directApply(list) }
                 .filter { this !is HasNeutralElement<*> || it != getNeutralElement() }, // 3. Filter out neutral element
             true
             )
+    }
+
+    /**
+     * Add term to collector.
+     * Flattens the list
+     */
+    private fun collect(collector: Collector<TDomain>, term: Term<TDomain>) {
+        if (term !is AppliedOperatorTerm<*, *> || term.operator != this)
+            collector.appendToKey(getKey(term), term)
+        else
+            (term.args as Collection<Term<TDomain>>).forEach() { collect(collector, it) }
     }
 
     /**
@@ -197,30 +258,46 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
      */
     protected abstract fun directApply(terms: Collection<Term<TDomain>>): Term<TDomain>
 
-    override fun put(
+
+    /**
+     * Substitute args of a binary operator.
+     *
+     * This handles simple collections, where the substitution should only be applied ONCE:
+     * (p and q and r)[t/p and q] -> t and r
+     *
+     * It can't tell when the substitution is more complex, as in:
+     * (x^2-2x+8)[t/x-1] -> t^2+7
+     * (4x)[t/2x] -> 2t
+     * (x^4)[t/x^2] -> t^2
+     * (e^(2x))[t/e^x] -> t^2
+     */
+    open override fun put(
         args: Collection<Term<TDomain>>,
         sub: Term<*>,
         sourceArgs: Collection<Term<TDomain>>
     ): Term<TDomain>? {
-        when {
-            this is Commutative && this is Associative -> {
+        if (this !is Associative)
+            return super.put(args, sub, sourceArgs)
 
-            }
-            this is Associative -> {
+        try {
+            val putter: Putter<TDomain, MutableCollection<Term<TDomain>>> = if (this is Commutative)
+                CommutativePutter()
+            else
+                NonCommutativePutter()
 
-            }
-            this is Commutative && args.size == 2 && sourceArgs.size == 2 -> {
-
-            }
+            putter.terms.addAll(args)
+            putter.replace(sourceArgs, resultDomain.parse(sub))
+            return apply(putter.terms)
+        } catch (e: Exception) {
+            return null
         }
-        return super.put(args, sub, sourceArgs)
     }
 
     /**
      * Print in infix style
      */
     override fun toString(args: Collection<Term<TDomain>>): String {
-        return super.toString(args)
+        return args.fold("") { acc, term -> if (acc == "") "$term" else "$acc$name$term" }
     }
 
 }
