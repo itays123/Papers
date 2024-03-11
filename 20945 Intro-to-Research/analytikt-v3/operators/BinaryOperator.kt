@@ -172,10 +172,6 @@ private class NonCommutativePutter<TDomain>: Putter<TDomain, MutableList<Term<TD
 abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
 
     final override fun apply(args: Collection<Term<TDomain>>): Term<TDomain> {
-        return apply(args, false)
-    }
-
-    private fun apply(args: Collection<Term<TDomain>>, collected: Boolean): Term<TDomain> {
         when {
             args.isEmpty() -> {
                 if (this is HasNeutralElement<*>)
@@ -189,17 +185,9 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
                     return args.last()
                 else throw IllegalArgumentException("Binary operator expects at least two arguments")
             }
-            this !is Associative -> {
-                // If the operator is not associative, we don't allow accepting more than 2 arguments
-                if (args.size > 2)
-                    throw IllegalArgumentException("Precedence order should be specified explicitly in non-associative operators")
-                if ((args.first() is Constant<*> && args.last() is Constant<*>)
-                    ||  getKey(args.first()) == getKey(args.last()))
-                    return directApply(args)
-                return super.apply(args)
-            }
-            collected -> {
-                return super.apply(args)
+            this !is Associative && args.size > 2 -> {
+                throw IllegalArgumentException("Precedence order should be specified explicitly in non-associative operators")
+                // collection is identical to associative ops with many elements in non-associative ops
             }
         }
 
@@ -214,11 +202,10 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
             NonCommutativeCollector()
         args.forEach { collect(collector, it) }
 
-        return apply(
-            collector.map { list -> directApply(list) }
-                .filter { this !is HasNeutralElement<*> || it != getNeutralElement() }, // 3. Filter out neutral element
-            true
-            )
+        val newArgs = collector
+                .map { list -> if (list.size == 1) list.first() else directApply(list) }
+                .filter { this !is HasNeutralElement<*> || it != getNeutralElement() } // 3. Filter out neutral element
+        return if (newArgs.size == 1) newArgs.first() else super.apply(newArgs)
     }
 
     /**
