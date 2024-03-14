@@ -177,7 +177,6 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
         * 3. Lazy evaluation
         * 4. Element collection
         * 5. Identity element removal
-        * 6. Lazy evaluation once again, with newly collected args
         *
         * 1. Protection.
         * Ensure the right amount of arguments is given.
@@ -204,7 +203,7 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
         * 3. Lazy evaluation.
         * If an associative operator *has* a specific argument in its argument list,
          */
-        var lazyEval = tryLazyEvaluate(flattenedArgList)
+        val lazyEval = tryLazyEvaluate(flattenedArgList)
         if (lazyEval != null)
             return lazyEval
 
@@ -223,10 +222,7 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
                 .map { list -> if (list.size == 1) list.first() else directApply(list) }
                 .filter { this !is HasNeutralElement<*> || it != neutralElement } // 5. Filter out neutral element
 
-        lazyEval = tryLazyEvaluate(newArgs)
-
         return when {
-            lazyEval != null -> return lazyEval
             newArgs.isEmpty() && this is HasNeutralElement<*> -> resultDomain.parse(neutralElement as TDomain)
             newArgs.size == 1 -> newArgs.last()
             else -> super.apply(newArgs)
@@ -243,22 +239,6 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
             else
                 appendArgs(flattenedArgsList, term.args as Collection<Term<TDomain>>)
         }
-    }
-
-
-    /**
-     * Overridable lazy evaluation map
-     * In a pair (key, value), if key is present in the argument list, immediately evaluate to value
-     */
-    protected open val lazyEvalMap: Map<Term<TDomain>, Term<TDomain>> = mapOf()
-
-    private fun tryLazyEvaluate(args: Collection<Term<TDomain>>): Term<TDomain>? {
-        for (term in args) {
-            val lazyEval = lazyEvalMap[term]
-            if (lazyEval != null)
-                return lazyEval
-        }
-        return null
     }
 
     /**
@@ -330,20 +310,11 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
     override fun toString(args: Collection<Term<TDomain>>): String {
         return args.fold("") {
             acc, term ->
-                val termStr = if (shouldParenthesizeTerm(term)) "($term)" else "$term"
                 if (acc == "")
-                    termStr
+                    stringifyTerm(term)
                 else
-                    "$acc$name$termStr"
+                    "$acc$name${stringifyTerm(term)}"
         }
-    }
-
-    /**
-     * Determine whether a term should be parenthesized.
-     * For example, term x^2 in sum x^2+3 should not be parenthesized.
-     */
-    protected open fun shouldParenthesizeTerm(term: Term<TDomain>): Boolean {
-        return term is AppliedOperatorTerm<*, *>
     }
 
 }

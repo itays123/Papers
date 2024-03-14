@@ -16,6 +16,23 @@ abstract class Operator<TArgDomain, TResDomain> {
     abstract val name: String
 
     /**
+     * Overridable lazy evaluation map
+     * In a pair (key, value), if key is present in the argument list, immediately evaluate to value
+     */
+    protected open val lazyEvalMap: Map<Term<TArgDomain>, Term<TResDomain>> = mapOf()
+
+    protected fun tryLazyEvaluate(args: Collection<Term<TArgDomain>>): Term<TResDomain>? {
+        if (lazyEvalMap.isEmpty())
+            return null
+        for (term in args) {
+            val lazyEval = lazyEvalMap[term]
+            if (lazyEval != null)
+                return lazyEval
+        }
+        return null
+    }
+
+    /**
      * Interface method
      */
     fun apply(vararg args: Term<TArgDomain>): Term<TResDomain> {
@@ -26,7 +43,7 @@ abstract class Operator<TArgDomain, TResDomain> {
      * Accept values if needed and apply the operator
      */
     open fun apply(args: Collection<Term<TArgDomain>>): Term<TResDomain> {
-        return AppliedOperatorTerm(this, args, resultDomain)
+        return tryLazyEvaluate(args) ?: AppliedOperatorTerm(this, args, resultDomain)
     }
 
     /**
@@ -65,29 +82,40 @@ abstract class Operator<TArgDomain, TResDomain> {
         return result
     }
 
+
+    override fun toString(): String {
+        return name
+    }
+
     /**
      * Generates a string representing the operator.
      * Default implementation is prefix form.
      */
     open fun toString(args: Collection<Term<TArgDomain>>): String {
         var res = name
-        var delim = ""
-        val parenthesize = args.size > 1 || args.any { it is AppliedOperatorTerm<*,*> }
+        val parenthesize = args.size > 1
         if (parenthesize)
             res += "("
         else
             res += " "
-        args.forEach {
-            res += delim + it.toString()
-            delim = ","
+        args.forEachIndexed { index, term ->
+            if (index > 0)
+                res += ","
+            res += stringifyTerm(term)
         }
         if (parenthesize)
             res += ")"
         return res
     }
 
-    override fun toString(): String {
-        return name
+    /**
+     * Determine whether a term should be parenthesized.
+     * For example, term x^2 in sum x^2+3 should not be parenthesized.
+     */
+    protected open fun shouldParenthesizeTerm(term: Term<TArgDomain>): Boolean {
+        return term is AppliedOperatorTerm<*, *>
     }
+
+    protected fun stringifyTerm(term: Term<TArgDomain>) = if (shouldParenthesizeTerm(term)) "($term)" else term.toString()
 
 }

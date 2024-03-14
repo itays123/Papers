@@ -28,6 +28,10 @@ class Join() : Operator<String, String>() {
         return super.apply(reducedArgs)
     }
 
+    override fun shouldParenthesizeTerm(term: Term<String>): Boolean {
+        return false
+    }
+
 }
 
 class Reverse : Operator<String, String>() {
