@@ -3,10 +3,6 @@ package operators
 import analytikt.base.*
 import analytikt.operators.*
 
-class IntDomain : DomainDescriptor<Int> {
-    override val constantInstance: Constant<Int>
-        get() = parse(1)
-}
 class Z3Domain : DomainDescriptor<Int> {
 
     companion object {
@@ -26,23 +22,32 @@ class Z3Domain : DomainDescriptor<Int> {
 
 /**
  * Non-associative, Non-commutative operator
+ * Z3 subtraction
  * a * b = a-b
  */
-class BasicSubtraction : BinaryOperator<Int>() {
+class Z3Subtraction : BinaryOperator<Int>() {
 
     override val resultDomain: DomainDescriptor<Int>
-        get() = IntDomain()
+        get() = Z3Domain()
     override val name: String
         get() = "-"
+
+    companion object {
+        val eval = arrayOf(
+            arrayOf(0, 2, 1),
+            arrayOf(1, 0, 2),
+            arrayOf(2, 1, 0)
+        )
+    }
 
     override fun directApply(terms: Collection<Term<Int>>): Term<Int> {
         if (terms.size != 2) throw RuntimeException()
         val left = terms.first()
         val right = terms.last()
         if (left is Constant && right is Constant)
-            return Constant(left.value - right.value, left.domain)
+            return resultDomain.parse(eval[left.value][right.value])
         if (left is Variable && right is Variable) // should be the same one according to key definition
-            return Constant(0, left.domain)
+            return Z3Domain.Zero
         throw RuntimeException()
     }
 
@@ -50,23 +55,31 @@ class BasicSubtraction : BinaryOperator<Int>() {
 
 /**
  * Non-associative, commutative operator
- * a*b = |a-b|
+ *
  */
-class Distance : BinaryOperator<Int>(), Commutative {
+class Z3CommutativeImpl : BinaryOperator<Int>(), Commutative {
 
     override val resultDomain: DomainDescriptor<Int>
-        get() = IntDomain()
+        get() = Z3Domain()
     override val name: String
         get() = "*"
 
+
+    companion object {
+        val eval = arrayOf(
+            arrayOf(0, 1, 0),
+            arrayOf(1, 2, 0),
+            arrayOf(0, 0, 2)
+        )
+    }
+
     override fun directApply(terms: Collection<Term<Int>>): Term<Int> {
+        if (terms.size != 2) throw RuntimeException()
         val left = terms.first()
         val right = terms.last()
         if (left is Constant && right is Constant)
-            return Constant(kotlin.math.abs(left.value - right.value), left.domain)
-        if (left is Variable && right is Variable) // should be the same one according to key definition
-            return Constant(0, left.domain)
-        throw RuntimeException("Cannot handle")
+            return resultDomain.parse(eval[left.value][right.value])
+        throw RuntimeException()
     }
 
 }
@@ -96,27 +109,24 @@ class NeutralElemOpImpl : BinaryOperator<Int>(), HasNeutralElement<Int> {
     override val name: String
         get() = "*"
 
-    private val resultTable = mapOf(
-        Pair(Pair(0,0), 0),
-        Pair(Pair(0,1), 1),
-        Pair(Pair(0,2), 2),
-        Pair(Pair(1,0), 1),
-        Pair(Pair(1,1), 2),
-        Pair(Pair(1,2), 1),
-        Pair(Pair(2,0), 2),
-        Pair(Pair(2,1), 0),
-        Pair(Pair(2,2), 0),
-    )
-
     override val neutralElement: Int
         get() = 0
 
+    companion object {
+        val eval = arrayOf(
+            arrayOf(0, 1, 2),
+            arrayOf(1, 2, 1),
+            arrayOf(2, 0, 0)
+        )
+    }
+
     override fun directApply(terms: Collection<Term<Int>>): Term<Int> {
-        if (terms.first() !is Constant || terms.last() !is Constant)
-            return AppliedOperatorTerm(this, terms, resultDomain)
-        val left = (terms.first() as Constant).value
-        val right = (terms.last() as Constant).value
-        return resultDomain.parse(resultTable[Pair(left, right)] ?: throw UnsupportedOperationException("Binary op accepts values from 0 to 2"))
+        if (terms.size != 2) throw RuntimeException()
+        val left = terms.first()
+        val right = terms.last()
+        if (left is Constant && right is Constant)
+            return resultDomain.parse(eval[left.value][right.value])
+        throw RuntimeException()
     }
 
 }
@@ -143,28 +153,22 @@ class AssociativeOpImpl : BinaryOperator<Int>(), Associative {
         get() = Z3Domain()
     override val name: String
         get() = "*"
-
-    private val resultTable = mapOf(
-        Pair(Pair(0,0), 0),
-        Pair(Pair(0,1), 0),
-        Pair(Pair(0,2), 0),
-        Pair(Pair(1,0), 0),
-        Pair(Pair(1,1), 1),
-        Pair(Pair(1,2), 2),
-        Pair(Pair(2,0), 0),
-        Pair(Pair(2,1), 0),
-        Pair(Pair(2,2), 0),
-    )
-
     override val lazyEvalMap: Map<Term<Int>, Term<Int>>
         get() = mapOf(Pair(resultDomain.parse(0), resultDomain.parse(0)))
+    companion object {
+        val eval = arrayOf(
+            arrayOf(0, 0, 0),
+            arrayOf(0, 1, 2),
+            arrayOf(0, 0, 0)
+        )
+    }
 
     override fun directApply(terms: Collection<Term<Int>>): Term<Int> {
         if (terms.first() !is Constant || terms.last() !is Constant)
             return AppliedOperatorTerm(this, terms, resultDomain)
         val left = (terms.first() as Constant).value
         val right = (terms.last() as Constant).value
-        return resultDomain.parse(resultTable[Pair(left, right)] ?: throw UnsupportedOperationException("Binary op accepts values from 0 to 2"))
+        return resultDomain.parse(eval[left][right])
     }
 
 }
@@ -303,7 +307,7 @@ class Z3Operator5 : BinaryOperator<Int>(), Associative, Commutative, HasNeutralE
 class SimpleMultiply : BinaryOperator<Int>(), Associative, Commutative, HasNeutralElement<Int> {
 
     override val resultDomain: DomainDescriptor<Int>
-        get() = IntDomain()
+        get() = Z3Domain()
     override val name: String
         get() = "*"
     override val neutralElement: Int

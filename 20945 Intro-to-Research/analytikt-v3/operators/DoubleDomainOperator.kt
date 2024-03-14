@@ -15,16 +15,16 @@ abstract class DoubleDomainOperator<TArg1, TArg2, TResult> : Operator<Pair<Term<
         // We only allow "constants" (i.e - pair of terms) to be arguments
         if (args.any { it !is Constant })
             throw UnsupportedOperationException("Double Domain operator must accept pairs!")
-        return apply(args.map { (it as Constant).value })
+        return applyPairs(args.map { (it as Constant).value })
     }
 
     /**
      * Apply method with given pairs of terms
      */
     fun apply(vararg pairs: Pair<Term<TArg1>, Term<TArg2>>): Term<TResult> {
-        return apply(pairs.asList())
+        return applyPairs(pairs.asList())
     }
 
-    abstract fun apply(args: Collection<Pair<Term<TArg1>, Term<TArg2>>>): Term<TResult>
+    abstract fun applyPairs(args: Collection<Pair<Term<TArg1>, Term<TArg2>>>): Term<TResult>
 
 }

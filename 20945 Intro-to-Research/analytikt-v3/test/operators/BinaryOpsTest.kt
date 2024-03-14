@@ -8,34 +8,34 @@ import org.junit.jupiter.api.assertThrows
 
 class BinaryOpsTest {
 
-    val x = Variable("x", IntDomain())
-    val y = Variable("y", IntDomain())
-    val t = Variable("t", IntDomain())
+    val x = Variable("x", Z3Domain())
+    val y = Variable("y", Z3Domain())
+    val t = Variable("t", Z3Domain())
 
     @Test
     fun defaultBinaryOp() {
         // Test a "regular" binary operator
 
         // Check protection
-        assertThrows<IllegalArgumentException> { BasicSubtraction().apply() }
-        assertThrows<IllegalArgumentException> { BasicSubtraction().apply(x) }
-        assertThrows<IllegalArgumentException> { BasicSubtraction().apply(x, y, x) }
+        assertThrows<IllegalArgumentException> { Z3Subtraction().apply() }
+        assertThrows<IllegalArgumentException> { Z3Subtraction().apply(x) }
+        assertThrows<IllegalArgumentException> { Z3Subtraction().apply(x, y, x) }
 
         // Check collecting
-        assertEquals(BasicSubtraction().apply(x, Constant(1, IntDomain())).toString(), "x-1")
-        assertEquals(BasicSubtraction().apply(x, y).toString(), "x-y")
-        assertEquals(BasicSubtraction().apply(x, x), Constant(0, IntDomain()))
-        assertEquals(BasicSubtraction().apply(Constant(8, IntDomain()), Constant(7, IntDomain())), Constant(1, IntDomain()))
+        assertEquals(Z3Subtraction().apply(x, Z3Domain.One).toString(), "x-1")
+        assertEquals(Z3Subtraction().apply(x, y).toString(), "x-y")
+        assertEquals(Z3Subtraction().apply(x, x), Z3Domain.Zero)
+        assertEquals(Z3Subtraction().apply(Z3Domain.Two, Z3Domain.One), Z3Domain.One)
 
         // Substitution check
-        assertEquals(BasicSubtraction().apply(x, Constant(1, IntDomain()))
-            .put(t, BasicSubtraction().apply(x, IntDomain().parse(2))),
-            BasicSubtraction().apply(x, Constant(1, IntDomain()))) // noop
-        assertEquals(BasicSubtraction().apply(x, Constant(1, IntDomain())) // substitute in args
-            .put(BasicSubtraction().apply(t, IntDomain().parse(1)), x)
+        assertEquals(Z3Subtraction().apply(x, Z3Domain.One)
+            .put(t, Z3Subtraction().apply(x, Z3Domain.Two)),
+            Z3Subtraction().apply(x, Z3Domain.One)) // noop
+        assertEquals(Z3Subtraction().apply(x, Z3Domain.One) // substitute in args
+            .put(Z3Subtraction().apply(t, Z3Domain.One), x)
             .toString(), "(t-1)-1")
-        assertEquals(BasicSubtraction().apply(x, Constant(1, IntDomain())) // substitute in operator
-            .put(t, BasicSubtraction().apply(x, IntDomain().parse(1))), t)
+        assertEquals(Z3Subtraction().apply(x, Z3Domain.One) // substitute in operator
+            .put(t, Z3Subtraction().apply(x, Z3Domain.One)), t)
     }
 
     @Test
@@ -43,25 +43,24 @@ class BinaryOpsTest {
         // Test a non-associative, commutative operator
 
         // Check protection
-        assertThrows<IllegalArgumentException> { Distance().apply() }
-        assertThrows<IllegalArgumentException> { Distance().apply(x) }
-        assertThrows<IllegalArgumentException> { Distance().apply(x, y, x) }
+        assertThrows<IllegalArgumentException> { Z3CommutativeImpl().apply() }
+        assertThrows<IllegalArgumentException> { Z3CommutativeImpl().apply(x) }
+        assertThrows<IllegalArgumentException> { Z3CommutativeImpl().apply(x, y, x) }
 
         // Check collecting
-        assertEquals(Distance().apply(x, Constant(1, IntDomain())), Distance().apply(Constant(1, IntDomain()), x))
-        assertEquals(Distance().apply(x, y), Distance().apply(y, x))
-        assertEquals(Distance().apply(x, x), Constant(0, IntDomain()))
-        assertEquals(Distance().apply(Constant(8, IntDomain()), Constant(7, IntDomain())), Distance().apply(Constant(7, IntDomain()), Constant(8, IntDomain())))
+        assertEquals(Z3CommutativeImpl().apply(x, Z3Domain.One), Z3CommutativeImpl().apply(Z3Domain.One, x))
+        assertEquals(Z3CommutativeImpl().apply(x, y), Z3CommutativeImpl().apply(y, x))
+        assertEquals(Z3CommutativeImpl().apply(Z3Domain.One, Z3Domain.Two), Z3CommutativeImpl().apply(Z3Domain.Two, Z3Domain.One))
 
         // Substitution check
-        assertEquals(Distance().apply(x, Constant(1, IntDomain()))
-            .put(t, Distance().apply(x, IntDomain().parse(2))),
-            Distance().apply(x, Constant(1, IntDomain()))) // noop
-        assertEquals(Distance().apply(x, Constant(1, IntDomain())) // substitute in args
-            .put(Distance().apply(t, IntDomain().parse(1)), x),
-            Distance().apply(Distance().apply(IntDomain().parse(1), t), IntDomain().parse(1)))
-        assertEquals(Distance().apply(x, Constant(1, IntDomain())) // substitute in operator
-            .put(t, Distance().apply(x, IntDomain().parse(1))), t)
+        assertEquals(Z3CommutativeImpl().apply(x, Z3Domain.One)
+            .put(t, Z3CommutativeImpl().apply(x, Z3Domain.Two)),
+            Z3CommutativeImpl().apply(x, Z3Domain.One)) // noop
+        assertEquals(Z3CommutativeImpl().apply(x, Z3Domain.One) // substitute in args
+            .put(Z3CommutativeImpl().apply(t, Z3Domain.One), x),
+            Z3CommutativeImpl().apply(Z3CommutativeImpl().apply(Z3Domain.One, t), Z3Domain.One))
+        assertEquals(Z3CommutativeImpl().apply(x, Z3Domain.One) // substitute in operator
+            .put(t, Z3CommutativeImpl().apply(x, Z3Domain.One)), t)
     }
 
     @Test
@@ -87,9 +86,6 @@ class BinaryOpsTest {
     @Test
     fun associativeBinaryOp() {
         // Test associative operators
-        val x = Variable("x", Z3Domain())
-        val y = Variable("y", Z3Domain())
-        val t = Variable("t", Z3Domain())
 
         // Check protection
         assertThrows<IllegalArgumentException> { AssociativeOpImpl().apply() }
