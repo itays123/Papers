@@ -10,8 +10,19 @@ import kotlin.jvm.Throws
 /**
  * Represents an operator f such that for all a,b,c in the domain:
  * f(f(a,b),c)=f(a,f(b,c))
+ *
+ * When an associative operator is applied, we need to flatten its argument list, such that:
+ * f(f(a,b), c) = f(a,b,c)
  */
-interface Associative
+interface Associative {
+
+    fun<T> flattenArg(arg: Term<T>): List<Term<T>> {
+        if (arg is AppliedOperatorTerm<*, *> && arg.operator == this)
+            return (arg.args as Collection<Term<T>>).flatMap { term -> flattenArg(term) }
+        return listOf(arg)
+    }
+
+}
 
 /**
  * Represents an operator f such that for all a,b in the domain:
@@ -108,9 +119,9 @@ private class NonCommutativeCollector<TDomain>: Collector<TDomain>() {
 /**
  * Helps collect an associative binary operator's arguments using polymorphism
  */
-private abstract class Putter<TDomain, out TColl: MutableCollection<Term<TDomain>>> {
+private abstract class Putter<TDomain> {
 
-    abstract val terms: TColl
+    abstract fun addTerms(terms: Collection<Term<TDomain>>)
 
     /**
      * Replace (once) occurrences of targetTerms with an occurrence of sub
@@ -118,19 +129,28 @@ private abstract class Putter<TDomain, out TColl: MutableCollection<Term<TDomain
      */
     @Throws(UnsupportedOperationException::class)
     abstract fun replace(targetTerms: Collection<Term<TDomain>>, sub: Term<TDomain>)
+
+    abstract fun toCollection(): Collection<Term<TDomain>>
 }
 
 /**
  * Substitutes (once) arguments for commutative operators
  */
-private class CommutativePutter<TDomain>: Putter<TDomain, MutableSet<Term<TDomain>>>() {
+private class CommutativePutter<TDomain>: Putter<TDomain>() {
 
-    override val terms: MutableSet<Term<TDomain>>
-        get() = HashSet() // use TreeSet() for sorted terms!
+    val terms: MutableSet<Term<TDomain>> = HashSet() // use TreeSet() for sorted terms!
+
+    override fun addTerms(terms: Collection<Term<TDomain>>) {
+        this.terms.addAll(terms)
+    }
 
     override fun replace(targetTerms: Collection<Term<TDomain>>, sub: Term<TDomain>) {
         targetTerms.forEach { if (!terms.remove(it)) throw UnsupportedOperationException("Could not replace") }
         terms.add(sub)
+    }
+
+    override fun toCollection(): Collection<Term<TDomain>> {
+        return terms
     }
 
 }
@@ -138,18 +158,25 @@ private class CommutativePutter<TDomain>: Putter<TDomain, MutableSet<Term<TDomai
 /**
  * Substitutes (once) terms for non-commutative operators
  */
-private class NonCommutativePutter<TDomain>: Putter<TDomain, MutableList<Term<TDomain>>>() {
+private class NonCommutativePutter<TDomain>: Putter<TDomain>() {
 
-    override val terms: MutableList<Term<TDomain>>
-        get() = mutableListOf()
+    private val terms: MutableList<Term<TDomain>> = mutableListOf()
+
+    override fun addTerms(terms: Collection<Term<TDomain>>) {
+        this.terms.addAll(terms)
+    }
 
     override fun replace(targetTerms: Collection<Term<TDomain>>, sub: Term<TDomain>) {
         val startIndex = terms.windowed(targetTerms.size).indexOfFirst { it == targetTerms }
         if (startIndex == -1)
             throw UnsupportedOperationException("Replacement unsuccessful")
         terms[startIndex] = sub
-        for (i in 1..<terms.size)
+        for (i in 1..<targetTerms.size)
             terms.removeAt(startIndex + i)
+    }
+
+    override fun toCollection(): Collection<Term<TDomain>> {
+        return terms
     }
 
 }
@@ -192,18 +219,13 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
         * 2. List flattening.
         * If associative, flatten argument list. p and (p and q) is actually p and p and q.
         */
-        val flattenedArgList: Collection<Term<TDomain>>
-        if (this is Associative) {
-            flattenedArgList = mutableListOf()
-            appendArgs(flattenedArgList, args)
-        }
-        else
-            flattenedArgList = args
+        val flattenedArgs: Collection<Term<TDomain>> = if (this is Associative) args.flatMap { flattenArg(it) } else args
+
         /*
         * 3. Lazy evaluation.
         * If an associative operator *has* a specific argument in its argument list,
          */
-        val lazyEval = tryLazyEvaluate(flattenedArgList)
+        val lazyEval = tryLazyEvaluate(flattenedArgs)
         if (lazyEval != null)
             return lazyEval
 
@@ -216,7 +238,7 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
             CommutativeCollector()
         else
             NonCommutativeCollector()
-        flattenedArgList.forEach { collector.appendToKey(getKey(it), it) }
+        flattenedArgs.forEach { collector.appendToKey(getKey(it), it) }
 
         val newArgs = collector
                 .map { list -> if (list.size == 1) list.first() else directApply(list) }
@@ -226,18 +248,6 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
             newArgs.isEmpty() && this is HasNeutralElement<*> -> resultDomain.parse(neutralElement as TDomain)
             newArgs.size == 1 -> newArgs.last()
             else -> super.apply(newArgs)
-        }
-    }
-
-    /**
-     * Appends term to argument list recursively
-     */
-    private fun appendArgs(flattenedArgsList: MutableList<Term<TDomain>>, args: Collection<Term<TDomain>>) {
-        args.forEach {term ->
-            if (term !is AppliedOperatorTerm<*, *> || term.operator != this)
-                flattenedArgsList.add(term)
-            else
-                appendArgs(flattenedArgsList, term.args as Collection<Term<TDomain>>)
         }
     }
 
@@ -291,15 +301,15 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
             return super.put(args, sub, sourceArgs)
 
         try {
-            val putter: Putter<TDomain, MutableCollection<Term<TDomain>>> = if (this is Commutative)
+            val putter: Putter<TDomain> = if (this is Commutative)
                 CommutativePutter()
             else
                 NonCommutativePutter()
 
-            putter.terms.addAll(args)
-            putter.replace(sourceArgs, resultDomain.parse(sub))
-            return apply(putter.terms)
-        } catch (e: Exception) {
+            putter.addTerms(args.flatMap { flattenArg(it) })
+            putter.replace(sourceArgs.flatMap { flattenArg(it) }, resultDomain.parse(sub))
+            return apply(putter.toCollection())
+        } catch (e: UnsupportedOperationException) {
             return null
         }
     }

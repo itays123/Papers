@@ -87,6 +87,9 @@ class BinaryOpsTest {
     @Test
     fun associativeBinaryOp() {
         // Test associative operators
+        val x = Variable("x", Z3Domain())
+        val y = Variable("y", Z3Domain())
+        val t = Variable("t", Z3Domain())
 
         // Check protection
         assertThrows<IllegalArgumentException> { AssociativeOpImpl().apply() }
