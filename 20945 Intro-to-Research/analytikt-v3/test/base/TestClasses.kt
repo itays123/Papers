@@ -57,3 +57,16 @@ class Reverse : Operator<String, String>() {
     }
 
 }
+
+class LazyEvalOp: Operator<String, String>() {
+
+    override val resultDomain: DomainDescriptor<String>
+        get() = StringDomain()
+
+    override val name: String
+        get() = "LazyEvalOp"
+
+    override val lazyEvalMap: Map<Term<String>, Term<String>>
+        get() = mapOf(Pair(StringDomain().parse("hello"), StringDomain().parse("world")))
+
+}

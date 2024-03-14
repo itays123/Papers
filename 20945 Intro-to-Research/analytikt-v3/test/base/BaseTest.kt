@@ -44,4 +44,9 @@ class BaseTest {
         assertEquals(Reverse().apply(joined).toString(), "Join(olleh,x,olleholleh,Rev x)")
         assertEquals(joined.put(Reverse().apply(x), x).toString(), "Join(Rev x,hellohello,x,hello)")
     }
+
+    @Test
+    fun lazyEvalOp() {
+        assertEquals(LazyEvalOp().apply(x, x, x, x, hello, x, x), "world")
+    }
 }
