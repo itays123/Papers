@@ -9,6 +9,11 @@ package analytikt.base
 interface DomainDescriptor<TDomain> {
 
     /**
+     * An instance of the domain set to use in various cases
+     */
+    val constantInstance: Constant<TDomain>
+
+    /**
      * Safely casts a term of any domain to a term of this domain
      */
     fun parse(term: Term<*>): Term<TDomain> {

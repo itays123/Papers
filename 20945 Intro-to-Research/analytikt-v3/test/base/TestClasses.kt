@@ -3,7 +3,10 @@ package base
 import analytikt.base.*
 
 // String domain -
-class StringDomain : DomainDescriptor<String>
+class StringDomain : DomainDescriptor<String> {
+    override val constantInstance: Constant<String>
+        get() = parse("hello")
+}
 
 class Join() : Operator<String, String>() {
     override val resultDomain: DomainDescriptor<String>

@@ -1,7 +1,6 @@
 package analytikt.operators
 
 import analytikt.base.*
-import java.util.HashMap
 import kotlin.jvm.Throws
 
 /*
@@ -26,7 +25,7 @@ interface Commutative
  */
 interface HasNeutralElement<TDomain> {
 
-    fun getNeutralElement(): TDomain
+    val neutralElement: TDomain
 
 }
 
@@ -155,7 +154,6 @@ private class NonCommutativePutter<TDomain>: Putter<TDomain, MutableList<Term<TD
 
 }
 
-
 /**
  * Represents a (domain-closed) Binary operators: These are operators who take exactly two operands and return a term of the same domain. This would include:
  * Addition of numbers, vectors, matrices, …
@@ -171,52 +169,96 @@ private class NonCommutativePutter<TDomain>: Putter<TDomain, MutableList<Term<TD
  */
 abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
 
-    final override fun apply(args: Collection<Term<TDomain>>): Term<TDomain> {
-        when {
-            args.isEmpty() -> {
-                if (this is HasNeutralElement<*>)
-                    return resultDomain.parse(getNeutralElement() as TDomain)
-                else throw IllegalArgumentException("Binary operator expects at least two arguments")
-            }
-            args.size == 1 -> {
-                // If f is a binary operator with a neutral element e, we assume f(z) is f(z,e).
-                // For example, +x = 0+x, *y = 1*y, etc.
-                if (this is HasNeutralElement<*>)
-                    return args.last()
-                else throw IllegalArgumentException("Binary operator expects at least two arguments")
-            }
-            this !is Associative && args.size > 2 -> {
-                throw IllegalArgumentException("Precedence order should be specified explicitly in non-associative operators")
-                // collection is identical to associative ops with many elements in non-associative ops
-            }
+    override fun apply(args: Collection<Term<TDomain>>): Term<TDomain> {
+        /*
+        * Applying values to the binary operator involves many phases:
+        * 1. Protection
+        * 2. List flattening
+        * 3. Lazy evaluation
+        * 4. Element collection
+        * 5. Identity element removal
+        * 6. Lazy evaluation once again, with newly collected args
+        *
+        * 1. Protection.
+        * Ensure the right amount of arguments is given.
+        * If the operator has a neutral element, we accept less than 2 elements and append the neutral element to the rest.
+        * If the operator is associative, we accept more than 2 elements.
+        */
+        if (this !is HasNeutralElement<*> && args.size < 2)
+            throw IllegalArgumentException("Binary operator expects at least two arguments")
+        if (this !is Associative && args.size > 2)
+            throw IllegalArgumentException("Precedence order should be specified explicitly in non-associative operators")
+
+        /*
+        * 2. List flattening.
+        * If associative, flatten argument list. p and (p and q) is actually p and p and q.
+        */
+        val flattenedArgList: Collection<Term<TDomain>>
+        if (this is Associative) {
+            flattenedArgList = mutableListOf()
+            appendArgs(flattenedArgList, args)
         }
+        else
+            flattenedArgList = args
+        /*
+        * 3. Lazy evaluation.
+        * If an associative operator *has* a specific argument in its argument list,
+         */
+        var lazyEval = tryLazyEvaluate(flattenedArgList)
+        if (lazyEval != null)
+            return lazyEval
 
-        // 1. Flatten list - this has to happen right now, and shouldn't happen again
-        // 2. Collect elements using the getKey() method, according to commutativity rules.
-        // 3. Identity element removal - this should happen after collecting elements,
-        // such that a collection won't accidentally return an identity element
-
+        /*
+        * 4. Element collection.
+        * Separate arguments to sets, each set is a set where applying the operator directly at it would produce a single element.
+        * 5. Filter out neutral element (during collection)
+         */
         val collector: Collector<TDomain> = if (this is Commutative)
             CommutativeCollector()
         else
             NonCommutativeCollector()
-        args.forEach { collect(collector, it) }
+        flattenedArgList.forEach { collector.appendToKey(getKey(it), it) }
 
         val newArgs = collector
                 .map { list -> if (list.size == 1) list.first() else directApply(list) }
-                .filter { this !is HasNeutralElement<*> || it != getNeutralElement() } // 3. Filter out neutral element
-        return if (newArgs.size == 1) newArgs.first() else super.apply(newArgs)
+                .filter { this !is HasNeutralElement<*> || it != neutralElement } // 5. Filter out neutral element
+
+        lazyEval = tryLazyEvaluate(newArgs)
+
+        return when {
+            lazyEval != null -> return lazyEval
+            newArgs.isEmpty() && this is HasNeutralElement<*> -> resultDomain.parse(neutralElement as TDomain)
+            newArgs.size == 1 -> newArgs.last()
+            else -> super.apply(newArgs)
+        }
     }
 
     /**
-     * Add term to collector.
-     * Flattens the list
+     * Appends term to argument list recursively
      */
-    private fun collect(collector: Collector<TDomain>, term: Term<TDomain>) {
-        if (term !is AppliedOperatorTerm<*, *> || term.operator != this)
-            collector.appendToKey(getKey(term), term)
-        else
-            (term.args as Collection<Term<TDomain>>).forEach() { collect(collector, it) }
+    private fun appendArgs(flattenedArgsList: MutableList<Term<TDomain>>, args: Collection<Term<TDomain>>) {
+        args.forEach {term ->
+            if (term !is AppliedOperatorTerm<*, *> || term.operator != this)
+                flattenedArgsList.add(term)
+            else
+                appendArgs(flattenedArgsList, term.args as Collection<Term<TDomain>>)
+        }
+    }
+
+
+    /**
+     * Overridable lazy evaluation map
+     * In a pair (key, value), if key is present in the argument list, immediately evaluate to value
+     */
+    protected open val lazyEvalMap: Map<Term<TDomain>, Term<TDomain>> = mapOf()
+
+    private fun tryLazyEvaluate(args: Collection<Term<TDomain>>): Term<TDomain>? {
+        for (term in args) {
+            val lazyEval = lazyEvalMap[term]
+            if (lazyEval != null)
+                return lazyEval
+        }
+        return null
     }
 
     /**
@@ -236,6 +278,8 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
      * neg p -> p
      */
     protected open fun getKey(term: Term<TDomain>): Term<TDomain> {
+        if (term is Constant)
+            return term.domain.constantInstance
         return term
     }
 
@@ -284,7 +328,22 @@ abstract class BinaryOperator<TDomain : Any> : Operator<TDomain, TDomain>() {
      * Print in infix style
      */
     override fun toString(args: Collection<Term<TDomain>>): String {
-        return args.fold("") { acc, term -> if (acc == "") "$term" else "$acc$name$term" }
+        return args.fold("") {
+            acc, term ->
+                val termStr = if (shouldParenthesizeTerm(term)) "($term)" else "$term"
+                if (acc == "")
+                    termStr
+                else
+                    "$acc$name$termStr"
+        }
+    }
+
+    /**
+     * Determine whether a term should be parenthesized.
+     * For example, term x^2 in sum x^2+3 should not be parenthesized.
+     */
+    protected open fun shouldParenthesizeTerm(term: Term<TDomain>): Boolean {
+        return term is AppliedOperatorTerm<*, *>
     }
 
 }
